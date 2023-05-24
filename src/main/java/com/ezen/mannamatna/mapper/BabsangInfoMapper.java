@@ -1,5 +1,9 @@
 package com.ezen.mannamatna.mapper;
 
-public interface BabsangInfoMapper {
+import java.util.List;
 
+import com.ezen.mannamatna.vo.BabsangInfoVO;
+
+public interface BabsangInfoMapper {
+	List<BabsangInfoVO> babsangList();
 }
