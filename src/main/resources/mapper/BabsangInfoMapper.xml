@@ -4,6 +4,6 @@
 <mapper namespace="com.ezen.mannamatna.mapper.BabsangInfoMapper">
 	<select id="babsangList"
 		resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
-		SELECT * FROM BOARD_INFO;
+		SELECT * FROM BABSANG_INFO
 	</select>
 </mapper>

@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class CommentInfoVO {
 
-	int ciNum;
-	String ciComment;
-	String ciCredat;
-	String ciCretim;
-	int uiNum;
-	int biNum;
+	private int ciNum;
+	private String ciContent;
+	private String ciCredat;
+	private String ciCretim;
+	private int uiNum;
+	private int biNum;
 }
