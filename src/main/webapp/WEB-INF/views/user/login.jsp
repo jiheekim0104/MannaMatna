@@ -10,8 +10,8 @@
 	로그인 페이지입니다 거억~
 	<br>
 	<form action="/index" method="POST">
-		아이디 <input type="text" name=uiId id=uiId><br> 비밀번호 <input
-			type="password" name=uiPwd id=uiPwd><br>
+		<input type="text" name=uiId id=uiId placeholder="아이디"><br>
+		<input type="password" name=uiPwd id=uiPwd placeholder="비밀번호"><br>
 		<button>로그인</button><br>
 		<button>네이버 로그인</button>
 		<button>카카오 로그인</button><br>

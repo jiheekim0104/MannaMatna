@@ -21,8 +21,9 @@
 		<c:forEach items="${userList}" var="userVO">
 			<tr>
 				<td>${userVO.uiNum}</td>
-				
 				<td>${userVO.uiNickname}</td>
+				<td>${userVO.uiId}</td>
+				<td>${userVO.uiCredat}</td>
 			
 			</tr>
 		</c:forEach>
