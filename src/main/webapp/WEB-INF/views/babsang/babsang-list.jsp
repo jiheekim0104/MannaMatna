@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>밥상리스트확인!!!!!</h2>
+<h2>밥상리스트확인!!!!!메인!!!</h2>
 </body>
 </html>
