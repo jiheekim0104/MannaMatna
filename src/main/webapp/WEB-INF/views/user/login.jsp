@@ -9,7 +9,7 @@
 <body>
 	로그인 페이지입니다 거억~
 	<br>
-	<form action="/index" method="POST" onsubmit="return checkValue()">
+	<form action="/" method="POST" onsubmit="return checkValue()">
 		<input type="text" name="uiId" id="uiId" placeholder="아이디를 입력해주세요."><br>
 		<div id="uiIdNullMsg" name="uiIdNullMsg" style="color: red"></div>
 
@@ -29,24 +29,24 @@
 			let inputPwd = document.getElementById('uiPwd').value; //입력받은 비밀번호
 			
 			//아이디 입력 확인
-			if (inputId == "") {
+			if (inputId.trim() == "") {
 				document.querySelector('#uiIdNullMsg').innerHTML = '아이디는 필수입력 사항입니다.'
 				return false;
-			} else if (inputId.length<8||inputId.length>20) {
+			} else if (inputId.trim().length<8||inputId.trim().length>20) {
 				document.querySelector('#uiIdNullMsg').innerHTML = '아이디는 8~20자리입니다.'
 				return false;
-			} else if (inputId != "") {
+			} else if (inputId.trim() != "") {
 				document.querySelector('#uiIdNullMsg').innerHTML = null
 			}
 	
 			//비밀번호 입력 확인
-			if (inputPwd == "") {
+			if (inputPwd.trim() == "") {
 				document.querySelector('#uiPwdNullMsg').innerHTML = '비밀번호는 필수입력 사항입니다.'
 				return false;
-			} else if (inputPwd.length<4||inputId.length>20) {
+			} else if (inputPwd.trim().length<4||inputId.trim().length>20) {
 				document.querySelector('#uiPwdNullMsg').innerHTML = '비밀번호는 4~20자리입니다.'
 				return false;
-			} else if (inputPwd != "") {
+			} else if (inputPwd.trim() != "") {
 				document.querySelector('#uiPwdNullMsg').innerHTML = null
 			}
 			return true;
