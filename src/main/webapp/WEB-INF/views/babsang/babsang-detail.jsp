@@ -8,27 +8,34 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>밥상상세!!!!!!!!!!!!!!</h2>
+	<h1>밥상상세!!!!!!!!!!!!!!</h1>
+	<h2>여기는 밥상 상세 내역보기</h2>
+	<hr>
 	<h2>댓글연동확인</h2>
-	<table border="1">
-		<tr>
-			<th>댓글번호</th>
-			<th>내용</th>
-			<th>작성날짜</th>
-			<th>작성시간</th>
-			<th>작성자</th>
-			<th>게시물번호</th>
-		</tr>
-		<c:forEach items="${commentList}" var="commentVO">
-			<tr>
-				<td>${commentVO.ciNum}</td>
-				<td>${commentVO.ciContent}</td>
-				<td>${commentVO.ciCredat}</td>
-				<td>${commentVO.ciCretim}</td>
-				<td>${commentVO.uiNum}</td>
-				<td>${commentVO.biNum}</td>
-			</tr>
-		</c:forEach>
-	</table>
+	<span>댓글번호</span>
+	<span>내용</span>
+	<span>작성날짜</span>
+	<span>작성시간</span>
+	<span>작성자</span>
+	<span>게시물번호</span>
+	<br><hr><br>
+	<c:forEach items="${commentList}" var="commentVO">
+		<span>${commentVO.ciNum}</span>
+		<span>${commentVO.ciContent}</span>	
+		<span>${commentVO.ciCredat}</span>
+		<span>${commentVO.ciCretim}</span>
+		<span>${commentVO.uiNum}</span>
+		<span>${commentVO.biNum}</span>
+		<form>
+		<button>수정하기</button>
+		<button>삭제하기</button>
+		</form>
+		<br>
+	</c:forEach>
+	<form>
+		<input type="text" id="content" name="content"
+			placeholder="내용을 입력해주세요.">
+		<button>작성하기</button>
+	</form>
 </body>
 </html>
