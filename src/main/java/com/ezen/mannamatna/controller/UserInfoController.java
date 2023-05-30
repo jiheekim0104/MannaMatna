@@ -26,6 +26,11 @@ public class UserInfoController {
 		return "index"; 
 	}
 	
+	@PostMapping("/") 
+	public String home() {
+		return "index"; 
+	}
+	
 	@GetMapping("/login")
 	public String login() {
 		return "user/login";
