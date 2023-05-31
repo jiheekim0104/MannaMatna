@@ -16,10 +16,11 @@ public class CommentInfoController {
 	@Autowired
 	CommentInfoService commentInfoService;
 
-	@GetMapping("/comment")
+	@GetMapping("/comment") // 추후 babsang-detail 쪽으로 매핑지어질 예정
 	public String goComment(@ModelAttribute CommentInfoVO commentInfoVO, Model m) {
-		List<CommentInfoVO> commentList = commentInfoService.getCommentInfos(commentInfoVO);
-		m.addAttribute("commentList", commentList);
+		List<CommentInfoVO> commentList = commentInfoService.getCommentInfos(commentInfoVO); // 서비스 호출
+		m.addAttribute("commentList", commentList); // 모델에 댓글리스트 add
+		// 이부분은 추후 basang id 와 mapping 예정
 		return "babsang/babsang-detail";
 	}
 }
