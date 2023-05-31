@@ -2,7 +2,28 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.mannamatna.mapper.CommentInfoMapper">
-	<select id="selectCommentInfos" resultType="com.ezen.mannamatna.vo.CommentInfoVO">
+	<select id="countCommentInfo" resultType="int">
+		SELECT COUNT(*) FROM
+		COMMENT_INFO
+	</select>
+	<select id="selectCommentInfos"
+		resultType="com.ezen.mannamatna.vo.CommentInfoVO">
 		SELECT * FROM COMMENT_INFO
 	</select>
+	<insert id="insertCommentInfo"
+		parameterType="com.ezen.mannamatna.vo.CommentInfoVO">
+		INSERT INTO COMMENT_INFO (CI_NUM, CI_CONTENT, CI_CREDAT,
+		CI_CRETIM, UI_NUM, BI_NUM) VALUES
+		(#{ciNum}, #{ciContent}, #{ciCredat},
+		#{ciCretim}, #{uiNum}, #{biNum})
+	</insert>
+	<update id="updateCommentInfo"
+		parameterType="com.ezen.mannamatna.vo.CommentInfoVO">
+		UPDATE COMMENT_INFO SET CI_CONTENT = #{ciContent} WHERE
+		CI_NUM = #{ciNum}
+	</update>
+	<delete id="deleteCommentInfo" parameterType="int">
+		DELETE FROM
+		COMMENT_INFO WHERE CI_NUM = #{ciNum}
+	</delete>
 </mapper>

@@ -13,6 +13,9 @@ public class CommentInfoService {
 	@Autowired
 	CommentInfoMapper commentInfoMapper;
 	
+	public List<CommentInfoVO> getCommentInfos(int biNum){
+		return commentInfoMapper.selectCommentInfos(biNum);
+	}
 	public List<CommentInfoVO> getCommentInfos(CommentInfoVO commentInfoVO){
 		return commentInfoMapper.selectCommentInfos(commentInfoVO);
 	}
