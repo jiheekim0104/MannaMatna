@@ -3,10 +3,15 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.mannamatna.mapper.UserInfoMapper">
 	<select id="selectUserInfo" resultType="com.ezen.mannamatna.vo.UserInfoVO">
-		select * from user_info
+		select * from user_info where ui_Id = #{uiId}
 	</select>
 	
 	<select id="idChk" resultType="int">
 		select count(*) from user_info where ui_Id = #{uiId}
 	</select>
+	
+	<insert id="insertUserInfo"> 
+		insert into user_info (ui_nickname,ui_pwd,ui_photo,ui_gender,ui_age,ui_id)
+		values (#{uiNickname},#{uiPwd},#{uiPhoto},#{uiGender},#{uiAge},#{uiId})
+	</insert>
 </mapper>

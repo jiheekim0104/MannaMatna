@@ -28,4 +28,11 @@ public class UserInfoService {
 		}
 		return false;
 	}
+	
+	public boolean join(UserInfoVO userInfoVO) {
+		if(uiMapper.insertUserInfo(userInfoVO)==1) {
+			return true;
+		}
+		return false;
+	}
 }

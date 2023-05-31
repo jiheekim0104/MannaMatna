@@ -1,15 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script>
+<c:if test="${msg!=null}">
+alert('${msg}');
+</c:if>
+</script>
 <body>
-	로그인 페이지입니다 거억~
+	<h1>로그인 페이지입니다.</h1>
 	<br>
-	<form action="/" method="POST" onsubmit="return checkValue()">
+	<form action="/login" method="POST" onsubmit="return checkValue()">
 		<input type="text" name="uiId" id="uiId" placeholder="아이디를 입력해주세요."><br>
 		<div id="uiIdNullMsg" name="uiIdNullMsg" style="color: red"></div>
 
@@ -24,6 +30,7 @@
 	<button onclick="location.href='/join'">회원가입</button>
 
 	<script>
+	
 		function checkValue() {
 			let inputId = document.getElementById('uiId').value; //입력받은 아이디
 			let inputPwd = document.getElementById('uiPwd').value; //입력받은 비밀번호
