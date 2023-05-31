@@ -2,8 +2,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.mannamatna.mapper.BabsangInfoMapper">
-	<select id="babsangList"
+	<select id="selectBabsangList"
 		resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
-		SELECT * FROM BABSANG_INFO
+		SELECT 
+		BI_TITLE, BI_HEADCNT, BI_FDCATEGORY, BI_MEETINGDAT,
+		BI_MEETINGTIM 
+		FROM BABSANG_INFO
 	</select>
+		
+	<insert id="insertBabsangInfo">
+		INSERT INTO BOARD_INFO(
+		BI_TITLE, BI_CONTENT, BI_MEETINGDAT, BI_MEETINGTIM, 
+		BI_HEADCNT, BI_FDCATEGORY, BI_CLOSED, UI_NUM)
+		VALUSE(
+		#{biTitle}, #{biContent}, #{biMeetingDat}, #{biMeetingTim}, 
+		#{biHeadCnt}, #{biFdCategory}, #{biClosed}, #{uiNum}
+		)
+	</insert>
 </mapper>

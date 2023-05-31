@@ -5,5 +5,5 @@ import java.util.List;
 import com.ezen.mannamatna.vo.BabsangInfoVO;
 
 public interface BabsangInfoMapper {
-	List<BabsangInfoVO> babsangList();
+	List<BabsangInfoVO> selectBabsangList(BabsangInfoVO babsangInfoVO);
 }
