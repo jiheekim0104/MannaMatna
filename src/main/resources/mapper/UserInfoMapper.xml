@@ -5,4 +5,8 @@
 	<select id="selectUserInfo" resultType="com.ezen.mannamatna.vo.UserInfoVO">
 		select * from user_info
 	</select>
+	
+	<select id="idChk" resultType="int">
+		select count(*) from user_info where ui_Id = #{uiId}
+	</select>
 </mapper>

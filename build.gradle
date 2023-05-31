@@ -26,6 +26,9 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'javax.servlet:jstl' 
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.2' //jackson 의존성 추가 (29~31)
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.14.2'
+	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.2'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'

@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+${user}<br>
+${user.uiNickname}(${user.uiId})
+성별 : ${user.uiGender}
+연령대 : ${user.uiAge}<br>
 
 </body>
 </html>

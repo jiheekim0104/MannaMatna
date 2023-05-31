@@ -2,6 +2,8 @@ package com.ezen.mannamatna.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,17 @@ public class UserInfoService {
 	@Autowired
 	private UserInfoMapper uiMapper;
 	
-	public List<UserInfoVO> selectUserInfo(UserInfoVO user){
-		return uiMapper.selectUserInfo(user);
+	
+	public int idChk(UserInfoVO userInfoVO) {
+		return uiMapper.idChk(userInfoVO);
+	}
+
+	public boolean login(UserInfoVO userInfoVO, HttpSession session) {
+		userInfoVO = uiMapper.selectUserInfo(userInfoVO);
+		if(userInfoVO!=null) {
+			session.setAttribute("user", userInfoVO);
+			return true;
+		}
+		return false;
 	}
 }

@@ -15,4 +15,8 @@ public class UserInfoVO {
 	private int biNum;
 	private Date uiCredat;
 	private String uiId;
+	
+	public UserInfoVO() {
+		
+	}
 }

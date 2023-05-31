@@ -5,5 +5,7 @@ import java.util.List;
 import com.ezen.mannamatna.vo.UserInfoVO;
 
 public interface UserInfoMapper {
-	List<UserInfoVO> selectUserInfo(UserInfoVO userInfoVO);
+	UserInfoVO selectUserInfo(UserInfoVO userInfoVO);
+	
+	int idChk(UserInfoVO userInfoVO);
 }
