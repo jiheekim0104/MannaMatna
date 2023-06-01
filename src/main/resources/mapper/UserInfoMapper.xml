@@ -10,6 +10,10 @@
 		select count(*) from user_info where ui_Id = #{uiId}
 	</select>
 	
+	<select id="nicknameChk" resultType="int">
+		select count(*) from user_info where ui_Nickname = #{uiNickname}
+	</select>
+	
 	<insert id="insertUserInfo"> 
 		insert into user_info (ui_nickname,ui_pwd,ui_photo,ui_gender,ui_age,ui_id)
 		values (#{uiNickname},#{uiPwd},#{uiPhoto},#{uiGender},#{uiAge},#{uiId})

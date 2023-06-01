@@ -7,6 +7,10 @@ public interface UserInfoMapper {
 	
 	int idChk(UserInfoVO userInfoVO);
 	
+	int nicknameChk(UserInfoVO userInfoVO);
+	
 	int insertUserInfo(UserInfoVO userInfoVO);
+
+	
 	
 }

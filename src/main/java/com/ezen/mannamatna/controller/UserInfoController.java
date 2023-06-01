@@ -75,14 +75,32 @@ public class UserInfoController {
 	
 	@PostMapping("/idChk")
 	@ResponseBody
-	public Map<String, Integer> idChk(@ModelAttribute UserInfoVO userInfoVO, @RequestBody Map<String, Integer> map) {
-		log.info("===========>{}",userInfoVO.getUiId());
+	public Map<String, Integer> idChk(@ModelAttribute UserInfoVO userInfoVO, @RequestBody Map<String, String> checkMap) {
+		Map<String, Integer> map = new HashMap<>();
+		if(checkMap.get("uiId").trim().equals("")) {
+			map.put("result", -1);
+			return map; 
+		}
+		userInfoVO.setUiId(checkMap.get("uiId"));
+		log.info("여기는 컨트롤러1===========>{}",userInfoVO.getUiId());
 		int result = uiService.idChk(userInfoVO);
-		log.info("===========>{}",result);
-		Map<String, Integer> rmap = new HashMap<>();
-		rmap.put("data", result);
-		return rmap; 
+		log.info("여기는 컨트롤러2===========>{}",result);
+		map.put("result", result);
+		return map; 
 	}
+	
+	@PostMapping("/nicknameChk")
+	@ResponseBody
+	public Map<String, Integer> nicknameChk(@ModelAttribute UserInfoVO userInfoVO, @RequestBody Map<String, String> checkMap) {
+		userInfoVO.setUiNickname(checkMap.get("uiNickname"));
+		log.info("여기는 컨트롤러1===========>{}",userInfoVO.getUiNickname());
+		int result = uiService.nicknameChk(userInfoVO);
+		log.info("여기는 컨트롤러2===========>{}",result);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("result", result);
+		return map; 
+	}
+	
 	
 	@GetMapping("/profile")
 	public String profile() {

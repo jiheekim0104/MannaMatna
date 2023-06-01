@@ -5,24 +5,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 	<h1>회원가입</h1>
 	SNS 연동<br>
-	<form action="/join-ok" method="POST">
+	<form action="/join-ok" method="POST" onsubmit="return checkValue()">
 		<input type="text" name="uiId" id="uiId" placeholder="아이디">
-		<button type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
-		<br>
+		<button type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button><br> 
 		<input type="text" name="uiNickname" id="uiNickname" placeholder="닉네임">
-		<button>중복확인</button>
-		<br>
-		<input type="password" name="uiPwd" id="uiPwd" placeholder="비밀번호"><br>
-		<input type="password" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br> 
-		<input type="file" name="uiPhoto" id="uiPhoto">
-		<br> 
+		<button type="button" id="nicknameChk" onclick="fn_nicknameChk();" value="N">중복확인</button><br> 
+		<input type="password" name="uiPwd" id="uiPwd" placeholder="비밀번호"><br> 
+		<input type="password" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
+		<input type="file" name="uiPhoto" id="uiPhoto"> <br> 
 		<select name="uiAge" id="uiAge">
-			<option value="none">연령대를 선택하세요.</option>
+			<option value="0">연령대를 선택하세요.</option>
 			<option value="10">10대</option>
 			<option value="20">20대</option>
 			<option value="30">30대</option>
@@ -37,21 +35,98 @@
 
 </body>
 <script>
-function fn_idChk(){
-	$.ajax({
-		url : "/idChk",
-		type : "post",
-		contentType: "application/json",
-		data : JSON.stringify({"uiId" : $("#uiId").val()}),
-		success : function(data){
-			if(data == 1){
-				alert("중복된 아이디입니다.");
-			}else if(data == 0){
-				$('#idChk').val('Y');
-				alert("사용가능한 아이디입니다.");
-			}
+	function checkValue(){
+		let idChk = document.getElementById('idChk').value; // 아이디 중복확인 결과값
+		if(idChk=="N"){
+			alert("아이디 중복확인을 해주세요.");
+			return false;
 		}
-	})
-}
+		let nicknameChk = document.getElementById('nicknameChk').value; // 아이디 중복확인 결과값
+		if(nicknameChk=="N"){
+			alert("닉네임 중복확인을 해주세요.");
+			return false;
+		}
+		let inputPwd = document.getElementById('uiPwd').value; // 입력받은 비밀번호
+		if(inputPwd.trim() == "") {
+			alert("비밀번호는 필수입력 사항입니다.");
+			return false;
+		} 
+		if (inputPwd.trim().length<4||inputId.trim().length>20) {
+			alert("비밀번호는 4~20자리입니다.");
+			return false;
+		} 
+		alert("2"); // 이게 왜 안나온담 ㅇㅅㅇ ?
+		let inputPwdCheck = document.getElementById('uiPwdCheck').value; // 입력받은 확인용 비밀번호
+		if (inputPwdCheck.trim() == ""){  
+			alert("비밀번호를 한번더 확인해주세요.");
+			return false;
+		}
+		alert("3");
+		let inputAge = document.getElementById('uiAge').value; // 입력받은 연령대
+		if (inputAge == 0){  
+			alert("연령대를 선택해주세요.");
+			return false;
+		}
+		alert("4");
+		let inputGender = document.getElementById('uiGender').value; // 입력받은 성별
+		if (inputGender == null){  
+			alert("성별을 선택해주세요.");
+			return false;
+		}
+		alert("5");
+		return true;
+	}
+	
+	function fn_idChk() {
+		let inputId = document.getElementById('uiId').value; // 입력받은 아이디
+		if (inputId.trim().length == "") {
+			alert("아이디를 입력해주세요.");
+		} else if (inputId.trim().length < 8 || inputId.trim().length > 20) {
+			alert("아이디는 8~20자리입니다.");
+		} else {
+			$.ajax({
+				url : "/idChk", // 요청서버 url
+				type : "post", // 타입
+				contentType : "application/json", // 보내는 데이터의 타입
+				data : JSON.stringify({"uiId" : $("#uiId").val()}),// 보낼데이터의 타입
+				success : function(data) { // 결과 성공 콜백함수
+					if (data.result == 1) {
+						alert("중복된 아이디입니다.");
+					} else if (data.result == 0) {
+						$('#idChk').val('Y');
+						alert("사용가능한 아이디입니다.");
+					} else if (data.result == -1) {
+						alert("아이디를 입력하세요.");
+					}
+				}
+			})
+		}
+
+	}
+	function fn_nicknameChk() {
+		let inputNickname = document.getElementById('uiNickname').value; // 입력받은 닉네임
+		if (inputNickname.trim().length == "") {
+			alert("닉네임을 입력해주세요.");
+		} else if (inputNickname.trim().length < 2
+				|| inputNickname.trim().length > 6) {
+			alert("닉네임은 2~6자리입니다.");
+		} else {
+			$.ajax({
+				url : "/nicknameChk", // 요청서버 url
+				type : "post", // 타입
+				contentType : "application/json", // 보내는 데이터의 타입
+				data : JSON.stringify({"uiNickname" : $("#uiNickname").val()}),// 보낼데이터의 타입
+				success : function(data) { // 결과 성공 콜백함수
+					if (data.result == 1) {
+						alert("중복된 닉네임입니다.");
+					} else if (data.result == 0) {
+						$('#nicknameChk').val('Y');
+						alert("사용가능한 닉네임입니다.");
+					}
+				}
+			})
+		}
+
+	}
 </script>
 </html>
