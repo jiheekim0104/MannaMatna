@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,7 +31,7 @@ public class CommentInfoController {
 	
 	@GetMapping("/list")
 	@ResponseBody // 리스트를 화면에 바로 뿌린다.
-	public List<CommentInfoVO> commentInfoList(int biNum){
+	public List<CommentInfoVO> commentInfoList(@PathVariable int biNum){
 		// 댓글 리스트
 		return commentInfoService.getCommentInfos(biNum);
 	}

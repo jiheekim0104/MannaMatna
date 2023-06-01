@@ -10,6 +10,25 @@
 <body>
 	<h1>밥상상세!!!!!!!!!!!!!!</h1>
 	<h2>여기는 밥상 상세 내역보기</h2>
+	<div>
+      <div>
+        <label>제목</label>
+        <p>${detail.biTitle}</p>
+      </div>
+      <div>
+        <label>작성자</label>
+        <p>${detail.uiNum}</p>
+      </div>
+      <div>
+        <label>작성날짜</label>
+        <p>${detail.biCreateDat}</p>
+      </div>
+      <div>
+        <label>내용</label>
+        <p>${detail.biContent}</p>
+      </div>
+      <button type="submit">참가하기</button>
+</div>
 	<hr>
 	<h2>댓글연동확인</h2>
 	<table>

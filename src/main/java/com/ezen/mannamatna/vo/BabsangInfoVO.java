@@ -6,7 +6,7 @@ import lombok.Data;
 public class BabsangInfoVO {
 	private int biNum;
 	private String biTitle;
-	private int biContent;
+	private String biContent;
 	private String biMeetingDat;
 	private String biMeetingTim;
 	private String biHeadCnt;
