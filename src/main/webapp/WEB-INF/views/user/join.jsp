@@ -11,14 +11,17 @@
 <body>
 	<h1>회원가입</h1>
 	SNS 연동<br>
-	<form action="/join-ok" method="POST" onsubmit="return checkValue()">
+	<form action="/join-ok" method="POST" onsubmit="return checkValue()" enctype="multipart/form-data">
 		<input type="text" name="uiId" id="uiId" placeholder="아이디">
 		<button type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button><br> 
 		<input type="text" name="uiNickname" id="uiNickname" placeholder="닉네임">
 		<button type="button" id="nicknameChk" onclick="fn_nicknameChk();" value="N">중복확인</button><br> 
 		<input type="password" name="uiPwd" id="uiPwd" placeholder="비밀번호"><br> 
 		<input type="password" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
-		<input type="file" name="uiPhoto" id="uiPhoto"> <br> 
+		<input type="file" name="uiFile" id="uiFile" onchange="loadImg(this)"><br> 
+		<div id="imgDiv" style="display:none">
+			<img src = "" width="300">
+		</div>
 		<select name="uiAge" id="uiAge">
 			<option value="0">연령대를 선택하세요.</option>
 			<option value="10">10대</option>
@@ -26,54 +29,74 @@
 			<option value="30">30대</option>
 			<option value="40">40대</option>
 			<option value="50">50대 이상</option>
-		</select> 
+		</select><br> 
 		<input type="radio" name="uiGender" id="uiGender1" value="true">남자
 		<input type="radio" name="uiGender" id="uiGender2" value="false">여자
+		<button type="button" onclick="show();" value="N">여기</button><br>
 		<button>가입완료</button>
 	</form>
 
 
 </body>
 <script>
+	let inputGender = document.querySelector([name='uiGender']); // 입력받은 성별 미선택 처리 필요함
+	let inputGender1 = document.getElementById('uiGender1').value;
+	let inputGender2 = document.getElementById('uiGender2').value;
+	function show(){
+		alert(!(inputGender1==true || inputGender2==false));
+	}
+	function loadImg(obj){
+		let file =obj.files[0];
+		let imgObj = document.querySelector('#imgDiv>img');
+		imgObj.src = URL.createObjectURL(file);
+		document.querySelector('#imgDiv').style.display='';
+	}
 	function checkValue(){
-		let idChk = document.getElementById('idChk').value; // 아이디 중복확인 결과값
+		let idChk = document.getElementById('idChk').value; // 아이디 중복확인 시행 유무
 		if(idChk=="N"){
 			alert("아이디 중복확인을 해주세요.");
 			return false;
 		}
-		let nicknameChk = document.getElementById('nicknameChk').value; // 아이디 중복확인 결과값
+		let nicknameChk = document.getElementById('nicknameChk').value; // 아이디 중복확인 시행 유무
 		if(nicknameChk=="N"){
 			alert("닉네임 중복확인을 해주세요.");
 			return false;
 		}
+		
 		let inputPwd = document.getElementById('uiPwd').value; // 입력받은 비밀번호
 		if(inputPwd.trim() == "") {
 			alert("비밀번호는 필수입력 사항입니다.");
 			return false;
 		} 
-		if (inputPwd.trim().length<4||inputId.trim().length>20) {
+		
+		if(inputPwd.trim().length<4||inputPwd.trim().length>20) {
 			alert("비밀번호는 4~20자리입니다.");
 			return false;
 		} 
-		alert("2"); // 이게 왜 안나온담 ㅇㅅㅇ ?
+		
 		let inputPwdCheck = document.getElementById('uiPwdCheck').value; // 입력받은 확인용 비밀번호
-		if (inputPwdCheck.trim() == ""){  
+		if(inputPwdCheck.trim() == ""){  
 			alert("비밀번호를 한번더 확인해주세요.");
 			return false;
 		}
-		alert("3");
+		
+		if(inputPwd!=inputPwdCheck){
+			alert("입력한 비밀번호와 확인용 비밀번호가 일치하지 않습니다.");
+			return false;
+		}
+		
 		let inputAge = document.getElementById('uiAge').value; // 입력받은 연령대
-		if (inputAge == 0){  
+		if(inputAge == 0){  
 			alert("연령대를 선택해주세요.");
 			return false;
 		}
-		alert("4");
-		let inputGender = document.getElementById('uiGender').value; // 입력받은 성별
-		if (inputGender == null){  
+		
+		
+		if(!(inputGender1==true || inputGender2==false)){  
 			alert("성별을 선택해주세요.");
 			return false;
 		}
-		alert("5");
+		
 		return true;
 	}
 	

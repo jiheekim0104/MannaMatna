@@ -1,13 +1,14 @@
 package com.ezen.mannamatna.service;
 
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ezen.mannamatna.controller.UserInfoController;
 import com.ezen.mannamatna.mapper.UserInfoMapper;
 import com.ezen.mannamatna.vo.UserInfoVO;
 
@@ -15,6 +16,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Service
 public class UserInfoService {
+	private final String uploadFilePath = "C:\\works\\workspace\\mannamatna\\src\\main\\webapp\\resources\\upload";
 	@Autowired
 	private UserInfoMapper uiMapper;
 	
@@ -38,11 +40,26 @@ public class UserInfoService {
 		return false;
 	}
 	
-	public boolean join(UserInfoVO userInfoVO) {
-		if(uiMapper.insertUserInfo(userInfoVO)==1) {
-			return true;
+	public boolean join(UserInfoVO userInfoVO) throws IllegalStateException, IOException {
+		log.info("userInfoVO====>{}",userInfoVO);
+		String fileName = userInfoVO.getUiFile().getOriginalFilename();
+		log.info("fileName====>{}",fileName);
+		if("".equals(fileName)) {
+			userInfoVO.setUiFilepath("/resources/upload/nophoto.png");
+		} else if(!"".equals(fileName)) {
+			int idx = fileName.lastIndexOf(".");
+			String extName = "";
+			if (idx != -1) {
+				extName = fileName.substring(idx);
+			}
+			String name = UUID.randomUUID().toString();
+			log.info("name====>{}",name);
+			File file = new File(uploadFilePath, name+extName);
+			userInfoVO.getUiFile().transferTo(file);
+			userInfoVO.setUiFilepath("/resources/upload/"+name+extName);
+			log.info("저장됨====>{}",userInfoVO);
 		}
-		return false;
+		return uiMapper.insertUserInfo(userInfoVO)==1;
 	}
 
 	

@@ -15,7 +15,7 @@
 	</select>
 	
 	<insert id="insertUserInfo"> 
-		insert into user_info (ui_nickname,ui_pwd,ui_photo,ui_gender,ui_age,ui_id)
-		values (#{uiNickname},#{uiPwd},#{uiPhoto},#{uiGender},#{uiAge},#{uiId})
+		insert into user_info (ui_nickname,ui_pwd,ui_filepath,ui_gender,ui_age,ui_id)
+		values (#{uiNickname},#{uiPwd},#{uiFilepath},#{uiGender},#{uiAge},#{uiId})
 	</insert>
 </mapper>

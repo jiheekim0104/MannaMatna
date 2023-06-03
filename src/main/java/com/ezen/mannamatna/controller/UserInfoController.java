@@ -1,5 +1,6 @@
 package com.ezen.mannamatna.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +66,8 @@ public class UserInfoController {
 	}
 	
 	@PostMapping("/join-ok")
-	public String joinOk(@ModelAttribute UserInfoVO userInfoVO, Model m) {
+	public String joinOk(@ModelAttribute UserInfoVO userInfoVO,HttpSession session, Model m) throws IllegalStateException, IOException {
+		log.info("조인ok=====>{}",userInfoVO);
 		if(uiService.join(userInfoVO)) {
 			m.addAttribute("msg","회원가입에 성공하셨습니다.");
 			return "user/login";

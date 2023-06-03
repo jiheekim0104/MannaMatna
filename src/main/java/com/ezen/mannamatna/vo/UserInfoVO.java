@@ -2,14 +2,17 @@ package com.ezen.mannamatna.vo;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
 public class UserInfoVO {
+	private MultipartFile uiFile;
 	private int uiNum;
 	private String uiNickname;
 	private String uiPwd;
-	private String uiPhoto;
+	private String uiFilepath;
 	private Boolean uiGender;
 	private int uiAge;
 	private int biNum;
