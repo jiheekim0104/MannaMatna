@@ -15,16 +15,16 @@ console.log(biNum);
 	        	if(data.length>0){
 	        	     $.each(data, function(key, value){ 
 	 	                a += '<div class="commentArea">';
-	 	                a += '<div class="commentInfo'+value.ciNum+'">'+'댓글번호 : '+value.ciNum+' / 작성자 : '+value.uiNum;
+	 	                a += '<div class="commentInfo'+value.ciNum+'">'+'댓글번호 : '+value.ciNum+' 작성자 : '+value.uiNum + ' 작성시간 : ' + value.ciCredat + '<br>';
+	 	                a += '<div class="commentContent'+value.ciNum+'"> <span> 내용 : '+value.ciContent +'</span>';
 	 	                a += '<a onclick="commentUpdate('+value.ciNum+',\''+value.ciContent+'\');"> 수정 </a>';
 	 	                a += '<a onclick="commentDelete('+value.ciNum+');"> 삭제 </a> </div>';
-	 	                a += '<div class="commentContent'+value.ciNum+'"> <p> 내용 : '+value.ciContent +'</p>';
 	 	                a += '</div></div>';
 	 	            });
 	        	}else{
-	        		a += "<div>";
-	                a += "<div><h4><strong>등록된 댓글이 없습니다.</strong></h4>";
-	                a += "</div></div>";
+	        		a += '<div>';
+	                a += '<div><h4><strong>등록된 댓글이 없습니다.</strong></h4>';
+	                a += '</div></div>';
 	        	}
 	            
 	            $(".commentList").html(a);

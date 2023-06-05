@@ -25,12 +25,12 @@ public class BabsangInfoController {
 	public String goMain(BabsangInfoVO babsang, Model m){
 		List<BabsangInfoVO> babsangList = babsangInfoService.getBabsangInfoVOs(babsang);
 		m.addAttribute("babsangList", babsangList);
-		return "/babsang/babsang-list";
+		return "babsang/babsang-list";
 	}
 	
 	@GetMapping("/createBabsang")
 	public String goCreateBabsang(){
-		return "/babsang/babsang-insert";
+		return "babsang/babsang-insert";
 	}
 	
 	@PostMapping("/babsang-insert")

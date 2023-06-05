@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.mannamatna.mapper.UserInfoMapper;
+import com.ezen.mannamatna.service.BabsangInfoService;
 import com.ezen.mannamatna.service.UserInfoService;
+import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
 
 import lombok.extern.log4j.Log4j;
@@ -29,6 +31,8 @@ public class UserInfoController {
 	
 	@Autowired
 	UserInfoService uiService;
+	@Autowired
+	BabsangInfoService babsangInfoService;
 	
 	@GetMapping("/") 
 	public String home(@ModelAttribute UserInfoVO userInfoVO, Model m) {
@@ -46,10 +50,12 @@ public class UserInfoController {
 	}
 	
 	@PostMapping("/login")
-	public String gologin(@ModelAttribute UserInfoVO userInfoVO, HttpSession session, Model m) {
+	public String gologin(@ModelAttribute UserInfoVO userInfoVO, @ModelAttribute BabsangInfoVO babsangInfoVO, HttpSession session, Model m) {
 		log.info("=============>{}",uiService.login(userInfoVO, session));
 		if(uiService.login(userInfoVO, session)) {
-		return "index";
+			// 로그인 후 메인으로 가면서 babsangList 를 가져옴
+			m.addAttribute("babsangList", babsangInfoService.getBabsangInfoVOs(babsangInfoVO));
+		return "babsang/babsang-list";
 	}
 	m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다.");
 	return "user/login";

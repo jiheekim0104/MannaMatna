@@ -29,26 +29,31 @@
       </div>
       <button type="submit">참가하기</button>
 </div>
-	<!-- 추가추가 -->
 	<hr>
+	<!-- 댓글영역 -->
+	<h2>로그인유저정보 확인</h2>
+	<p>${session.uiNum}</p>
+	<hr>
+	<h3>댓글</h3>
 	<div class="container">
-		<label for="ciContent">댓글</label>
+		<div class="commentList"></div>
+	</div>
+	<!-- 제이쿼리가 제대로 로드 되지 않는 현상 해결 -->
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<!-- babsang-comment.jsp 연결 -->
+	<%@ include file="babsang-comment.jsp"%>
+		<!-- 댓글입력 Form -->
+		<div class="container">
+		<label for="ciContent"></label>
 		<form name="commentInsertForm">
 			<div class="input-group">
 				<input type="hidden" name="biNum" value="${detail.biNum}" /> <input
 					type="text" class="form-control" id="ciContent" name="ciContent"
-					placeholder="내용을 입력하세요."> <span class="input-group-btn">
-					<button type="button" name="commentInsertBtn">등록</button>
+					placeholder="댓글을 입력하세요."> <span class="input-group-btn">
+					<button type="button" name="commentInsertBtn">작성하기</button>
 				</span>
 			</div>
 		</form>
 	</div>
-
-	<div class="container">
-		<div class="commentList"></div>
-	</div>
-	<script src="http://code.jquery.com/jquery-latest.js"></script> 
-	<!-- babsang-comment.jsp 연결 -->
-	<%@ include file="babsang-comment.jsp"%>
 </body>
 </html>

@@ -32,7 +32,7 @@ public class CommentInfoController {
 	@GetMapping("/list")
 	@ResponseBody // 리스트를 화면에 바로 뿌린다.
 	public List<CommentInfoVO> commentInfoList(int biNum){
-		// 파라미터로 @PathVariable 빼니깐 동작함...url과 관련이 있는 것 같다..!
+		// 파라미터로 @PathVariable 빼니깐 동작함...uri와 관련이 있는 것 같다..!
 		// 댓글 리스트
 		return commentInfoService.getCommentInfos(biNum);
 	}

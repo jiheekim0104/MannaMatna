@@ -11,4 +11,5 @@ public class CommentInfoVO {
 	private String ciCretim;
 	private int uiNum;
 	private int biNum;
+	private UserInfoVO userInfoVO;
 }

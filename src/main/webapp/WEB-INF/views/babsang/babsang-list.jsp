@@ -43,5 +43,8 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<hr>
+	<h2>로그인정보확인</h2>
+	<p>
 </body>
 </html>
