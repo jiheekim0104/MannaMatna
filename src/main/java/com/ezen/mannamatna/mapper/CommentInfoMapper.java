@@ -9,7 +9,7 @@ public interface CommentInfoMapper {
 	List<CommentInfoVO> selectCommentInfos(int biNum);
 	
 	// 테스트페이지용
-	List<CommentInfoVO> selectCommentInfos(CommentInfoVO commentInfoVO);
+//	List<CommentInfoVO> selectCommentInfos(CommentInfoVO commentInfoVO);
 	
 	// 댓글 작성
 	int insertCommentInfo(CommentInfoVO commentInfoVO);

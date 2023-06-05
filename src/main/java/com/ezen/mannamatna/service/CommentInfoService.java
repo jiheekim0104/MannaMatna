@@ -10,13 +10,16 @@ import com.ezen.mannamatna.vo.CommentInfoVO;
 
 @Service
 public class CommentInfoService {
+	
 	@Autowired
 	CommentInfoMapper commentInfoMapper;
 	
 	public List<CommentInfoVO> getCommentInfos(int biNum){
 		return commentInfoMapper.selectCommentInfos(biNum);
 	}
-	public List<CommentInfoVO> getCommentInfos(CommentInfoVO commentInfoVO){
-		return commentInfoMapper.selectCommentInfos(commentInfoVO);
-	}
+	
+//	public List<CommentInfoVO> getCommentInfos(CommentInfoVO commentInfoVO){
+//		// 테스트용 
+//		return commentInfoMapper.selectCommentInfos(commentInfoVO);
+//	}
 }

@@ -21,17 +21,18 @@ public class CommentInfoController {
 	CommentInfoService commentInfoService;
 	
 	// 연결 테스트용 작업했던거임!
-	@GetMapping("/comment") // 추후 babsang-detail 쪽으로 매핑지어질 예정
-	public String goComment(@ModelAttribute CommentInfoVO commentInfoVO, Model m) {
-		List<CommentInfoVO> commentList = commentInfoService.getCommentInfos(commentInfoVO); // 서비스 호출
-		m.addAttribute("commentList", commentList); // 모델에 댓글리스트 add
-		// 이부분은 추후 basang id 와 mapping 예정
-		return "babsang/babsang-detail";
-	}
+//	@GetMapping("/comment") // 추후 babsang-detail 쪽으로 매핑지어질 예정
+//	public String goComment(@ModelAttribute CommentInfoVO commentInfoVO, Model m) {
+//		List<CommentInfoVO> commentList = commentInfoService.getCommentInfos(commentInfoVO); // 서비스 호출
+//		m.addAttribute("commentList", commentList); // 모델에 댓글리스트 add
+//		// 이부분은 추후 basang id 와 mapping 예정
+//		return "babsang/babsang-detail";
+//	}
 	
 	@GetMapping("/list")
 	@ResponseBody // 리스트를 화면에 바로 뿌린다.
-	public List<CommentInfoVO> commentInfoList(@PathVariable int biNum){
+	public List<CommentInfoVO> commentInfoList(int biNum){
+		// 파라미터로 @PathVariable 빼니깐 동작함...url과 관련이 있는 것 같다..!
 		// 댓글 리스트
 		return commentInfoService.getCommentInfos(biNum);
 	}

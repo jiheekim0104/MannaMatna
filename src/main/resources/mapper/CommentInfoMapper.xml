@@ -6,9 +6,9 @@
 		SELECT COUNT(*) FROM
 		COMMENT_INFO
 	</select>
-	<select id="selectCommentInfos"
+	<select id="selectCommentInfos" parameterType="int"
 		resultType="com.ezen.mannamatna.vo.CommentInfoVO">
-		SELECT * FROM COMMENT_INFO
+		SELECT * FROM COMMENT_INFO WHERE BI_NUM = #{biNum}
 	</select>
 	<insert id="insertCommentInfo"
 		parameterType="com.ezen.mannamatna.vo.CommentInfoVO">

@@ -29,37 +29,10 @@
       </div>
       <button type="submit">참가하기</button>
 </div>
-	<hr>
-	<h2>댓글연동확인</h2>
-	<table>
-		<tr>
-			<th>댓글번호</th>
-			<th>내용</th>
-			<th>작성날짜</th>
-			<th>작성시간</th>
-			<th>작성자</th>
-			<th>게시물번호</th>
-		</tr>
-		<c:forEach items="${commentList}" var="commentInfoVO">
-			<tr>
-				<td>${commentInfoVO.ciNum}</td>
-				<td>${commentInfoVO.ciContent}</td>
-				<td>${commentInfoVO.ciCredat}</td>
-				<td>${commentInfoVO.ciCretim}</td>
-				<td>${commentInfoVO.uiNum}</td>
-				<td>${commentInfoVO.biNum}</td>
-				<td><button>수정하기</button>
-				<td><button>삭제하기</button>
-			</tr>
-		</c:forEach>
-	</table>
-	<hr>
-	<br>
 	<!-- 추가추가 -->
-	<h2>댓글다른방식연동=babsang-list클릭요청시detail페이지이동 구현시 확인</h2>
 	<hr>
 	<div class="container">
-		<label for="ciContent">comment</label>
+		<label for="ciContent">댓글</label>
 		<form name="commentInsertForm">
 			<div class="input-group">
 				<input type="hidden" name="biNum" value="${detail.biNum}" /> <input
@@ -74,7 +47,7 @@
 	<div class="container">
 		<div class="commentList"></div>
 	</div>
-
+	<script src="http://code.jquery.com/jquery-latest.js"></script> 
 	<!-- babsang-comment.jsp 연결 -->
 	<%@ include file="babsang-comment.jsp"%>
 </body>
