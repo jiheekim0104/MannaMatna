@@ -17,7 +17,7 @@ ${user.uiNickname}(${user.uiId})<br>
 <c:if test="${user.uiFilepath!=null}">
 <img src="${user.uiFilepath}" width="300">
 </c:if><br>
-<button onclick="location.href='/profile-update'">정보수정</button>
+<button onclick="location.href='/check-update'">정보수정</button>
 <button onclick="location.href='/withdraw'">탈퇴하기</button>
 
 <a href="/user-check">유저확인페이지(확인용)</a>

@@ -11,9 +11,18 @@
 	<h1>여기는 메인 페이지</h1>
 	<button onclick="location.href='/main'">프로필 이미지</button>
 	<br>
-	<button onclick="location.href='/login'">Login</button>
-	<br>
+	<c:if test="${user.uiId == null}">
+<button onclick="location.href='/login'">Login</button>
+<br>
 	<button onclick="location.href='/join'">Join</button>
+</c:if>
+<c:if test="${user.uiId != null}">
+${user.uiNickname}님 안녕하세요<br>
+<button onclick="location.href='/logout'">Logout</button>
+<button onclick="location.href='/profile'">Profile</button>
+</c:if>
+	
+	
 	<br>
 	<button onclick="location.href='/createBabsang'">밥상 생성</button>
 	<br>

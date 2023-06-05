@@ -18,4 +18,12 @@
 		insert into user_info (ui_nickname,ui_pwd,ui_filepath,ui_gender,ui_age,ui_id)
 		values (#{uiNickname},#{uiPwd},#{uiFilepath},#{uiGender},#{uiAge},#{uiId})
 	</insert>
+	
+	<update id="updateUserInfo">
+		update user_info set ui_nickname = #{uiNickname}, ui_pwd = #{uiPwd}, ui_filepath = #{uiFilepath}
+		where ui_num = #{uiNum}
+	</update>
+	<delete id="deleteUserInfo">
+		delete from user_info where ui_num = #{uiNum}
+	</delete>
 </mapper>

@@ -18,6 +18,8 @@ public class UserInfoVO {
 	private int biNum;
 	private Date uiCredat;
 	private String uiId;
+	private int uiActive;
+	private String uiDel;
 	
 	public UserInfoVO() {
 		

@@ -62,5 +62,27 @@ public class UserInfoService {
 		return uiMapper.insertUserInfo(userInfoVO)==1;
 	}
 
+	public boolean delete(UserInfoVO userInfoVO, HttpSession session){
+		return uiMapper.deleteUserInfo(userInfoVO)==1;
+	}
 	
+	public boolean update(UserInfoVO userInfoVO, HttpSession session) throws IllegalStateException, IOException {
+		String fileName = userInfoVO.getUiFile().getOriginalFilename();
+		if("".equals(fileName)) {
+			userInfoVO.setUiFilepath("/resources/upload/nophoto.png");
+		} else if(!"".equals(fileName)) {
+			int idx = fileName.lastIndexOf(".");
+			String extName = "";
+			if (idx != -1) {
+				extName = fileName.substring(idx);
+			}
+			String name = UUID.randomUUID().toString();
+			log.info("name====>{}",name);
+			File file = new File(uploadFilePath, name+extName);
+			userInfoVO.getUiFile().transferTo(file);
+			userInfoVO.setUiFilepath("/resources/upload/"+name+extName);
+			log.info("저장됨====>{}",userInfoVO);
+		}
+		return uiMapper.updateUserInfo(userInfoVO)==1;
+	}
 }

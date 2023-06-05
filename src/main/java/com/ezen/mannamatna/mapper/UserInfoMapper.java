@@ -11,6 +11,8 @@ public interface UserInfoMapper {
 	
 	int insertUserInfo(UserInfoVO userInfoVO);
 
-	
+	int deleteUserInfo(UserInfoVO userInfoVO);
+
+	int updateUserInfo(UserInfoVO userInfoVO);
 	
 }

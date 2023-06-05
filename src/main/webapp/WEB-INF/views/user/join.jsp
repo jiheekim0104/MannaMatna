@@ -39,12 +39,16 @@
 
 </body>
 <script>
-	let inputGender = document.querySelector([name='uiGender']); // 입력받은 성별 미선택 처리 필요함
-	let inputGender1 = document.getElementById('uiGender1').value;
-	let inputGender2 = document.getElementById('uiGender2').value;
+ 	let inputGender = document.querySelector([name='uiGender']); // 입력받은 성별 미선택 처리 필요함
+
 	function show(){
-		alert(!(inputGender1==true || inputGender2==false));
-	}
+ 		alert(querySelector('input[name="uiGender"]').value);
+		/* if(document.querySelector('[name='uiGender']').checked)
+			querySelector('input[name="radio"]:checked').value;
+		alert("1개 이상 선택해 주세요.");
+		$('input[name="checkbox"]').is(':checked'); */
+	} 
+		
 	function loadImg(obj){
 		let file =obj.files[0];
 		let imgObj = document.querySelector('#imgDiv>img');
@@ -91,7 +95,7 @@
 			return false;
 		}
 		
-		
+		//성별체크
 		if(!(inputGender1==true || inputGender2==false)){  
 			alert("성별을 선택해주세요.");
 			return false;

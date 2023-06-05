@@ -85,10 +85,6 @@ public class UserInfoController {
 	@ResponseBody
 	public Map<String, Integer> idChk(@ModelAttribute UserInfoVO userInfoVO, @RequestBody Map<String, String> checkMap) {
 		Map<String, Integer> map = new HashMap<>();
-		if(checkMap.get("uiId").trim().equals("")) {
-			map.put("result", -1);
-			return map; 
-		}
 		userInfoVO.setUiId(checkMap.get("uiId"));
 		log.info("여기는 컨트롤러1===========>{}",userInfoVO.getUiId());
 		int result = uiService.idChk(userInfoVO);
@@ -110,9 +106,20 @@ public class UserInfoController {
 	}
 	
 	
-	@GetMapping("/profile")
-	public String profile() {
+	@GetMapping("/profile") // 프로필 화면 연결
+	public String profile(@ModelAttribute UserInfoVO userInfoVO, HttpSession session) {
+		userInfoVO = (UserInfoVO) session.getAttribute("user");
 		return "user/user-profile";
+	}
+	
+	@GetMapping("/check-update") // 프로필 수정 버튼을 누른 경우 
+	public String checkUpdate() {
+		return "user/user-check-update";
+	}
+	
+	@PostMapping("/check-update") // 수정 버튼을 누르고 비밀번호가 일치한 경우
+	public String checkUpdateOk() {
+		return "user/user-profile-update";
 	}
 	
 	@GetMapping("/profile-update")
@@ -120,13 +127,26 @@ public class UserInfoController {
 		return "user/user-profile-update";
 	}
 	
+	@PostMapping("/profile-update")
+	public String updateProfileOk(@ModelAttribute UserInfoVO userInfoVO, HttpSession session, Model m) throws IllegalStateException, IOException {
+		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
+		userInfoVO.setUiNum(sessionUserInfo.getUiNum());
+		if(uiService.update(userInfoVO, session)) {
+			m.addAttribute("msg","정보수정에 성공하셨습니다.");
+			session.setAttribute("user", userInfoVO);
+			return "user/user-profile";
+		}
+		m.addAttribute("msg","정보수정에 실패하였습니다.");
+		return "user/user-profile";
+	}
+	
+	
+	
 	@GetMapping("/withdraw")
 	public String withdraw() {
 		return "user/user-withdraw";
 	}
 	
-	@GetMapping("/user-check")
-	public String check() {
-		return "user/user-check";
-	}
+	
+	
 }
