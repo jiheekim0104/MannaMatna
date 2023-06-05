@@ -54,6 +54,8 @@ ${user.uiNickname}님 안녕하세요<br>
 	</table>
 	<hr>
 	<h2>로그인정보확인</h2>
-	<p>
+	<p>${sessionScope.user.uiNum}</p>
+	<img src="${sessionScope.user.uiFilepath}" width="300">
+	<p>${sessionScope.user.uiNickname}</p>
 </body>
 </html>

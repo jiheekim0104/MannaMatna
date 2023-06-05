@@ -32,7 +32,9 @@
 	<hr>
 	<!-- 댓글영역 -->
 	<h2>로그인유저정보 확인</h2>
-	<p>${session.uiNum}</p>
+	<p>${sessionScope.user.uiNum}</p>
+	<img src="${sessionScope.user.uiFilepath}" width="300">
+	<p>${sessionScope.user.uiNickname}</p>
 	<hr>
 	<h3>댓글</h3>
 	<div class="container">
@@ -40,8 +42,6 @@
 	</div>
 	<!-- 제이쿼리가 제대로 로드 되지 않는 현상 해결 -->
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<!-- babsang-comment.jsp 연결 -->
-	<%@ include file="babsang-comment.jsp"%>
 		<!-- 댓글입력 Form -->
 		<div class="container">
 		<label for="ciContent"></label>
@@ -55,5 +55,7 @@
 			</div>
 		</form>
 	</div>
+	<!-- babsang-comment.jsp 연결 -->
+	<%@ include file="babsang-comment.jsp"%>
 </body>
 </html>
