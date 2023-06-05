@@ -27,7 +27,7 @@
 										function(key, value) {
 											a += '<div class="commentArea">';
 											a += '<div class="commentInfo'+value.ciNum+'">'
-														+ '댓글번호 : '
+														+ '<img src="${sessionScope.user.uiFilepath}" width="300">' + ' 댓글번호 : '
 														+ value.ciNum
 														+ ' 작성자 : '
 														+ value.uiNum
