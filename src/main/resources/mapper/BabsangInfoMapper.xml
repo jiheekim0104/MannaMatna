@@ -2,22 +2,25 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.mannamatna.mapper.BabsangInfoMapper">
+
 	<select id="selectBabsangList"
 		resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
 		SELECT BI_NUM, BI_TITLE, BI_CONTENT, BI_MEETINGDAT,
-	BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY, BI_CLOSED,
-	UI_NUM FROM BABSANG_INFO
+		BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY, BI_CLOSED,
+		UI_NUM FROM BABSANG_INFO
 	</select>
+	
 	<select id="selectBabsangInfo" parameterType="int" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
-	SELECT BI_NUM, BI_TITLE, BI_CONTENT, BI_MEETINGDAT,
-	BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY, BI_CLOSED,
-	UI_NUM FROM BABSANG_INFO WHERE BI_NUM = #{biNum}
+		SELECT BI_NUM, BI_TITLE, BI_CONTENT, BI_MEETINGDAT,
+		BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY, BI_CLOSED,
+		UI_NUM FROM BABSANG_INFO WHERE BI_NUM = #{biNum}
 	</select>
+	
 	<insert id="insertBabsangInfo">
 		INSERT INTO BOARD_INFO(
 		BI_TITLE, BI_CONTENT, BI_MEETINGDAT, BI_MEETINGTIM, 
 		BI_HEADCNT, BI_FDCATEGORY, BI_CLOSED, UI_NUM)
-		VALUSE(
+		VALUES(
 		#{biTitle}, #{biContent}, #{biMeetingDat}, #{biMeetingTim}, 
 		#{biHeadCnt}, #{biFdCategory}, #{biClosed}, #{uiNum}
 		)

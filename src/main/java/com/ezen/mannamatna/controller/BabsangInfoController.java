@@ -2,6 +2,8 @@ package com.ezen.mannamatna.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.ezen.mannamatna.service.BabsangInfoService;
 import com.ezen.mannamatna.vo.BabsangInfoVO;
+import com.ezen.mannamatna.vo.UserInfoVO;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -28,13 +31,23 @@ public class BabsangInfoController {
 		return "babsang/babsang-list";
 	}
 	
-	@GetMapping("/createBabsang")
+	@GetMapping("/addBabsang")
 	public String goCreateBabsang(){
 		return "babsang/babsang-insert";
 	}
 	
-	@PostMapping("/babsang-insert")
-	public String insertBabsang(BabsangInfoVO board, Model m) {
+	@PostMapping("/addBabsang")
+	public String insertBabsang(BabsangInfoVO babsang, Model m, HttpSession session) {
+		UserInfoVO user = (UserInfoVO)session.getAttribute("user");
+		babsang.setUiNum(user.getUiNum());
+		String msg = "실패";
+		String url = "/babsang-insert";
+		if(babsangInfoService.addBabsangInfo(babsang)) {
+			msg = "성공";
+			url = "/babsang-list";
+		}
+		m.addAttribute("msg", msg);
+		m.addAttribute("url",url);
 		return "babsang/babsang-list";
 	}
 	

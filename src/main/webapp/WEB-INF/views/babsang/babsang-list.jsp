@@ -24,7 +24,7 @@ ${user.uiNickname}님 안녕하세요<br>
 	
 	
 	<br>
-	<button onclick="location.href='/createBabsang'">밥상 생성</button>
+	<button onclick="location.href='/addBabsang'">밥상 생성</button>
 	<br>
 
 	<table border="1">

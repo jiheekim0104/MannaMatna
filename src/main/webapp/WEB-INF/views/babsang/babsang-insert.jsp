@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="POST" action="/babsang-insert">
+	<form method="POST" action="/addBabsang">
 		<!-- required = 필수요소-->
 		<input type="text" id="biTitle" name="biTitle" 
 		placeholder="제목" style="width: 50%;" required><br>

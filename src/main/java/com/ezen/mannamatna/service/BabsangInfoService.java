@@ -25,4 +25,8 @@ public class BabsangInfoService {
 		// 상세페이지 biNum을 넘겨 받는 방식
 		 return babsangInfoMapper.selectBabsangInfo(biNum);
 	}
+	
+	public boolean addBabsangInfo(BabsangInfoVO babsang) {
+		return babsangInfoMapper.insertBabsangInfo(babsang)==1;
+	}
 }
