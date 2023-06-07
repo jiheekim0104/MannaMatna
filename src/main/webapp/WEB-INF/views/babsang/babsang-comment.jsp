@@ -19,34 +19,15 @@
 					data : {
 						'biNum' : biNum
 					},
-					async : false,
 					success : function(data) {
 						var a = '';
 						if (data.length > 0) {
-							$.each(
-										data,
-										function(key, value) {
-											
-											
-											a += '<div>';
-											a += '<div'+value.ciNum+'">'
-														+ '<img src="' + value.uiFilepath + '" width="50">'
-														+ ' 작성자 : '
-														+ value.uiNickname
-														+ ' 작성시간 : '
-														+ value.ciCredat
-														+ '<br>';
-												a += '<div class="commentCiContent'+value.ciNum+'"> <span> 내용 : '
-														+ value.ciContent
-														+ '</span>';
-												a += '<a onclick="commentUpdate('
-														+ value.ciNum
-														+ ',\''
-														+ value.ciContent
-														+ '\');"> 수정 </a>';
-												a += '<a onclick="commentDelete('
-														+ value.ciNum
-														+ ');"> 삭제 </a> </div>';
+							$.each(data,function(key, value) {
+											a += '<div style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+											a += '<div class="commentInfo'+value.ciNum+'">'+ '댓글번호 : '+value.ciNum+'<img src="' + value.uiFilepath + '" width="50">'+ ' 작성자 : '+ value.uiNickname+ ' 작성시간 : '+ value.ciCredat + '<br>';
+												a += '<div class="commentCiContent'+value.ciNum+'"> <p> 내용 : '+ value.ciContent+ '</p>';
+												a += '<a onclick="commentUpdate('+ value.ciNum+ ',\''+ value.ciContent+ '\');"> 수정 </a>';
+												a += '<a onclick="commentDelete('+ value.ciNum+ ');"> 삭제 </a> </div>';
 												a += '</div></div>';
 											});
 						} else {
@@ -79,7 +60,7 @@
 	    
 	    a += '<div>';
 	    a += '<input type="text" name="ciContent_'+ciNum+'" value="'+ciContent+'"/>';
-	    a += '<span><button type="button" onclick="commentUpdateProc('+ciNum+');">수정</button> </span>';
+	    a += '<span><button type="button" onclick="commentUpdateProc('+ciNum+');">수정</button></span>';
 	    a += '</div>';
 	    
 	    $('.commentCiContent'+ciNum).html(a);
@@ -94,9 +75,8 @@
 	        url : '/comment/update',
 	        type : 'post',
 	        data : {'ciContent' : updateCiContent, 'ciNum' : ciNum},
-	        async : false,
 	        success : function(data){
-	            if(data == 1) commentList(); //댓글 수정후 목록 출력 
+	            if(data == 1) commentList(biNum); //댓글 수정후 목록 출력 
 	        }
 	    });
 	}
