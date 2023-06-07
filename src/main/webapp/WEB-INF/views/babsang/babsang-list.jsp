@@ -5,37 +5,50 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>만나맛나 : 1인가구를 위한 신개념 밥상 매칭 사이트 </title>
+<title>만나맛나 : 1인가구를 위한 신개념 밥상 매칭 사이트</title>
+
+<style type="text/css">
+.profileImg {
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
+	border: 2px solid black;
+}
+</style>
+
 </head>
+
 <body>
 	<h1>여기는 메인 페이지</h1>
-	<button onclick="location.href='/main'">프로필 이미지</button>
-	<br>
-	<c:if test="${user.uiId == null}">
-<button onclick="location.href='/login'">Login</button>
-<br>
-	<button onclick="location.href='/join'">Join</button>
-</c:if>
-<c:if test="${user.uiId != null}">
-${user.uiNickname}님 안녕하세요<br>
-<button onclick="location.href='/logout'">Logout</button>
-<button onclick="location.href='/profile'">Profile</button>
-</c:if>
-	
-	
-	<br>
-	<button onclick="location.href='/addBabsang'">밥상 생성</button>
-	<br>
+	<hr>
+	<h2>로그인 정보 확인</h2>
+	<p>
+		<img class="profileImg" src="${sessionScope.user.uiFilepath}" onclick="location.href='/profile'">
+	</p>
 
-	<table border="1">
+	<c:if test="${sessionScope.user.uiId == null}">
+		<button onclick="location.href='/login'">Login</button>
+		<br>
+		<button onclick="location.href='/join'">Join</button>
+	</c:if>
+	<c:if test="${sessionScope.user.uiId != null}">
+		<p>유저 번호 : ${sessionScope.user.uiNum}</p>
+		<p>닉네임 : ${sessionScope.user.uiNickname}</p>
+		<p>${sessionScope.user.uiNickname}님
+			안녕하세요!!!!<br>
+			<button onclick="location.href='/logout'">Logout</button>
+			<button onclick="location.href='/profile'">Profile</button>
+		</p>
+	</c:if>
+	<p>
+		<button onclick="location.href='/addBabsang'">밥상 생성</button>
+	</p>
+
+	<table border="1" style="color: black;">
 		<c:if test="${empty babsangList}">
 			<th>게시물이 존재하지 않습니다</th>
 		</c:if>
-		<!-- onclick 함수는 테이블 자체에 주지않을게용! 
-		 각 게시물마다 밥상번호가 다 다르게 넘어가야함! 확인하시면 지우셔도됩니당
-	-->
 		<c:forEach items="${babsangList}" var="babsangListVO">
-			<!-- 일단은 제목에 링크넣었습니다. -->
 			<tr>
 				<th colspan="2"><a href="/detail/${babsangListVO.biNum}">${babsangListVO.biTitle}</a>
 				</th>
@@ -50,12 +63,14 @@ ${user.uiNickname}님 안녕하세요<br>
 				<td>${babsangListVO.biMeetingDat}</td>
 				<td>${babsangListVO.biMeetingTim}</td>
 			</tr>
+			<c:if test="${sessionScope.user.uiNum == babsangListVO.uiNum}">
+			<tr>
+				<td>
+					<button onclick="location.href='/deleteBabsang'">밥상 삭제</button>
+				</td>
+			</tr>
+			</c:if>
 		</c:forEach>
 	</table>
-	<hr>
-	<h2>로그인정보확인</h2>
-	<p>${sessionScope.user.uiNum}</p>
-	<img src="${sessionScope.user.uiFilepath}" width="300">
-	<p>${sessionScope.user.uiNickname}</p>
 </body>
 </html>
