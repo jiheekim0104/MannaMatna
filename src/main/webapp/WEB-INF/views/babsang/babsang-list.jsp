@@ -66,7 +66,7 @@
 			<c:if test="${sessionScope.user.uiNum == babsangListVO.uiNum}">
 			<tr>
 				<td>
-					<button onclick="location.href='/deleteBabsang'">밥상 삭제</button>
+					<button onclick="location.href='/deleteBabsang?biNum=${babsangListVO.biNum}'">밥상 삭제</button>
 				</td>
 			</tr>
 			</c:if>

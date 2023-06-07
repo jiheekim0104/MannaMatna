@@ -10,4 +10,6 @@ public interface BabsangInfoMapper {
 	BabsangInfoVO selectBabsangInfo(int biNum); // 게시글 상세
 
 	int insertBabsangInfo(BabsangInfoVO babsang); // 게시물 작성
+	
+	int deleteBabsangInfo(int biNum); // 게시글 삭제
 }

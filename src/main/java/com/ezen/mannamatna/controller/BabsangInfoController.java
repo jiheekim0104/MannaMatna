@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.ezen.mannamatna.service.BabsangInfoService;
 import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
@@ -40,10 +42,10 @@ public class BabsangInfoController {
 	public String insertBabsang(BabsangInfoVO babsang, Model m, HttpSession session) {
 		UserInfoVO user = (UserInfoVO)session.getAttribute("user");
 		babsang.setUiNum(user.getUiNum());
-		String msg = "실패";
+		String msg = "밥상 등록 실패";
 		String url = "/babsang-insert";
 		if(babsangInfoService.addBabsangInfo(babsang)) {
-			msg = "성공";
+			msg = "밥상 등록 성공";
 			url = "/main";
 		}
 		m.addAttribute("msg", msg);
@@ -57,4 +59,17 @@ public class BabsangInfoController {
         m.addAttribute("detail", babsangInfoService.getBabsangInfoVO(biNum));
         return "babsang/babsang-detail"; // 요청 jsp
     }
+	
+	@GetMapping("deleteBabsang")
+	public String deleteBabsang(Model m,  @PathVariable int biNum) {
+		String msg = "밥상 삭제 실패";
+		String url = "/main";
+		if(babsangInfoService.deleteBabsangInfo(biNum)) {
+			msg = "밥상 삭제 성공";
+			url = "/main";
+		}
+		m.addAttribute("msg",msg);
+		m.addAttribute("url",url);
+		return "common/msg";
+	}
 }

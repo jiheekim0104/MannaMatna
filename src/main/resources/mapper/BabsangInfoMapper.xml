@@ -25,4 +25,9 @@
 		#{biHeadCnt}, #{biFdCategory}, #{biClosed}, #{uiNum}
 		)
 	</insert>
+	
+	<delete id="deleteBabsangInfo">
+		DELETE FROM BABSANG_INFO
+		WHERE BI_NUM = #{biNum}
+	</delete>
 </mapper>

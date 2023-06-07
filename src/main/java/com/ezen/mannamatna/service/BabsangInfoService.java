@@ -29,4 +29,8 @@ public class BabsangInfoService {
 	public boolean addBabsangInfo(BabsangInfoVO babsang) {
 		return babsangInfoMapper.insertBabsangInfo(babsang)==1;
 	}
+	
+	public boolean deleteBabsangInfo(int biNum) {
+		return babsangInfoMapper.deleteBabsangInfo(biNum)==1;
+	}
 }
