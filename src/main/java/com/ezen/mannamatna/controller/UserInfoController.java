@@ -109,6 +109,7 @@ public class UserInfoController {
 	@GetMapping("/profile") // 프로필 화면 연결
 	public String profile(@ModelAttribute UserInfoVO userInfoVO, HttpSession session) {
 		userInfoVO = (UserInfoVO) session.getAttribute("user");
+		log.info("컨트롤러/프로필요청 ==>{}",userInfoVO);
 		return "user/user-profile";
 	}
 	
@@ -118,18 +119,24 @@ public class UserInfoController {
 	}
 	
 	@PostMapping("/check-update") // 수정 버튼을 누르고 비밀번호가 일치한 경우
-	public String checkUpdateOk() {
-		return "user/user-profile-update";
+	public String checkUpdateOk(@ModelAttribute UserInfoVO userInfoVO, HttpSession session) {
+		userInfoVO = (UserInfoVO) session.getAttribute("user");
+		log.info("컨트롤러/체크 업데이트 포스트 ==>{}",session);
+		log.info("컨트롤러/체크 업데이트 포스트 ==>{}",userInfoVO);
+		return "/user/user-profile-update";
 	}
 	
-	@GetMapping("/profile-update")
+	@GetMapping("/user/user-profile-update")
 	public String updateProfile() {
 		return "user/user-profile-update";
 	}
 	
 	@PostMapping("/profile-update")
 	public String updateProfileOk(@ModelAttribute UserInfoVO userInfoVO, HttpSession session, Model m) throws IllegalStateException, IOException {
+		log.info("컨트롤러/프로필업데이트완료1 ==>{}",session);
+		log.info("컨트롤러/프로필업데이트완료1 ==>{}",userInfoVO);
 		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
+		log.info("컨트롤러/프로필업데이트완료2 ==>{}",userInfoVO);
 		userInfoVO.setUiNum(sessionUserInfo.getUiNum());
 		if(uiService.update(userInfoVO, session)) {
 			m.addAttribute("msg","정보수정에 성공하셨습니다.");
@@ -137,6 +144,7 @@ public class UserInfoController {
 			return "user/user-profile";
 		}
 		m.addAttribute("msg","정보수정에 실패하였습니다.");
+		log.info("컨트롤러/프로필업데이트완료3 ==>{}",userInfoVO);
 		return "user/user-profile";
 	}
 	
@@ -144,9 +152,32 @@ public class UserInfoController {
 	
 	@GetMapping("/withdraw")
 	public String withdraw() {
-		return "user/user-withdraw";
+		// 사유씀 
+		return "user/user-withdraw"; 
 	}
 	
+	@PostMapping("/withdraw")// 탈퇴사유를 입력하고 확인을 누른 경우 
+	public String goWithdraw(@ModelAttribute UserInfoVO userInfoVO,HttpSession session) {
+		//사유입력한거 일단 임시 저장 받아야됨
+		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
+		userInfoVO.setUiDel(sessionUserInfo.getUiDel());
+		log.info("컨트롤러 윗드로우 ==>{}",userInfoVO.getUiDel());
+		return "user/user-check-withdraw";
+	}
 	
+	@GetMapping("/user/user-check-withdraw") 
+	public String checkWithdraw() {
+		// 비밀번호 재확인
+		// 앞에서 입력한 사유를 이때 저장함
+		return "user/user-check-withdraw";
+	}
+	
+	@PostMapping("/check-withdraw")
+	public String checkWithdrawOk() {
+		//삭제진행
+		//세션에서 아웃시켜야함
+		//엑티브 0처리
+		return "babsang/babsang-list";
+	}
 	
 }

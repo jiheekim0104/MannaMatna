@@ -67,7 +67,9 @@ public class UserInfoService {
 	}
 	
 	public boolean update(UserInfoVO userInfoVO, HttpSession session) throws IllegalStateException, IOException {
+		log.info("userInfoVO====>{}",userInfoVO);
 		String fileName = userInfoVO.getUiFile().getOriginalFilename();
+		log.info("fileName====>{}",fileName);
 		if("".equals(fileName)) {
 			userInfoVO.setUiFilepath("/resources/upload/nophoto.png");
 		} else if(!"".equals(fileName)) {
@@ -83,6 +85,7 @@ public class UserInfoService {
 			userInfoVO.setUiFilepath("/resources/upload/"+name+extName);
 			log.info("저장됨====>{}",userInfoVO);
 		}
+		log.info("서비스/업데이트==>{}",userInfoVO);
 		return uiMapper.updateUserInfo(userInfoVO)==1;
 	}
 }

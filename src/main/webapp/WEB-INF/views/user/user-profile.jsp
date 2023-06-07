@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script>
+<c:if test="${msg!=null}">
+alert('${msg}');
+</c:if>
+</script>
 <body>
 <h1>프로필</h1>
 ${user}<br>
@@ -20,7 +25,6 @@ ${user.uiNickname}(${user.uiId})<br>
 <button onclick="location.href='/check-update'">정보수정</button>
 <button onclick="location.href='/withdraw'">탈퇴하기</button>
 
-<a href="/user-check">유저확인페이지(확인용)</a>
 </body>
 <script>
 if(${user.uiGender}){

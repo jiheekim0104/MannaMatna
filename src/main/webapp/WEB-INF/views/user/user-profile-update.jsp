@@ -18,16 +18,26 @@
 			<input type="file" name="uiFile" id="uiFile" onchange="loadImg(this)">
 			<br>
 		</c:if>
-		<input type="text" name="uiNickname" id="uiNickname"
-			value="${user.uiNickname}">
-		<button type="button" id="nicknameChk" onclick="fn_nicknameChk();"
-			value="N">중복확인</button>
-		<br> <input type="password" name="uiPwd" id="uiPwd"
-			value="${user.uiPwd}"><br> <input type="password"
-			name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
+		<input type="text" name="uiNickname" id="uiNickname" value="${user.uiNickname}">
+		<button type="button" id="nicknameChk" onclick="fn_nicknameChk();" value="N">중복확인</button><br> 
+		<input type="password" name="uiPwd" id="uiPwd" value="${user.uiPwd}"><br> 
+		<input type="password" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
+		성별 : <input type="radio" name="uiGender" id="uiGender1" value="true">남자
+		<input type="radio" name="uiGender" id="uiGender2" value="false">여자<br>
+		연령대 : <select name="uiAge" id="uiAge">
+			<option value="0">연령대를 선택하세요.</option>
+			<option value="10">10대</option>
+			<option value="20">20대</option>
+			<option value="30">30대</option>
+			<option value="40">40대</option>
+			<option value="50">50대 이상</option>
+		</select><br>
 		
-		성별 : <a id="uiGender" name="uiGender"></a><br>
-연령대 : ${user.uiAge}대<br>
+		<input type="hidden" name="biNum" id="biNum" value="${user.biNum}"> 
+		<input type="hidden" name="uiCredat" id="uiCredat" value="${user.uiCredat}"> 
+		<input type="hidden" name="uiId" id="uiId" value="${user.uiId}"> 
+		<input type="hidden" name="uiActive" id="uiActive" value="${user.uiActive}"> 
+		
 		<button>확인</button>
 	</form>
 	<script>
