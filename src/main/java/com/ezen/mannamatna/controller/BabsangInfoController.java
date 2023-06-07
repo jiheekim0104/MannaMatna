@@ -44,11 +44,11 @@ public class BabsangInfoController {
 		String url = "/babsang-insert";
 		if(babsangInfoService.addBabsangInfo(babsang)) {
 			msg = "성공";
-			url = "/babsang-list";
+			url = "/main";
 		}
 		m.addAttribute("msg", msg);
 		m.addAttribute("url",url);
-		return "babsang/babsang-list";
+		return "common/msg";
 	}
 	
 	@GetMapping("/detail/{biNum}") // biNum으로 VO를 가져오는 방식

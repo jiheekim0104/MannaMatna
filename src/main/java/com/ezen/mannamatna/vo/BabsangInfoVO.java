@@ -9,7 +9,7 @@ public class BabsangInfoVO {
 	private String biContent;
 	private String biMeetingDat;
 	private String biMeetingTim;
-	private String biHeadCnt;
+	private int biHeadCnt;
 	private String biCreateDat;
 	private String biFdCategory;
 	private boolean biClosed;
