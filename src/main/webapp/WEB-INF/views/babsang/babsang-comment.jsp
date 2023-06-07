@@ -19,6 +19,7 @@
 					data : {
 						'biNum' : biNum
 					},
+					async : false,
 					success : function(data) {
 						var a = '';
 						if (data.length > 0) {
@@ -27,15 +28,15 @@
 										function(key, value) {
 											
 											
-											a += '<div class="commentArea">';
-											a += '<div class="commentInfo'+value.ciNum+'">'
-														+ '<img src="' + value.uiFilepath + '" width="300">'
+											a += '<div>';
+											a += '<div'+value.ciNum+'">'
+														+ '<img src="' + value.uiFilepath + '" width="50">'
 														+ ' 작성자 : '
 														+ value.uiNickname
 														+ ' 작성시간 : '
 														+ value.ciCredat
 														+ '<br>';
-												a += '<div class="commentContent'+value.ciNum+'"> <span> 내용 : '
+												a += '<div class="commentCiContent'+value.ciNum+'"> <span> 내용 : '
 														+ value.ciContent
 														+ '</span>';
 												a += '<a onclick="commentUpdate('
@@ -72,7 +73,36 @@
 			}
 		});
 	}
+	//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
+	function commentUpdate(ciNum, ciContent){
+	    var a ='';
+	    
+	    a += '<div>';
+	    a += '<input type="text" name="ciContent_'+ciNum+'" value="'+ciContent+'"/>';
+	    a += '<span><button type="button" onclick="commentUpdateProc('+ciNum+');">수정</button> </span>';
+	    a += '</div>';
+	    
+	    $('.commentCiContent'+ciNum).html(a);
+	    
+	}
+	 
+	//댓글 수정
+	function commentUpdateProc(ciNum){
+	    var updateCiContent = $('[name=ciContent_'+ciNum+']').val();
+	    console.log(updateCiContent);
+	    $.ajax({
+	        url : '/comment/update',
+	        type : 'post',
+	        data : {'ciContent' : updateCiContent, 'ciNum' : ciNum},
+	        async : false,
+	        success : function(data){
+	            if(data == 1) commentList(); //댓글 수정후 목록 출력 
+	        }
+	    });
+	}
+	
 	$(document).ready(function() {
 		commentList(); // 페이지 로딩 시 댓글 목록 출력
 	});
+	
 </script>

@@ -19,8 +19,7 @@
 		(#{ciNum}, #{ciContent}, DEFAULT,
 		DEFAULT, #{uiNum}, #{biNum})
 	</insert>
-	<update id="updateCommentInfo"
-		parameterType="com.ezen.mannamatna.vo.CommentInfoVO">
+	<update id="updateCommentInfo" parameterType ="com.ezen.mannamatna.vo.CommentInfoVO">
 		UPDATE COMMENT_INFO SET CI_CONTENT = #{ciContent} WHERE
 		CI_NUM = #{ciNum}
 	</update>

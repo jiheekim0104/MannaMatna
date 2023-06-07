@@ -46,7 +46,7 @@
 		<div class="container">
 		<label for="ciContent"></label>
 		<form name="commentInsertForm">
-			<div class="input-group">
+			<div>
 				<input type="hidden" name="biNum" value="${detail.biNum}" /> <input
 					type="text" class="form-control" id="ciContent" name="ciContent"
 					placeholder="댓글을 입력하세요."> <span class="input-group-btn">
