@@ -53,13 +53,13 @@ public class CommentInfoController {
 	@PostMapping("/insert")
 	@ResponseBody // 댓글 화면에 바로 출력
 	public int commentInfoInsert(@RequestParam int biNum, @RequestParam String ciContent, HttpSession session) {
-		CommentInfoVO commentInfoVO = new CommentInfoVO();
-		UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user");
-		int uiNum = userInfoVO.getUiNum();
-		log.info("세션에담겼어?!!!!======>{}", uiNum);
-		commentInfoVO.setBiNum(biNum);
-		commentInfoVO.setUiNum(uiNum);
-		commentInfoVO.setCiContent(ciContent);
+		CommentInfoVO commentInfoVO = new CommentInfoVO(); // 새로 저장할 VO객체 생성
+		UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user"); // 세션에 저장된 유저정보 가져옴
+		commentInfoVO.setBiNum(biNum); // 해당 게시물 번호를 댓글정보에 넣어준다.
+		commentInfoVO.setCiContent(ciContent); // 내용 저장
+		commentInfoVO.setUiNum(userInfoVO.getUiNum()); // 세션에 uiNum 담아준다.
+		commentInfoVO.setUiFilepath(userInfoVO.getUiFilepath()); // 세션정보의 프로필사진정보 넣어준다.
+		commentInfoVO.setUiNickname(userInfoVO.getUiNickname()); // 세션정보의 닉네임 넣어준다.
 		return commentInfoService.insertCommentInfo(commentInfoVO);
 	}
 }

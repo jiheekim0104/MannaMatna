@@ -8,7 +8,9 @@
 	</select>
 	<select id="selectCommentInfos" parameterType="int"
 		resultType="com.ezen.mannamatna.vo.CommentInfoVO">
-		SELECT * FROM COMMENT_INFO WHERE BI_NUM = #{biNum}
+		SELECT u.UI_FILEPATH, u.UI_NICKNAME, c.CI_CONTENT, c.CI_CREDAT, 
+		c.CI_CRETIM, c.BI_NUM FROM COMMENT_INFO c 
+		JOIN USER_INFO u ON c.UI_NUM = u.UI_NUM WHERE c.BI_NUM = #{biNum}
 	</select>
 	<insert id="insertCommentInfo"
 		parameterType="com.ezen.mannamatna.vo.CommentInfoVO">

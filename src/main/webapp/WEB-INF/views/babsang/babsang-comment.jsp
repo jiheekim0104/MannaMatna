@@ -25,12 +25,13 @@
 							$.each(
 										data,
 										function(key, value) {
+											
+											
 											a += '<div class="commentArea">';
 											a += '<div class="commentInfo'+value.ciNum+'">'
-														+ '<img src="${sessionScope.user.uiFilepath}" width="300">' + ' 댓글번호 : '
-														+ value.ciNum
+														+ '<img src="' + value.uiFilepath + '" width="300">'
 														+ ' 작성자 : '
-														+ value.uiNum
+														+ value.uiNickname
 														+ ' 작성시간 : '
 														+ value.ciCredat
 														+ '<br>';
