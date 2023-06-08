@@ -21,14 +21,21 @@
 <body>
 	<h1>여기는 메인 페이지</h1>
 	<hr>
+	
+	<!-- 유저 정보, 기능 -->
 	<h2>로그인 정보 확인</h2>
-
-
+	
+	<!-- 비로그인 시 -->
 	<c:if test="${sessionScope.user.uiId == null}">
-		<button onclick="location.href='/login'">Login</button>
-		<br>
-		<button onclick="location.href='/join'">Join</button>
+		<p>
+			<button onclick="location.href='/login'">Login</button>
+		</p>
+		<p>
+			<button onclick="location.href='/join'">Join</button>
+		</p>	
 	</c:if>
+	
+	<!-- 로그인 시 -->
 	<c:if test="${sessionScope.user.uiId != null}">
 		<p>
 			<img class="profileImg" src="${sessionScope.user.uiFilepath}"
@@ -41,20 +48,32 @@
 			<button onclick="location.href='/logout'">Logout</button>
 			<button onclick="location.href='/profile'">Profile</button>
 		</p>
+		<p>
+			<button onclick="location.href='/addBabsang'">밥상 생성</button>
+		</p>
 	</c:if>
-	<p>
-		<button onclick="location.href='/addBabsang'">밥상 생성</button>
-	</p>
+	
 
+	<!-- 밥상 리스트 목록 -->
 	<table border="1" style="color: black;">
 		<c:if test="${empty babsangList}">
 			<th>게시물이 존재하지 않습니다</th>
 		</c:if>
 		<c:forEach items="${babsangList}" var="babsangListVO">
 			<tr>
-				<th colspan="2"><a href="/detail/${babsangListVO.biNum}">${babsangListVO.biTitle}</a>
+				<th colspan="2"><a href="/detail/${babsangListVO.biNum}">제목 : ${babsangListVO.biTitle}</a>
 				</th>
 			</tr>
+<!-- 생성자, 보드 번호 추후 삭제 예정 -->
+			<tr>
+				<td colspan="2">보드 번호 : ${babsangListVO.biNum}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">보드 생성자 : ${babsangListVO.uiNum}
+				</td>
+			</tr>
+<!-- 이 까지 -->
 			<tr>
 				<td colspan="2">카테고리 : ${babsangListVO.biFdCategory}</td>
 			</tr>
@@ -65,7 +84,8 @@
 				<td>날짜 : ${babsangListVO.biMeetingDat}</td>
 				<td>시간 : ${babsangListVO.biMeetingTim}</td>
 			</tr>
-			<%-- <tr>
+			<%-- 밥상 삭제 버튼
+			<tr>
 				<c:if test="${sessionScope.user.uiNum == babsangListVO.uiNum}">
 					<td colspan="2" align="center">
 						<button

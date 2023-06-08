@@ -14,4 +14,5 @@ public class BabsangInfoVO {
 	private String biFdCategory;
 	private boolean biClosed;
 	private int uiNum;
+	private int uiBiNum; //밥상 생성 시 userInfo의 biNum 일단 중단
 }

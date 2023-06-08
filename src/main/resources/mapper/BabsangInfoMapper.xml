@@ -3,12 +3,27 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.mannamatna.mapper.BabsangInfoMapper">
 
-	<select id="selectBabsangList"
+	<!-- 아래는 테스트 중 입니다 -->
+	<!-- 임시 id명 "selectBabsangUserJoin" -->
+	<select id= "selectBabsangList" 
+		resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
+		SELECT * FROM BABSANG_INFO BI INNER JOIN USER_INFO UI
+		WHERE BI.UI_NUM = UI.UI_NUM
+		ORDER BY BI.BI_NUM ASC;
+		<!-- 나중에 내림차순(생성 순)으로 바꿔야함 -->
+	</select>
+	
+	<update id="">
+		밥상이 생기고 나서 update해야할까...
+	</update>
+
+<!-- 	기존 select 쿼리문
+		<select id="selectBabsangList"
 		resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
 		SELECT BI_NUM, BI_TITLE, BI_CONTENT, BI_MEETINGDAT,
 		BI_MEETINGTIM, BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY,
 		BI_CLOSED, UI_NUM FROM BABSANG_INFO
-	</select>
+	</select> -->
 	
 	<select id="selectBabsangInfo" parameterType="int" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
 		SELECT BI_NUM, BI_TITLE, BI_CONTENT, BI_MEETINGDAT,
@@ -23,6 +38,7 @@
 		VALUES(
 		#{biTitle}, #{biContent}, #{biMeetingDat}, #{biMeetingTim}, 
 		#{biHeadCnt}, #{biFdCategory}, #{biClosed}, #{uiNum}
+		<!-- , #{uiBiNum} -->
 		)
 	</insert>
 	
@@ -30,4 +46,6 @@
 		DELETE FROM BABSANG_INFO
 		WHERE BI_NUM = #{biNum}
 	</delete>
+	
+	
 </mapper>

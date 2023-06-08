@@ -33,4 +33,8 @@ public class BabsangInfoService {
 	public boolean deleteBabsangInfo(int biNum) {
 		return babsangInfoMapper.deleteBabsangInfo(biNum)==1;
 	}
+	
+	public BabsangInfoVO updateUiBiNum(int uiBiNum) {
+		return babsangInfoMapper.updateUserInfoBiNum(uiBiNum);
+	}//일단 중단
 }
