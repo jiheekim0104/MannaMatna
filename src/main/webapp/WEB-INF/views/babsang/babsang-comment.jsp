@@ -27,10 +27,13 @@
 											a += '<div style="border:1px solid darkgray; margin-bottom: 15px;">';
 											a += '<div class="commentInfo'+value.ciNum+'">uiNum : ' + value.uiNum +'<img src="' + value.uiFilepath + '" width="50">'+ ' 작성자 : '+ value.uiNickname+ ' 작성시간 : '+ value.ciCredat + '<br>';
 												a += '<div class="commentCiContent'+value.ciNum+'"> <span> 내용 : '+ value.ciContent+ '</span>';
-												// 아래부분 태그들은 세션스코프의 값과 value.uiNum과 같으면 태그가 나오도록 수정해보자!!!
+												// 로그인시 수정, 삭제기능 가능토록 추가
+												if(${sessionScope.user.uiNum}==value.uiNum && ${sessionScope.user.uiNum}!=null){
+												// 아래부분 태그들은 세션스코프의 값이 존재하면서, value.uiNum과 값이 같으면 태그가 나오도록 수정
 												a += '<a onclick="commentUpdate('+ value.ciNum+ ',\''+ value.ciContent+ '\');"> 수정 </a>';
-												a += '<a onclick="commentDelete('+ value.ciNum+ ');"> 삭제 </a> </div>';
-												// 
+												a += '<a onclick="commentDelete('+ value.ciNum+ ');"> 삭제 </a>';
+												}
+												a += '</div>';
 												a += '</div></div>';
 											});
 						} else {
