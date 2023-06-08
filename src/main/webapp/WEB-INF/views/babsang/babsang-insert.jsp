@@ -14,14 +14,14 @@
 			
 		<select id="biFdCategory"name="biFdCategory" required>
 			<option value="" selected>카테고리 선택</option>
-			<option value="koreanFood">한식</option>
-			<option value="chineseFood">중식</option>
-			<option value="japaneseFood">일식</option>
-			<option value="americanFood">양식</option>
-			<option value="bunsik">분식</option>
-			<option value="fastFood">패스트푸드</option>
-			<option value="seaFood">해산물</option>
-			<option value="forkFeet">족발</option>
+			<option value="한식">한식</option>
+			<option value="중식">중식</option>
+			<option value="일식">일식</option>
+			<option value="양식">양식</option>
+			<option value="분식">분식</option>
+			<option value="패스트푸드">패스트푸드</option>
+			<option value="해산물">해산물</option>
+			<option value="족발">족발</option>
 		</select>
 		
 		<input type="date" id="biMeetingDat" name="biMeetingDat" required>

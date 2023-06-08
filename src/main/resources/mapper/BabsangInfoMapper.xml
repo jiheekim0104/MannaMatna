@@ -6,8 +6,8 @@
 	<select id="selectBabsangList"
 		resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
 		SELECT BI_NUM, BI_TITLE, BI_CONTENT, BI_MEETINGDAT,
-		BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY, BI_CLOSED,
-		UI_NUM FROM BABSANG_INFO
+		BI_MEETINGTIM, BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY,
+		BI_CLOSED, UI_NUM FROM BABSANG_INFO
 	</select>
 	
 	<select id="selectBabsangInfo" parameterType="int" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
@@ -25,4 +25,9 @@
 		#{biHeadCnt}, #{biFdCategory}, #{biClosed}, #{uiNum}
 		)
 	</insert>
+	
+	<delete id="deleteBabsangInfo">
+		DELETE FROM BABSANG_INFO
+		WHERE BI_NUM = #{biNum}
+	</delete>
 </mapper>

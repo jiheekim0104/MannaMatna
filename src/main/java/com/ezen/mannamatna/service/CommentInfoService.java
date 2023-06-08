@@ -21,7 +21,7 @@ public class CommentInfoService {
 	@Autowired
 	UserInfoMapper userInfoMapper;
 	
-	public List<CommentInfoVO> getCommentInfos(int biNum){
+	public List<CommentInfoVO> getCommentInfosService(int biNum){
 		// 댓글 목록 불러오기
 		return commentInfoMapper.selectCommentInfos(biNum);
 	}
@@ -31,13 +31,16 @@ public class CommentInfoService {
 //		return commentInfoMapper.selectCommentInfos(commentInfoVO);
 //	}
 	
-	public int insertCommentInfo(CommentInfoVO commetInfoVO) {
+	public int insertCommentInfoService(CommentInfoVO commetInfoVO) {
 		// 댓글 작성 기능
 		return commentInfoMapper.insertCommentInfo(commetInfoVO);
 	}
 	
-	public int updateCommentInfo(CommentInfoVO commentInfoVO) {
+	public int updateCommentInfoService(CommentInfoVO commentInfoVO) {
 		// 댓글 수정 기능
 		return commentInfoMapper.updateCommentInfo(commentInfoVO);
+	}
+	public int deleteCommentInfoService(int ciNum) {
+		return commentInfoMapper.deleteCommentInfo(ciNum);
 	}
 }

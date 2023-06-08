@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 <script>
 	// ajax를 이용한 댓글 목록 출력
-	var biNum = '${detail.biNum}'; // 게시글 번호
+	let biNum = '${detail.biNum}'; // 게시글 번호
 	console.log(biNum);
 
 	$('[name=commentInsertBtn]').click(function() { //댓글 등록 버튼 클릭시 
 		console.log('댓글등록눌렀따!!!');
-		var insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
+		let insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
 		commentInsert(insertData); //Insert 함수호출(아래)
 	});
 
@@ -19,34 +19,21 @@
 					data : {
 						'biNum' : biNum
 					},
-					async : false,
 					success : function(data) {
-						var a = '';
+						let a = '';
 						if (data.length > 0) {
-							$.each(
-										data,
-										function(key, value) {
-											
-											
-											a += '<div>';
-											a += '<div'+value.ciNum+'">'
-														+ '<img src="' + value.uiFilepath + '" width="50">'
-														+ ' 작성자 : '
-														+ value.uiNickname
-														+ ' 작성시간 : '
-														+ value.ciCredat
-														+ '<br>';
-												a += '<div class="commentCiContent'+value.ciNum+'"> <span> 내용 : '
-														+ value.ciContent
-														+ '</span>';
-												a += '<a onclick="commentUpdate('
-														+ value.ciNum
-														+ ',\''
-														+ value.ciContent
-														+ '\');"> 수정 </a>';
-												a += '<a onclick="commentDelete('
-														+ value.ciNum
-														+ ');"> 삭제 </a> </div>';
+							$.each(data,function(key, value) {
+											console.log('세션스코프 : ' + ${sessionScope.user.uiNum});
+											a += '<div style="border:1px solid darkgray; margin-bottom: 15px;">';
+											a += '<div class="commentInfo'+value.ciNum+'">uiNum : ' + value.uiNum +'<img src="' + value.uiFilepath + '" width="50">'+ ' 작성자 : '+ value.uiNickname+ ' 작성시간 : '+ value.ciCredat + '<br>';
+												a += '<div class="commentCiContent'+value.ciNum+'"> <span> 내용 : '+ value.ciContent+ '</span>';
+												// 로그인시 수정, 삭제기능 가능토록 추가
+												if(${sessionScope.user.uiNum}==value.uiNum && ${sessionScope.user.uiNum}!=null){
+												// 아래부분 태그들은 세션스코프의 값이 존재하면서, value.uiNum과 값이 같으면 태그가 나오도록 수정
+												a += '<a onclick="commentUpdate('+ value.ciNum+ ',\''+ value.ciContent+ '\');"> 수정 </a>';
+												a += '<a onclick="commentDelete('+ value.ciNum+ ');"> 삭제 </a>';
+												}
+												a += '</div>';
 												a += '</div></div>';
 											});
 						} else {
@@ -75,17 +62,15 @@
 	}
 	//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
 	function commentUpdate(ciNum, ciContent){
-	    var a ='';
+	    let a ='';
 	    
 	    a += '<div>';
 	    a += '<input type="text" name="ciContent_'+ciNum+'" value="'+ciContent+'"/>';
-	    a += '<span><button type="button" onclick="commentUpdateProc('+ciNum+');">수정</button> </span>';
+	    a += '<span><button type="button" onclick="commentUpdateProc('+ciNum+');">수정</button>';
+	    a += '<button onclick="commentUpdateCancle()">취소</button></span>';
 	    a += '</div>';
-	    
 	    $('.commentCiContent'+ciNum).html(a);
-	    
 	}
-	 
 	//댓글 수정
 	function commentUpdateProc(ciNum){
 	    var updateCiContent = $('[name=ciContent_'+ciNum+']').val();
@@ -94,9 +79,22 @@
 	        url : '/comment/update',
 	        type : 'post',
 	        data : {'ciContent' : updateCiContent, 'ciNum' : ciNum},
-	        async : false,
 	        success : function(data){
-	            if(data == 1) commentList(); //댓글 수정후 목록 출력 
+	            if(data == 1) commentList(biNum); //댓글 수정후 목록 출력 
+	        }
+	    });
+	}
+	// 댓글 수정 시 취소기능, 다시 리스트를 출력한다.
+	function commentUpdateCancle(){
+		commentList(); // 기존 댓글 목록 출력
+	};
+	//댓글 삭제 
+	function commentDelete(ciNum){
+	    $.ajax({
+	        url : '/comment/delete/'+ciNum,
+	        type : 'post',
+	        success : function(data){
+	            if(data == 1) commentList(biNum); //댓글 삭제후 목록 출력 
 	        }
 	    });
 	}

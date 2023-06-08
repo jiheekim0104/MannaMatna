@@ -6,17 +6,20 @@
 		SELECT COUNT(*) FROM
 		COMMENT_INFO
 	</select>
+	<select id="selectCommentInfo" parameterType="int" resultType="com.ezen.mannamatna.vo.CommentInfoVO">
+	SELECT * FROM COMMENT_INFO WHERE CI_NUM = #{ciNum}
+	</select>
 	<select id="selectCommentInfos" parameterType="int"
 		resultType="com.ezen.mannamatna.vo.CommentInfoVO">
-		SELECT u.UI_FILEPATH, u.UI_NICKNAME, c.CI_CONTENT, c.CI_CREDAT, 
-		c.CI_CRETIM, c.BI_NUM FROM COMMENT_INFO c 
+		SELECT u.UI_FILEPATH, u.UI_NICKNAME, c.CI_NUM, c.CI_CONTENT, c.CI_CREDAT, 
+		c.CI_CRETIM, c.BI_NUM, c.UI_NUM FROM COMMENT_INFO c 
 		JOIN USER_INFO u ON c.UI_NUM = u.UI_NUM WHERE c.BI_NUM = #{biNum}
 	</select>
 	<insert id="insertCommentInfo"
 		parameterType="com.ezen.mannamatna.vo.CommentInfoVO">
-		INSERT INTO COMMENT_INFO (CI_NUM, CI_CONTENT, CI_CREDAT,
+		INSERT INTO COMMENT_INFO (CI_CONTENT, CI_CREDAT,
 		CI_CRETIM, UI_NUM, BI_NUM) VALUES
-		(#{ciNum}, #{ciContent}, DEFAULT,
+		(#{ciContent}, DEFAULT,
 		DEFAULT, #{uiNum}, #{biNum})
 	</insert>
 	<update id="updateCommentInfo" parameterType ="com.ezen.mannamatna.vo.CommentInfoVO">

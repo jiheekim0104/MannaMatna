@@ -28,6 +28,13 @@
         <p>${detail.biContent}</p>
       </div>
       <button type="submit">참가하기</button>
+      <p>세션스코프 uiNum = ${sessionScope.user.uiNum}</p>
+      <p>babsangInfo의 uiNum = ${detail.uiNum}
+      <!-- 이 부분 추가했습니다 -->
+      <c:if test="${sessionScope.user.uiNum == detail.uiNum}">
+		<button onclick="location.href='/deleteBabsang?biNum=${detail.biNum}'">밥상삭제</button>
+	  </c:if>
+	  
 </div>
 	<hr>
 	<!-- 댓글영역 -->

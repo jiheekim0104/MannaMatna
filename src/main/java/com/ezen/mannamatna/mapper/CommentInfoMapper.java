@@ -22,4 +22,6 @@ public interface CommentInfoMapper {
 	
 	// 댓글 삭제
 	int deleteCommentInfo(int ciNum); // 삭제 시 번호만 필요하다.
+	
+	int selectCommentInfo(); // 수정 시 db에서 댓글번호 가져와보기
 }

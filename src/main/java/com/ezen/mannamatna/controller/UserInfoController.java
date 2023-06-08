@@ -31,8 +31,6 @@ public class UserInfoController {
 	
 	@Autowired
 	UserInfoService uiService;
-	@Autowired
-	BabsangInfoService babsangInfoService;
 	
 	@GetMapping("/") 
 	public String home(@ModelAttribute UserInfoVO userInfoVO, Model m) {
@@ -50,12 +48,15 @@ public class UserInfoController {
 	}
 	
 	@PostMapping("/login")
-	public String gologin(@ModelAttribute UserInfoVO userInfoVO, @ModelAttribute BabsangInfoVO babsangInfoVO, HttpSession session, Model m) {
+	public String gologin(@ModelAttribute UserInfoVO userInfoVO, HttpSession session, Model m) {
 		log.info("=============>{}",uiService.login(userInfoVO, session));
 		if(uiService.login(userInfoVO, session)) {
 			// 로그인 후 메인으로 가면서 babsangList 를 가져옴
-			m.addAttribute("babsangList", babsangInfoService.getBabsangInfoVOs(babsangInfoVO));
-		return "babsang/babsang-list";
+			// 제가 url 매핑을 잘못해놔서 수정했어용..!! 모델에 babsang객체를 넣을 필요가없었습니당!!!
+			// m.addAttribute("babsangList", babsangInfoService.getBabsangInfoVOs(babsangInfoVO));
+			m.addAttribute("url", "/main");
+			m.addAttribute("msg", "로그인성공");
+			return "common/msg";
 	}
 	m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다.");
 	return "user/login";
