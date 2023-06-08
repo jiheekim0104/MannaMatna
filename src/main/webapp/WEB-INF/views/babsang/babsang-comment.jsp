@@ -23,11 +23,14 @@
 						var a = '';
 						if (data.length > 0) {
 							$.each(data,function(key, value) {
+											console.log('세션스코프 : ' + ${sessionScope.user.uiNum});
 											a += '<div style="border:1px solid darkgray; margin-bottom: 15px;">';
-											a += '<div class="commentInfo'+value.ciNum+'"><img src="' + value.uiFilepath + '" width="50">'+ ' 작성자 : '+ value.uiNickname+ ' 작성시간 : '+ value.ciCredat + '<br>';
+											a += '<div class="commentInfo'+value.ciNum+'">uiNum : ' + value.uiNum +'<img src="' + value.uiFilepath + '" width="50">'+ ' 작성자 : '+ value.uiNickname+ ' 작성시간 : '+ value.ciCredat + '<br>';
 												a += '<div class="commentCiContent'+value.ciNum+'"> <span> 내용 : '+ value.ciContent+ '</span>';
+												// 아래부분 태그들은 세션스코프의 값과 value.uiNum과 같으면 태그가 나오도록 수정해보자!!!
 												a += '<a onclick="commentUpdate('+ value.ciNum+ ',\''+ value.ciContent+ '\');"> 수정 </a>';
 												a += '<a onclick="commentDelete('+ value.ciNum+ ');"> 삭제 </a> </div>';
+												// 
 												a += '</div></div>';
 											});
 						} else {
