@@ -29,7 +29,7 @@
       </div>
       <button type="submit">참가하기</button>
       <p>세션스코프 uiNum = ${sessionScope.user.uiNum}</p>
-      <p>babsangInfo의 uiNum = ${detail.uiNum}
+      <p>babsangInfo의 uiNum = ${detail.uiNum}</p>
       <!-- 이 부분 추가했습니다 -->
       <c:if test="${sessionScope.user.uiNum == detail.uiNum}">
 		<button onclick="location.href='/deleteBabsang?biNum=${detail.biNum}'">밥상삭제</button>
@@ -37,12 +37,13 @@
 	  
 </div>
 	<hr>
-	<!-- 댓글영역 -->
+	<!-- 참가자정보 영역 -->
 	<h2>로그인유저정보 확인</h2>
 	<p>${sessionScope.user.uiNum}</p>
 	<img src="${sessionScope.user.uiFilepath}" width="300">
 	<p>${sessionScope.user.uiNickname}</p>
 	<hr>
+	<!-- 댓글영역 -->
 	<h3>댓글</h3>
 	<div class="container">
 		<div class="commentList"></div>

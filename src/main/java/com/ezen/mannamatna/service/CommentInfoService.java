@@ -18,9 +18,6 @@ public class CommentInfoService {
 	@Autowired
 	CommentInfoMapper commentInfoMapper;
 	
-	@Autowired
-	UserInfoMapper userInfoMapper;
-	
 	public List<CommentInfoVO> getCommentInfosService(int biNum){
 		// 댓글 목록 불러오기
 		return commentInfoMapper.selectCommentInfos(biNum);
