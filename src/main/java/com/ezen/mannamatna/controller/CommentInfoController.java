@@ -19,6 +19,7 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import com.ezen.mannamatna.service.CommentInfoService;
 import com.ezen.mannamatna.service.UserInfoService;
+import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.ezen.mannamatna.vo.CommentInfoVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
 

@@ -56,16 +56,16 @@
 				</th>
 			</tr>
 			<tr>
-				<td colspan="2">${babsangListVO.biFdCategory}</td>
+				<td colspan="2">카테고리 : ${babsangListVO.biFdCategory}</td>
 			</tr>
 			<tr>
-				<td colspan="2">${babsangListVO.biHeadCnt}</td>
+				<td colspan="2">최대 인원 수 : ${babsangListVO.biHeadCnt}</td>
 			</tr>
 			<tr>
-				<td>${babsangListVO.biMeetingDat}</td>
-				<td>${babsangListVO.biMeetingTim}</td>
+				<td>날짜 : ${babsangListVO.biMeetingDat}</td>
+				<td>시간 : ${babsangListVO.biMeetingTim}</td>
 			</tr>
-			<tr>
+			<%-- <tr>
 				<c:if test="${sessionScope.user.uiNum == babsangListVO.uiNum}">
 					<td colspan="2" align="center">
 						<button
@@ -73,7 +73,7 @@
 							삭제</button>
 					</td>
 				</c:if>
-			</tr>
+			</tr> --%>
 		</c:forEach>
 	</table>
 </body>
