@@ -2,7 +2,6 @@ package com.ezen.mannamatna.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -16,13 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ezen.mannamatna.mapper.UserInfoMapper;
-import com.ezen.mannamatna.service.BabsangInfoService;
 import com.ezen.mannamatna.service.UserInfoService;
-import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
 
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2

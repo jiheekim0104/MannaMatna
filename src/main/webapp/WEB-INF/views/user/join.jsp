@@ -13,9 +13,9 @@
 	SNS 연동<br>
 	<form action="/join-ok" method="POST" onsubmit="return checkValue()" enctype="multipart/form-data">
 		<input type="text" name="uiId" id="uiId" placeholder="아이디">
-		<button type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button><br> 
+		<button type="button" id="idChk" onclick="fn_idChk()" value="N">중복확인</button><br> 
 		<input type="text" name="uiNickname" id="uiNickname" placeholder="닉네임">
-		<button type="button" id="nicknameChk" onclick="fn_nicknameChk();" value="N">중복확인</button><br> 
+		<button type="button" id="nicknameChk" onclick="fn_nicknameChk()" value="N">중복확인</button><br> 
 		<input type="password" name="uiPwd" id="uiPwd" placeholder="비밀번호"><br> 
 		<input type="password" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
 		<input type="file" name="uiFile" id="uiFile" onchange="loadImg(this)"><br> 
@@ -30,27 +30,26 @@
 			<option value="40">40대</option>
 			<option value="50">50대 이상</option>
 		</select><br> 
-		<input type="radio" name="uiGender" id="uiGender1" value="true">남자
+		<input type="radio" name="uiGender" id="uiGender1" value="true" required>남자
 		<input type="radio" name="uiGender" id="uiGender2" value="false">여자
-		<button type="button" onclick="show();" value="N">여기</button><br>
+		<button type="button" onclick="show()" value="N">여기</button><br>
 		<button>가입완료</button>
 	</form>
 
 
 </body>
 <script>
- 	let inputGender = document.querySelector([name='uiGender']); // 입력받은 성별 미선택 처리 필요함
-
 	function show(){
- 		alert(querySelector('input[name="uiGender"]').value);
+		/* let inputGender = document.querySelector('[name='uiGender']:checked'); // 입력받은 성별 미선택 처리 필요함
+ 		alert(inputGender); */
 		/* if(document.querySelector('[name='uiGender']').checked)
 			querySelector('input[name="radio"]:checked').value;
 		alert("1개 이상 선택해 주세요.");
-		$('input[name="checkbox"]').is(':checked'); */
-	} 
+		$('input[name="checkbox"]').is(':checked');  */
+ 	} 
 		
 	function loadImg(obj){
-		let file =obj.files[0];
+		let file =obj.files[0];0
 		let imgObj = document.querySelector('#imgDiv>img');
 		imgObj.src = URL.createObjectURL(file);
 		document.querySelector('#imgDiv').style.display='';
@@ -96,10 +95,10 @@
 		}
 		
 		//성별체크
-		if(!(inputGender1==true || inputGender2==false)){  
+		/* if(!(inputGender1==true || inputGender2==false)){  
 			alert("성별을 선택해주세요.");
 			return false;
-		}
+		} */
 		
 		return true;
 	}

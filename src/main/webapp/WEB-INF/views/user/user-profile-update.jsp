@@ -35,11 +35,6 @@
 		<button>확인</button>
 	</form>
 	<script>
-	if(${user.uiGender}){
-		document.querySelector('#uiGender').innerHTML = '남자';
-	} else {
-		document.querySelector('#uiGender').innerHTML = '여자';
-	}
 		function loadImg(obj) {
 			let file = obj.files[0];
 			let imgObj = document.querySelector('#imgDiv');
@@ -47,10 +42,17 @@
 			document.querySelector('#imgDiv').style.display = '';
 		}
 		function checkValue(){
+			alert(0);
 			let nicknameChk = document.getElementById('nicknameChk').value; // 아이디 중복확인 시행 유무
+			let inputNickname = document.getElementById('uiNickname').value; 
 			if(nicknameChk=="N"){
-				alert("닉네임 중복확인을 해주세요.");
-				return false;
+				if(inputNickname==${user.uiNickname}){
+					$('#nicknameChk').val('Y');
+				} else {
+					alert("닉네임 중복확인을 해주세요.");
+					return false;
+				}
+				
 			}
 			
 			let inputPwd = document.getElementById('uiPwd').value; // 입력받은 비밀번호
@@ -75,6 +77,11 @@
 				return false;
 			}
 			
+			let inputAge = document.getElementById('uiAge').value; // 입력받은 연령대
+			if(inputAge == 0){  
+				alert("연령대를 선택해주세요.");
+				return false;
+			}
 			
 			return true;
 		}
