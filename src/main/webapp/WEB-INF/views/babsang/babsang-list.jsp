@@ -22,9 +22,7 @@
 	<h1>여기는 메인 페이지</h1>
 	<hr>
 	<h2>로그인 정보 확인</h2>
-	<p>
-		<img class="profileImg" src="${sessionScope.user.uiFilepath}" onclick="location.href='/profile'">
-	</p>
+
 
 	<c:if test="${sessionScope.user.uiId == null}">
 		<button onclick="location.href='/login'">Login</button>
@@ -32,6 +30,10 @@
 		<button onclick="location.href='/join'">Join</button>
 	</c:if>
 	<c:if test="${sessionScope.user.uiId != null}">
+		<p>
+			<img class="profileImg" src="${sessionScope.user.uiFilepath}"
+				onclick="location.href='/profile'">
+		</p>
 		<p>유저 번호 : ${sessionScope.user.uiNum}</p>
 		<p>닉네임 : ${sessionScope.user.uiNickname}</p>
 		<p>${sessionScope.user.uiNickname}님
@@ -63,13 +65,15 @@
 				<td>${babsangListVO.biMeetingDat}</td>
 				<td>${babsangListVO.biMeetingTim}</td>
 			</tr>
-			<c:if test="${sessionScope.user.uiNum == babsangListVO.uiNum}">
 			<tr>
-				<td>
-					<button onclick="location.href='/deleteBabsang?biNum=${babsangListVO.biNum}'">밥상 삭제</button>
-				</td>
+				<c:if test="${sessionScope.user.uiNum == babsangListVO.uiNum}">
+					<td colspan="2" align="center">
+						<button
+							onclick="location.href='/deleteBabsang?biNum=${babsangListVO.biNum}'">밥상
+							삭제</button>
+					</td>
+				</c:if>
 			</tr>
-			</c:if>
 		</c:forEach>
 	</table>
 </body>

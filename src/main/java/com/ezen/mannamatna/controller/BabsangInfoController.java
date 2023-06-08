@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ezen.mannamatna.service.BabsangInfoService;
 import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
+import com.mysql.cj.Session;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -60,8 +61,8 @@ public class BabsangInfoController {
         return "babsang/babsang-detail"; // 요청 jsp
     }
 	
-	@GetMapping("deleteBabsang")
-	public String deleteBabsang(Model m,  @PathVariable int biNum) {
+	@GetMapping("/deleteBabsang")
+	public String deleteBabsang(Model m, @RequestParam("biNum") int biNum) {
 		String msg = "밥상 삭제 실패";
 		String url = "/main";
 		if(babsangInfoService.deleteBabsangInfo(biNum)) {
