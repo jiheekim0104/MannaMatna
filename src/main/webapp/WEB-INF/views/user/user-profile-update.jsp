@@ -32,12 +32,6 @@
 			<option value="40">40대</option>
 			<option value="50">50대 이상</option>
 		</select><br>
-		
-		<input type="hidden" name="biNum" id="biNum" value="${user.biNum}"> 
-		<input type="hidden" name="uiCredat" id="uiCredat" value="${user.uiCredat}"> 
-		<input type="hidden" name="uiId" id="uiId" value="${user.uiId}"> 
-		<input type="hidden" name="uiActive" id="uiActive" value="${user.uiActive}"> 
-		
 		<button>확인</button>
 	</form>
 	<script>

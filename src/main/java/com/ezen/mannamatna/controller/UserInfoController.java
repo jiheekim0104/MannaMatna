@@ -121,8 +121,6 @@ public class UserInfoController {
 	@PostMapping("/check-update") // 수정 버튼을 누르고 비밀번호가 일치한 경우
 	public String checkUpdateOk(@ModelAttribute UserInfoVO userInfoVO, HttpSession session) {
 		userInfoVO = (UserInfoVO) session.getAttribute("user");
-		log.info("컨트롤러/체크 업데이트 포스트 ==>{}",session);
-		log.info("컨트롤러/체크 업데이트 포스트 ==>{}",userInfoVO);
 		return "/user/user-profile-update";
 	}
 	
@@ -133,18 +131,19 @@ public class UserInfoController {
 	
 	@PostMapping("/profile-update")
 	public String updateProfileOk(@ModelAttribute UserInfoVO userInfoVO, HttpSession session, Model m) throws IllegalStateException, IOException {
-		log.info("컨트롤러/프로필업데이트완료1 ==>{}",session);
-		log.info("컨트롤러/프로필업데이트완료1 ==>{}",userInfoVO);
 		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
-		log.info("컨트롤러/프로필업데이트완료2 ==>{}",userInfoVO);
 		userInfoVO.setUiNum(sessionUserInfo.getUiNum());
+		userInfoVO.setBiNum(sessionUserInfo.getBiNum());
+		userInfoVO.setUiCredat(sessionUserInfo.getUiCredat());
+		userInfoVO.setUiId(sessionUserInfo.getUiId());
+		userInfoVO.setUiActive(sessionUserInfo.getUiActive());
+		userInfoVO.setUiDel(sessionUserInfo.getUiDel());
 		if(uiService.update(userInfoVO, session)) {
 			m.addAttribute("msg","정보수정에 성공하셨습니다.");
 			session.setAttribute("user", userInfoVO);
 			return "user/user-profile";
 		}
 		m.addAttribute("msg","정보수정에 실패하였습니다.");
-		log.info("컨트롤러/프로필업데이트완료3 ==>{}",userInfoVO);
 		return "user/user-profile";
 	}
 	

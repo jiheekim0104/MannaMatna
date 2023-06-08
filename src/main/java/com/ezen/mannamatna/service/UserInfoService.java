@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.ezen.mannamatna.mapper.UserInfoMapper;
 import com.ezen.mannamatna.vo.UserInfoVO;
@@ -66,7 +67,7 @@ public class UserInfoService {
 		return uiMapper.deleteUserInfo(userInfoVO)==1;
 	}
 	
-	public boolean update(UserInfoVO userInfoVO, HttpSession session) throws IllegalStateException, IOException {
+	public boolean update(@ModelAttribute UserInfoVO userInfoVO, HttpSession session) throws IllegalStateException, IOException {
 		log.info("userInfoVO====>{}",userInfoVO);
 		String fileName = userInfoVO.getUiFile().getOriginalFilename();
 		log.info("fileName====>{}",fileName);
