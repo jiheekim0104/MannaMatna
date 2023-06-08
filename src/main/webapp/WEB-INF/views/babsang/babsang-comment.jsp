@@ -23,9 +23,9 @@
 						var a = '';
 						if (data.length > 0) {
 							$.each(data,function(key, value) {
-											a += '<div style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-											a += '<div class="commentInfo'+value.ciNum+'">'+ '댓글번호 : '+value.ciNum+'<img src="' + value.uiFilepath + '" width="50">'+ ' 작성자 : '+ value.uiNickname+ ' 작성시간 : '+ value.ciCredat + '<br>';
-												a += '<div class="commentCiContent'+value.ciNum+'"> <p> 내용 : '+ value.ciContent+ '</p>';
+											a += '<div style="border:1px solid darkgray; margin-bottom: 15px;">';
+											a += '<div class="commentInfo'+value.ciNum+'"><img src="' + value.uiFilepath + '" width="50">'+ ' 작성자 : '+ value.uiNickname+ ' 작성시간 : '+ value.ciCredat + '<br>';
+												a += '<div class="commentCiContent'+value.ciNum+'"> <span> 내용 : '+ value.ciContent+ '</span>';
 												a += '<a onclick="commentUpdate('+ value.ciNum+ ',\''+ value.ciContent+ '\');"> 수정 </a>';
 												a += '<a onclick="commentDelete('+ value.ciNum+ ');"> 삭제 </a> </div>';
 												a += '</div></div>';
@@ -77,6 +77,16 @@
 	        data : {'ciContent' : updateCiContent, 'ciNum' : ciNum},
 	        success : function(data){
 	            if(data == 1) commentList(biNum); //댓글 수정후 목록 출력 
+	        }
+	    });
+	}
+	//댓글 삭제 
+	function commentDelete(ciNum){
+	    $.ajax({
+	        url : '/comment/delete/'+ciNum,
+	        type : 'post',
+	        success : function(data){
+	            if(data == 1) commentList(biNum); //댓글 삭제후 목록 출력 
 	        }
 	    });
 	}
