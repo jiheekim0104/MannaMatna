@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 <script>
 	// ajax를 이용한 댓글 목록 출력
-	var biNum = '${detail.biNum}'; // 게시글 번호
+	let biNum = '${detail.biNum}'; // 게시글 번호
 	console.log(biNum);
 
 	$('[name=commentInsertBtn]').click(function() { //댓글 등록 버튼 클릭시 
 		console.log('댓글등록눌렀따!!!');
-		var insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
+		let insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
 		commentInsert(insertData); //Insert 함수호출(아래)
 	});
 
@@ -20,7 +20,7 @@
 						'biNum' : biNum
 					},
 					success : function(data) {
-						var a = '';
+						let a = '';
 						if (data.length > 0) {
 							$.each(data,function(key, value) {
 											console.log('세션스코프 : ' + ${sessionScope.user.uiNum});
@@ -62,17 +62,15 @@
 	}
 	//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
 	function commentUpdate(ciNum, ciContent){
-	    var a ='';
+	    let a ='';
 	    
 	    a += '<div>';
 	    a += '<input type="text" name="ciContent_'+ciNum+'" value="'+ciContent+'"/>';
-	    a += '<span><button type="button" onclick="commentUpdateProc('+ciNum+');">수정</button></span>';
+	    a += '<span><button type="button" onclick="commentUpdateProc('+ciNum+');">수정</button>';
+	    a += '<button onclick="commentUpdateCancle()">취소</button></span>';
 	    a += '</div>';
-	    
 	    $('.commentCiContent'+ciNum).html(a);
-	    
 	}
-	 
 	//댓글 수정
 	function commentUpdateProc(ciNum){
 	    var updateCiContent = $('[name=ciContent_'+ciNum+']').val();
@@ -86,6 +84,10 @@
 	        }
 	    });
 	}
+	// 댓글 수정 시 취소기능, 다시 리스트를 출력한다.
+	function commentUpdateCancle(){
+		commentList(); // 기존 댓글 목록 출력
+	};
 	//댓글 삭제 
 	function commentDelete(ciNum){
 	    $.ajax({
