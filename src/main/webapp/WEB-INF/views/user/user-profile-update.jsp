@@ -32,7 +32,8 @@
 			<option value="40">40대</option>
 			<option value="50">50대 이상</option>
 		</select><br>
-		<button>확인</button>
+		<button>수정완료</button>
+		<button type="button">취소하기</button>
 	</form>
 	<script>
 		function loadImg(obj) {
@@ -42,7 +43,6 @@
 			document.querySelector('#imgDiv').style.display = '';
 		}
 		function checkValue(){
-			alert(0);
 			let nicknameChk = document.getElementById('nicknameChk').value; // 아이디 중복확인 시행 유무
 			let inputNickname = document.getElementById('uiNickname').value; 
 			if(nicknameChk=="N"){
@@ -80,6 +80,12 @@
 			let inputAge = document.getElementById('uiAge').value; // 입력받은 연령대
 			if(inputAge == 0){  
 				alert("연령대를 선택해주세요.");
+				return false;
+			}
+			
+			let inputGender = document.querySelector('input[name="uiGender"]:checked'); // 입력받은 성별
+			if(inputGender==null){  
+				alert("성별을 선택해주세요.");
 				return false;
 			}
 			
