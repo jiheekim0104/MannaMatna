@@ -30,24 +30,14 @@
 			<option value="40">40대</option>
 			<option value="50">50대 이상</option>
 		</select><br> 
-		<input type="radio" name="uiGender" id="uiGender1" value="true" required>남자
+		<input type="radio" name="uiGender" id="uiGender1" value="true">남자
 		<input type="radio" name="uiGender" id="uiGender2" value="false">여자
-		<button type="button" onclick="show()" value="N">여기</button><br>
 		<button>가입완료</button>
 	</form>
 
 
 </body>
-<script>
-	function show(){
-		/* let inputGender = document.querySelector('[name='uiGender']:checked'); // 입력받은 성별 미선택 처리 필요함
- 		alert(inputGender); */
-		/* if(document.querySelector('[name='uiGender']').checked)
-			querySelector('input[name="radio"]:checked').value;
-		alert("1개 이상 선택해 주세요.");
-		$('input[name="checkbox"]').is(':checked');  */
- 	} 
-		
+<script>	
 	function loadImg(obj){
 		let file =obj.files[0];0
 		let imgObj = document.querySelector('#imgDiv>img');
@@ -94,11 +84,12 @@
 			return false;
 		}
 		
-		//성별체크
-		/* if(!(inputGender1==true || inputGender2==false)){  
+		
+		let inputGender = document.querySelector('input[name="uiGender"]:checked'); // 입력받은 성별
+		if(inputGender==null){  
 			alert("성별을 선택해주세요.");
 			return false;
-		} */
+		}
 		
 		return true;
 	}
