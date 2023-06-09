@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -8,52 +9,15 @@
 <title>만나맛나 : 1인가구를 위한 신개념 밥상 매칭 사이트</title>
 
 <style type="text/css">
-.profileImg {
-	width: 200px;
-	height: 200px;
-	object-fit: cover;
-	border: 2px solid black;
-}
+
 </style>
 
 </head>
 
 <body>
+<div class="content">
 	<h1>여기는 메인 페이지</h1>
 	<hr>
-	
-	<!-- 유저 정보, 기능 -->
-	<h2>로그인 정보 확인</h2>
-	
-	<!-- 비로그인 시 -->
-	<c:if test="${sessionScope.user.uiId == null}">
-		<p>
-			<button onclick="location.href='/login'">Login</button>
-		</p>
-		<p>
-			<button onclick="location.href='/join'">Join</button>
-		</p>	
-	</c:if>
-	
-	<!-- 로그인 시 -->
-	<c:if test="${sessionScope.user.uiId != null}">
-		<p>
-			<img class="profileImg" src="${sessionScope.user.uiFilepath}"
-				onclick="location.href='/profile'">
-		</p>
-		<p>유저 번호 : ${sessionScope.user.uiNum}</p>
-		<p>닉네임 : ${sessionScope.user.uiNickname}</p>
-		<p>${sessionScope.user.uiNickname}님
-			안녕하세요!!!!<br>
-			<button onclick="location.href='/logout'">Logout</button>
-			<button onclick="location.href='/profile'">Profile</button>
-		</p>
-		<p>
-			<button onclick="location.href='/addBabsang'">밥상 생성</button>
-		</p>
-	</c:if>
-	
-
 	<!-- 밥상 리스트 목록 -->
 	<table border="1" style="color: black;">
 		<c:if test="${empty babsangList}">
@@ -96,5 +60,6 @@
 			</tr> --%>
 		</c:forEach>
 	</table>
+</div>	
 </body>
 </html>

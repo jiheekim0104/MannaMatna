@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,7 @@
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+<div class="content">
 	<h1>프로필 수정</h1>
 	${user}
 	<form action="/profile-update" method="POST" onsubmit="return checkValue()" enctype="multipart/form-data">
@@ -117,5 +119,6 @@
 
 		}
 	</script>
+</div>	
 </body>
 </html>

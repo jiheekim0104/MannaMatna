@@ -1,0 +1,61 @@
+/* 사이드바 메뉴 */
+.sidenav {
+  margin-left: 10%; /* 전체 영역의 10%만큼 왼쪽을 띄움 */
+  height: 100%; 
+  width: 15%;
+  position: fixed;
+  z-index: 1; 
+  top: 0; 
+  left: 0;
+  border-right: 5px solid #FF6347;
+  overflow-x: hidden; /* x축 스크롤 숨김 */
+  padding-top: 20px;
+}
+
+.logo{
+	width: 100%;
+	padding: 0;
+	margin: 0 auto;
+}
+
+/* 메뉴 내용 */
+.sidenav a {
+  margin-top: 20px;
+  padding: 6px 12px 6px 12px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 25px;
+  color: #111;
+  display: block;
+}
+
+/* 마우스 올리면 메뉴 색 변경 */
+.sidenav a:hover {
+  color: #FF6347;
+}
+
+/* 연결되는 페이지 내용 */
+.content {
+  margin-left: 25%; /* 사이드바 영역만큼 띄워줌 */
+  padding: 0px 20px; 
+  margin-right: 10%; /* 전체 영역의 10%만큼 오른쪽을 띄움 */
+}
+.profileImg{
+	width: 100%;
+	object-fit: cover;
+	border: 2px solid black;
+}
+.greetings{
+	text-align: center;
+}
+
+.uiNickname{
+	color: #FF6347;
+	font-weight: bolder;
+}
+
+/* 450px 보다 페이지의 길이가 짧아지면 사이드바에있는 글꼴이 작아짐 */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

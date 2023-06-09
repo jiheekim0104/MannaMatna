@@ -9,7 +9,7 @@ alert('${msg}');
 </script>
 <html>
 <body>
-	<div class="login">로그인 페이지입니다.
+	<div class="content">로그인 페이지입니다.
 	<br>
 	<form action="/login" method="POST" onsubmit="return checkValue()">
 		<input type="text" name="uiId" id="uiId" placeholder="아이디를 입력해주세요."><br>

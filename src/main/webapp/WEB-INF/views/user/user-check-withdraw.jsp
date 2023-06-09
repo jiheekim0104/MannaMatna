@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>     
+    pageEncoding="UTF-8"%>   
+<%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>      
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,13 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="content">
 <form action="/check-withdraw"  method="POST" onsubmit="return checkValue()">
 	${user.uiNickname}님이 맞는지 한번더 확인할게요.<br>
 	<input type="password" name="uiPwd" id="uiPwd" placeholder="비밀번호를 입력해주세요.">
 	<button>확인</button>
 </form>
 
-
+</div>
 </body>
 <script>
 function checkValue(){

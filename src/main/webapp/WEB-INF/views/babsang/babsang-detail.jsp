@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -8,6 +9,7 @@
 <title>밥상상세페이지</title>
 </head>
 <body>
+<div class="content">
 	<h1>밥상상세!!!!!!!!!!!!!!</h1>
 	<h2>여기는 밥상 상세 내역보기</h2>
 	<div>
@@ -69,5 +71,6 @@
 	</div>
 	<!-- babsang-comment.jsp 연결 -->
 	<%@ include file="babsang-comment.jsp"%>
+</div>	
 </body>
 </html>

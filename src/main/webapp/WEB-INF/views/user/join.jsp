@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+<div class="content">
 	<h1>회원가입</h1>
 	SNS 연동<br>
 	<form action="/join-ok" method="POST" onsubmit="return checkValue()" enctype="multipart/form-data">
@@ -34,8 +36,7 @@
 		<input type="radio" name="uiGender" id="uiGender2" value="false">여자
 		<button>가입완료</button>
 	</form>
-
-
+</div>
 </body>
 <script>	
 	function loadImg(obj){
