@@ -38,6 +38,10 @@
 </div>
 	<hr>
 	<!-- 참가자정보 영역 -->
+	<h2>참가자정보 확인</h2>
+	<p>작성자정보 ${detail.uiNum}</p>
+	<img src ="">
+	<hr>
 	<h2>로그인유저정보 확인</h2>
 	<p>${sessionScope.user.uiNum}</p>
 	<img src="${sessionScope.user.uiFilepath}" width="300">

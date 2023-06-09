@@ -1,19 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
 <c:if test="${msg!=null}">
 alert('${msg}');
 </c:if>
 </script>
+<html>
 <body>
-	<h1>로그인 페이지입니다.</h1>
+	<div class="login">로그인 페이지입니다.
 	<br>
 	<form action="/login" method="POST" onsubmit="return checkValue()">
 		<input type="text" name="uiId" id="uiId" placeholder="아이디를 입력해주세요."><br>
@@ -28,9 +24,34 @@ alert('${msg}');
 		<br>
 	</form>
 	<button onclick="location.href='/join'">회원가입</button>
-
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+	<p>호로롤롤ㄹ</p>
+</div>
 	<script>
-	
 		function checkValue() {
 			let inputId = document.getElementById('uiId').value; //입력받은 아이디
 			let inputPwd = document.getElementById('uiPwd').value; //입력받은 비밀번호
