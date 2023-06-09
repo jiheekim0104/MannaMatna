@@ -89,4 +89,9 @@ public class UserInfoService {
 		log.info("서비스/업데이트==>{}",userInfoVO);
 		return uiMapper.updateUserInfo(userInfoVO)==1;
 	}
+	
+	public boolean updateUiBiNum(UserInfoVO uiBiNum) {
+		return uiMapper.updateUiBiNum(uiBiNum)==1;
+	}
+
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezen.mannamatna.service.BabsangInfoService;
+import com.ezen.mannamatna.service.UserInfoService;
 import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
 import com.mysql.cj.Session;
@@ -26,6 +27,9 @@ public class BabsangInfoController {
 	
 	@Autowired
 	private BabsangInfoService babsangInfoService;
+	@Autowired 
+	private UserInfoService userInfoService;
+	 
 	
 	@GetMapping("/main")
 	public String goMain(BabsangInfoVO babsang, Model m){
@@ -40,14 +44,23 @@ public class BabsangInfoController {
 	}
 	
 	@PostMapping("/addBabsang")
-	public String insertBabsang(BabsangInfoVO babsang, Model m, HttpSession session) {
+	public String insertBabsang(BabsangInfoVO babsang,  UserInfoVO userInfoVO,  Model m, HttpSession session) {
 		UserInfoVO user = (UserInfoVO)session.getAttribute("user");
 		babsang.setUiNum(user.getUiNum());
+		log.info("userInfo_biNum ===> {}", babsang.getUiBiNum());
+		userInfoVO.setBiNum(babsang.getBiNum());
+		
 		String msg = "밥상 등록 실패";
 		String url = "/babsang-insert";
 		if(babsangInfoService.addBabsangInfo(babsang)) {
+			 if(userInfoService.updateUiBiNum(userInfoVO)) {
 			msg = "밥상 등록 성공";
 			url = "/main";
+			/* log.info("ui.uiBiNum ===> {}", uiBiNum.getBiNum()); */
+
+			//밥상 등록 성공 한 순간 autoIncrement된 babsang.biNum을 받아옴
+			log.info("uiBiNum ===> {}", babsang.getBiNum());
+			} 
 		}
 		m.addAttribute("msg", msg);
 		m.addAttribute("url",url);

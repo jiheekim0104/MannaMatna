@@ -66,11 +66,11 @@
 			</tr>
 <!-- 생성자, 보드 번호 추후 삭제 예정 -->
 			<tr>
-				<td colspan="2">보드 번호 : ${babsangListVO.biNum}
+				<td colspan="2">밥상 번호 : ${babsangListVO.biNum}
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2">보드 생성자 : ${babsangListVO.uiNum}
+				<td colspan="2">밥상 생성자 : ${babsangListVO.uiNum}
 				</td>
 			</tr>
 <!-- 이 까지 -->

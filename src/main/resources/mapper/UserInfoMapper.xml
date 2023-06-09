@@ -23,7 +23,14 @@
 		update user_info set ui_nickname = #{uiNickname}, ui_pwd = #{uiPwd}, ui_filepath = #{uiFilepath}
 		where ui_num = #{uiNum}
 	</update>
+	
 	<delete id="deleteUserInfo">
 		delete from user_info where ui_num = #{uiNum}
 	</delete>
+	
+	<!-- userInfo.biNum 업데이트문 -->
+	<update id="updateUiBiNum">
+		update user_info set bi_num = #{uiBiNum} where ui_num = #{ui_num}
+	</update>
+	
 </mapper>

@@ -38,7 +38,10 @@
 		VALUES(
 		#{biTitle}, #{biContent}, #{biMeetingDat}, #{biMeetingTim}, 
 		#{biHeadCnt}, #{biFdCategory}, #{biClosed}, #{uiNum}
-		<!-- , #{uiBiNum} -->
+		<!-- 마지막에 auto increase 된 넘버 불러오는 mysql 메소드 -->
+		<selectKey resultType="int" keyProperty="biNum" order="AFTER">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
 		)
 	</insert>
 	

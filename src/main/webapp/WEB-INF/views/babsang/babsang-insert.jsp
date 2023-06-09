@@ -9,13 +9,13 @@
 <body>
 	<form method="POST" action="/addBabsang">
 		<!-- required = 필수요소-->
-		<div>
+		<%-- <div>
 		<label id="uiBiNum">
 		밥상번호${babsangListVO.biNum}를 user_Info.biNum에 넣어야하는데 <br>
 		생성하기 버튼 누르기 전까지는 생성되질 않는다<br>
 		어떻게 해야하나유..
 		</label>
-		</div>
+		</div> --%>
 		<input type="text" id="biTitle" name="biTitle" 
 		placeholder="제목" style="width: 50%;" required><br>
 			
