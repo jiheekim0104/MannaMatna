@@ -21,8 +21,4 @@ public class SecurityConfig {
         return http.build();
     }
     
-    @Bean
-    PasswordEncoder passwordEncoder() { //이후 암호화 방식 변경을 쉽게하려고 빈객체로 만들기위해 추가함
-        return new BCryptPasswordEncoder();
-    }    
 }

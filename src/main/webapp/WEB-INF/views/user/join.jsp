@@ -13,8 +13,9 @@
 <div class="content">
 	<h1>회원가입</h1>
 	SNS 연동
-	<button onclick="location.href='/naverLogin'">네이버 로그인</button>
-		<button>카카오 로그인</button><br>
+	<button onclick="location.href='/naverLogin'">네이버 간편가입</button>
+	<button onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b288a9632f49edf850cff8d6eb985755&redirect_uri=http://localhost/kakaoPost/'">카카오 간편가입</button>
+	<br>
 	<form action="/join-ok" method="POST" onsubmit="return checkValue()" enctype="multipart/form-data">
 		<input type="text" name="uiId" id="uiId" placeholder="아이디">
 		<button type="button" id="idChk" onclick="fn_idChk()" value="N">중복확인</button><br> 

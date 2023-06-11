@@ -48,9 +48,6 @@ public class UserInfoController {
 	public String gologin(@ModelAttribute UserInfoVO userInfoVO, HttpSession session, Model m) {
 		log.info("=============>{}",uiService.login(userInfoVO, session));
 		if(uiService.login(userInfoVO, session)) {
-			// 로그인 후 메인으로 가면서 babsangList 를 가져옴
-			// 제가 url 매핑을 잘못해놔서 수정했어용..!! 모델에 babsang객체를 넣을 필요가없었습니당!!!
-			// m.addAttribute("babsangList", babsangInfoService.getBabsangInfoVOs(babsangInfoVO));
 			m.addAttribute("url", "/main");
 			m.addAttribute("msg", "로그인성공");
 			return "common/msg";
@@ -60,18 +57,43 @@ public class UserInfoController {
 }
 	
 	@GetMapping("/kakaoPost")
-	  public String kakaoLogin(@RequestParam(value = "code",required = false) String code){
-        if(code!=null){//카카오측에서 보내준 code가 있다면 출력합니다
+	  public String kakaoJoin(@RequestParam(value = "code",required = false) String code, HttpSession session,  Model m) throws IllegalStateException, IOException{
+		UserInfoVO userInfoVO = null;
+		if(code!=null){//카카오측에서 보내준 code가 있다면 출력
             System.out.println("code = " + code);
             KakaoToken kakaoToken = uiService.requestToken(code); //카카오 토큰 요청
-            
-            
-            UserInfoVO userInfoVO = uiService.requestUser(kakaoToken.getAccess_token()); //유저정보 요청
+            userInfoVO = uiService.requestUser(kakaoToken.getAccess_token()); //유저정보 요청
             log.info("user = {}",userInfoVO);
             log.info("kakoToken = {}", kakaoToken);
+			/* session.setAttribute("user", userInfoVO); */
         }
+		if(uiService.join(userInfoVO)) {
+			m.addAttribute("msg","회원가입에 성공하셨습니다.");
+			return "user/login";
+		}
 		return "user/kakaoPost";
 	}
+	
+	@GetMapping("/kakaoLogin")
+	public String kakaoLogin(@RequestParam(value = "code",required = false) String code, HttpSession session,  Model m) throws IllegalStateException, IOException{
+		UserInfoVO userInfoVO = null;
+		if(code!=null){//카카오측에서 보내준 code가 있다면 출력
+            System.out.println("code = " + code);
+            KakaoToken kakaoToken = uiService.requestToken(code); //카카오 토큰 요청
+            userInfoVO = uiService.requestUser(kakaoToken.getAccess_token()); //유저정보 요청
+            log.info("user = {}",userInfoVO);
+            log.info("kakoToken = {}", kakaoToken);
+            session.setAttribute("user", userInfoVO);
+        }
+		  log.info("=============>{}",uiService.login(userInfoVO, session)); //아직 DB에없어서 안뜸! 
+		  if(uiService.login(userInfoVO, session)) { 
+			  m.addAttribute("url","/main"); 
+			  m.addAttribute("msg", "로그인성공"); 
+			  return "common/msg"; 
+		  }
+		m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다.");
+		return "user/login";
+}
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {

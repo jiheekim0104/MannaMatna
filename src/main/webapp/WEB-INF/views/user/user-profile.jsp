@@ -16,7 +16,7 @@ alert('${msg}');
 <body>
 <div class="content">
 <h1>프로필</h1>
-<%-- ${user}<br> --%>
+${user}<br>
 ${user.uiNickname}(${user.uiId})<br>
 성별 : 
 <a id="uiGender" name="uiGender"></a><br>

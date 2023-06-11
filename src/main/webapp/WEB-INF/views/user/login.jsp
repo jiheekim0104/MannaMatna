@@ -21,7 +21,7 @@ alert('${msg}');
 		<button>로그인</button><br>	
 	</form>
 	<button onclick="location.href='/naverLogin'">네이버 로그인</button>
-	<button onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b288a9632f49edf850cff8d6eb985755&redirect_uri=http://localhost/kakaoPost/'">카카오 로그인</button>
+	<button onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b288a9632f49edf850cff8d6eb985755&redirect_uri=http://localhost/kakaoLogin/'">카카오 로그인</button>
 	<br>
 	<button onclick="location.href='/join'">회원가입</button>
 
