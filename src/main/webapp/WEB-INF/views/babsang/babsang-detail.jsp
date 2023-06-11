@@ -44,10 +44,10 @@
 	<p>작성자정보 ${detail.uiNum}</p>
 	<img src ="">
 	<hr>
-	<h2>로그인유저정보 확인</h2>
+	<%-- <h2>로그인유저정보 확인</h2>
 	<p>${sessionScope.user.uiNum}</p>
 	<img src="${sessionScope.user.uiFilepath}" width="300">
-	<p>${sessionScope.user.uiNickname}</p>
+	<p>${sessionScope.user.uiNickname}</p> --%>
 	<hr>
 	<!-- 댓글영역 -->
 	<h3>댓글</h3>

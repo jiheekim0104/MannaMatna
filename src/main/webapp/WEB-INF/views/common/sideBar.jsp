@@ -9,9 +9,12 @@
 <title>만나맛나 : 1인가구를 위한 신개념 밥상 매칭 사이트</title>
 <link rel="stylesheet" href="${path}/resources/css/sideBar.css" />
 <script src="${path}/resources/js/sideBar.js"></script>
+<script src ="https://developers.kakao.com/sdk/js/kakak/min.js"></script>
 </head>
 <body>
-<header></header>
+<header>
+하위~
+</header>
 
 <nav>
 	<div class="sidenav">

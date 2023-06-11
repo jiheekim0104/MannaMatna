@@ -29,6 +29,8 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.2' //jackson 의존성 추가 (29~31)
 	implementation 'com.fasterxml.jackson.core:jackson-core:2.14.2'
 	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.2'
+	implementation 'org.springframework.boot:spring-boot-starter-security' //스프링 스큐리티 추가
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5' //추가는했는데 사실 쓸지말지 고민중..
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'

@@ -1,17 +1,27 @@
 package com.ezen.mannamatna.service;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.ezen.mannamatna.mapper.UserInfoMapper;
+import com.ezen.mannamatna.vo.KakaoToken;
 import com.ezen.mannamatna.vo.UserInfoVO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.log4j.Log4j2;
 @Log4j2
@@ -20,7 +30,7 @@ public class UserInfoService {
 	private final String uploadFilePath = "C:\\works\\workspace\\mannamatna\\src\\main\\webapp\\resources\\upload";
 	@Autowired
 	private UserInfoMapper uiMapper;
-	
+	private PasswordEncoder passwordEncoder; //주입받아서 이용하기 위함
 	
 	public int idChk(UserInfoVO userInfoVO) {
 		log.info("여기는서비스=====>{}",userInfoVO);
@@ -60,6 +70,8 @@ public class UserInfoService {
 			userInfoVO.setUiFilepath("/resources/upload/"+name+extName);
 			log.info("저장됨====>{}",userInfoVO);
 		}
+//		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		userInfoVO.setUiPwd(passwordEncoder.encode(userInfoVO.getUiPwd()));
 		return uiMapper.insertUserInfo(userInfoVO)==1;
 	}
 
@@ -93,5 +105,155 @@ public class UserInfoService {
 	public boolean updateUiBiNum(UserInfoVO uiBiNum) {
 		return uiMapper.updateUiBiNum(uiBiNum)==1;
 	}
+	
+	//인증코드로 token요청하기
+    public KakaoToken requestToken(String code){
+        String strUrl = "https://kauth.kakao.com/oauth/token"; //request를 보낼 주소
+        KakaoToken kakaoToken = new KakaoToken(); //response를 받을 객체
 
+        try{
+            URL url = new URL(strUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection(); //url Http 연결 생성
+
+            //POST 요청
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);//outputStreamm으로 post 데이터를 넘김
+
+            //파라미터 세팅
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+            StringBuilder sb = new StringBuilder();
+            sb.append("grant_type=authorization_code"); //grant_type를 authorization_code로 고정등록해야함
+            sb.append("&client_id=b288a9632f49edf850cff8d6eb985755");
+            sb.append("&redirect_uri=http://localhost/kakaoPost/");
+            sb.append("&code=" + code);  //인자로 받아온 인증코드
+            bw.write(sb.toString());
+            bw.flush();//실제 요청을 보내는 부분
+
+            //실제 요청을 보내는 부분, 결과 코드가 200이라면 성공
+            int responseCode = conn.getResponseCode();
+            log.info("responsecode(200이면성공): {}",responseCode);
+
+            //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = "";
+            String result = "";
+
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+
+            log.info("response body: {}",result);
+
+
+            //Jackson으로 json 파싱할 것임
+            ObjectMapper mapper = new ObjectMapper();
+            //kakaoToken에 result를 KakaoToken.class 형식으로 변환하여 저장
+            kakaoToken = mapper.readValue(result, KakaoToken.class);
+
+            //api호출용 access token
+            String access_Token = kakaoToken.getAccess_token();
+            //access 토큰 만료되면 refresh token사용(유효기간 더 김)
+            String refresh_Token=kakaoToken.getRefresh_token();
+
+
+            
+            log.info("access_token = {}",access_Token);
+            log.info("refresh_token = {}", refresh_Token);
+            
+            br.close();
+            bw.close();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        log.info("카카오토큰생성완료>>>{}",kakaoToken);
+        return kakaoToken;
+    }
+    
+    public UserInfoVO requestUser(String accessToken){ // 카카오 유저 정보
+        log.info("requestUser 시작");
+        String strUrl = "https://kapi.kakao.com/v2/user/me"; //request를 보낼 주소
+        UserInfoVO userInfoVO = new UserInfoVO(); //response를 받을 객체
+
+        try{
+            URL url = new URL(strUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection(); //url Http 연결 생성
+
+            //POST 요청
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);//outputStreamm으로 post 데이터를 넘김
+
+            //전송할 header 작성, 인자로 받은 access_token전송
+            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+
+            //실제 요청을 보내는 부분, 결과 코드가 200이라면 성공
+            int responseCode = conn.getResponseCode();
+            log.info("requestUser의 responsecode(200이면성공): {}",responseCode);
+
+            //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = "";
+            String result = "";
+
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            br.close();
+
+            log.info("response body: {}",result);
+
+
+            //Jackson으로 json 파싱할 것임
+            ObjectMapper mapper = new ObjectMapper();
+            //결과 json을 HashMap 형태로 변환하여 resultMap에 담음
+            HashMap<String,Object> resultMap = mapper.readValue(result, HashMap.class);
+            //json 파싱하여 id 가져오기
+            Long id = Long.valueOf(String.valueOf(resultMap.get("id")));
+
+            //결과json 안에 properties key는 json Object를 value로 가짐
+            HashMap<String,Object> properties = (HashMap<String, Object>) resultMap.get("properties");
+            String profile_image = (String)properties.get("profile_image");
+            String nickname = (String)properties.get("nickname");
+            
+            //결과json 안에 kakao_account key는 json Object를 value로 가짐
+            HashMap<String,Object> kakao_account = (HashMap<String, Object>) resultMap.get("kakao_account");
+           
+            log.info("nickname= {}",nickname);
+            String age_range = (String)kakao_account.get("age_range");
+            log.info("age_range= {}",age_range);
+            String gender = (String)kakao_account.get("gender");
+            
+            //유저정보 세팅
+            userInfoVO.setUiNickname(nickname);//닉네임
+            
+            int uiAge=0;
+            if(age_range.startsWith("0")||age_range.startsWith("1")) {
+            	uiAge=10;
+            } else if(age_range.startsWith("2")) {
+            	uiAge=20;
+            } else if(age_range.startsWith("3")) {
+            	uiAge=30;
+            } else if(age_range.startsWith("4")) {
+            	uiAge=40;
+            } else {
+            	uiAge=50;
+            }
+            userInfoVO.setUiNum(uiAge); //연령대
+            
+            boolean uiGender=true;
+            if(gender.equals("female")) {
+            	uiGender = false;
+            }
+            userInfoVO.setUiGender(uiGender);//성별
+            userInfoVO.setUiFilepath(profile_image);//사진
+
+            log.info("resultMap= {}",resultMap);
+            log.info("properties= {}",properties);
+            log.info("userInfoVO={}",userInfoVO);
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return userInfoVO;
+    }
 }

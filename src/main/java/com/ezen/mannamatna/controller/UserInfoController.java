@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.mannamatna.service.UserInfoService;
+import com.ezen.mannamatna.vo.KakaoToken;
 import com.ezen.mannamatna.vo.UserInfoVO;
 
 import lombok.extern.log4j.Log4j2;
@@ -56,6 +58,21 @@ public class UserInfoController {
 	m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다.");
 	return "user/login";
 }
+	
+	@GetMapping("/kakaoPost")
+	  public String kakaoLogin(@RequestParam(value = "code",required = false) String code){
+        if(code!=null){//카카오측에서 보내준 code가 있다면 출력합니다
+            System.out.println("code = " + code);
+            KakaoToken kakaoToken = uiService.requestToken(code); //카카오 토큰 요청
+            
+            
+            UserInfoVO userInfoVO = uiService.requestUser(kakaoToken.getAccess_token()); //유저정보 요청
+            log.info("user = {}",userInfoVO);
+            log.info("kakoToken = {}", kakaoToken);
+        }
+		return "user/kakaoPost";
+	}
+	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();

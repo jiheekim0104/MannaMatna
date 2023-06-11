@@ -18,40 +18,18 @@ alert('${msg}');
 		<input type="password" name="uiPwd" id="uiPwd" placeholder="비밀번호를 입력해주세요."><br>
 		<div id="uiPwdNullMsg" name="uiPwdNullMsg" style="color: red"></div>
 
-		<button>로그인</button><br>
-		<button>네이버 로그인</button>
-		<button>카카오 로그인</button>
-		<br>
+		<button>로그인</button><br>	
 	</form>
+	<button onclick="location.href='/naverLogin'">네이버 로그인</button>
+	<button onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b288a9632f49edf850cff8d6eb985755&redirect_uri=http://localhost/kakaoPost/'">카카오 로그인</button>
+	<br>
 	<button onclick="location.href='/join'">회원가입</button>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-	<p>호로롤롤ㄹ</p>
-</div>
-	<script>
+
+	</div>
+	
+	
+</body>
+<script>
 		function checkValue() {
 			let inputId = document.getElementById('uiId').value; //입력받은 아이디
 			let inputPwd = document.getElementById('uiPwd').value; //입력받은 비밀번호
@@ -80,5 +58,4 @@ alert('${msg}');
 			return true;
 		}
 	</script>
-</body>
 </html>
