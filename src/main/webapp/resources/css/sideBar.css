@@ -1,13 +1,33 @@
+html{
+    background-size: cover;
+    height: 100%;
+}
+body{
+	min-height: 100%;
+    margin: 0; 
+	display: grid;
+	grid-template-columns: 10% 15% 65% 10%;
+	grid-template-rows: 110px minmax(0px, auto) 60px;
+	grid-template-areas:
+		'a b c d'
+		'a b e d'
+		'a f f d';
+}
+
+header{
+	grid-area:c;
+}
+
+nav{
+	grid-area:b;
+}
 /* 사이드바 메뉴 */
 .sidenav {
-  margin-left: 10%; /* 전체 영역의 10%만큼 왼쪽을 띄움 */
-  height: 100%; 
-  width: 15%;
-  position: fixed;
+	height:100%;
   z-index: 1; 
   top: 0; 
   left: 0;
-  border-right: 5px solid #FF6347;
+  border-right: 5px solid #FC522F;
   overflow-x: hidden; /* x축 스크롤 숨김 */
   padding-top: 20px;
 }
@@ -31,14 +51,14 @@
 
 /* 마우스 올리면 메뉴 색 변경 */
 .sidenav a:hover {
-  color: #FF6347;
+  color: #FC522F;
 }
 
 /* 연결되는 페이지 내용 */
 .content {
-  margin-left: 25%; /* 사이드바 영역만큼 띄워줌 */
-  padding: 0px 20px; 
-  margin-right: 10%; /* 전체 영역의 10%만큼 오른쪽을 띄움 */
+	grid-area:e;
+  	padding: 0px 20px; 
+  	min-height: 100%;
 }
 .profileImg{
 	width: 100%;
@@ -50,7 +70,7 @@
 }
 
 .uiNickname{
-	color: #FF6347;
+	color: #FC522F;
 	font-weight: bolder;
 }
 
@@ -61,13 +81,24 @@
 }
 
 /* 버튼 디자인 */
-.button {
-  background-color: #FF6347;
-  border: none;
-  color: white;
-  padding: 15px 32px;
+.sidenav>.addBabsang {
+  background-color: rgb(252,229,205);
+  border: 2px solid #FC522F;
+  border-radius:0.5em;
+  color: #FC522F;
+  font-weight: bolder;
+  padding: 8px 22px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+.sidenav>.addBabsang:hover {
+  background-color: #FC522F;
+  color: #FFFFFF;
+}
+
+footer{
+	grid-area:f;
 }

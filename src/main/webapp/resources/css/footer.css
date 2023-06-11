@@ -1,0 +1,10 @@
+
+
+footer {
+	background-color: #EEEEEE;
+	bottom: 0px;
+	line-height : 60px;
+	z-index: 100;
+	font-size: x-small;
+	text-align: center;
+}

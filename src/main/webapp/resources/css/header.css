@@ -1,0 +1,17 @@
+header{
+	background-color: #EEEEEE;
+}
+
+div{
+	text-align: center;
+}
+
+.mainText{
+	padding-top:12px;
+	font-size: xx-large;
+	font-weight: bolder;
+}
+
+.subText{
+	padding-top:5px;
+}
