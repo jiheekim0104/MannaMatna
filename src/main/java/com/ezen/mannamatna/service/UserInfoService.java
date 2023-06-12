@@ -54,7 +54,16 @@ public class UserInfoService {
 		}
 		return false;
 	}
-
+	
+	public boolean kakaoLogin(UserInfoVO userInfoVO, HttpSession session) {
+		userInfoVO = uiMapper.selectKakaoUserInfo(userInfoVO);
+		if (userInfoVO != null) {
+			session.setAttribute("user", userInfoVO);
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean join(UserInfoVO userInfoVO) throws IllegalStateException, IOException {
 		String fileName = null;
 		if(userInfoVO.getUiFile()==null) {

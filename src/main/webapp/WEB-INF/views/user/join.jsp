@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${path}/resources/css/join.css" />
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
@@ -13,16 +14,17 @@
 <div class="content">
 	<h1>회원가입</h1>
 	SNS 연동
-	<button onclick="location.href='/naverLogin'">네이버 간편가입</button>
-	<button onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b288a9632f49edf850cff8d6eb985755&redirect_uri=http://localhost/kakaoPost/'">카카오 간편가입</button>
+	<button class="naverBnt" onclick="location.href='/naverLogin'"><img src="../../../resources/upload/naverLogo.png">네이버 간편가입</button>
+	<button class="kakaoBnt"onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b288a9632f49edf850cff8d6eb985755&redirect_uri=http://localhost/kakaoPost/'"><img src="../../../resources/upload/kakaoLogo.png">카카오 간편가입</button>
 	<br>
 	<form action="/join-ok" method="POST" onsubmit="return checkValue()" enctype="multipart/form-data">
+		<input type="text" class="check"><br>
 		<input type="text" name="uiId" id="uiId" placeholder="아이디">
-		<button type="button" id="idChk" onclick="fn_idChk()" value="N">중복확인</button><br> 
+		<button type="button" id="idChk" class="bnt" onclick="fn_idChk()" value="N">중복확인</button><br> 
 		<input type="text" name="uiNickname" id="uiNickname" placeholder="닉네임">
-		<button type="button" id="nicknameChk" onclick="fn_nicknameChk()" value="N">중복확인</button><br> 
-		<input type="password" name="uiPwd" id="uiPwd" placeholder="비밀번호"><br> 
-		<input type="password" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
+		<button type="button" id="nicknameChk" class="bnt" onclick="fn_nicknameChk()" value="N">중복확인</button><br> 
+		<input type="password" class="uiPwd" name="uiPwd" id="uiPwd" placeholder="비밀번호"><br> 
+		<input type="password" class="uiPwdCheck" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
 		<input type="file" name="uiFile" id="uiFile" onchange="loadImg(this)"><br> 
 		<div id="imgDiv" style="display:none">
 			<img src = "" width="300">

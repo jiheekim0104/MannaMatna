@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="${path}/resources/css/login.css" />
 <script>
 <c:if test="${msg!=null}">
 alert('${msg}');
@@ -14,17 +15,17 @@ alert('${msg}');
 	<br>
 	<form action="/login" method="POST" onsubmit="return checkValue()">
 		<input type="text" name="uiId" id="uiId" placeholder="아이디를 입력해주세요."><br>
-		<div id="uiIdNullMsg" name="uiIdNullMsg" style="color: red"></div>
+		<div id="uiIdNullMsg" name="uiIdNullMsg"></div>
 
 		<input type="password" name="uiPwd" id="uiPwd" placeholder="비밀번호를 입력해주세요."><br>
 		<div id="uiPwdNullMsg" name="uiPwdNullMsg" style="color: red"></div>
 
-		<button>로그인</button><br>	
+		<button class="loginBnt">로그인</button><br>	
 	</form>
-	<button onclick="location.href='/naverLogin'">네이버 로그인</button>
-	<button onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b288a9632f49edf850cff8d6eb985755&redirect_uri=http://localhost/kakaoLogin/'">카카오 로그인</button>
+	<button class="naverBnt" onclick="location.href='/naverLogin'"><img src="../../../resources/upload/naverLogo.png">네이버 로그인</button>
+	<button class="kakaoBnt" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b288a9632f49edf850cff8d6eb985755&redirect_uri=http://localhost/kakaoLogin/'"><img src="../../../resources/upload/kakaoLogo.png">카카오 로그인</button>
 	<br>
-	<button onclick="location.href='/join'">회원가입</button>
+	<button class="joinBnt" onclick="location.href='/join'">회원가입</button>
 
 	</div>
 	
