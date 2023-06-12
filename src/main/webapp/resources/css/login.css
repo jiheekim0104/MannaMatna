@@ -1,0 +1,94 @@
+@charset "UTF-8";
+input{
+	width: 350px;
+	height: 22px;
+	margin: 5px 0px;
+}
+
+#uiIdNullMsg{
+	color: red;
+	font-size: small;
+}
+
+#uiPwdNullMsg{
+	color: red;
+	font-size: small;
+}
+
+.loginBnt {
+	width: 362px;
+	height: 40px;
+	background-color: #FC522F;
+	border: 2px solid #FC522F;
+	border-radius:0.5em;
+	color: #FFFFFF;
+	font-weight: bolder;
+	padding: 2px 22px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 20px;
+	margin-top: 10px;
+}
+
+/* .loginBnt:hover{
+	background-color: #FFFFFF;
+	color: #FC522F;
+} */
+
+.naverBnt {
+	width: 175px;
+	height: 40px;
+	background-color: rgb(6,189,52);
+	border: 2px solid rgb(6,189,52);
+	border-radius:0.5em;
+	color: #FFFFFF;
+	font-weight: bolder;
+	padding: 2px 22px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin-top: 10px;
+}
+
+button>img {
+	width:30px;
+}
+
+.kakaoBnt {
+	width: 175px;
+	height: 40px;
+	background-color: rgb(254,242,0);
+	border: 2px solid rgb(254,242,0);
+	border-radius:0.5em;
+	color: rgb(60,30,30);
+	font-weight: bolder;
+	padding: 2px 22px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin-top: 10px;
+}
+
+.joinBnt {
+	width: 362px;
+	height: 40px;
+	background-color: #FFFFFF;
+	border: 2px solid #FC522F;
+	border-radius:0.5em;
+	color: #FC522F;
+	font-weight: bolder;
+	padding: 2px 22px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 20px;
+	margin-top: 10px;
+}
+
+.joinBnt:hover{
+	background-color: #FC522F;
+	color: #FFFFFF;
+}

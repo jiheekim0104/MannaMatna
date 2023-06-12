@@ -54,7 +54,16 @@ public class UserInfoService {
 		}
 		return false;
 	}
-
+	
+	public boolean kakaoLogin(UserInfoVO userInfoVO, HttpSession session) {
+		userInfoVO = uiMapper.selectKakaoUserInfo(userInfoVO);
+		if (userInfoVO != null) {
+			session.setAttribute("user", userInfoVO);
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean join(UserInfoVO userInfoVO) throws IllegalStateException, IOException {
 		String fileName = null;
 		if(userInfoVO.getUiFile()==null) {
@@ -115,8 +124,8 @@ public class UserInfoService {
 		return uiMapper.updateUserInfo(userInfoVO) == 1;
 	}
 
-	public boolean updateUiBiNum(UserInfoVO uiBiNum) {
-		return uiMapper.updateUiBiNum(uiBiNum) == 1;
+	public boolean updateUiBiNum(UserInfoVO biNum) {
+		return uiMapper.updateUiBiNum(biNum) == 1;
 	}
 
 	// 인증코드로 token요청하기

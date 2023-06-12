@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+input{
+	width: 244px;
+	height: 22px;
+	margin: 5px 0px;
+}
+
+.uiPwd{
+	width: 350px;
+	height: 22px;
+	margin: 5px 0px;
+}
+
+.uiPwdCheck{
+	width: 350px;
+	height: 22px;
+	margin: 5px 0px;
+}
+
+.check{
+	width: 350px; /* 길이확인용 */
+}
+
+.naverBnt {
+	width: 175px;
+	height: 40px;
+	background-color: #FFFFFF;
+	border: 2px solid #FFFFFF;
+	border-radius:0.5em;
+	font-weight: bolder;
+	padding: 2px 2px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin-top: 10px;
+}
+
+button>img {
+	width:30px;
+}
+
+.kakaoBnt {
+	width: 170px;
+	height: 40px;
+	background-color: #FFFFFF;
+	border: 2px solid #FFFFFF;
+	border-radius:0.5em;
+	color: rgb(60,30,30);
+	font-weight: bolder;
+	padding: 2px 2px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin-top: 10px;
+}
+
+.bnt {
+	width: 100px;
+	height: 30px;
+	background-color: #FFFFFF;
+	border: 2px solid #FC522F;
+	border-radius:0.5em;
+	color: #FC522F;
+	font-weight: bolder;
+	padding: 0px 22px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin-top: 10px;
+}
+
+.bnt:hover{
+	background-color: #FC522F;
+	color: #FFFFFF;
+}

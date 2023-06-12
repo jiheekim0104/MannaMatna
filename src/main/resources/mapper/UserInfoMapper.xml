@@ -6,6 +6,10 @@
 		select * from user_info where ui_Id = #{uiId}
 	</select>
 	
+	<select id="selectKakaoUserInfo" resultType="com.ezen.mannamatna.vo.UserInfoVO">
+		select * from kakao_user_info where kui_Id = #{kuiId}
+	</select>
+	
 	<select id="idChk" resultType="int">
 		select count(*) from user_info where ui_Id = #{uiId}
 	</select>
@@ -29,8 +33,8 @@
 	</delete>
 	
 	<!-- userInfo.biNum 업데이트문 -->
-	<update id="updateUiBiNum">
-		update user_info set bi_num = #{uiBiNum} where ui_num = #{ui_num}
+	<update id="updateBiNum">
+		update user_info set bi_num = #{biNum} where ui_num = #{uiNum}
 	</update>
 	
 </mapper>

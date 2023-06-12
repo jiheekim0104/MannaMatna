@@ -74,7 +74,7 @@ public class UserInfoController {
 		return "user/kakaoPost";
 	}
 	
-	@GetMapping("/kakaoLogin")
+	@GetMapping("/kakaoLogin") 
 	public String kakaoLogin(@RequestParam(value = "code",required = false) String code, HttpSession session,  Model m) throws IllegalStateException, IOException{
 		UserInfoVO userInfoVO = null;
 		if(code!=null){//카카오측에서 보내준 code가 있다면 출력
@@ -85,7 +85,7 @@ public class UserInfoController {
             log.info("kakoToken = {}", kakaoToken);
             session.setAttribute("user", userInfoVO);
         }
-		  log.info("=============>{}",uiService.login(userInfoVO, session)); //아직 DB에없어서 안뜸! 
+		  log.info("=============>{}",uiService.kakaoLogin(userInfoVO, session)); //아직 DB에없어서 안뜸! 
 		  if(uiService.login(userInfoVO, session)) { 
 			  m.addAttribute("url","/main"); 
 			  m.addAttribute("msg", "로그인성공"); 
