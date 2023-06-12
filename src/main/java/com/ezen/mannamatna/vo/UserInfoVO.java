@@ -20,6 +20,7 @@ public class UserInfoVO {
 	private String uiId;
 	private int uiActive;
 	private String uiDel;
+	/* private int uiBiNum; */
 	
 	public UserInfoVO() {
 		

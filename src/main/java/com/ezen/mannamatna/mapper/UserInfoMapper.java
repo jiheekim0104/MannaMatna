@@ -15,5 +15,5 @@ public interface UserInfoMapper {
 
 	int updateUserInfo(UserInfoVO userInfoVO);
 	
-	int updateUiBiNum(UserInfoVO userInfoVO);
+	int updateBiNum(UserInfoVO userInfoVO);
 }

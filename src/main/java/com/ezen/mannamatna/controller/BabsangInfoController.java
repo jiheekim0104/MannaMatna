@@ -47,20 +47,19 @@ public class BabsangInfoController {
 	public String insertBabsang(BabsangInfoVO babsang,  UserInfoVO userInfoVO,  Model m, HttpSession session) {
 		UserInfoVO user = (UserInfoVO)session.getAttribute("user");
 		babsang.setUiNum(user.getUiNum());
+		//autoIncrement된 babsang.biNum을 받아옴 == 0 아직 안받아오는 상태
 		log.info("userInfo_biNum ===> {}", babsang.getUiBiNum());
-		userInfoVO.setBiNum(babsang.getBiNum());
-		
 		String msg = "밥상 등록 실패";
 		String url = "/babsang-insert";
 		if(babsangInfoService.addBabsangInfo(babsang)) {
-			 if(userInfoService.updateUiBiNum(userInfoVO)) {
+			//밥상 등록 성공 한 순간 autoIncrement된 babsang의 biNum을 받아옴 == 이제서야 받아옴
+			log.info("uiBiNum ===> {}", babsang.getUiBiNum());
+			userInfoVO.setBiNum(babsang.getUiBiNum());
+			userInfoVO.setUiNum(user.getUiNum());
+			log.info("userInfo.biNum ===> {}", userInfoVO.getBiNum());
 			msg = "밥상 등록 성공";
 			url = "/main";
-			/* log.info("ui.uiBiNum ===> {}", uiBiNum.getBiNum()); */
-
-			//밥상 등록 성공 한 순간 autoIncrement된 babsang.biNum을 받아옴
-			log.info("uiBiNum ===> {}", babsang.getBiNum());
-			} 
+			userInfoService.updateUiBiNum(userInfoVO);
 		}
 		m.addAttribute("msg", msg);
 		m.addAttribute("url",url);
