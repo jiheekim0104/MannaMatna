@@ -36,5 +36,8 @@
 	<update id="updateUiBiNum">
 		update user_info set bi_num = #{biNum} where ui_num = #{uiNum}
 	</update>
+	<select id="selectUserInfos">
+		select * from user_info;
+	</select>
 	
 </mapper>

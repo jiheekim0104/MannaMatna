@@ -1,5 +1,7 @@
 package com.ezen.mannamatna.mapper;
 
+import java.util.List;
+
 import com.ezen.mannamatna.vo.UserInfoVO;
 
 public interface UserInfoMapper {
@@ -18,5 +20,6 @@ public interface UserInfoMapper {
 	int updateUserInfo(UserInfoVO userInfoVO);
 	
 	int updateUiBiNum(UserInfoVO userInfoVO); // 밥상 인서트 후 UserInfoVO에 biNum 업데이트
-
+	
+	List<UserInfoVO> selectUserInfos(UserInfoVO userInfoVO); // 회원데이터를 모두 담은 List객체
 }

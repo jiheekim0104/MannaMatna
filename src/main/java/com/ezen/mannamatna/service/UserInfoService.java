@@ -12,6 +12,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -306,5 +307,11 @@ public class UserInfoService {
 			e.printStackTrace();
 		}
 		return userInfoVO;
+	}
+	
+	public List<UserInfoVO> getUserInfos(UserInfoVO userInfoVO, HttpSession session){
+		// 회원데이터를 모두 담은 객체 get
+		// session데이터로 추후 관리자가 아닐 경우 검사
+		return uiMapper.selectUserInfos(userInfoVO);
 	}
 }
