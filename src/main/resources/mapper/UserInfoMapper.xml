@@ -33,7 +33,7 @@
 	</delete>
 	
 	<!-- userInfo.biNum 업데이트문 -->
-	<update id="updateBiNum">
+	<update id="updateUiBiNum">
 		update user_info set bi_num = #{biNum} where ui_num = #{uiNum}
 	</update>
 	

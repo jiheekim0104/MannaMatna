@@ -59,7 +59,8 @@ public class BabsangInfoController {
 			log.info("userInfo.biNum ===> {}", userInfoVO.getBiNum());
 			msg = "밥상 등록 성공";
 			url = "/main";
-			userInfoService.updateUiBiNum(userInfoVO);
+			userInfoService.updateBiNum(userInfoVO); // 인서트 성공 시 유저서비스의 update 실행
+			log.info("인서트 성공 후 유저인포의 biNum =====> {}", userInfoVO.getBiNum());
 		}
 		m.addAttribute("msg", msg);
 		m.addAttribute("url",url);
