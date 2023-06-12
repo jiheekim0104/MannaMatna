@@ -65,7 +65,7 @@ public class UserInfoController {
             userInfoVO = uiService.requestUser(kakaoToken.getAccess_token()); //유저정보 요청
             log.info("user = {}",userInfoVO);
             log.info("kakoToken = {}", kakaoToken);
-			/* session.setAttribute("user", userInfoVO); */
+			session.setAttribute("user", userInfoVO); 
         }
 		if(uiService.join(userInfoVO)) {
 			m.addAttribute("msg","회원가입에 성공하셨습니다.");
