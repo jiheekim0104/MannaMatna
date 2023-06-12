@@ -18,6 +18,6 @@ public interface UserInfoMapper {
 
 	int updateUserInfo(UserInfoVO userInfoVO);
 	
-	int updateUiBiNum(UserInfoVO userInfoVO);
+	int updateUiBiNum(UserInfoVO userInfoVO); // 밥상 인서트 후 UserInfoVO에 biNum 업데이트
 
 }

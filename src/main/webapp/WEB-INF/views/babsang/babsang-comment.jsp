@@ -23,7 +23,7 @@
 						let a = '';
 						if (data.length > 0) {
 							$.each(data,function(key, value) {
-											console.log('세션스코프 : ' + ${sessionScope.user.uiNum});
+											// console.log('세션스코프 : ' + ${sessionScope.user.uiNum});
 											a += '<div style="border:1px solid darkgray; margin-bottom: 15px;">';
 											a += '<div class="commentInfo'+value.ciNum+'">uiNum : ' + value.uiNum +'<img src="' + value.uiFilepath + '" width="50">'+ ' 작성자 : '+ value.uiNickname+ ' 작성시간 : '+ value.ciCredat + '<br>';
 												a += '<div class="commentCiContent'+value.ciNum+'"> <span> 내용 : '+ value.ciContent+ '</span>';

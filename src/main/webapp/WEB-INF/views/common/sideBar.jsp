@@ -46,6 +46,16 @@
 				<br>
 				<a class="addBabsang" href="/addBabsang">밥상 생성</a>
 			</c:if>
+			<!-- 관리자로 로그인 시 -->
+			<c:if test="${sessionScope.user.uiId=='Administer'}">
+			<script>
+			console.log('${sessionScope.user.uiId}');
+			</script>
+			<br>
+			<!-- 통계 조회 버튼 추가 -->
+			<a class="addBabsang" href="/chart">통계 조회</a>
+			</c:if>
+			
 		</div>
 		<!-- sidenav END -->
 	</nav>

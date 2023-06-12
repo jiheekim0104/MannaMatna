@@ -124,8 +124,9 @@ public class UserInfoService {
 		return uiMapper.updateUserInfo(userInfoVO) == 1;
 	}
 
-	public boolean updateUiBiNum(UserInfoVO biNum) {
-		return uiMapper.updateUiBiNum(biNum) == 1;
+	public boolean updateBiNum(UserInfoVO userInfoVO) {
+		// 인서트 후 넘겨받은 BabsangInfoVO의 biNum을 userInfoVO에 업데이트
+		return uiMapper.updateUiBiNum(userInfoVO) == 1;
 	}
 
 	// 인증코드로 token요청하기
