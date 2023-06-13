@@ -16,7 +16,7 @@
 
 <body>
 <div class="content">
-	<h1>여기는 메인 페이지</h1>
+	<h1>여기는 만들어진 밥상 리스트</h1>
 	<hr>
 	<!-- 밥상 리스트 목록 -->
 	<table border="1" style="color: black;">

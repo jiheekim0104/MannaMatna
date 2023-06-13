@@ -24,13 +24,14 @@
 		<div class="sidenav">
 			<a href="/main"><img src="../../../resources/upload/logo.png"
 				class="logo"></a>
-			<!-- 비로그인 시 -->
+				
+			<!-- 비로그인 시 출력 화면-->
 			<c:if test="${sessionScope.user.uiId == null}">
 				<a href="/login">Login</a>
 				<a href="/join">Join</a>
 			</c:if>
 
-			<!-- 로그인 시 -->
+			<!-- 로그인 시 출력 화면-->
 			<c:if test="${sessionScope.user.uiId != null}">
 				<a><img class="profileImg" src="${sessionScope.user.uiFilepath}"
 					onclick="location.href='/profile'"></a>
@@ -40,13 +41,29 @@
 					안녕하세요
 				</div>
 				<br>
-
 				<a href="/profile">Profile</a>
 				<a href="/logout">Logout</a>
 				<br>
-				<a class="addBabsang" href="/addBabsang">밥상 생성</a>
+				
+				<!-- 테스트중 -->
+				<a>세션.biNum = ${sessionScope.user.biNum}</a>
+				<a>유저.biNum = ${user.biNum}</a>
+				<a>세션.uiNum = ${sessionScope.user.uiNum}</a>
+				<a>유저.uiNum = ${user.uiNum}</a>
+				
+				<!-- 내가 만든 밥상이 없을 때 -->
+				<c:if test="${sessionScope.user.biNum == 0}">
+					<a class="addBabsang" href="/addBabsang">밥상 생성</a>
+				</c:if>
+				<!-- 내가 만든 밥상이 있을 때 -->
+				<c:if test="${sessionScope.user.biNum != 0}">
+					<a class="alreadyHaveBabsang" href="# 수정 필요">내 밥상 보러가기</a>
+				</c:if>
+				
 			</c:if>
-			<!-- 관리자로 로그인 시 -->
+			
+			
+			<!-- 관리자로 로그인 시 출력 화면-->
 			<c:if test="${sessionScope.user.uiId=='Administer'}">
 			<script>
 			console.log('${sessionScope.user.uiId}');
