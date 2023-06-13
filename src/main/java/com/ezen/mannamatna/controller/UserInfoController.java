@@ -48,8 +48,14 @@ public class UserInfoController {
 	
 	@PostMapping("/login")
 	public String gologin(@ModelAttribute UserInfoVO userInfoVO, BabsangInfoVO babsang, HttpSession session, Model m) {
-		log.info("=============>{}",uiService.login(userInfoVO, session));
 		if(uiService.login(userInfoVO, session)) {
+			userInfoVO = (UserInfoVO) session.getAttribute("user");
+			log.info("=============>{}",userInfoVO);
+			if(userInfoVO.getUiActive()==1) {
+				m.addAttribute("msg","탈퇴처리된 계정입니다.");
+				session.invalidate();
+				return "user/login";
+			}
 			userInfoVO.setBiNum(babsang.getUiBiNum());
 			m.addAttribute("url", "/main");
 			m.addAttribute("msg", "로그인성공");
@@ -196,27 +202,29 @@ public class UserInfoController {
 		return "user/user-withdraw"; 
 	}
 	
-	@PostMapping("/withdraw")// 탈퇴사유를 입력하고 확인을 누른 경우 
+	@PostMapping("/withdraw") // 탈퇴사유를 입력하고 확인을 누른 경우 
 	public String goWithdraw(@ModelAttribute UserInfoVO userInfoVO,HttpSession session) {
-		//사유입력한거 일단 임시 저장 받아야됨
 		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
-		userInfoVO.setUiDel(sessionUserInfo.getUiDel());
-		log.info("컨트롤러 윗드로우 ==>{}",userInfoVO.getUiDel());
+		sessionUserInfo.setUiDel(userInfoVO.getUiDel()); //사유입력한거 일단 임시 저장
+		userInfoVO = sessionUserInfo;
 		return "user/user-check-withdraw";
 	}
 	
-	@GetMapping("/user/user-check-withdraw") 
+	@GetMapping("/user/user-check-withdraw") // 비밀번호 재확인
 	public String checkWithdraw() {
-		// 비밀번호 재확인
-		// 앞에서 입력한 사유를 이때 저장함
 		return "user/user-check-withdraw";
 	}
 	
 	@PostMapping("/check-withdraw")
-	public String checkWithdrawOk() {
-		//삭제진행
-		//세션에서 아웃시켜야함
-		//엑티브 0처리
+	public String checkWithdrawOk(@ModelAttribute UserInfoVO userInfoVO,HttpSession session,Model m) {
+		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
+		sessionUserInfo.setUiActive(1); //엑티브 1처리
+		userInfoVO = sessionUserInfo;
+		log.info("컨트롤러 체크-윗드로우 ==>{}",userInfoVO);
+		if(uiService.delete(userInfoVO, session)) { // 앞에서 입력한 사유를 이때 저장함 (업데이트)
+			m.addAttribute("msg","정상적으로 탈퇴처리되었습니다.");
+			session.invalidate();
+		}	
 		return "babsang/babsang-list";
 	}
 	

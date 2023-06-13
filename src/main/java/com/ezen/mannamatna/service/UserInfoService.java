@@ -75,10 +75,14 @@ public class UserInfoService {
 			fileName = userInfoVO.getUiFilepath().replace(absolutePath+"\\src\\main\\webapp",""); // 각 시스템환경마다 경로 공유되도록 수정
 			userInfoVO.setUiFilepath(fileName);
 			userInfoVO.setUiPwd("0000");
-			//여기
 			log.info("프로젝트절대경로===={}", System.getProperty("user.dir"));
-			
-			return uiMapper.insertUserInfo(userInfoVO) == 1;
+			if(uiMapper.insertUserInfo(userInfoVO)==1) {
+				KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO();
+				kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId());
+				kakaoUserInfoVO.setUiNum(userInfoVO.getUiNum());
+				return uiMapper.insertKakaoUserInfo(kakaoUserInfoVO)==1;
+			}
+			return false;
 		} else {
 			fileName = userInfoVO.getUiFile().getOriginalFilename();
 			if ("".equals(fileName)) {
@@ -131,12 +135,13 @@ public class UserInfoService {
 		log.info("서비스/업데이트==>{}", userInfoVO);
 		return uiMapper.updateUserInfo(userInfoVO) == 1;
 	}
-
+	
 	public boolean updateBiNum(UserInfoVO userInfoVO) {
 		// 인서트 후 넘겨받은 BabsangInfoVO의 biNum을 userInfoVO에 업데이트
 		return uiMapper.updateUiBiNum(userInfoVO) == 1;
 	}
 
+	
 	// 인증코드로 token요청하기
 	public KakaoToken requestToken(String addURI, String code) {
 		String strUrl = "https://kauth.kakao.com/oauth/token"; // request를 보낼 주소
@@ -319,7 +324,7 @@ public class UserInfoService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		log.info("서비스에서 받은 카카오 유저={}",userInfoVO); // 유저 어디갔노..^0^;; 정보가 안오네;;ㅎ
+		log.info("서비스에서 받은 카카오 유저={}",userInfoVO); 
 		return userInfoVO;
 	}
 	

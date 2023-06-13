@@ -3,7 +3,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.mannamatna.mapper.UserInfoMapper">
 	<select id="selectUserInfo" resultType="com.ezen.mannamatna.vo.UserInfoVO">
-		select * from user_info where ui_Id = #{uiId}
+		select * from user_info where ui_Id = #{uiId} and ui_Pwd = #{uiPwd} 
 	</select>
 	
 	<select id="selectKakaoUserInfo" resultType="com.ezen.mannamatna.vo.KakaoUserInfoVO">
@@ -23,14 +23,20 @@
 		values (#{uiNickname},#{uiPwd},#{uiFilepath},#{uiGender},#{uiAge},#{uiId})
 	</insert>
 	
+	<insert id="insertKakaoUserInfo"> 
+		insert into kakao_user_info (ui_num,kui_id)
+		values (#{uiNum},#{kuiId})
+	</insert>
+	
 	<update id="updateUserInfo">
 		update user_info set ui_nickname = #{uiNickname}, ui_pwd = #{uiPwd}, ui_filepath = #{uiFilepath}
 		where ui_num = #{uiNum}
 	</update>
 	
-	<delete id="deleteUserInfo">
-		delete from user_info where ui_num = #{uiNum}
-	</delete>
+	<update id="deleteUserInfo"> <!-- 회원 탈퇴 목적이지만 db에는 업데이트로 기록됨 -->
+		update user_info set ui_active = #{uiActive}, ui_del = #{uiDel}
+		where ui_num = #{uiNum}
+	</update>
 	
 	<!-- userInfo.biNum 업데이트문 -->
 	<update id="updateUiBiNum">
