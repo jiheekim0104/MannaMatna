@@ -17,11 +17,27 @@
 <body>
 <div class="content">
 	<h1>여기는 만들어진 밥상 리스트</h1>
+	
+	<form method="get" action="#">
+		<input type="text" name="word" id="word" placeholder="검색하실 밥상의 제목을 입력해주세요">
+		<button>검색</button>
+	</form>
+	<form method="get" action="#">
+		<button>태그</button>
+		<button>태그</button>
+		<button>태그</button>
+		<button>태그</button>
+		<button>태그</button>
+		<button>태그</button>
+		<button>태그</button>
+		<button>태그</button>
+	</form>
+	
 	<hr>
 	<!-- 밥상 리스트 목록 -->
 	<table border="1" style="color: black;">
 		<c:if test="${empty babsangList}">
-			<th>게시물이 존재하지 않습니다</th>
+			<th>밥상이 존재하지 않습니다</th>
 		</c:if>
 		<c:forEach items="${babsangList}" var="babsangListVO">
 			<tr>

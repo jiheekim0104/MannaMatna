@@ -37,8 +37,10 @@
 
 			<!-- 로그인 시 출력 화면-->
 			<c:if test="${sessionScope.user.uiId != null}">
-				<a><img class="profileImg" src="${sessionScope.user.uiFilepath}"
-					onclick="location.href='/profile'"></a>
+				<div class="box">
+					<img class="profileImg" src="${sessionScope.user.uiFilepath}"
+					onclick="location.href='/profile'">
+				</div>
 				<br>
 				<div class="greetings">
 					<span class="uiNickname"> ${sessionScope.user.uiNickname}</span>님
@@ -56,11 +58,11 @@
 				<a>유저.uiNum = ${user.uiNum}</a>
 				-->
 				
-				<!-- 내가 만든 밥상이 없을 때 -->
+				<!-- 내가 만든 밥상이 없을 때 보이는 버튼-->
 				<c:if test="${user.biNum == 0}">
 					<a class="addBabsang" href="/addBabsang">밥상 생성</a>
 				</c:if>
-				<!-- 내가 만든 밥상이 있을 때 -->
+				<!-- 내가 만든 밥상이 있을 때 보이는 버튼-->
 				<c:if test="${user.biNum != 0}">
 					<a class="alreadyHaveBabsang" href="/detail/${user.biNum}">내 밥상<br>보러가기</a>
 				</c:if>

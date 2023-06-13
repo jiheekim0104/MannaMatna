@@ -60,10 +60,18 @@ nav{
   	padding: 0px 20px; 
   	min-height: 100%;
 }
+
+.box {
+    width: 120px;
+    height: 120px; 
+    border-radius: 70%; /* 원 모양의 둘레 만들고 */
+    border : 2px solid #BDBDBD; /* 테두리 두께, 스타일(solid=실선), 컬러 설정 */
+    overflow: hidden; /* 넘치는 부분은 자르기 */
+}
 .profileImg{
 	width: 100%;
-	object-fit: cover;
-	border: 2px solid black;
+    height: 100%;
+    object-fit: cover;
 }
 .greetings{
 	text-align: center;
