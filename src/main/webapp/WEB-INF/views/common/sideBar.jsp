@@ -45,19 +45,20 @@
 				<a href="/logout">Logout</a>
 				<br>
 				
-				<!-- 테스트중 -->
+				<!-- 테스트 완료
 				<a>세션.biNum = ${sessionScope.user.biNum}</a>
 				<a>유저.biNum = ${user.biNum}</a>
 				<a>세션.uiNum = ${sessionScope.user.uiNum}</a>
 				<a>유저.uiNum = ${user.uiNum}</a>
+				-->
 				
 				<!-- 내가 만든 밥상이 없을 때 -->
-				<c:if test="${sessionScope.user.biNum == 0}">
+				<c:if test="${user.biNum == 0}">
 					<a class="addBabsang" href="/addBabsang">밥상 생성</a>
 				</c:if>
 				<!-- 내가 만든 밥상이 있을 때 -->
-				<c:if test="${sessionScope.user.biNum != 0}">
-					<a class="alreadyHaveBabsang" href="# 수정 필요">내 밥상 보러가기</a>
+				<c:if test="${user.biNum != 0}">
+					<a class="alreadyHaveBabsang" href="/detail/${user.biNum}">내 밥상 보러가기</a>
 				</c:if>
 				
 			</c:if>

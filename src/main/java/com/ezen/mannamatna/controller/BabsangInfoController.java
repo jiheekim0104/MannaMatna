@@ -47,22 +47,25 @@ public class BabsangInfoController {
 	public String insertBabsang(BabsangInfoVO babsang,  UserInfoVO userInfoVO,  Model m, HttpSession session) {
 		UserInfoVO userSession = (UserInfoVO)session.getAttribute("user");
 
-		babsang.setUiNum(userSession.getUiNum()); //세션의 uiNum을 받아서 밥상의 uiNum으로 set
+		babsang.setUiNum(userSession.getUiNum()); // 세션의 uiNum >> 받아서 밥상의 uiNum으로 set
 		log.info("userInfo_biNum ===> {}", babsang.getUiBiNum()); // 밥상이 생성되지않아 받아올게 없어서 0이 나옴
 		String msg = "밥상 등록 실패";
 		String url = "/babsang-insert";
 		
-		if(babsangInfoService.addBabsangInfo(babsang)) {//insert 되면
-			int biNum = babsang.getUiBiNum(); //인서트 할 때의 autoIncrement 된 밥상 번호를 받아옴
-			log.info("babsang.uiBiNum ===> {}", biNum); // 로그 테스트
-			userInfoVO.setBiNum(biNum); // 유저의 biNum >> 밥상 insert 할 때 받아온 biNum으로 set
-			log.info("userInfo.biNum ===> {}", userInfoVO.getBiNum()); //로그테스트
+		if(babsangInfoService.addBabsangInfo(babsang)) {// 밥상이 insert 되면
+			int biNum = babsang.getUiBiNum(); // insert 할 때의 autoIncrement 된 밥상 번호를 받아옴
+			log.info("babsang.uiBiNum ===> {}", biNum); // 확인
+			
 			userInfoVO.setUiNum(userSession.getUiNum());
-			userSession.setBiNum(biNum); //세션의 biNum >> 밥상 insert 할 때 받아온 biNum으로 set 
+
+			userInfoVO.setBiNum(biNum); // 유저의 biNum >> 밥상 insert 할 때 받아온 biNum으로 set
+			log.info("userInfo.biNum ===> {}", userInfoVO.getBiNum()); // 확인
+			userSession.setBiNum(biNum); // 세션의 biNum >> 밥상 insert 할 때 받아온 biNum으로 set 
+			log.info("userSession.biNum ===> {}", userSession.getBiNum()); // 확인
+			
 			msg = "밥상 등록 성공";
 			url = "/main";
-			userInfoService.updateBiNum(userInfoVO); // 인서트 성공 시 유저서비스의 update 실행
-			log.info("인서트 끝날때의 userInfo.biNum =====> {}", userInfoVO.getBiNum());
+			userInfoService.updateBiNum(userInfoVO); // insert성공 시 유저서비스의 update 실행
 			log.info("==== 밥상 insert 끝 ====");
 		}
 		m.addAttribute("msg", msg);
@@ -70,7 +73,7 @@ public class BabsangInfoController {
 		return "common/msg";
 	}
 	
-	//내가 만든 밥상이 있을 때 보내는 메세지
+	// 내가 만든 밥상이 있을 때 보내는 메세지
 	@PostMapping("/failedAddBabsang")
 	public String failInsertBabsang(BabsangInfoVO babsang,  UserInfoVO userInfoVO,  Model m, HttpSession session) {
 		String msg = "밥상 등록 실패";
@@ -93,12 +96,17 @@ public class BabsangInfoController {
 		String msg = "밥상 삭제 실패";
 		String url = "/main";
 		if(babsangInfoService.deleteBabsangInfo(biNum)) {
+			userInfoVO.setUiNum(userSession.getUiNum());
+
 			userSession.setBiNum(0);//세션의 biNum >> 0으로 set
 			log.info("userSession.biNum >>> {}",userSession.getBiNum());
+			
 			userInfoVO.setBiNum(0);//유저의 biNum >> 0으로 set
 			log.info("user.biNum >>> {}",userInfoVO.getBiNum());
+			
 			msg = "밥상 삭제 성공";
 			url = "/main";
+			userInfoService.updateBiNum(userInfoVO); // delete 성공 시 유저서비스의 update 실행
 		}
 		m.addAttribute("msg",msg);
 		m.addAttribute("url",url);
