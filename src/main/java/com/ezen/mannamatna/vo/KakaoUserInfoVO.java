@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class KakaoUserInfoVO {
 	private int uiNum;
-	private int kuiId;
+	private long kuiId;
 }

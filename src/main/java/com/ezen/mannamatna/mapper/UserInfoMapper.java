@@ -8,13 +8,15 @@ import com.ezen.mannamatna.vo.UserInfoVO;
 public interface UserInfoMapper {
 	UserInfoVO selectUserInfo(UserInfoVO userInfoVO);
 	
-	KakaoUserInfoVO selectKakaoUserInfo(KakaoUserInfoVO kakaoUserInfoVO); //카카오 로그인 유저
+	KakaoUserInfoVO selectKakaoUserInfo(KakaoUserInfoVO kakaoUserInfoVO); //카카오 로그인 유저를 찾을때 사용
 	
 	int idChk(UserInfoVO userInfoVO);
 	
 	int nicknameChk(UserInfoVO userInfoVO);
 	
 	int insertUserInfo(UserInfoVO userInfoVO);
+	
+	int insertKakaoUserInfo(KakaoUserInfoVO kakaoUserInfoVO);
 
 	int deleteUserInfo(UserInfoVO userInfoVO);
 

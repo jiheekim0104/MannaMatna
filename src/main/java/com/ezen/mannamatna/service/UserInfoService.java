@@ -74,6 +74,7 @@ public class UserInfoService {
 			fileName = userInfoVO.getUiFilepath().replace("C:\\works\\workspace\\mannamatna\\src\\main\\webapp","");
 			userInfoVO.setUiFilepath(fileName);
 			userInfoVO.setUiPwd("0000");
+			//여기
 			return uiMapper.insertUserInfo(userInfoVO) == 1;
 		} else {
 			fileName = userInfoVO.getUiFile().getOriginalFilename();
@@ -198,7 +199,7 @@ public class UserInfoService {
 		log.info("requestUser 시작");
 		String strUrl = "https://kapi.kakao.com/v2/user/me"; // request를 보낼 주소
 		UserInfoVO userInfoVO = new UserInfoVO(); // response를 받을 객체
-
+		KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO(); // response를 받을 카카오 유저 객체
 		try {
 			URL url = new URL(strUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // url Http 연결 생성
@@ -243,7 +244,12 @@ public class UserInfoService {
 
 			String age_range = (String) kakao_account.get("age_range");
 			String gender = (String) kakao_account.get("gender");
-
+			
+			// 카카오 유저인포에 인서트하는 내용이 들어가야함! 
+			/*
+			 * kakaoUserInfoVO.setKuiId(id); uiMapper.insertKakaoUserInfo(kakaoUserInfoVO);
+			 */
+			
 			// 유저정보 세팅
 			userInfoVO.setUiId(Long.toString(id));
 			userInfoVO.setUiNickname(nickname);// 닉네임
