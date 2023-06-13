@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.mannamatna.service.UserInfoService;
+import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.ezen.mannamatna.vo.KakaoToken;
 import com.ezen.mannamatna.vo.KakaoUserInfoVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
@@ -46,9 +47,10 @@ public class UserInfoController {
 	}
 	
 	@PostMapping("/login")
-	public String gologin(@ModelAttribute UserInfoVO userInfoVO, HttpSession session, Model m) {
+	public String gologin(@ModelAttribute UserInfoVO userInfoVO, BabsangInfoVO babsang, HttpSession session, Model m) {
 		log.info("=============>{}",uiService.login(userInfoVO, session));
 		if(uiService.login(userInfoVO, session)) {
+			userInfoVO.setBiNum(babsang.getUiBiNum());
 			m.addAttribute("url", "/main");
 			m.addAttribute("msg", "로그인성공");
 			return "common/msg";
