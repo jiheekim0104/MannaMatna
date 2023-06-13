@@ -33,6 +33,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Service
 public class UserInfoService {
+	private final String relativeUploadFilePath = "../../../../../main/webapp/resources/upload";
 	private final String uploadFilePath = "C:\\works\\workspace\\mannamatna\\src\\main\\webapp\\resources\\upload";
 	@Autowired
 	private UserInfoMapper uiMapper;
@@ -71,7 +72,7 @@ public class UserInfoService {
 	public boolean join(UserInfoVO userInfoVO) throws IllegalStateException, IOException {
 		String fileName = null;
 		if(userInfoVO.getUiFile()==null) {
-			fileName = userInfoVO.getUiFilepath().replace("C:\\works\\workspace\\mannamatna\\src\\main\\webapp","");
+			fileName = userInfoVO.getUiFilepath().replace("../../../../../main/webapp","");
 			userInfoVO.setUiFilepath(fileName);
 			userInfoVO.setUiPwd("0000");
 			return uiMapper.insertUserInfo(userInfoVO) == 1;
@@ -87,7 +88,7 @@ public class UserInfoService {
 				}
 				String name = UUID.randomUUID().toString();
 				log.info("name====>{}", name);
-				File file = new File(uploadFilePath, name + extName);
+				File file = new File(relativeUploadFilePath, name + extName);
 				userInfoVO.getUiFile().transferTo(file);
 				userInfoVO.setUiFilepath("/resources/upload/" + name + extName);
 				log.info("저장됨====>{}", userInfoVO);
@@ -119,7 +120,7 @@ public class UserInfoService {
 			}
 			String name = UUID.randomUUID().toString();
 			log.info("name====>{}", name);
-			File file = new File(uploadFilePath, name + extName);
+			File file = new File(relativeUploadFilePath, name + extName);
 			userInfoVO.getUiFile().transferTo(file);
 			userInfoVO.setUiFilepath("/resources/upload/" + name + extName);
 			log.info("저장됨====>{}", userInfoVO);
@@ -276,7 +277,7 @@ public class UserInfoService {
 				imageUrl = new URL(profile_image);
 				inputStream = imageUrl.openStream();
 				name = UUID.randomUUID().toString();
-				outputStream = new FileOutputStream(uploadFilePath+"\\"+name+".jpg");
+				outputStream = new FileOutputStream(relativeUploadFilePath+"\\"+name+".jpg");
 
 				while (true) {
 					int data = inputStream.read();
@@ -301,7 +302,7 @@ public class UserInfoService {
 				}
 			}
 
-			userInfoVO.setUiFilepath(uploadFilePath+"\\"+name+".jpg");// 사진
+			userInfoVO.setUiFilepath(relativeUploadFilePath+"\\"+name+".jpg");// 사진
 
 			log.info("resultMap= {}", resultMap);
 			log.info("properties= {}", properties);
