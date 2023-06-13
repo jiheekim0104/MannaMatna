@@ -36,5 +36,5 @@ public class BabsangInfoService {
 	
 	public BabsangInfoVO updateUiBiNum(int uiBiNum) {
 		return babsangInfoMapper.updateUserInfoBiNum(uiBiNum);
-	}//일단 중단
+	}
 }

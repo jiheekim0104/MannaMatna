@@ -14,5 +14,5 @@ public interface BabsangInfoMapper {
 	
 	int deleteBabsangInfo(int biNum); // 게시글 삭제
 	
-	BabsangInfoVO updateUserInfoBiNum(int uiBiNum); // 유저정보 - biNum 생성중 일단 중단
+	BabsangInfoVO updateUserInfoBiNum(int uiBiNum); // 유저정보 - biNum
 }
