@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.ezen.mannamatna.mapper.UserInfoMapper;
 import com.ezen.mannamatna.vo.KakaoToken;
+import com.ezen.mannamatna.vo.KakaoUserInfoVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -56,9 +57,12 @@ public class UserInfoService {
 		return false;
 	}
 	
-	public boolean kakaoLogin(UserInfoVO userInfoVO, HttpSession session) {
-		userInfoVO = uiMapper.selectKakaoUserInfo(userInfoVO);
-		if (userInfoVO != null) {
+	public boolean kakaoLogin(HttpSession session, KakaoUserInfoVO kakaoUserInfoVO) {
+		kakaoUserInfoVO = uiMapper.selectKakaoUserInfo(kakaoUserInfoVO);
+		if (kakaoUserInfoVO != null) {
+			UserInfoVO userInfoVO = null;
+			userInfoVO.setUiNum(kakaoUserInfoVO.getUiNum()); // 카카오 로그인 유저의 유저번호를 userInfoVO에 담기
+			log.info("userInfoVO=>{}",userInfoVO);
 			session.setAttribute("user", userInfoVO);
 			return true;
 		}
@@ -131,7 +135,7 @@ public class UserInfoService {
 	}
 
 	// 인증코드로 token요청하기
-	public KakaoToken requestToken(String code) {
+	public KakaoToken requestToken(String addURI, String code) {
 		String strUrl = "https://kauth.kakao.com/oauth/token"; // request를 보낼 주소
 		KakaoToken kakaoToken = new KakaoToken(); // response를 받을 객체
 
@@ -146,9 +150,10 @@ public class UserInfoService {
 			// 파라미터 세팅
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
+			String redirectURI = "&redirect_uri=http://localhost"+addURI;
 			sb.append("grant_type=authorization_code"); // grant_type를 authorization_code로 고정등록해야함
 			sb.append("&client_id=b288a9632f49edf850cff8d6eb985755");
-			sb.append("&redirect_uri=http://localhost/kakaoPost/");
+			sb.append(redirectURI); //이부분이 바뀌어야하는건가? join과 login시에 url이 다르니까?
 			sb.append("&code=" + code); // 인자로 받아온 인증코드
 			bw.write(sb.toString());
 			bw.flush();// 실제 요청을 보내는 부분
@@ -306,6 +311,7 @@ public class UserInfoService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		log.info("서비스에서 받은 카카오 유저={}",userInfoVO); // 유저 어디갔노..^0^;; 정보가 안오네;;ㅎ
 		return userInfoVO;
 	}
 	

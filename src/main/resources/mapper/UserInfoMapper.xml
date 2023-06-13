@@ -6,7 +6,7 @@
 		select * from user_info where ui_Id = #{uiId}
 	</select>
 	
-	<select id="selectKakaoUserInfo" resultType="com.ezen.mannamatna.vo.UserInfoVO">
+	<select id="selectKakaoUserInfo" resultType="com.ezen.mannamatna.vo.KakaoUserInfoVO">
 		select * from kakao_user_info where kui_Id = #{kuiId}
 	</select>
 	

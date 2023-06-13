@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.mannamatna.service.UserInfoService;
 import com.ezen.mannamatna.vo.KakaoToken;
+import com.ezen.mannamatna.vo.KakaoUserInfoVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
 
 import lombok.extern.log4j.Log4j2;
@@ -61,11 +62,11 @@ public class UserInfoController {
 		UserInfoVO userInfoVO = null;
 		if(code!=null){//카카오측에서 보내준 code가 있다면 출력
             System.out.println("code = " + code);
-            KakaoToken kakaoToken = uiService.requestToken(code); //카카오 토큰 요청
+            KakaoToken kakaoToken = uiService.requestToken("/kakaoPost/",code); //카카오 토큰 요청
             userInfoVO = uiService.requestUser(kakaoToken.getAccess_token()); //유저정보 요청
             log.info("user = {}",userInfoVO);
             log.info("kakoToken = {}", kakaoToken);
-			session.setAttribute("user", userInfoVO); 
+//			session.setAttribute("user", userInfoVO); 
         }
 		if(uiService.join(userInfoVO)) {
 			m.addAttribute("msg","회원가입에 성공하셨습니다.");
@@ -79,14 +80,17 @@ public class UserInfoController {
 		UserInfoVO userInfoVO = null;
 		if(code!=null){//카카오측에서 보내준 code가 있다면 출력
             System.out.println("code = " + code);
-            KakaoToken kakaoToken = uiService.requestToken(code); //카카오 토큰 요청
+            KakaoToken kakaoToken = uiService.requestToken("/kakaoLogin/",code); //카카오 토큰 요청
             userInfoVO = uiService.requestUser(kakaoToken.getAccess_token()); //유저정보 요청
             log.info("user = {}",userInfoVO);
             log.info("kakoToken = {}", kakaoToken);
+            
             session.setAttribute("user", userInfoVO);
         }
-		  log.info("=============>{}",uiService.kakaoLogin(userInfoVO, session)); //아직 DB에없어서 안뜸! 
-		  if(uiService.login(userInfoVO, session)) { 
+		/*
+		 * log.info("=============>{}",uiService.kakaoLogin(userInfoVO, session)); //아직
+		 * DB에없어서 안뜸!
+		 */		  if(uiService.login(userInfoVO, session)) { 
 			  m.addAttribute("url","/main"); 
 			  m.addAttribute("msg", "로그인성공"); 
 			  return "common/msg"; 
