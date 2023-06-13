@@ -25,7 +25,16 @@
 		</c:if>
 		<c:forEach items="${babsangList}" var="babsangListVO">
 			<tr>
-				<th colspan="2"><a href="/detail/${babsangListVO.biNum}">제목 : ${babsangListVO.biTitle}</a>
+				<th colspan="2">
+					<%-- 로그인 시 밥상을 구경할 수 있게--%>
+					<c:if test="${sessionScope.user.uiId != null}">
+						<a href="/detail/${babsangListVO.biNum}">제목 : ${babsangListVO.biTitle}</a>
+					</c:if>
+					<%-- 비로그인 시 밥상을 구경할 수 없게--%>
+					<c:if test="${sessionScope.user.uiId == null}">
+						<a href="/cannotSeeBabsang">제목 : ${babsangListVO.biTitle}</a>
+					</c:if>
+					
 				</th>
 			</tr>
 <!-- 생성자, 보드 번호 추후 삭제 예정 -->

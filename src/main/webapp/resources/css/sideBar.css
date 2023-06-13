@@ -81,7 +81,7 @@ nav{
 }
 
 /* 버튼 디자인 */
-.sidenav>.addBabsang {
+.sidenav>.addBabsang, .sidenav>.alreadyHaveBabsang {
   background-color: rgb(252,229,205);
   border: 2px solid #FC522F;
   border-radius:0.5em;

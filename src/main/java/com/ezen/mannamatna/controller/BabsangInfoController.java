@@ -72,17 +72,7 @@ public class BabsangInfoController {
 		m.addAttribute("url",url);
 		return "common/msg";
 	}
-	
-	// 내가 만든 밥상이 있을 때 보내는 메세지
-	@PostMapping("/failedAddBabsang")
-	public String failInsertBabsang(BabsangInfoVO babsang,  UserInfoVO userInfoVO,  Model m, HttpSession session) {
-		String msg = "밥상 등록 실패";
-		String url = "/babsang-insert";
-		m.addAttribute("msg", msg);
-		m.addAttribute("url",url);
-		return "common/msg";
-	}
-	
+
 	@GetMapping("/detail/{biNum}") // biNum으로 VO를 가져오는 방식
     public String detailBabsang(@PathVariable int biNum, Model m){
 		// 밥상 상세페이지 컨트롤러 구현
@@ -112,4 +102,11 @@ public class BabsangInfoController {
 		m.addAttribute("url",url);
 		return "common/msg";
 	}
+	
+	// 비로그인 시 밥상 보려고 할 때
+	@GetMapping("/cannotSeeBabsang")
+	public String cannotSeeBabsang() {
+		return "common/common";
+	}
+	
 }
