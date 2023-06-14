@@ -86,23 +86,26 @@ public class UserInfoController {
 	@GetMapping("/kakaoLogin") 
 	public String kakaoLogin(@RequestParam(value = "code",required = false) String code, HttpSession session,  Model m) throws IllegalStateException, IOException{
 		UserInfoVO userInfoVO = null;
+		KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO();
+		// 카카오 로그인해서 id 돌려받고, 그 아이디를 가진 유저가 있는지 인포 돌아서 확인 이때 비번은 0000 고정임
+		
 		if(code!=null){//카카오측에서 보내준 code가 있다면 출력
             System.out.println("code = " + code);
             KakaoToken kakaoToken = uiService.requestToken("/kakaoLogin/",code); //카카오 토큰 요청
+            log.info("여기서 들어감! kakaoUserInfoVO={}",kakaoUserInfoVO);
             userInfoVO = uiService.requestUser(kakaoToken.getAccess_token()); //유저정보 요청
-            log.info("user = {}",userInfoVO);
-            log.info("kakoToken = {}", kakaoToken);
-            
-            session.setAttribute("user", userInfoVO);
+            kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId()); // userInfoVO가 가지고있는 카카오 id값을 kakaoUserInfoVO에 넣음
+            log.info("로그인요청한 kakaoUserInfoVO={}",kakaoUserInfoVO);
+            if(uiService.kakaoLogin(kakaoUserInfoVO, session)) { // 카카오유저테이블에 그 id를 가지는 카카오유저가있다면
+            	m.addAttribute("url","/main"); 
+            	 m.addAttribute("msg", "로그인성공"); 
+            	 session.setAttribute("user", userInfoVO);//해당 유저번호를 담아서 리턴하는거 추가해야함
+            	 return "common/msg";
+            }
+            m.addAttribute("msg","카카오 가입 유저가 아닙니다.");
+    		return "user/login";
         }
-		/*
-		 * log.info("=============>{}",uiService.kakaoLogin(userInfoVO, session)); //아직
-		 * DB에없어서 안뜸!
-		 */		  if(uiService.login(userInfoVO, session)) { 
-			  m.addAttribute("url","/main"); 
-			  m.addAttribute("msg", "로그인성공"); 
-			  return "common/msg"; 
-		  }
+	
 		m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다.");
 		return "user/login";
 }

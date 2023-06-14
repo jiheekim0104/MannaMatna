@@ -57,17 +57,21 @@ public class UserInfoService {
 		return false;
 	}
 	
-	public boolean kakaoLogin(HttpSession session, KakaoUserInfoVO kakaoUserInfoVO) {
+	public boolean kakaoLogin(KakaoUserInfoVO kakaoUserInfoVO, HttpSession session) { //여기서 문제가 생기는듯 ㅇㅅ ㅇ?
+		
+		log.info("확인하려는 유저 =>{}",kakaoUserInfoVO);
 		kakaoUserInfoVO = uiMapper.selectKakaoUserInfo(kakaoUserInfoVO);
+		log.info("돌려받은 유저 =>{}",kakaoUserInfoVO); //카db에 제대로 안올라갔으니까 여기서 못찾아온거같음ㅇㅇ
 		if (kakaoUserInfoVO != null) {
-			UserInfoVO userInfoVO = null;
+			UserInfoVO userInfoVO = new UserInfoVO();
 			userInfoVO.setUiNum(kakaoUserInfoVO.getUiNum()); // 카카오 로그인 유저의 유저번호를 userInfoVO에 담기
-			log.info("userInfoVO=>{}",userInfoVO);
+			log.info("카카오 로그인 서비스 =>{}",userInfoVO);
 			session.setAttribute("user", userInfoVO);
 			return true;
 		}
 		return false;
 	}
+	
 	
 	public boolean join(UserInfoVO userInfoVO) throws IllegalStateException, IOException {
 		String fileName = null;
@@ -259,7 +263,7 @@ public class UserInfoService {
 			 */
 			
 			// 유저정보 세팅
-			userInfoVO.setUiId(Long.toString(id));
+			userInfoVO.setKuiId(id);
 			userInfoVO.setUiNickname(nickname);// 닉네임
 
 			int uiAge = 0;
@@ -333,4 +337,6 @@ public class UserInfoService {
 		// session데이터로 추후 관리자가 아닐 경우 검사
 		return uiMapper.selectUserInfos(userInfoVO);
 	}
+
+	
 }
