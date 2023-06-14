@@ -26,6 +26,11 @@
 		<input type="password" class="uiPwd" name="uiPwd" id="uiPwd" placeholder="비밀번호"><br> 
 		<input type="password" class="uiPwdCheck" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
 		<input type="file" name="uiFile" id="uiFile" onchange="loadImg(this)"><br> 
+		<div class="filebox">
+    		<input class="upload-name" value="프로필 사진" placeholder="프로필 사진">
+    		<label for="file">업로드</label> 
+   		 	<input type="file" id="file" onchange="loadImg(this)">
+		</div>
 		<div id="imgDiv" style="display:none">
 			<img src = "" width="300">
 		</div>
@@ -45,7 +50,7 @@
 </body>
 <script>	
 	function loadImg(obj){
-		let file =obj.files[0];0
+		let file =obj.files[0];
 		let imgObj = document.querySelector('#imgDiv>img');
 		imgObj.src = URL.createObjectURL(file);
 		document.querySelector('#imgDiv').style.display='';

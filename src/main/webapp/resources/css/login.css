@@ -52,6 +52,10 @@ input{
 	margin-top: 10px;
 }
 
+.naverBnt>img{
+	vertical-align: -8px;
+}
+
 button>img {
 	width:30px;
 }
@@ -70,6 +74,11 @@ button>img {
 	display: inline-block;
 	font-size: 15px;
 	margin-top: 10px;
+	line-height: 40px;
+}
+
+.kakaoBnt>img{
+	vertical-align: -8px;
 }
 
 .joinBnt {
