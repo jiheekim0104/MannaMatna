@@ -21,6 +21,5 @@ public class UserInfoVO {
 	private int uiActive;
 	private String uiDel;
 	
-	
 	private long kuiId;
 }
