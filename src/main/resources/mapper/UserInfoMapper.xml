@@ -3,6 +3,10 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.mannamatna.mapper.UserInfoMapper">
 	<select id="selectUserInfo" resultType="com.ezen.mannamatna.vo.UserInfoVO">
+		select * from user_info where ui_Nickname = #{uiNickname}
+	</select>
+	
+	<select id="selectUserInfoForLogin" resultType="com.ezen.mannamatna.vo.UserInfoVO">
 		select * from user_info where ui_Id = #{uiId} and ui_Pwd = #{uiPwd} 
 	</select>
 	
@@ -24,7 +28,7 @@
 	</insert>
 	
 	<insert id="insertKakaoUserInfo"> 
-		insert into kakao_user_info (ui_num,kui_id)
+		insert into kakao_user_info (ui_num, kui_id)
 		values (#{uiNum},#{kuiId})
 	</insert>
 	

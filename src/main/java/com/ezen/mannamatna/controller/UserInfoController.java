@@ -97,9 +97,14 @@ public class UserInfoController {
             kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId()); // userInfoVO가 가지고있는 카카오 id값을 kakaoUserInfoVO에 넣음
             log.info("로그인요청한 kakaoUserInfoVO={}",kakaoUserInfoVO);
             if(uiService.kakaoLogin(kakaoUserInfoVO, session)) { // 카카오유저테이블에 그 id를 가지는 카카오유저가있다면
-            	m.addAttribute("url","/main"); 
-            	 m.addAttribute("msg", "로그인성공"); 
+            	UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
             	 session.setAttribute("user", userInfoVO);//해당 유저번호를 담아서 리턴하는거 추가해야함
+            	 log.info("서비스에서 넘어온 sessionUserInfo={}",sessionUserInfo);
+            	 userInfoVO.setUiNum(sessionUserInfo.getUiNum());
+            	 log.info("화면에 나올 kakaoUserInfoVO={}",kakaoUserInfoVO);
+            	 session.setAttribute("user", userInfoVO); 
+            	 m.addAttribute("url","/main"); 
+            	 m.addAttribute("msg", "로그인성공");
             	 return "common/msg";
             }
             m.addAttribute("msg","카카오 가입 유저가 아닙니다.");

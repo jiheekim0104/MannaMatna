@@ -80,10 +80,19 @@ public class UserInfoService {
 			userInfoVO.setUiFilepath(fileName);
 			userInfoVO.setUiPwd("0000");
 			log.info("프로젝트절대경로===={}", System.getProperty("user.dir"));
+			log.info("일반db에 넣기전={}", userInfoVO);
+			long kakaoId = userInfoVO.getKuiId();
 			if(uiMapper.insertUserInfo(userInfoVO)==1) {
+				userInfoVO=uiMapper.selectUserInfo(userInfoVO);
+				
+				//여기서 고쳐야함 ㅇㅇ
+				log.info("일반db에 추가된거+카카오번호 추가한거={}", userInfoVO);
+				userInfoVO.setKuiId(kakaoId);
+				log.info("일반db에 추가된거+카카오번호 추가한거={}", userInfoVO);
 				KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO();
 				kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId());
 				kakaoUserInfoVO.setUiNum(userInfoVO.getUiNum());
+				log.info("카카오db에추가할거임={}", kakaoUserInfoVO);
 				return uiMapper.insertKakaoUserInfo(kakaoUserInfoVO)==1;
 			}
 			return false;

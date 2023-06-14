@@ -26,7 +26,7 @@
 				class="logo"></a>
 				
 			<!-- 비로그인 시 출력 화면-->
-			<c:if test="${sessionScope.user.uiId == null}">
+			<c:if test="${sessionScope.user.uiNickname == null}">
 				<a href="/login">Login</a>
 				<a href="/join">Join</a>
 				<!-- 테스트 완료
@@ -36,7 +36,7 @@
 			</c:if>
 
 			<!-- 로그인 시 출력 화면-->
-			<c:if test="${sessionScope.user.uiId != null}">
+			<c:if test="${sessionScope.user.uiNickname != null}">
 				<div class="box">
 					<img class="profileImg" src="${sessionScope.user.uiFilepath}"
 					onclick="location.href='/profile'">
