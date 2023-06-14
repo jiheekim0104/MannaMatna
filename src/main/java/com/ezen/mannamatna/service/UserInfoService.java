@@ -49,7 +49,7 @@ public class UserInfoService {
 	}
 
 	public boolean login(UserInfoVO userInfoVO, HttpSession session) {
-		userInfoVO = uiMapper.selectUserInfo(userInfoVO);
+		userInfoVO = uiMapper.selectUserInfoForLogin(userInfoVO);
 		if (userInfoVO != null) {
 			session.setAttribute("user", userInfoVO);
 			return true;

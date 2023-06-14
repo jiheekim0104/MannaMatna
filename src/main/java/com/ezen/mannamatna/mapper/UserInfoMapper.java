@@ -8,6 +8,8 @@ import com.ezen.mannamatna.vo.UserInfoVO;
 public interface UserInfoMapper {
 	UserInfoVO selectUserInfo(UserInfoVO userInfoVO);
 	
+	UserInfoVO selectUserInfoForLogin(UserInfoVO userInfoVO);
+	
 	KakaoUserInfoVO selectKakaoUserInfo(KakaoUserInfoVO kakaoUserInfoVO); //카카오 로그인 유저를 찾을때 사용
 	
 	int idChk(UserInfoVO userInfoVO);
@@ -25,4 +27,6 @@ public interface UserInfoMapper {
 	int updateUiBiNum(UserInfoVO userInfoVO); // 밥상 인서트 후 UserInfoVO에 biNum 업데이트
 	
 	List<UserInfoVO> selectUserInfos(UserInfoVO userInfoVO); // 회원데이터를 모두 담은 List객체
+
+	
 }

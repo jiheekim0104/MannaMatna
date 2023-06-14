@@ -48,6 +48,7 @@ public class UserInfoController {
 	
 	@PostMapping("/login")
 	public String gologin(@ModelAttribute UserInfoVO userInfoVO, BabsangInfoVO babsang, HttpSession session, Model m) {
+		log.info("=============>{}",userInfoVO);
 		if(uiService.login(userInfoVO, session)) {
 			userInfoVO = (UserInfoVO) session.getAttribute("user");
 			log.info("=============>{}",userInfoVO);
