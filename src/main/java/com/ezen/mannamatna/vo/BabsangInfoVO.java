@@ -14,5 +14,8 @@ public class BabsangInfoVO {
 	private String biFdCategory;
 	private boolean biClosed;
 	private int uiNum;
-	private int uiBiNum;//밥상이 완전히 생성되기 전까지는 biNum을 사용할 수 없어서 따로 담으려고 만듦
+	private int uiBiNum;//밥상이 생성되며 autoincrement되는 biNum을 따로받음
+	//페이징 구현중
+	private int page = 1;
+	private int rows = 4;
 }

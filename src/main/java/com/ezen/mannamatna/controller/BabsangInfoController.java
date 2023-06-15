@@ -17,7 +17,6 @@ import com.ezen.mannamatna.service.BabsangInfoService;
 import com.ezen.mannamatna.service.UserInfoService;
 import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
-import com.mysql.cj.Session;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -31,12 +30,20 @@ public class BabsangInfoController {
 	private UserInfoService userInfoService;
 	 
 	
+
+	 @GetMapping("/main") public String goMain(BabsangInfoVO babsang, Model m){
+		 List<BabsangInfoVO> babsangList = babsangInfoService.getBabsangInfoVOs(babsang); 
+		 m.addAttribute("babsangList",babsangList);
+		 return "babsang/babsang-list"; 
+	 }
+	 
+/*	페이징 구현중
 	@GetMapping("/main")
-	public String goMain(BabsangInfoVO babsang, Model m){
-		List<BabsangInfoVO> babsangList = babsangInfoService.getBabsangInfoVOs(babsang);
-		m.addAttribute("babsangList", babsangList);
+	public String goMain(@ModelAttribute BabsangInfoVO babsang, Model m){
+		m.addAttribute("page", babsangInfoService.getPagingBansang(babsang));
 		return "babsang/babsang-list";
 	}
+*/
 	
 	@GetMapping("/addBabsang")
 	public String goCreateBabsang(){
