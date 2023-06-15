@@ -2,52 +2,65 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.mannamatna.mapper.UserInfoMapper">
-	<select id="selectUserInfo" resultType="com.ezen.mannamatna.vo.UserInfoVO">
+	<select id="selectUserInfo"
+		resultType="com.ezen.mannamatna.vo.UserInfoVO">
 		select * from user_info where ui_Nickname = #{uiNickname}
 	</select>
-	
-	<select id="selectUserInfoForLogin" resultType="com.ezen.mannamatna.vo.UserInfoVO">
-		select * from user_info where ui_Id = #{uiId} and ui_Pwd = #{uiPwd} 
+
+	<select id="selectUserInfoForLogin"
+		resultType="com.ezen.mannamatna.vo.UserInfoVO">
+		select * from user_info where ui_Id = #{uiId} and ui_Pwd =
+		#{uiPwd}
 	</select>
-	
-	<select id="selectKakaoUserInfo" resultType="com.ezen.mannamatna.vo.KakaoUserInfoVO">
+	<select id="selectKakaoUserInfo"
+		resultType="com.ezen.mannamatna.vo.KakaoUserInfoVO">
 		select * from kakao_user_info where kui_Id = #{kuiId}
 	</select>
-	
+	<select id="selectUserInfoByKakao"
+		resultType="com.ezen.mannamatna.vo.UserInfoVO">
+		select * from user_info where ui_Num = #{uiNum}
+	</select>
 	<select id="idChk" resultType="int">
-		select count(*) from user_info where ui_Id = #{uiId}
+		select count(*) from user_info
+		where ui_Id = #{uiId}
 	</select>
-	
+
 	<select id="nicknameChk" resultType="int">
-		select count(*) from user_info where ui_Nickname = #{uiNickname}
+		select count(*) from
+		user_info where ui_Nickname = #{uiNickname}
 	</select>
-	
-	<insert id="insertUserInfo"> 
-		insert into user_info (ui_nickname,ui_pwd,ui_filepath,ui_gender,ui_age,ui_id)
-		values (#{uiNickname},#{uiPwd},#{uiFilepath},#{uiGender},#{uiAge},#{uiId})
+
+	<insert id="insertUserInfo">
+		insert into user_info
+		(ui_nickname,ui_pwd,ui_filepath,ui_gender,ui_age,ui_id)
+		values
+		(#{uiNickname},#{uiPwd},#{uiFilepath},#{uiGender},#{uiAge},#{uiId})
 	</insert>
-	
-	<insert id="insertKakaoUserInfo"> 
+
+	<insert id="insertKakaoUserInfo">
 		insert into kakao_user_info (ui_num, kui_id)
 		values (#{uiNum},#{kuiId})
 	</insert>
-	
+
 	<update id="updateUserInfo">
-		update user_info set ui_nickname = #{uiNickname}, ui_pwd = #{uiPwd}, ui_filepath = #{uiFilepath}
+		update user_info set ui_nickname = #{uiNickname},
+		ui_pwd = #{uiPwd}, ui_filepath = #{uiFilepath}
 		where ui_num = #{uiNum}
 	</update>
-	
+
 	<update id="deleteUserInfo"> <!-- 회원 탈퇴 목적이지만 db에는 업데이트로 기록됨 -->
 		update user_info set ui_active = #{uiActive}, ui_del = #{uiDel}
-		where ui_num = #{uiNum}
+		where
+		ui_num = #{uiNum}
 	</update>
-	
+
 	<!-- userInfo.biNum 업데이트문 -->
 	<update id="updateUiBiNum">
-		update user_info set bi_num = #{biNum} where ui_num = #{uiNum}
+		update user_info set bi_num = #{biNum} where ui_num =
+		#{uiNum}
 	</update>
 	<select id="selectUserInfos">
 		select * from user_info;
 	</select>
-	
+
 </mapper>

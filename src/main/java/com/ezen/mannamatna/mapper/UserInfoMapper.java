@@ -28,5 +28,6 @@ public interface UserInfoMapper {
 	
 	List<UserInfoVO> selectUserInfos(UserInfoVO userInfoVO); // 회원데이터를 모두 담은 List객체
 
+	UserInfoVO selectUserInfoByKakao(UserInfoVO userInfoVO);
 	
 }

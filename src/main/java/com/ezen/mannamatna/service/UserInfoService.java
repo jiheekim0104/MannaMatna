@@ -65,8 +65,14 @@ public class UserInfoService {
 		if (kakaoUserInfoVO != null) {
 			UserInfoVO userInfoVO = new UserInfoVO();
 			userInfoVO.setUiNum(kakaoUserInfoVO.getUiNum()); // 카카오 로그인 유저의 유저번호를 userInfoVO에 담기
-			log.info("카카오 로그인 서비스 =>{}",userInfoVO);
-			session.setAttribute("user", userInfoVO);
+			UserInfoVO newUserInfoVO = uiMapper.selectUserInfoByKakao(userInfoVO);
+			// uiNum 정보만 가지고 있는 VO를 넣고 리턴은 다시 셀렉트문으로 찾은 모든 정보를 가지고 있는 uiVO 객체를 다시 돌려받는다.
+			// uiVO와 kakaoVO가 연결되는것은 uiNum 인데 찾은 uiNum으로 uiVO를 셀렉트해서 찾는 쿼리문이 없었음
+			// 매퍼에 해당 메소드 및 쿼리문 추가하여 kakaoLogin()에 추가함
+			// 객체를 두개 생성하는게 비효율적이면 같은 userInfoVO에 계속 담아도 됨. 정상작동확인함
+			log.info("카카오 로그인 서비스 =>{}",newUserInfoVO);
+			session.setAttribute("user", newUserInfoVO);
+			log.info("서비스에서 카카오 세션값확인={}", session.getAttribute("user"));
 			return true;
 		}
 		return false;
