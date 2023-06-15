@@ -352,6 +352,12 @@ public class UserInfoService {
 		// session데이터로 추후 관리자가 아닐 경우 검사
 		return uiMapper.selectUserInfos(userInfoVO);
 	}
+	
+	public List<UserInfoVO> getUserInfosByBiNum(int biNum) {
+		// 밥상등록시 ui 테이블에 biNum을 업데이트했다.
+		// 해당 메소드 실행시 밥상작성자로 판단하게된 uiVO객체를 리턴받는다.
+		return uiMapper.selectUserInfosByBiNum(biNum);
+	}
 
 	
 }

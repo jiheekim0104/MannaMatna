@@ -62,5 +62,8 @@
 	<select id="selectUserInfos">
 		select * from user_info;
 	</select>
+	<select id="selectUserInfosByBiNum" resultType = "com.ezen.mannamatna.vo.UserInfoVO">
+		SELECT * FROM USER_INFO WHERE BI_NUM = #{biNum}
+	</select>
 
 </mapper>

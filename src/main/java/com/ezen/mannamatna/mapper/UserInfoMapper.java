@@ -28,6 +28,7 @@ public interface UserInfoMapper {
 	
 	List<UserInfoVO> selectUserInfos(UserInfoVO userInfoVO); // 회원데이터를 모두 담은 List객체
 
-	UserInfoVO selectUserInfoByKakao(UserInfoVO userInfoVO);
+	UserInfoVO selectUserInfoByKakao(UserInfoVO userInfoVO); // 카카오db에서 받은 kakaoVO객체로 UserInfoVO를 찾음
 	
+	List<UserInfoVO> selectUserInfosByBiNum(int biNum); // 밥상 biNum으로 uiVO(작성자) 데이터를 가져옴
 }
