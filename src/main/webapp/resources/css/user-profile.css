@@ -1,0 +1,20 @@
+@charset "UTF-8";
+.uiNickname{
+	color: #FC522F;
+	
+}
+.img > img{
+	 float: left;
+}
+
+.content > .infoBox{
+	display: inline-block;
+}
+
+.info{
+	float: left;
+}
+
+/* .buttons {
+	float: right;
+} */

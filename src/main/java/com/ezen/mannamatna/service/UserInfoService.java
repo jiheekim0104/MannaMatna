@@ -81,25 +81,24 @@ public class UserInfoService {
 	
 	public boolean join(UserInfoVO userInfoVO) throws IllegalStateException, IOException {
 		String fileName = null;
-		if(userInfoVO.getUiFile()==null) {
+		if(userInfoVO.getUiFile()==null) { //카카오 유저
 			fileName = userInfoVO.getUiFilepath().replace(absolutePath+"\\src\\main\\webapp",""); // 각 시스템환경마다 경로 공유되도록 수정
 			userInfoVO.setUiFilepath(fileName);
-			userInfoVO.setUiPwd("0000");
+			userInfoVO.setUiPwd("0000"); //null일수 없어서 넣어둠
 			log.info("프로젝트절대경로===={}", System.getProperty("user.dir"));
 			log.info("일반db에 넣기전={}", userInfoVO);
 			long kakaoId = userInfoVO.getKuiId();
-			if(uiMapper.insertUserInfo(userInfoVO)==1) {
-				userInfoVO=uiMapper.selectUserInfo(userInfoVO);
+			if(uiMapper.insertUserInfo(userInfoVO)==1) { //일반 유저 테이블에 넣고
+				userInfoVO=uiMapper.selectUserInfo(userInfoVO); //넣은걸 가져와서 
 				
-				//여기서 고쳐야함 ㅇㅇ
 				log.info("일반db에 추가된거+카카오번호 추가한거={}", userInfoVO);
 				userInfoVO.setKuiId(kakaoId);
 				log.info("일반db에 추가된거+카카오번호 추가한거={}", userInfoVO);
-				KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO();
+				KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO(); //카카오 유저 객체에 넣어주고
 				kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId());
 				kakaoUserInfoVO.setUiNum(userInfoVO.getUiNum());
 				log.info("카카오db에추가할거임={}", kakaoUserInfoVO);
-				return uiMapper.insertKakaoUserInfo(kakaoUserInfoVO)==1;
+				return uiMapper.insertKakaoUserInfo(kakaoUserInfoVO)==1; // 카카오 유저 테이블에 인서트
 			}
 			return false;
 		} else {

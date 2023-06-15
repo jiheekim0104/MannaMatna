@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="${path}/resources/css/user-profile.css" />
 <script>
 <c:if test="${msg!=null}">
 alert('${msg}');
@@ -15,17 +16,25 @@ alert('${msg}');
 </script>
 <body>
 <div class="content">
-<h1>프로필</h1>
-${user}<br>
-${user.uiNickname}(${user.uiId})<br>
-성별 : 
-<a id="uiGender" name="uiGender"></a><br>
-연령대 : ${user.uiAge}대<br>
-<c:if test="${user.uiFilepath!=null}">
-<img src="${user.uiFilepath}" width="300">
-</c:if><br>
-<button onclick="location.href='/check-update'">정보수정</button>
-<button onclick="location.href='/withdraw'">탈퇴하기</button>
+	<div class="img">
+		<c:if test="${user.uiFilepath!=null}">
+		<img src="${user.uiFilepath}" width="300">
+		</c:if>
+	</div>
+	<br><br><br>
+	<div class="infoBox">
+		<div class="info">
+			<span class="uiNickname">${user.uiNickname}</span>
+			(${user.uiId})<br>
+			성별 : 
+			<a id="uiGender" name="uiGender"></a><br>
+			연령대 : ${user.uiAge}대<br>
+		</div>	
+		<div class="buttons">
+			<button onclick="location.href='/check-update'">정보수정</button>
+			<button onclick="location.href='/withdraw'">탈퇴하기</button>
+		</div>
+	</div>
 </div>
 </body>
 <script>

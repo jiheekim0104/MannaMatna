@@ -97,14 +97,6 @@ public class UserInfoController {
             kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId()); // userInfoVO가 가지고있는 카카오 id값을 kakaoUserInfoVO에 넣음
             log.info("로그인요청한 kakaoUserInfoVO={}",kakaoUserInfoVO);
             if(uiService.kakaoLogin(kakaoUserInfoVO, session)) { // 카카오유저테이블에 그 id를 가지는 카카오유저가있다면
-            	// UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
-            	 // session.setAttribute("user", userInfoVO);//해당 유저번호를 담아서 리턴하는거 추가해야함
-            	 // log.info("서비스에서 넘어온 sessionUserInfo={}",sessionUserInfo);
-            	 // userInfoVO.setUiNum(sessionUserInfo.getUiNum());
-            	 // log.info("화면에 나올 kakaoUserInfoVO={}",kakaoUserInfoVO);
-            	 // session.setAttribute("user", userInfoVO); 
-            	// 서비스에 카카오로그인 메소드로 로직을 좀 몰아넣음
-            	// 일단은 주석처리하고 작업완료!
             	 m.addAttribute("url","/main"); 
             	 m.addAttribute("msg", "로그인성공");
             	 return "common/msg";
@@ -116,6 +108,17 @@ public class UserInfoController {
 		m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다.");
 		return "user/login";
 }
+	
+	@GetMapping("/naverLogin")
+	public String naverLogin() {
+		return "user/naverLogin";
+	}
+	
+	@GetMapping("/naverPost")
+	 public String kakaoJoin(){
+		return "user/naverPost";
+	}
+	
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
@@ -237,5 +240,7 @@ public class UserInfoController {
 		}	
 		return "babsang/babsang-list";
 	}
+	
+	
 	
 }
