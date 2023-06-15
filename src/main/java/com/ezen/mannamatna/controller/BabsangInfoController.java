@@ -84,6 +84,7 @@ public class BabsangInfoController {
     public String detailBabsang(@PathVariable int biNum, Model m){
 		// 밥상 상세페이지 컨트롤러 구현
         m.addAttribute("detail", babsangInfoService.getBabsangInfoVO(biNum));
+        m.addAttribute("babsangUserList", userInfoService.getUserInfosByBiNum(biNum));
         return "babsang/babsang-detail"; // 요청 jsp
     }
 	
