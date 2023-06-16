@@ -83,8 +83,14 @@ public class BabsangInfoController {
 	@GetMapping("/detail/{biNum}") // biNum으로 VO를 가져오는 방식
     public String detailBabsang(@PathVariable int biNum, Model m){
 		// 밥상 상세페이지 컨트롤러 구현
-        m.addAttribute("detail", babsangInfoService.getBabsangInfoVO(biNum));
+		BabsangInfoVO babsangInfoVO = babsangInfoService.getBabsangInfoVO(biNum);
+        m.addAttribute("detail", babsangInfoVO);
+        // 모델에 detail로 해당 상세 밥상객체를 넣어준 후
+        m.addAttribute("babsangMaker",userInfoService.getUserInfoFromBabsang(babsangInfoVO.getUiNum()));
+        // 해당 밥상객체의 uiNum으로 밥상작성자 유저를 모델에 넣어준다.
         m.addAttribute("babsangUserList", userInfoService.getUserInfosByBiNum(biNum));
+        // 참가하기를 누르면 UserInfoVO에 biNum이 업데이트 되며, 해당 biNum과 같은 유저리스트(참가자)를 가져온 후
+        // 모델에 넣어준다.
         return "babsang/babsang-detail"; // 요청 jsp
     }
 	

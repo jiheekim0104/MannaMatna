@@ -24,9 +24,9 @@
 						if (data.length > 0) {
 							$.each(data,function(key, value) {
 											// console.log('세션스코프 : ' + ${sessionScope.user.uiNum});
-											a += '<div style="border:1px solid darkgray; margin-bottom: 15px;">';
-											a += '<div class="commentInfo'+value.ciNum+'">uiNum : ' + value.uiNum +'<img src="' + value.uiFilepath + '" width="50">'+ ' 작성자 : '+ value.uiNickname+ ' 작성시간 : '+ value.ciCredat + '<br>';
-												a += '<div class="commentCiContent'+value.ciNum+'"> <span> 내용 : '+ value.ciContent+ '</span>';
+											a += '<div class = "commentBox">';
+											a += '<div class="commentInfo'+value.ciNum+'">' +'<img src="' + value.uiFilepath + '" class = "profileImg" id = "commentImg"><br><span class = "commentNickName" id = "commentNickName">' + value.uiNickname + '</span><span class ="commentTime" id="commentTime">' + value.ciCredat + '</span><br>';
+												a += '<div class="commentCiContent'+value.ciNum+'"> <span class="commentContent" id="commentContent">'+ value.ciContent+ '</span>';
 												// 로그인시 수정, 삭제기능 가능토록 추가
 												if(${sessionScope.user.uiNum}==value.uiNum && ${sessionScope.user.uiNum}!=null){
 												// 아래부분 태그들은 세션스코프의 값이 존재하면서, value.uiNum과 값이 같으면 태그가 나오도록 수정

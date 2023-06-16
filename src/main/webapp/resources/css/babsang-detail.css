@@ -9,7 +9,7 @@
 	color: #FC522F;
 	display: inline;
 	float: left;
-	margin: 30px 0 0 10px;
+	margin: 30px 50% 0 10px;
 }
 
 .content .category {
@@ -21,6 +21,7 @@
 	font-size: 15px;
 	border: 1px solid #FC522F;
 	margin-top: 35px;
+	width: 80px;
 }
 
 .content .time {
@@ -30,34 +31,141 @@
 
 .content .innerContent {
 	border: 1px solid gray;
-	width: 100%;
+	width: 90%;
 	height: 200px;
-	border-radius: 10px;
+	border-radius: 30px;
 	text-align: center;
 	margin: 0 auto;
 }
 
-.content .participents {
+.content .Btn {
+	width: 115px;
+	height: 30px;
+	background-color: #FC522F;
+	border: 2px solid #FC522F;
+	border-radius: 0.5em;
+	color: #FFFFFF;
+	padding: 2px 10px;
+	text-align: center;
+	font-size: 15px;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+.content .userImages {
+	width: 100%;
+	height: 80px;
+}
+
+.content .userImages .participents {
 	float: left;
 	padding: 20px 100px 20px 80px;
 }
-.content .userCount{
+
+.content .userImages .userCount {
 	font-weight: bold;
 	text-align: left;
 	margin-top: -8px;
-	
 }
-.content .box{
-	float:left;
+
+.content .userImages .box {
+	width: 80px;
+	height: 80px;
 	margin-top: 30px;
 	margin-left: -200px;
+	margin-right: 250px;
+	float: left;
 }
-.content .nickName{
+
+.content .userImages .box .crown {
+	width: 15px;
+	height: 15px;
+}
+
+#makerBox {
+	border: 3px solid #FC522F;
+}
+
+#makerNickName {
+	color: #FC522F;
+	font-weight: bolder;
+}
+
+#partyNickName {
+	margin-left: 20px;
+}
+
+.content .userImages .nickName {
 	position: absolute;
 	margin-top: 10px;
-	margin-left: 35px;
 	font-size: 15px;
 }
-.content .container{
-	margin-top: 200px;
+
+.content .container {
+	margin-top: 150px;
+}
+
+.content .container .commentBox {
+	border: 1px solid darkgray;
+	border-radius: 20px;
+	margin-bottom: 15px;
+	width: 90%;
+	font-size: 18px;
+	height: 100px;
+	margin: 0 auto;
+}
+
+.content .container .commentBox .profileImg {
+	width: 50px;
+	height: 50px;
+	border-radius: 70%; /* 원 모양의 둘레 만들고 */
+	border: 2px solid #BDBDBD; /* 테두리 두께, 스타일(solid=실선), 컬러 설정 */
+	overflow: hidden; /* 넘치는 부분은 자르기 */
+	margin: 0 auto;
+	margin-top: 5px;
+	margin-left: 10px;
+	float: left;
+	text-align: left;
+}
+
+.content .container .commentBox .commentNickName {
+	float: left;
+	font-weight: bolder;
+	margin-left: 15px;
+}
+
+.content .container .commentBox .commentTime {
+	float: left;
+	margin-left: 80px;
+}
+
+.content .container .commentBox .commentContent {
+	padding: 15px;
+	float: left;
+	margin-right: 65%;
+}
+
+.content .container .commentBox a {
+	float: left;
+	padding: 15px;
+}
+
+.content .container .commentInput {
+	margin: 0 auto;
+}
+
+.content .container .commentInput .form-control {
+	border: 1px solid darkgray;
+	width: 90%;
+	height: 40px;
+	border-radius: 15px;
+	display: inline;
+	margin-bottom: 20px;
+}
+.content .container .commentInput .commentBtn{
+	border: none;
+	outline: none;
+	display: inline;
+	background-color: white;
+	margin-left: -8%;
 }

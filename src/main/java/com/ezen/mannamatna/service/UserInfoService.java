@@ -37,7 +37,7 @@ public class UserInfoService {
 	private final String uploadFilePath = absolutePath + "\\src\\main\\webapp\\resources\\upload";
 	@Autowired
 	private UserInfoMapper uiMapper;
-	
+
 	public int idChk(UserInfoVO userInfoVO) {
 		log.info("여기는서비스=====>{}", userInfoVO);
 		return uiMapper.idChk(userInfoVO);
@@ -56,12 +56,12 @@ public class UserInfoService {
 		}
 		return false;
 	}
-	
-	public boolean kakaoLogin(KakaoUserInfoVO kakaoUserInfoVO, HttpSession session) { //여기서 문제가 생기는듯 ㅇㅅ ㅇ?
-		
-		log.info("확인하려는 유저 =>{}",kakaoUserInfoVO);
+
+	public boolean kakaoLogin(KakaoUserInfoVO kakaoUserInfoVO, HttpSession session) { // 여기서 문제가 생기는듯 ㅇㅅ ㅇ?
+
+		log.info("확인하려는 유저 =>{}", kakaoUserInfoVO);
 		kakaoUserInfoVO = uiMapper.selectKakaoUserInfo(kakaoUserInfoVO);
-		log.info("돌려받은 유저 =>{}",kakaoUserInfoVO); //카db에 제대로 안올라갔으니까 여기서 못찾아온거같음ㅇㅇ
+		log.info("돌려받은 유저 =>{}", kakaoUserInfoVO); // 카db에 제대로 안올라갔으니까 여기서 못찾아온거같음ㅇㅇ
 		if (kakaoUserInfoVO != null) {
 			UserInfoVO userInfoVO = new UserInfoVO();
 			userInfoVO.setUiNum(kakaoUserInfoVO.getUiNum()); // 카카오 로그인 유저의 유저번호를 userInfoVO에 담기
@@ -70,35 +70,35 @@ public class UserInfoService {
 			// uiVO와 kakaoVO가 연결되는것은 uiNum 인데 찾은 uiNum으로 uiVO를 셀렉트해서 찾는 쿼리문이 없었음
 			// 매퍼에 해당 메소드 및 쿼리문 추가하여 kakaoLogin()에 추가함
 			// 객체를 두개 생성하는게 비효율적이면 같은 userInfoVO에 계속 담아도 됨. 정상작동확인함
-			log.info("카카오 로그인 서비스 =>{}",newUserInfoVO);
+			log.info("카카오 로그인 서비스 =>{}", newUserInfoVO);
 			session.setAttribute("user", newUserInfoVO);
 			log.info("서비스에서 카카오 세션값확인={}", session.getAttribute("user"));
 			return true;
 		}
 		return false;
 	}
-	
-	
+
 	public boolean join(UserInfoVO userInfoVO) throws IllegalStateException, IOException {
 		String fileName = null;
-		if(userInfoVO.getUiFile()==null) { //카카오 유저
-			fileName = userInfoVO.getUiFilepath().replace(absolutePath+"\\src\\main\\webapp",""); // 각 시스템환경마다 경로 공유되도록 수정
+		if (userInfoVO.getUiFile() == null) { // 카카오 유저
+			fileName = userInfoVO.getUiFilepath().replace(absolutePath + "\\src\\main\\webapp", ""); // 각 시스템환경마다 경로
+																										// 공유되도록 수정
 			userInfoVO.setUiFilepath(fileName);
-			userInfoVO.setUiPwd("0000"); //null일수 없어서 넣어둠
+			userInfoVO.setUiPwd("0000"); // null일수 없어서 넣어둠
 			log.info("프로젝트절대경로===={}", System.getProperty("user.dir"));
 			log.info("일반db에 넣기전={}", userInfoVO);
 			long kakaoId = userInfoVO.getKuiId();
-			if(uiMapper.insertUserInfo(userInfoVO)==1) { //일반 유저 테이블에 넣고
-				userInfoVO=uiMapper.selectUserInfo(userInfoVO); //넣은걸 가져와서 
-				
+			if (uiMapper.insertUserInfo(userInfoVO) == 1) { // 일반 유저 테이블에 넣고
+				userInfoVO = uiMapper.selectUserInfo(userInfoVO); // 넣은걸 가져와서
+
 				log.info("일반db에 추가된거+카카오번호 추가한거={}", userInfoVO);
 				userInfoVO.setKuiId(kakaoId);
 				log.info("일반db에 추가된거+카카오번호 추가한거={}", userInfoVO);
-				KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO(); //카카오 유저 객체에 넣어주고
+				KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO(); // 카카오 유저 객체에 넣어주고
 				kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId());
 				kakaoUserInfoVO.setUiNum(userInfoVO.getUiNum());
 				log.info("카카오db에추가할거임={}", kakaoUserInfoVO);
-				return uiMapper.insertKakaoUserInfo(kakaoUserInfoVO)==1; // 카카오 유저 테이블에 인서트
+				return uiMapper.insertKakaoUserInfo(kakaoUserInfoVO) == 1; // 카카오 유저 테이블에 인서트
 			}
 			return false;
 		} else {
@@ -120,7 +120,7 @@ public class UserInfoService {
 			}
 		}
 		log.info("fileName====>{}", fileName);
-		
+
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		userInfoVO.setUiPwd(passwordEncoder.encode(userInfoVO.getUiPwd()));
 		return uiMapper.insertUserInfo(userInfoVO) == 1;
@@ -153,13 +153,12 @@ public class UserInfoService {
 		log.info("서비스/업데이트==>{}", userInfoVO);
 		return uiMapper.updateUserInfo(userInfoVO) == 1;
 	}
-	
+
 	public boolean updateBiNum(UserInfoVO userInfoVO) {
 		// 인서트 후 넘겨받은 BabsangInfoVO의 biNum을 userInfoVO에 업데이트
 		return uiMapper.updateUiBiNum(userInfoVO) == 1;
 	}
 
-	
 	// 인증코드로 token요청하기
 	public KakaoToken requestToken(String addURI, String code) {
 		String strUrl = "https://kauth.kakao.com/oauth/token"; // request를 보낼 주소
@@ -176,10 +175,10 @@ public class UserInfoService {
 			// 파라미터 세팅
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
-			String redirectURI = "&redirect_uri=http://localhost"+addURI;
+			String redirectURI = "&redirect_uri=http://localhost" + addURI;
 			sb.append("grant_type=authorization_code"); // grant_type를 authorization_code로 고정등록해야함
 			sb.append("&client_id=b288a9632f49edf850cff8d6eb985755");
-			sb.append(redirectURI); //이부분이 바뀌어야하는건가? join과 login시에 url이 다르니까?
+			sb.append(redirectURI); // 이부분이 바뀌어야하는건가? join과 login시에 url이 다르니까?
 			sb.append("&code=" + code); // 인자로 받아온 인증코드
 			bw.write(sb.toString());
 			bw.flush();// 실제 요청을 보내는 부분
@@ -259,7 +258,7 @@ public class UserInfoService {
 			HashMap<String, Object> resultMap = mapper.readValue(result, HashMap.class);
 			// json 파싱하여 id 가져오기
 			Long id = Long.valueOf(String.valueOf(resultMap.get("id")));
-			 
+
 			// 결과json 안에 properties key는 json Object를 value로 가짐
 			HashMap<String, Object> properties = (HashMap<String, Object>) resultMap.get("properties");
 			String profile_image = (String) properties.get("profile_image");
@@ -270,12 +269,12 @@ public class UserInfoService {
 
 			String age_range = (String) kakao_account.get("age_range");
 			String gender = (String) kakao_account.get("gender");
-			
-			// 카카오 유저인포에 인서트하는 내용이 들어가야함! 
+
+			// 카카오 유저인포에 인서트하는 내용이 들어가야함!
 			/*
 			 * kakaoUserInfoVO.setKuiId(id); uiMapper.insertKakaoUserInfo(kakaoUserInfoVO);
 			 */
-			
+
 			// 유저정보 세팅
 			userInfoVO.setKuiId(id);
 			userInfoVO.setUiNickname(nickname);// 닉네임
@@ -308,7 +307,7 @@ public class UserInfoService {
 				imageUrl = new URL(profile_image);
 				inputStream = imageUrl.openStream();
 				name = UUID.randomUUID().toString();
-				outputStream = new FileOutputStream(uploadFilePath+"\\"+name+".jpg");
+				outputStream = new FileOutputStream(uploadFilePath + "\\" + name + ".jpg");
 
 				while (true) {
 					int data = inputStream.read();
@@ -333,7 +332,7 @@ public class UserInfoService {
 				}
 			}
 
-			userInfoVO.setUiFilepath(uploadFilePath+"\\"+name+".jpg");// 사진
+			userInfoVO.setUiFilepath(uploadFilePath + "\\" + name + ".jpg");// 사진
 
 			log.info("resultMap= {}", resultMap);
 			log.info("properties= {}", properties);
@@ -342,21 +341,25 @@ public class UserInfoService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		log.info("서비스에서 받은 카카오 유저={}",userInfoVO); 
+		log.info("서비스에서 받은 카카오 유저={}", userInfoVO);
 		return userInfoVO;
 	}
-	
-	public List<UserInfoVO> getUserInfos(UserInfoVO userInfoVO, HttpSession session){
+
+	public List<UserInfoVO> getUserInfos(UserInfoVO userInfoVO, HttpSession session) {
 		// 회원데이터를 모두 담은 객체 get
 		// session데이터로 추후 관리자가 아닐 경우 검사
 		return uiMapper.selectUserInfos(userInfoVO);
 	}
-	
+
 	public List<UserInfoVO> getUserInfosByBiNum(int biNum) {
 		// 밥상등록시 ui 테이블에 biNum을 업데이트했다.
 		// 해당 메소드 실행시 밥상작성자로 판단하게된 uiVO객체를 리턴받는다.
 		return uiMapper.selectUserInfosByBiNum(biNum);
 	}
 
-	
+	public UserInfoVO getUserInfoFromBabsang(int uiNum) {
+		// 밥상등록 시 밥상정보에 등록된 uiNum으로 유저리스트에서 해당유저(작성자)정보를 찾는다.
+		return uiMapper.selectUserInfoFromBabsang(uiNum);
+	}
+
 }

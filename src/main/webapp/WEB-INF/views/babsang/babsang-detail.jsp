@@ -24,30 +24,42 @@
 			${fn:substring(biMeetingTim,0,2)}시 ${fn:substring(biMeetingTim,3,5)}분</div>
 		<div class="innerContent">${detail.biContent}</div>
 		<c:if test="${sessionScope.user.uiNum != detail.uiNum}">
-			<button type="submit">참가하기</button>
+			<button class="Btn" type="submit">참가하기</button>
 		</c:if>
 		<!-- 이 부분 추가했습니다 -->
 		<c:if test="${sessionScope.user.uiNum == detail.uiNum}">
-			<button type="submit">마감하기</button>
-			<%-- 프론트작업중 잠깐 주석 처리 
-		<button onclick="location.href='/deleteBabsang?biNum=${detail.biNum}'">밥상삭제</button>--%>
+			<button class="Btn" type="submit">마감하기</button>
+			<button class="Btn"
+				onclick="">밥상삭제</button>
+				<%-- 추후 onclick 함수에 넣기 location.href='/deleteBabsang?biNum=${detail.biNum}' --%>
 		</c:if>
-
 		<hr>
 		<!-- 참가자정보 영역 -->
-
-		<div class="participents">참여자정보</div>
-		<br>
-		<div class="userCount">${fn:length(babsangUserList)}(현재인원)/
-			${detail.biHeadCnt} (최대인원)</div>
-		<c:forEach items="${babsangUserList}" var="userList">
-			<div class="box">
-				<img class="profileImg" src="${userList.uiFilepath}"
+		<div class="userImages">
+			<div class="participents">참여자정보</div>
+			<br>
+			<div class="userCount">${fn:length(babsangUserList)}(현재인원)/
+				${detail.biHeadCnt} (최대인원)</div>
+			<div class="box" id="makerBox">
+				<img class="profileImg" src="${babsangMaker.uiFilepath}"
 					onclick="location.href='/profile'">
-				<div class="nickName">${userList.uiNickname}</div>
+				<div class="nickName" id="makerNickName">
+					<img class="crown" src="../../../resources/upload/왕관.png">
+					${babsangMaker.uiNickname}
+				</div>
 			</div>
-		</c:forEach>
-
+			<c:forEach items="${babsangUserList}" var="userList">
+				<c:if test="${userList.uiNum!=detail.uiNum}">
+					<%-- 유저리스트의 uiNum과 해당밥상의 uiNum 이 같지 않을 경우만 실행 --%>
+					<%-- 즉, 참가자만 출력 (작성자는 기본 고정) --%>
+					<div class="box">
+						<img class="profileImg" src="${userList.uiFilepath}"
+							onclick="location.href='/profile'">
+						<div class="nickName" id="partyNickName">${userList.uiNickname}</div>
+					</div>
+				</c:if>
+			</c:forEach>
+		</div>
 		<div class="container">
 			<hr>
 			<!-- 댓글영역 -->
@@ -60,11 +72,11 @@
 		<div class="container">
 			<label for="ciContent"></label>
 			<form name="commentInsertForm">
-				<div>
+				<div class = "commentInput">
 					<input type="hidden" name="biNum" value="${detail.biNum}" /> <input
 						type="text" class="form-control" id="ciContent" name="ciContent"
 						placeholder="댓글을 입력하세요."> <span class="input-group-btn">
-						<button type="button" name="commentInsertBtn">작성하기</button>
+						<button class= "commentBtn"type="button" name="commentInsertBtn">작성하기</button>
 					</span>
 				</div>
 			</form>
