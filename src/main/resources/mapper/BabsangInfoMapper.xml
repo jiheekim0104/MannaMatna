@@ -21,7 +21,7 @@
 		</if>
 		<!-- <if test='biContent != null and biContent != ""'>
 				AND BI_TITLE LIKE CONCAT('%', #{biContent}, '%')
-			</if> -->
+		</if> -->
 		ORDER BY BI.BI_NUM DESC
 	</select>
 	

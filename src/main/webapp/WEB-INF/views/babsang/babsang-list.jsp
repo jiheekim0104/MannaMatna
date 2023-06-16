@@ -108,7 +108,7 @@
 				if(i==page){
 					html += ' [' + i + '] ';
 				}else{
-					html += ' <a href="/main?page=' + i + '&biTitle=${param.biTitle}">[' + i + ']</a>' ;
+					html += ' <a href="/main?page=' + i + '&biTitle=${param.biTitle}&biContent=${param.biContent}">[' + i + ']</a>' ;
 				}
 			}
 			
