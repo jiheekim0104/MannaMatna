@@ -1,7 +1,5 @@
 package com.ezen.mannamatna.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +9,7 @@ import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import lombok.extern.log4j.Log4j2;
-
 @Service
-@Log4j2
 public class BabsangInfoService {
 	
 	@Autowired
@@ -22,12 +17,13 @@ public class BabsangInfoService {
 	@Autowired
 	private UserInfoMapper userInfoMapper;
 	
-	public List<BabsangInfoVO> getBabsangInfoVOs(BabsangInfoVO babsang){
-		return babsangInfoMapper.selectBabsangList(babsang);
-	}
+	/*기존 밥상 리스트 나열
+	 * public List<BabsangInfoVO> getBabsangInfoVOs(BabsangInfoVO babsang){ return
+	 * babsangInfoMapper.selectBabsangList(babsang); }
+	 */
 	
+	// 페이징
 	public PageInfo<BabsangInfoVO> getPagingBansang(BabsangInfoVO babsang){
-		//페이징 구현중
 		PageHelper.startPage(babsang.getPage(), babsang.getRows());
 		return new PageInfo<>(babsangInfoMapper.selectBabsangList(babsang));
 	}

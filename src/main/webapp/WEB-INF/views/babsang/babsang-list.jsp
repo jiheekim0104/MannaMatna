@@ -18,8 +18,8 @@
 <div class="content">
 	<h1>여기는 만들어진 밥상 리스트</h1>
 	
-	<form method="get" action="#">
-		<input type="text" name="word" id="word" placeholder="검색하실 밥상의 제목을 입력해주세요">
+	<form action="/main" method="get">
+		<input type="text" name="biTitle" placeholder="검색하실 밥상의 제목을 입력해주세요" value="${param.biTitle}">
 		<button>검색</button>
 	</form>
 	<form method="get" action="#">
@@ -36,10 +36,10 @@
 	<hr>
 	<!-- 밥상 리스트 목록 -->
 	<table border="1" style="color: black;">
-		<c:if test="${empty babsangList}">
+		<c:if test="${empty page.list}"><%-- babsangList --%>
 			<th>밥상이 존재하지 않습니다</th>
 		</c:if>
-		<c:forEach items="${babsangList}" var="babsangListVO">
+		<c:forEach items="${page.list}" var="babsangListVO"><!-- babsangList -->
 			<tr>
 				<th colspan="2">
 					<%-- 로그인 시 밥상을 구경할 수 있게--%>
@@ -85,6 +85,47 @@
 			</tr> --%>
 		</c:forEach>
 	</table>
-</div>	
+	
+	 <!-- 페이징 -->
+	<div id="pageDiv" style="text-align:center; color:aqua; font-size:14pt"></div>
+	<c:if test="${!(empty page.list)}">
+		<script>
+			const pages = ${page.pages};//총페이지
+			const page = ${page.pageNum};//현재페이지
+			const start = Math.floor((page-1)/5)*5+1;//묶음페이지에서 첫페이지
+			const end = (start + 4) > pages ? pages : (start + 4);//묶음페이지에서 끝페이지
+
+			let html = '';
+			
+			if(11<=page){
+				html +='<a href="/main?page=1&biTitle=${param.biTitle}">&#x219E</a>  '
+			}//page가 11 이상일때만 맨 처음으로 버튼 보임
+			if(start!=1){
+				html += '<a href="/main?page=' + (start-1) + '&biTitle=${param.biTitle}">&#x2190</a>'
+			}//<버튼 누르면 현재 묶음페이지의 start에서 -1로 (묶음페이지가 첫페이지(1~5)가 아닐 때만 보임)
+			
+			for(let i=start; i<=end; i++){
+				if(i==page){
+					html += ' [' + i + '] ';
+				}else{
+					html += ' <a href="/main?page=' + i + '&biTitle=${param.biTitle}">[' + i + ']</a>' ;
+				}
+			}
+			
+			if(end!=pages){
+				html += ' <a href="/main?page=' + (end+1) + '&biTitle=${param.biTitle}">&#x2192</a>';
+				
+			}//>버튼 누르면 묶음페이지 +1로 (묶음페이지가 첫페이지(1~5)가 아닐 때만 보임)
+			
+			if((end/5)<=(Math.ceil(pages/5))-2){
+				html +='  <a href="/main?page=' + pages + '&biTitle=${param.biTitle}">&#x21A0</a>'
+				}//>>버튼 누르면 마지막 묶음페이지로 */
+				
+			document.querySelector('#pageDiv').innerHTML = html;
+		</script>
+	</c:if>
+</div>	 
+
+
 </body>
 </html>

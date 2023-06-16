@@ -3,37 +3,27 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.mannamatna.mapper.BabsangInfoMapper">
 
-	<select id= "selectBabsangList" 
-		resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
-		SELECT BI.*, UI.UI_NUM<!-- * -->
-		FROM BABSANG_INFO BI INNER JOIN USER_INFO UI
-		WHERE BI.UI_NUM = UI.UI_NUM
-		ORDER BY BI.BI_NUM DESC
-	</select>
-	
-	<!-- 제목/내용 검색 쿼리 -->
-	<select id= "searchBabsangList" 
-		resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
-		SELECT *<!-- * -->
-		FROM BABSANG_INFO BI INNER JOIN USER_INFO UI
-		<where>
-			<if test='biTitle != null and biTitle != ""'>
-				AND BI_TITLE LIKE CONCAT('%', #{biTitle}, '%')
-			</if>
-			<if test='biContent != null and biContent != ""'>
-				AND BI_TITLE LIKE CONCAT('%', #{biContent}, '%')
-			</if>
-		</where>
-		ORDER BY BI.BI_NUM DESC
-	</select>
-	
-<!-- 	기존 select 쿼리문
+	<!-- 	기존 select 쿼리문
 		<select id="selectBabsangList"
 		resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
 		SELECT BI_NUM, BI_TITLE, BI_CONTENT, BI_MEETINGDAT,
 		BI_MEETINGTIM, BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY,
 		BI_CLOSED, UI_NUM FROM BABSANG_INFO
 	</select> -->
+	
+	<select id= "selectBabsangList" 
+		resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
+		SELECT BI.*, UI.UI_NUM<!-- * -->
+		FROM BABSANG_INFO BI INNER JOIN USER_INFO UI
+		WHERE BI.UI_NUM = UI.UI_NUM
+		<if test='biTitle != null and biTitle != ""'>
+			AND BI.BI_TITLE LIKE CONCAT('%', #{biTitle}, '%')
+		</if>
+		<!-- <if test='biContent != null and biContent != ""'>
+				AND BI_TITLE LIKE CONCAT('%', #{biContent}, '%')
+			</if> -->
+		ORDER BY BI.BI_NUM DESC
+	</select>
 	
 	<select id="selectBabsangInfo" parameterType="int" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
 		SELECT BI_NUM, BI_TITLE, BI_CONTENT, BI_MEETINGDAT, BI_MEETINGTIM, 
