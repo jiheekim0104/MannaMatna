@@ -25,11 +25,13 @@ alert('${msg}');
 	<div class="infoBox">
 		<div class="info">
 			<span class="uiNickname">${user.uiNickname}</span>
-			(${user.uiId})<br>
+			<span class="uiId">(${user.uiId})</span>
+			<br>
 			성별 : 
 			<a id="uiGender" name="uiGender"></a><br>
 			연령대 : ${user.uiAge}대<br>
-		</div>	
+		</div>
+		<br><br><br>
 		<div class="buttons">
 			<button onclick="location.href='/check-update'">정보수정</button>
 			<button onclick="location.href='/withdraw'">탈퇴하기</button>
@@ -38,6 +40,10 @@ alert('${msg}');
 </div>
 </body>
 <script>
+if(${user.uiId==""}){
+	document.querySelector('.uiId').innerHTML = '(SNS가입 연동)';
+}
+
 if(${user.uiGender}){
 	document.querySelector('#uiGender').innerHTML = '남자';
 } else {
