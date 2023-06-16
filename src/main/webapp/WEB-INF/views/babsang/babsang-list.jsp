@@ -92,18 +92,17 @@
 		<script>
 			const pages = ${page.pages};//총페이지
 			const page = ${page.pageNum};//현재페이지
-			const start = Math.floor((page-1)/5)*5+1;//묶음페이지
-			const end = (start + 4) > pages ? pages : (start + 4);
+			const start = Math.floor((page-1)/5)*5+1;//묶음페이지에서 첫페이지
+			const end = (start + 4) > pages ? pages : (start + 4);//묶음페이지에서 끝페이지
 
 			let html = '';
 			
 			if(11<=page){
 				html +='<a href="/main?page=1&biTitle=${param.biTitle}">&#x219E</a>  '
-			}
+			}//page가 11 이상일때만 맨 처음으로 버튼 보임
 			if(start!=1){
 				html += '<a href="/main?page=' + (start-1) + '&biTitle=${param.biTitle}">&#x2190</a>'
-				//<<버튼 누르면 1번째 묶음페이지로
-			}//<버튼 누르면 묶음페이지 -1로 (묶음페이지가 첫페이지(1~5)가 아닐 때만 보임)
+			}//<버튼 누르면 현재 묶음페이지의 start에서 -1로 (묶음페이지가 첫페이지(1~5)가 아닐 때만 보임)
 			
 			for(let i=start; i<=end; i++){
 				if(i==page){
@@ -117,7 +116,8 @@
 				html += ' <a href="/main?page=' + (end+1) + '&biTitle=${param.biTitle}">&#x2192</a>';
 				
 			}//>버튼 누르면 묶음페이지 +1로 (묶음페이지가 첫페이지(1~5)가 아닐 때만 보임)
-			if(page<pages-9){
+			
+			if((end/5)<=(Math.ceil(pages/5))-2){
 				html +='  <a href="/main?page=' + pages + '&biTitle=${param.biTitle}">&#x21A0</a>'
 				}//>>버튼 누르면 마지막 묶음페이지로 */
 				
