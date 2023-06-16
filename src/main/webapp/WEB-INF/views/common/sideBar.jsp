@@ -64,7 +64,7 @@
 				</c:if>
 				<!-- 내가 만든 밥상이 있을 때 보이는 버튼-->
 				<c:if test="${user.biNum != 0}">
-					<a class="alreadyHaveBabsang" href="/detail/${user.biNum}">내 밥상<br>보러가기</a>
+					<a class="addBabsang" href="/detail/${user.biNum}">내 밥상<br>보러가기</a>
 				</c:if>
 				
 			</c:if>

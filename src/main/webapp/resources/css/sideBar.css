@@ -104,7 +104,7 @@ nav{
   font-size: 16px;
 }
 
-.sidenav>.addBabsang:hover {
+.sidenav>.addBabsang:hover, alreadyHaveBabsang:hover {
   background-color: #FC522F;
   color: #FFFFFF;
 }
