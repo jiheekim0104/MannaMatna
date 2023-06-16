@@ -120,6 +120,7 @@
 			if(page<pages-9){
 				html +='  <a href="/main?page=' + pages + '&biTitle=${param.biTitle}">&#x21A0</a>'
 				}//>>버튼 누르면 마지막 묶음페이지로 */
+				
 			document.querySelector('#pageDiv').innerHTML = html;
 		</script>
 	</c:if>
