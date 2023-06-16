@@ -31,19 +31,20 @@ public class BabsangInfoController {
 	 
 	
 
-	 @GetMapping("/main") public String goMain(BabsangInfoVO babsang, Model m){
-		 List<BabsangInfoVO> babsangList = babsangInfoService.getBabsangInfoVOs(babsang); 
-		 m.addAttribute("babsangList",babsangList);
-		 return "babsang/babsang-list"; 
-	 }
+	/*
+	 * @GetMapping("/main") public String goMain(BabsangInfoVO babsang, Model m){
+	 * List<BabsangInfoVO> babsangList =
+	 * babsangInfoService.getBabsangInfoVOs(babsang);
+	 * m.addAttribute("babsangList",babsangList); return "babsang/babsang-list"; }
+	 */
 	 
-/*	페이징 구현중
+	/* 페이징 구현중 */
 	@GetMapping("/main")
-	public String goMain(@ModelAttribute BabsangInfoVO babsang, Model m){
+	public String pagingBabsangList(@ModelAttribute BabsangInfoVO babsang, Model m){
 		m.addAttribute("page", babsangInfoService.getPagingBansang(babsang));
 		return "babsang/babsang-list";
 	}
-*/
+
 	
 	@GetMapping("/addBabsang")
 	public String goCreateBabsang(){

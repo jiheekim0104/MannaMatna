@@ -23,8 +23,8 @@ public class BabsangInfoService {
 		return babsangInfoMapper.selectBabsangList(babsang);
 	}
 	
+	//페이징 구현중
 	public PageInfo<BabsangInfoVO> getPagingBansang(BabsangInfoVO babsang){
-		//페이징 구현중
 		PageHelper.startPage(babsang.getPage(), babsang.getRows());
 		return new PageInfo<>(babsangInfoMapper.selectBabsangList(babsang));
 	}
