@@ -117,9 +117,12 @@ public class UserInfoController {
 	}
 	
 	@GetMapping("/naverPost")
-	 public String kakaoJoin(){
-		return "user/naverPost";
-	}
+	public String loginPOSTNaver(HttpSession session) {
+        log.info("callback controller");
+        return "user/callback";
+    }
+	
+
 	
 	
 	@GetMapping("/logout")

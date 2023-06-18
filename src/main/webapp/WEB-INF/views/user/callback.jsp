@@ -24,7 +24,9 @@
         + "&state=" + state;
     String accessToken = "";
     String refresh_token = "";
+    System.out.println("들어간다~");
     try {
+    	System.out.println("들어왔다~");
       URL url = new URL(apiURL);
       HttpURLConnection con = (HttpURLConnection)url.openConnection();
       con.setRequestMethod("GET");
@@ -43,11 +45,14 @@
       }
       br.close();
       if (responseCode == 200) {
+    	  System.out.println("합니다~");
         out.println(res.toString());
       }
     } catch (Exception e) {
       // Exception 로깅
     }
+    
+
   %>
   </body>
 </html>

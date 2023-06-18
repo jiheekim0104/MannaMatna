@@ -31,18 +31,32 @@
 			<input type="password" class="uiPwd" name="uiPwd" id="uiPwd" value="${user.uiPwd}"><br> 
 			<input type="password" class="uiPwdCheck" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
 			<select name="uiAge" id="uiAge">
+				
 				<option value="0">연령대를 선택하세요.</option>
-				<option value="10">10대</option>
-				<option value="20">>20대</option>
-				<!-- (user.uiAge==20)? "selected":"" -->
-				<!-- "if(${user.uiAge}==20)selected;" -->
-				<!-- if(user.uiAge==20){return "selected";} -->
-				<option value="30">30대</option>
-				<option value="40">40대</option>
-				<option value="50">50대 이상</option>
+				<c:if test="${user.uiAge==10}">
+					<option value="10" selected="selected">10대</option>
+				</c:if>	
+				<c:if test="${user.uiAge==20}">
+					<option value="20" selected="selected">20대</option>
+				</c:if>
+				<c:if test="${user.uiAge==30}">
+					<option value="30" selected="selected">30대</option>
+				</c:if>
+				<c:if test="${user.uiAge==40}">
+					<option value="40" selected="selected">40대</option>
+				</c:if>
+				<c:if test="${user.uiAge==50}">
+					<option value="50" selected="selected">50대 이상</option>
+				</c:if>	
+				
 			</select><br>
-			<span>성별</span> <input class="gender" type="radio" name="uiGender" id="uiGender1" value="true"> 남자
-			<input class="gender" type="radio" name="uiGender" id="uiGender2" value="false"> 여자<br>
+			<span>성별</span> 
+			<c:if test="${user.uiGender==true}">
+				<input class="gender" type="radio" name="uiGender" id="uiGender1" value="true" checked="checked"> 남자
+			</c:if>	
+			<c:if test="${user.uiGender==false}">
+				<input class="gender" type="radio" name="uiGender" id="uiGender2" value="false" checked="checked"> 여자<br>
+			</c:if>	
 			
 		</div>
 		<br><br><br><br><br><br><br><br><br><br><br>
@@ -57,7 +71,6 @@
 			document.querySelector('#imgDiv').style.display = '';
 		}
 		function checkValue(){
-			let nicknameChk = document.getElementById('nicknameChk').value; // 아이디 중복확인 시행 유무
 			let inputNickname = document.getElementById('uiNickname').value; 
 			if(nicknameChk=="N"){
 				if(inputNickname==${user.uiNickname}){
