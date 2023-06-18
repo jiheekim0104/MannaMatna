@@ -11,25 +11,24 @@
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+
 <div class="content">
 	<h1>회원가입</h1>
-	SNS 연동
-	<button class="naverBnt" onclick="location.href='/naverLogin'"><img src="../../../resources/upload/naverLogo.png">네이버 간편가입</button>
-	<button class="kakaoBnt"onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b288a9632f49edf850cff8d6eb985755&redirect_uri=http://localhost/kakaoPost/'"><img src="../../../resources/upload/kakaoLogo.png">카카오 간편가입</button>
+	<span>SNS 연동</span>
+	<button class="naverBnt" onclick="location.href='/naverLogin'"><img src="../../../resources/upload/naverLogo.png"> 네이버 간편가입</button>
+	<button class="kakaoBnt"onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b288a9632f49edf850cff8d6eb985755&redirect_uri=http://localhost/kakaoPost/'"><img src="../../../resources/upload/kakaoLogo.png"> 카카오 간편가입</button>
 	<br>
 	<form action="/join-ok" method="POST" onsubmit="return checkValue()" enctype="multipart/form-data">
-		<input type="text" class="check"><br>
 		<input type="text" name="uiId" id="uiId" placeholder="아이디">
 		<button type="button" id="idChk" class="bnt" onclick="fn_idChk()" value="N">중복확인</button><br> 
 		<input type="text" name="uiNickname" id="uiNickname" placeholder="닉네임">
 		<button type="button" id="nicknameChk" class="bnt" onclick="fn_nicknameChk()" value="N">중복확인</button><br> 
 		<input type="password" class="uiPwd" name="uiPwd" id="uiPwd" placeholder="비밀번호"><br> 
 		<input type="password" class="uiPwdCheck" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
-		<input type="file" name="uiFile" id="uiFile" onchange="loadImg(this)"><br> 
 		<div class="filebox">
-    		<input class="upload-name" value="프로필 사진" placeholder="프로필 사진">
+    		<input class="upload-name" placeholder="프로필 사진" >
     		<label for="file">업로드</label> 
-   		 	<input type="file" id="file" onchange="loadImg(this)">
+   		 	<input type="file" id="file" name="uiFile" onchange="loadImg(this)">
 		</div>
 		<div id="imgDiv" style="display:none">
 			<img src = "" width="300">
@@ -42,9 +41,9 @@
 			<option value="40">40대</option>
 			<option value="50">50대 이상</option>
 		</select><br> 
-		<input type="radio" name="uiGender" id="uiGender1" value="true">남자
-		<input type="radio" name="uiGender" id="uiGender2" value="false">여자
-		<button>가입완료</button>
+		<span>성별</span> <input class="gender" type="radio" name="uiGender" id="uiGender1" value="true"> 남자
+		<input class="gender" type="radio" name="uiGender" id="uiGender2" value="false"> 여자<br>
+		<button class="joinBnt">가입완료</button>
 	</form>
 </div>
 </body>
@@ -54,6 +53,8 @@
 		let imgObj = document.querySelector('#imgDiv>img');
 		imgObj.src = URL.createObjectURL(file);
 		document.querySelector('#imgDiv').style.display='';
+		let fileName = $("#file").val().split('/').pop().split('\\').pop();
+		$(".upload-name").val(fileName);
 	}
 	function checkValue(){
 		let idChk = document.getElementById('idChk').value; // 아이디 중복확인 시행 유무

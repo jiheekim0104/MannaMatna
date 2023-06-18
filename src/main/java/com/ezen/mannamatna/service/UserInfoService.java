@@ -50,6 +50,7 @@ public class UserInfoService {
 
 	public boolean login(UserInfoVO userInfoVO, HttpSession session) {
 		userInfoVO = uiMapper.selectUserInfoForLogin(userInfoVO);
+		log.info("확인하려는 유저 =>{}", userInfoVO);
 		if (userInfoVO != null) {
 			session.setAttribute("user", userInfoVO);
 			return true;

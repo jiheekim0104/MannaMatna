@@ -33,5 +33,5 @@ public interface UserInfoMapper {
 	List<UserInfoVO> selectUserInfosByBiNum(int biNum); // 밥상 biNum으로 uiVO(참가자) 데이터리스트를 가져옴
 
 	UserInfoVO selectUserInfoFromBabsang(int uiNum); // 밥상에 uiNum으로 uiVO(작성자) 데이터 한줄 가져옴
-
+	
 }

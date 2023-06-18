@@ -48,8 +48,10 @@ public class UserInfoController {
 	
 	@PostMapping("/login")
 	public String gologin(@ModelAttribute UserInfoVO userInfoVO, BabsangInfoVO babsang, HttpSession session, Model m) {
-		log.info("=============>{}",userInfoVO);
+		log.info("=============1>{}",userInfoVO);
+		log.info("=============1>{}",uiService.login(userInfoVO, session));
 		if(uiService.login(userInfoVO, session)) {
+			log.info("=============2>{}",userInfoVO);
 			userInfoVO = (UserInfoVO) session.getAttribute("user");
 			log.info("=============>{}",userInfoVO);
 			if(userInfoVO.getUiActive()==1) {

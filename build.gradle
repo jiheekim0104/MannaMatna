@@ -40,6 +40,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.5'
 	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1' // 구글차트 api를 위한 json-simple 의존성 추가
+	implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
+    implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
 }
 
 tasks.named('test') {

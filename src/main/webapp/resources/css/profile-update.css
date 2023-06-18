@@ -137,6 +137,10 @@ select{
 	vertical-align: -4px;
 }
 
+.nothing{
+	width:244px;
+	border: 1ps solid black;
+}
 .joinBnt {
 	width: 362px;
 	height: 40px;
@@ -157,3 +161,24 @@ select{
 	background-color: #FFFFFF;
 	color: #FC522F;
 } 
+
+.info>.uiNickname{
+	color: #FC522F;
+	font-size: 20px;
+}
+.img > img{
+	 float: left;
+	 margin-top: 10px;
+}
+
+.content > .infoBox{
+	float: left;
+	height: 300px;
+	width: 65%;
+}
+
+.info{
+	float: left;
+	text-align: left;
+	margin-left: 10px;
+}

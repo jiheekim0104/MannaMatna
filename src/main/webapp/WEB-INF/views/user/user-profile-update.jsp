@@ -7,35 +7,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${path}/resources/css/profile-update.css" />
 <script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
 </head>
 <body>
 <div class="content">
-	<h1>프로필 수정</h1>
-	${user}
 	<form action="/profile-update" method="POST" onsubmit="return checkValue()" enctype="multipart/form-data">
-	<c:if test="${user.uiFilepath!=null}">
-			<img id="imgDiv" src="${user.uiFilepath}" width="300">
-			<input type="file" name="uiFile" id="uiFile" onchange="loadImg(this)">
-			<br>
-		</c:if>
-		<input type="text" name="uiNickname" id="uiNickname" value="${user.uiNickname}">
-		<button type="button" id="nicknameChk" onclick="fn_nicknameChk();" value="N">중복확인</button><br> 
-		<input type="password" name="uiPwd" id="uiPwd" value="${user.uiPwd}"><br> 
-		<input type="password" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
-		성별 : <input type="radio" name="uiGender" id="uiGender1" value="true">남자
-		<input type="radio" name="uiGender" id="uiGender2" value="false">여자<br>
-		연령대 : <select name="uiAge" id="uiAge">
-			<option value="0">연령대를 선택하세요.</option>
-			<option value="10">10대</option>
-			<option value="20">20대</option>
-			<option value="30">30대</option>
-			<option value="40">40대</option>
-			<option value="50">50대 이상</option>
-		</select><br>
-		<button>수정완료</button>
-		<button type="button">취소하기</button>
+		<div class="img">
+			<c:if test="${user.uiFilepath!=null}">
+				<img id="imgDiv" src="${user.uiFilepath}" width="300">
+			</c:if>
+		</div>
+		<div class="info">
+			<div class="filebox">
+	    		<input class="upload-name" placeholder="프로필 사진" >
+	    		<label for="file">업로드</label> 
+	   		 	<input type="file" id="file" name="uiFile" onchange="loadImg(this)">
+			</div>
+			<input type="text" name="uiNickname" id="uiNickname" value="${user.uiNickname}">
+			<button class="bnt" type="button" id="nicknameChk" onclick="fn_nicknameChk();" value="N">중복확인</button><br> 
+			<input type="password" class="uiPwd" name="uiPwd" id="uiPwd" value="${user.uiPwd}"><br> 
+			<input type="password" class="uiPwdCheck" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
+			<select name="uiAge" id="uiAge">
+				<option value="0">연령대를 선택하세요.</option>
+				<option value="10">10대</option>
+				<option value="20">>20대</option>
+				<!-- (user.uiAge==20)? "selected":"" -->
+				<!-- "if(${user.uiAge}==20)selected;" -->
+				<!-- if(user.uiAge==20){return "selected";} -->
+				<option value="30">30대</option>
+				<option value="40">40대</option>
+				<option value="50">50대 이상</option>
+			</select><br>
+			<span>성별</span> <input class="gender" type="radio" name="uiGender" id="uiGender1" value="true"> 남자
+			<input class="gender" type="radio" name="uiGender" id="uiGender2" value="false"> 여자<br>
+			
+		</div>
+		<br><br><br><br><br><br><br><br><br><br><br>
+		<button class="bnt">수정완료</button>
+		<button class="bnt" type="button">취소하기</button>
 	</form>
 	<script>
 		function loadImg(obj) {

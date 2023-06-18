@@ -15,6 +15,7 @@ alert('${msg}');
 </c:if>
 </script>
 <body>
+
 <div class="content">
 	<div class="img">
 		<c:if test="${user.uiFilepath!=null}">
@@ -31,17 +32,19 @@ alert('${msg}');
 			<a id="uiGender" name="uiGender"></a><br>
 			연령대 : ${user.uiAge}대<br>
 		</div>
-		<br><br><br>
+		<br><br><br><br>
 		<div class="buttons">
-			<button onclick="location.href='/check-update'">정보수정</button>
-			<button onclick="location.href='/withdraw'">탈퇴하기</button>
+			<button class="updateBnt" onclick="location.href='/check-update'">정보수정</button>
+			<button class="withdrawBnt" onclick="location.href='/withdraw'">탈퇴하기</button>
+			<div class="hint"></div>
 		</div>
 	</div>
 </div>
 </body>
 <script>
-if(${user.uiId==""}){
+if(${user.uiId==null}){
 	document.querySelector('.uiId').innerHTML = '(SNS가입 연동)';
+	document.querySelector('.hint').innerHTML = '* SNS가입 연동고객의 초기 비밀번호는 0000 입니다.';
 }
 
 if(${user.uiGender}){

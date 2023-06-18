@@ -5,6 +5,7 @@
 }
 .img > img{
 	 float: left;
+	 margin-top: 10px;
 }
 
 .content > .infoBox{
@@ -16,9 +17,56 @@
 .info{
 	float: left;
 	text-align: left;
+	margin-left: 10px;
 }
 
 .buttons {
 	float: right;
 	
 } 
+
+.updateBnt {
+	width: 150px;
+	height: 35px;
+	background-color: #FC522F;
+	border: 2px solid #FC522F;
+	border-radius:0.5em;
+	color: #FFFFFF;
+	font-weight: bolder;
+	padding: 2px 22px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin-top: 10px;
+}
+
+.updateBnt:hover{
+	background-color: #FFFFFF;
+	color: #FC522F;
+} 
+
+.withdrawBnt {
+	width: 150px;
+	height: 35px;
+	background-color: #FFFFFF;
+	border: 2px solid #FC522F;
+	border-radius:0.5em;
+	color: #FC522F;
+	font-weight: bolder;
+	padding: 2px 22px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin-top: 10px;
+}
+
+.withdrawBnt:hover{
+	background-color: #FC522F;
+	color: #FFFFFF;
+}
+
+.hint{
+	font-size: 13px;
+}

@@ -7,15 +7,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="${path}/resources/css/user-check.css" />
 <body>
 <div class="content">
-<h1>회원 탈퇴</h1>
- ${user.uiNickname}님,저희를 떠나는 이유를 알려주세요.<br>
-<form action="/withdraw" method="post" onsubmit="return checkValue()">
-	<input type="text" name="uiDel" id="uiDel" placeholder="탈퇴사유를 적어주세요.">
-	<button>확인</button>
-</form>	
-</div>
+		<form action="/withdraw" method="post" onsubmit="return checkValue()">
+		<br><br>
+			<div class="inform">
+			 	<span class="uiNickname">${user.uiNickname}</span>님,저희를 떠나는 이유를 알려주세요.<br>
+			 </div>
+			<textarea name="uiDel" id="uiDel" placeholder="탈퇴사유를 적어주세요."></textarea>
+			<button class="withdrawBnt">확인</button>
+		</form>	
+	</div>
 </body>
 <script>
 	function checkValue(){

@@ -1,21 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
-<%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>      
+    pageEncoding="UTF-8"%>    
+<%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="${path}/resources/css/user-check.css" />
 <body>
-<div class="content">
-<form action="/check-withdraw"  method="POST" onsubmit="return checkValue()">
-	${user.uiNickname}님이 맞는지 한번더 확인할게요.<br>
-	<input type="password" name="uiPwd" id="uiPwd" placeholder="비밀번호를 입력해주세요.">
-	<button>확인</button>
-</form>
-
-</div>
+	<div class="content">
+		<form action="/check-update"  method="POST" onsubmit="return checkValue()">
+		<br><br>
+			<div class="inform">
+				<span class="uiNickname">${user.uiNickname}</span>님이 맞는지 한번더 확인할게요.<br>
+			</div>	
+			<input type="password" name="uiPwd" id="uiPwd" placeholder="비밀번호를 입력해주세요.">
+			<button class="bnt">확인</button>			
+		</form>
+	</div>
 </body>
 <script>
 function checkValue(){

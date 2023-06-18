@@ -1,0 +1,70 @@
+@charset "UTF-8";
+.content{
+	text-align: inherit;
+}
+.inform{
+	text-align: left;
+	font-weight: bolder;
+	font-size: 25px;
+}
+
+.inform>.uiNickname{
+	color: #FC522F;
+	font-weight: bolder;
+	font-size: 25px;
+}
+
+input{
+	width: 350px;
+	height: 22px;
+	margin: 5px 0px;
+}
+
+textarea{
+	width: 100%;
+	height: 122px;
+	margin: 5px 0px;
+	border-radius:0.5em; 
+	resize: none; /* 우측하단 세줄 표시 안보이게 처리함 */
+}
+
+.updateBnt { /* 이 css가 check-update & check-withdraw 에 같이 적용되다보니 달라야하는 부분이있어서 나눠줬음 */
+	width: 100px;
+	height: 30px;
+	background-color: #FC522F;
+	border: 2px solid #FC522F;
+	border-radius:0.5em;
+	color: #FFFFFF;
+	font-weight: bolder;
+	padding: 2px 22px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin-top: 10px;
+}
+
+.updateBnt:hover{
+	background-color: #FFFFFF;
+	color: #FC522F;
+} 
+
+.withdrawBnt { /* 이 css가 check-update & check-withdraw 에 같이 적용되다보니 달라야하는 부분이있어서 나눠줬음 */
+	width: 100px;
+	height: 30px;
+	background-color: #FC522F;
+	border: 2px solid #FC522F;
+	border-radius:0.5em;
+	color: #FFFFFF;
+	font-weight: bolder;
+	padding: 2px 22px;
+	text-decoration: none;
+	font-size: 15px;
+	margin-top: 10px;
+	float: right;
+}
+
+.withdrawBnt:hover{
+	background-color: #FFFFFF;
+	color: #FC522F;
+} 
