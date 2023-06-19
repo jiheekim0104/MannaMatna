@@ -20,6 +20,12 @@ input{
 	margin: 5px 0px;
 }
 
+input:focus{ 
+	outline: none !important; 
+	border-color: #FC522F; 
+	box-shadow: 0 0 5px #FC522F;	
+}
+
 textarea{
 	width: 100%;
 	height: 122px;

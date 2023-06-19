@@ -1,3 +1,4 @@
+<%@page import="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>	
@@ -16,19 +17,26 @@
 <div class="content">
 	<form action="/profile-update" method="POST" onsubmit="return checkValue()" enctype="multipart/form-data">
 		<div class="img">
-			<c:if test="${user.uiFilepath!=null}">
-				<img id="imgDiv" src="${user.uiFilepath}" width="300">
+			<c:if test="${user.uiFilepath != null}">	
+				<img src="${user.uiFilepath}" width="300">
+			</c:if>
+			<c:if test="${user.uiFilepath == null && user.kakaoImgPath != null}">	
+				<img src="${user.kakaoImgPath}" width="300">
+			</c:if>
+			<c:if test="${user.uiFilepath == null && user.naverImgPath != null}">	
+				<img src="${user.naverImgPath}" width="300">
 			</c:if>
 		</div>
 		<div class="info">
 			<div class="filebox">
 	    		<input class="upload-name" placeholder="프로필 사진">
 	    		<label for="file" class="labelBnt" >업로드</label> 
-	   		 	<input type="file" id="file" name="uiFile" onchange="loadImg(this)"  value="N" >
+	   		 	<input type="file" id="file" name="uiFile" onchange="loadImg(this)">
 			</div>
 			<input type="text" name="uiNickname" id="uiNickname" value="${user.uiNickname}">
 			<button class="bnt" type="button" id="nicknameChk" onclick="fn_nicknameChk();" value="N">중복확인</button><br> 
-			<input type="password" class="uiPwd" name="uiPwd" id="uiPwd" value="${user.uiPwd}"><br> 
+			
+			<input type="password" class="uiPwd" name="uiPwd" id="uiPwd" placeholder="비밀번호"><br> 
 			<input type="password" class="uiPwdCheck" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
 			<select name="uiAge" id="uiAge">
 				
@@ -67,20 +75,14 @@
 	</form>
 	<script>
 		function loadImg(obj) {
-			let file = obj.files[0];
-			let imgObj = document.querySelector('#imgDiv');
+			let file =obj.files[0];
+			let imgObj = document.querySelector('#imgDiv>img');
 			imgObj.src = URL.createObjectURL(file);
-			document.querySelector('#imgDiv').style.display = '';
+			document.querySelector('#imgDiv').style.display='';
 			let fileName = $("#file").val().split('/').pop().split('\\').pop();
-			$(".uiFile").val(fileName);
-			$('#file').val('Y'); // 사진이 바뀌었으면 y로 값을 변경함
-			alert(0);
+			$(".upload-name").val(fileName);
 		}
 		function checkValue(){
-			let prifileImgChk = document.querySelector('#file').value;
-			if(prifileImgChk=="N"){
-				prifileImgChk=='${user.uiFilepath}';
-			}
 			let inputNickname = document.getElementById('uiNickname').value; 
 			if(nicknameChk=="N"){
 				if(inputNickname==${user.uiNickname}){

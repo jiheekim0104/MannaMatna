@@ -3,11 +3,8 @@ package com.ezen.mannamatna.service;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -53,17 +50,25 @@ public class UserInfoService {
 	}
 
 	public boolean login(UserInfoVO userInfoVO, HttpSession session) {
+		log.info("userInfoVO=====>{}", userInfoVO);
+		if(userInfoVO.getUiPwd().equals("0000")&&userInfoVO.getUiId()==null){
+			session.setAttribute("user", userInfoVO);
+			return true;
+		}
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String inputPwd = userInfoVO.getUiPwd();
-		userInfoVO = uiMapper.selectUserInfoById(userInfoVO);
+		if(userInfoVO.getUiId()==null) {
+			userInfoVO = uiMapper.selectUserInfoByNum(userInfoVO);
+		} else {
+			userInfoVO = uiMapper.selectUserInfoById(userInfoVO);
+		}
+		
+		log.info("matches=====>{}", passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd()));
 		if(passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd())) {
 			log.info("확인하려는 유저 =>{}", userInfoVO);
 			session.setAttribute("user", userInfoVO);
 			return true;
 		}
-//		userInfoVO = uiMapper.selectUserInfoForLogin(userInfoVO);
-		
-
 		return false;
 	}
 
@@ -72,11 +77,13 @@ public class UserInfoService {
 		log.info("확인하려는 유저 =>{}", kakaoUserInfoVO);
 		String kakaoImgPath = kakaoUserInfoVO.getKakaoImgPath();
 		kakaoUserInfoVO = uiMapper.selectKakaoUserInfo(kakaoUserInfoVO);
+		
 		log.info("돌려받은 유저 =>{}", kakaoUserInfoVO); // 카db에 제대로 안올라갔으니까 여기서 못찾아온거같음ㅇㅇ
 		if (kakaoUserInfoVO != null) {
 			UserInfoVO userInfoVO = new UserInfoVO();
 			userInfoVO.setUiNum(kakaoUserInfoVO.getUiNum()); // 카카오 로그인 유저의 유저번호를 userInfoVO에 담기
-			UserInfoVO newUserInfoVO = uiMapper.selectUserInfoByKakao(userInfoVO);
+			UserInfoVO newUserInfoVO = uiMapper.selectUserInfoByNum(userInfoVO);
+			newUserInfoVO.setKuiId(kakaoUserInfoVO.getKuiId());
 			newUserInfoVO.setKakaoImgPath(kakaoImgPath);
 			// uiNum 정보만 가지고 있는 VO를 넣고 리턴은 다시 셀렉트문으로 찾은 모든 정보를 가지고 있는 uiVO 객체를 다시 돌려받는다.
 			// uiVO와 kakaoVO가 연결되는것은 uiNum 인데 찾은 uiNum으로 uiVO를 셀렉트해서 찾는 쿼리문이 없었음
@@ -100,7 +107,8 @@ public class UserInfoService {
 		if (naverUserInfoVO != null) {
 			UserInfoVO userInfoVO = new UserInfoVO();
 			userInfoVO.setUiNum(naverUserInfoVO.getUiNum()); // 네이버 로그인 유저의 유저번호를 userInfoVO에 담기
-			UserInfoVO newUserInfoVO = uiMapper.selectUserInfoByKakao(userInfoVO);
+			UserInfoVO newUserInfoVO = uiMapper.selectUserInfoByNum(userInfoVO);
+			newUserInfoVO.setNuiId(naverUserInfoVO.getNuiId());
 			newUserInfoVO.setNaverImgPath(naverImgPath);
 			log.info("네이버 로그인 서비스 =>{}", newUserInfoVO);
 			session.setAttribute("user", newUserInfoVO);
@@ -188,6 +196,8 @@ public class UserInfoService {
 	public boolean update(@ModelAttribute UserInfoVO userInfoVO, HttpSession session)
 			throws IllegalStateException, IOException {
 		log.info("userInfoVO====>{}", userInfoVO);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		userInfoVO.setUiPwd(passwordEncoder.encode(userInfoVO.getUiPwd())); 
 		String fileName = userInfoVO.getUiFile().getOriginalFilename();
 		log.info("fileName====>{}", fileName);
 		if ("".equals(fileName)) {

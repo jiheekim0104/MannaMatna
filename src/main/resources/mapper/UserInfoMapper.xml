@@ -28,15 +28,11 @@
 		select * from naver_user_info where nui_Id = #{nuiId}
 	</select>
 	
-	<select id="selectUserInfoByKakao"
+	<select id="selectUserInfoByNum"
 		resultType="com.ezen.mannamatna.vo.UserInfoVO">
 		select * from user_info where ui_Num = #{uiNum}
 	</select>
 	
-	<select id="selectUserInfoByNaver"
-		resultType="com.ezen.mannamatna.vo.UserInfoVO">
-		select * from user_info where ui_Num = #{uiNum}
-	</select>
 	
 	<select id="idChk" resultType="int">
 		select count(*) from user_info

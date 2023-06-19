@@ -9,9 +9,11 @@ input{
 	margin: 5px 0px;
 }
 
-/* input:focus{ 상자선택시 색변경
-	border: 2px solid #FC522F;
-} */
+input:focus{ 
+	outline: none !important; 
+	border-color: #FC522F; 
+	box-shadow: 0 0 5px #FC522F;	
+}
 
 .uiPwd{
 	width: 350px;

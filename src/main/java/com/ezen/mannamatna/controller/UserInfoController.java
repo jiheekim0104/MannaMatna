@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -212,6 +213,7 @@ public class UserInfoController {
 		log.info("컨트롤러/프로필요청 ==>{}",userInfoVO);
 		return "user/user-profile";
 	}
+	
 	@GetMapping("/profile/{uiNum}")
 	public String profileByUiNum(@PathVariable("uiNum") int uiNum, HttpSession session, Model m) {
 		// uiNum을 파라미터로 하는 프로필 화면 전환
@@ -221,14 +223,20 @@ public class UserInfoController {
 	}
 	
 	@GetMapping("/check-update") // 프로필 수정 버튼을 누른 경우 
-	public String checkUpdate() {
+	public String checkUpdate(Model m) {
 		return "user/user-check-update";
 	}
 	
-	@PostMapping("/check-update") // 수정 버튼을 누르고 비밀번호가 일치한 경우
-	public String checkUpdateOk(@ModelAttribute UserInfoVO userInfoVO, HttpSession session) {
+	@PostMapping("/check-update") // 수정 버튼을 누르고 비밀번호가 일치하는지 확인
+	public String checkUpdateOk(@ModelAttribute UserInfoVO userInfoVO, HttpSession session,Model m) {
+		String inputPwd = userInfoVO.getUiPwd();
 		userInfoVO = (UserInfoVO) session.getAttribute("user");
-		return "/user/user-profile-update";
+		userInfoVO.setUiPwd(inputPwd);
+		if(uiService.login(userInfoVO, session)) { //유저를 찾는 로직이 같아서 login 씀
+			return "/user/user-profile-update";
+		}
+		m.addAttribute("msg","비밀번호가 잘못되었습니다.");	
+		return "user/user-check-update";
 	}
 	
 	@GetMapping("/user/user-profile-update")
@@ -239,6 +247,7 @@ public class UserInfoController {
 	@PostMapping("/profile-update")
 	public String updateProfileOk(@ModelAttribute UserInfoVO userInfoVO, HttpSession session, Model m) throws IllegalStateException, IOException {
 		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
+		log.info("sessionUserInfo 확인={}",sessionUserInfo);
 		userInfoVO.setUiNum(sessionUserInfo.getUiNum());
 		userInfoVO.setBiNum(sessionUserInfo.getBiNum());
 		userInfoVO.setUiCredat(sessionUserInfo.getUiCredat());
