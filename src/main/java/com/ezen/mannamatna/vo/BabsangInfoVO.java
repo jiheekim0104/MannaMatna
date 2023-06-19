@@ -15,6 +15,7 @@ public class BabsangInfoVO {
 	private boolean biClosed;
 	private int uiNum;
 	private int uiBiNum;//밥상이 생성되며 autoincrement되는 biNum을 따로받음
+	private int uiNickname;
 	//페이징 
 	private int page = 1;
 	private int rows = 4;

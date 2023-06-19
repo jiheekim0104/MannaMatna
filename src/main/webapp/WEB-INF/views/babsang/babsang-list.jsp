@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>만나맛나 : 1인가구를 위한 신개념 밥상 매칭 사이트</title>
+<link rel="stylesheet" href="${path}/resources/css/babsang-list.css" />
 
 <style type="text/css">
 
@@ -16,21 +17,22 @@
 
 <body>
 <div class="content">
-	<h1>여기는 만들어진 밥상 리스트</h1>
+	<!-- <h1>여기는 만들어진 밥상 리스트</h1> -->
 	
-	<form action="/main" method="get">
-		<input type="text" name="biTitle" placeholder="검색하실 밥상의 제목을 입력해주세요" value="${param.biTitle}">
-		<button>검색</button>
+	<form action="/main" method="get" >
+		<input type="text" class="inputBiTitle" name="biTitle" placeholder="검색하실 밥상의 제목을 입력해주세요" value="${param.biTitle}">
+		<button class="buttonBiTitle">검색</button>
 	</form>
-	<form action="/main" method="get">
-		<button name="biFdCategory" value="한식">한식</button>
-		<button name="biFdCategory" value="중식">중식</button>
-		<button name="biFdCategory" value="일식">일식</button>
-		<button name="biFdCategory" value="양식">양식</button>
-		<button name="biFdCategory" value="분식">분식</button>
-		<button name="biFdCategory" value="패스트푸드">패스트푸드</button>
-		<button name="biFdCategory" value="해산물">해산물</button>
-		<button name="biFdCategory" value="족발">족발</button>
+	<form action="/main" method="get" >
+		<button class="biFdCategory" name="biFdCategory" value="">전체</button>
+		<button class="biFdCategory" name="biFdCategory" value="한식">한식</button>
+		<button class="biFdCategory" name="biFdCategory" value="중식">중식</button>
+		<button class="biFdCategory" name="biFdCategory" value="일식">일식</button>
+		<button class="biFdCategory" name="biFdCategory" value="양식">양식</button>
+		<button class="biFdCategory" name="biFdCategory" value="분식">분식</button>
+		<button class="biFdCategory" name="biFdCategory" value="패스트푸드">패스트푸드</button>
+		<button class="biFdCategory" name="biFdCategory" value="해산물">해산물</button>
+		<button class="biFdCategory" name="biFdCategory" value="족발">족발</button>
 	</form>
 	
 	<hr>
@@ -53,15 +55,15 @@
 					
 				</th>
 			</tr>
-<!-- 생성자, 보드 번호 추후 삭제 예정 -->
-			<tr>
+<!-- 생성자, 보드 번호 -->
+			<%-- <tr>
 				<td colspan="2">밥상 번호 : ${babsangListVO.biNum}
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">밥상 생성자 : ${babsangListVO.uiNum}
 				</td>
-			</tr>
+			</tr> --%>
 <!-- 이 까지 -->
 			<tr>
 				<td colspan="2">카테고리 : ${babsangListVO.biFdCategory}</td>
@@ -74,7 +76,7 @@
 				<td>시간 : ${babsangListVO.biMeetingTim}</td>
 			</tr>
 			<%-- 밥상 삭제 버튼--%>
-			<tr>
+			<%-- <tr>
 				<c:if test="${sessionScope.user.uiNum == babsangListVO.uiNum}">
 					<td colspan="2" align="center">
 						<button
@@ -82,7 +84,7 @@
 							삭제</button>
 					</td>
 				</c:if>
-			</tr> 
+			</tr>  --%>
 		</c:forEach>
 	</table>
 	
