@@ -97,20 +97,29 @@ public class BabsangInfoController {
 	@GetMapping("/deleteBabsang")
 	public String deleteBabsang(Model m, @RequestParam("biNum") int biNum, UserInfoVO userInfoVO, HttpSession session) {
 		UserInfoVO userSession = (UserInfoVO) session.getAttribute("user");
-		String msg = "밥상 삭제 실패";
-		String url = "/main";
-		if (babsangInfoService.deleteBabsangInfo(biNum)) {
-			userInfoVO.setUiNum(userSession.getUiNum());
-
-			userSession.setBiNum(0);// 세션의 biNum >> 0으로 set
-			log.info("userSession.biNum >>> {}", userSession.getBiNum());
-
-			userInfoVO.setBiNum(0);// 유저의 biNum >> 0으로 set
-			log.info("user.biNum >>> {}", userInfoVO.getBiNum());
-
-			msg = "밥상 삭제 성공";
-			url = "/main";
-			userInfoService.updateBiNum(userInfoVO); // delete 성공 시 유저서비스의 update 실행
+		String msg = "로그인이 필요합니다!!";
+		String url = "/login";
+		BabsangInfoVO babsangInfoVO = babsangInfoService.getBabsangInfoVO(biNum); // 상세페이지의 biNum으로 밥상객체 불러옴
+		List<UserInfoVO> userList = userInfoService.getUserInfosByBiNum(biNum); // 해당 밥상에 참여중인 userList
+		if (userSession != null) {
+			// 로그인 유저가 확인됐을 경우에만 삭제 가능
+			msg = "이미 마감된 밥상입니다!!";
+			url = "/detail/"+biNum; // 해당페이지 redirect
+			if (!babsangInfoVO.isBiClosed()) {
+				// biClosed = false 인 경우만 삭제기능 가능
+				// 밥상이 마감된 상태면 삭제할 수 없어여!!
+				for(UserInfoVO user : userList) {
+					// 삭제기능 실행 시
+					// 해당 밥상에 참여중인 유저리스트에 모든 biNum을 0으로 초기화
+					// 데이터 무결성
+					user.setBiNum(0);
+					userInfoService.updateBiNum(user); // delete 성공 시 유저서비스의 update 실행
+				}
+				// 유저리스트의 biNum 전부 0으로 업데이트 후 삭제!!
+				babsangInfoService.deleteBabsangInfo(biNum);
+				msg = "밥상 삭제 성공!!";
+				url = "/main";
+			}
 		}
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);
@@ -128,7 +137,7 @@ public class BabsangInfoController {
 		// 참가하기 컨트롤러
 		String msg = "로그인해주세요!";
 		String url = "/login";
-		 UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user"); // 로그인 중인 유저세션
+		UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user"); // 로그인 중인 유저세션
 		if (userInfoVO != null) {
 			// 로그인 세션이 확인 되는 경우만
 			// 세션에서 uiVO 객체를 제공받은 후 해당 객체로 uiService의 biNum업데이트 실행
@@ -141,12 +150,11 @@ public class BabsangInfoController {
 			} else if (babsangInfoVO.isBiClosed()) {
 				// 밥상이 이미 마감된 경우
 				msg = "이미 마감 된 밥상입니다!!";
-			} else if(userInfoVO.getBiNum()>0){
+			} else if (userInfoVO.getBiNum() > 0) {
 				// 이미 생성중인 밥상이 있으나 다른 밥상게시물 상세페이지에 들어갔을 경우 참가하기 실행하지 않아야한다.
-				// 세션유저객체의 biNum이 0보다 크다면 밥상에 참여중인 유저이거나 밥상작성자이다. 
+				// 세션유저객체의 biNum이 0보다 크다면 밥상에 참여중인 유저이거나 밥상작성자이다.
 				msg = "이미 참여중인 밥상이 존재합니다!!";
-			}
-				else {
+			} else {
 				// 인원이 가득 차지 않은 밥상 및 마감된 밥상이 아닐 경우, 참가중인 밥상이 없을 경우에만 실제 참가 기능 실행
 				userInfoVO = (UserInfoVO) session.getAttribute("user");
 				userInfoVO.setBiNum(biNum);
@@ -168,15 +176,16 @@ public class BabsangInfoController {
 		if (session.getAttribute("user") != null) {
 			// 세션 로그인상태 유지중 참가하기 취소 누른 후
 			// 유저인포 biNum 0으로 업데이트
-			url = "/detail/" + biNum;
+			url = "/detail/" + biNum; // 해당상세페이지 redirect
 			if (babsangInfoVO.isBiClosed()) {
+				// biClosed = true
 				// 밥상이 이미 마감된 경우
 				msg = "이미 마감 된 밥상입니다!!";
 			} else {
 				// 로그인 상태 중, 밥상이 마감되지 않은 경우
-				UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user");
-				userInfoVO.setBiNum(0);
-				userInfoService.updateBiNum(userInfoVO);
+				UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user"); // 로그인 유저객체
+				userInfoVO.setBiNum(0); 
+				userInfoService.updateBiNum(userInfoVO); // 유저인포의 biNum 0으로 업데이트
 				msg = "참가 취소되셨습니다!!";
 			}
 		}
@@ -196,7 +205,7 @@ public class BabsangInfoController {
 			if (babsangInfoService.blockJoin(biNum)) {
 				// 밥상서비스의 마감메소드 정상 실행 시
 				msg = "밥상마감!!";
-				url = "/detail/" + biNum;
+				url = "/detail/" + biNum; // 해당 페이지 redirect
 			}
 		}
 		m.addAttribute("msg", msg);
@@ -215,7 +224,7 @@ public class BabsangInfoController {
 			if (babsangInfoService.cancleBlockJoin(biNum)) {
 				// 밥상서비스의 마감메소드 정상 실행 시
 				msg = "밥상마감취소!!";
-				url = "/detail/" + biNum;
+				url = "/detail/" + biNum; // 해당 상세페이지 redirect
 			}
 		}
 		m.addAttribute("msg", msg);
