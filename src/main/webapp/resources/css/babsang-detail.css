@@ -104,15 +104,17 @@
 .content .container {
 	margin-top: 150px;
 }
-
+.content .container .commentList{
+	/*margin-bottom: 20px;*/
+}
 .content .container .commentBox {
 	border: 1px solid darkgray;
 	border-radius: 20px;
-	margin-bottom: 15px;
 	width: 90%;
 	font-size: 18px;
 	height: 100px;
 	margin: 0 auto;
+	margin-bottom: 30px;
 }
 
 .content .container .commentBox .profileImg {
@@ -142,12 +144,23 @@
 .content .container .commentBox .commentContent {
 	padding: 15px;
 	float: left;
-	margin-right: 65%;
 }
 
-.content .container .commentBox a {
-	float: left;
-	padding: 15px;
+.content .container .commentBox .commentBtn {
+	/* 댓글마다 수정 삭제 버튼 자리 고정 */
+	position:absolute;
+	padding-top: 15px;
+	margin-left: 49%;
+	font-weight: bold;
+	font-size: 16px;
+}
+.content .container .commentBox .commentBtn :hover{
+	/* 각 버튼 마우스 오버시 텍스트 색 변경 */
+	color:  #FC522F;
+
+}
+.content .container .commentBox .commentBtn span{
+	padding: 10px;
 }
 
 .content .container .commentInput {

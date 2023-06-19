@@ -30,8 +30,8 @@
 												// 로그인시 수정, 삭제기능 가능토록 추가
 												if(${sessionScope.user.uiNum}==value.uiNum && ${sessionScope.user.uiNum}!=null){
 												// 아래부분 태그들은 세션스코프의 값이 존재하면서, value.uiNum과 값이 같으면 태그가 나오도록 수정
-												a += '<a onclick="commentUpdate('+ value.ciNum+ ',\''+ value.ciContent+ '\');"> 수정 </a>';
-												a += '<a onclick="commentDelete('+ value.ciNum+ ');"> 삭제 </a>';
+												a += '<div class="commentBtn"><span onclick="commentUpdate('+ value.ciNum+ ',\''+ value.ciContent+ '\');"> 수정 </span>';
+												a += '<span onclick="commentDelete('+ value.ciNum+ ');"> 삭제 </span></div>';
 												}
 												a += '</div>';
 												a += '</div></div>';
