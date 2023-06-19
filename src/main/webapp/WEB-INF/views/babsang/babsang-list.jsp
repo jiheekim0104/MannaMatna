@@ -22,15 +22,15 @@
 		<input type="text" name="biTitle" placeholder="검색하실 밥상의 제목을 입력해주세요" value="${param.biTitle}">
 		<button>검색</button>
 	</form>
-	<form method="get" action="#">
-		<button>태그</button>
-		<button>태그</button>
-		<button>태그</button>
-		<button>태그</button>
-		<button>태그</button>
-		<button>태그</button>
-		<button>태그</button>
-		<button>태그</button>
+	<form action="/main" method="get">
+		<button name="biFdCategory" value="한식">한식</button>
+		<button name="biFdCategory" value="중식">중식</button>
+		<button name="biFdCategory" value="일식">일식</button>
+		<button name="biFdCategory" value="양식">양식</button>
+		<button name="biFdCategory" value="분식">분식</button>
+		<button name="biFdCategory" value="패스트푸드">패스트푸드</button>
+		<button name="biFdCategory" value="해산물">해산물</button>
+		<button name="biFdCategory" value="족발">족발</button>
 	</form>
 	
 	<hr>
@@ -73,7 +73,7 @@
 				<td>날짜 : ${babsangListVO.biMeetingDat}</td>
 				<td>시간 : ${babsangListVO.biMeetingTim}</td>
 			</tr>
-			<%-- 밥상 삭제 버튼
+			<%-- 밥상 삭제 버튼--%>
 			<tr>
 				<c:if test="${sessionScope.user.uiNum == babsangListVO.uiNum}">
 					<td colspan="2" align="center">
@@ -82,7 +82,7 @@
 							삭제</button>
 					</td>
 				</c:if>
-			</tr> --%>
+			</tr> 
 		</c:forEach>
 	</table>
 	
@@ -98,27 +98,27 @@
 			let html = '';
 			
 			if(11<=page){
-				html +='<a href="/main?page=1&biTitle=${param.biTitle}">&#x219E</a>  '
+				html +='<a href="/main?page=1&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}">&#x219E</a>  '
 			}//page가 11 이상일때만 맨 처음으로 버튼 보임
 			if(start!=1){
-				html += '<a href="/main?page=' + (start-1) + '&biTitle=${param.biTitle}">&#x2190</a>'
+				html += '<a href="/main?page=' + (start-1) + '&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}">&#x2190</a>'
 			}//<버튼 누르면 현재 묶음페이지의 start에서 -1로 (묶음페이지가 첫페이지(1~5)가 아닐 때만 보임)
 			
 			for(let i=start; i<=end; i++){
 				if(i==page){
 					html += ' [' + i + '] ';
 				}else{
-					html += ' <a href="/main?page=' + i + '&biTitle=${param.biTitle}&biContent=${param.biContent}">[' + i + ']</a>' ;
+					html += ' <a href="/main?page=' + i + '&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}">[' + i + ']</a>' ;
 				}
 			}
 			
 			if(end!=pages){
-				html += ' <a href="/main?page=' + (end+1) + '&biTitle=${param.biTitle}">&#x2192</a>';
+				html += ' <a href="/main?page=' + (end+1) + '&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}">&#x2192</a>';
 				
 			}//>버튼 누르면 묶음페이지 +1로 (묶음페이지가 첫페이지(1~5)가 아닐 때만 보임)
 			
 			if((end/5)<=(Math.ceil(pages/5))-2){
-				html +='  <a href="/main?page=' + pages + '&biTitle=${param.biTitle}">&#x21A0</a>'
+				html +='  <a href="/main?page=' + pages + '&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}">&#x21A0</a>'
 				}//>>버튼 누르면 마지막 묶음페이지로 */
 				
 			document.querySelector('#pageDiv').innerHTML = html;
