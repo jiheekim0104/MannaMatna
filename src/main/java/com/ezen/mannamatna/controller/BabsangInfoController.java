@@ -128,21 +128,27 @@ public class BabsangInfoController {
 		// 참가하기 컨트롤러
 		String msg = "로그인해주세요!";
 		String url = "/login";
-		if (session.getAttribute("user") != null) {
+		 UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user"); // 로그인 중인 유저세션
+		if (userInfoVO != null) {
 			// 로그인 세션이 확인 되는 경우만
 			// 세션에서 uiVO 객체를 제공받은 후 해당 객체로 uiService의 biNum업데이트 실행
 			url = "/detail/" + biNum;
-			BabsangInfoVO babsangInfoVO = babsangInfoService.getBabsangInfoVO(biNum);
-			List<UserInfoVO> userList = userInfoService.getUserInfosByBiNum(biNum);
+			BabsangInfoVO babsangInfoVO = babsangInfoService.getBabsangInfoVO(biNum); // 상세페이지의 밥상객체
+			List<UserInfoVO> userList = userInfoService.getUserInfosByBiNum(biNum); // 해당밥상에 참가중인 유저리스트
 			if (userList.size() == babsangInfoVO.getBiHeadCnt()) {
 				// 만약에 인원이 가득 찼을 경우
 				msg = "인원이 가득 찼습니다!!";
 			} else if (babsangInfoVO.isBiClosed()) {
 				// 밥상이 이미 마감된 경우
 				msg = "이미 마감 된 밥상입니다!!";
-			} else {
-				// 인원이 가득 차지 않은 밥상 및 마감된 밥상이 아닐 경우, 실제 참가 기능 실행
-				UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user");
+			} else if(userInfoVO.getBiNum()>0){
+				// 이미 생성중인 밥상이 있으나 다른 밥상게시물 상세페이지에 들어갔을 경우 참가하기 실행하지 않아야한다.
+				// 세션유저객체의 biNum이 0보다 크다면 밥상에 참여중인 유저이거나 밥상작성자이다. 
+				msg = "이미 참여중인 밥상이 존재합니다!!";
+			}
+				else {
+				// 인원이 가득 차지 않은 밥상 및 마감된 밥상이 아닐 경우, 참가중인 밥상이 없을 경우에만 실제 참가 기능 실행
+				userInfoVO = (UserInfoVO) session.getAttribute("user");
 				userInfoVO.setBiNum(biNum);
 				userInfoService.updateBiNum(userInfoVO);
 				msg = "참가되셨습니다!!";
