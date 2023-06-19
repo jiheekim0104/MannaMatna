@@ -63,7 +63,7 @@
 				${detail.biHeadCnt} (최대인원)</div>
 			<div class="box" id="makerBox">
 				<img class="profileImg" src="${babsangMaker.uiFilepath}"
-					onclick="location.href='/profile'">
+					onclick="location.href='/profile/${babsangMaker.uiNum}'">
 				<div class="nickName" id="makerNickName">
 					<img class="crown" src="../../../resources/upload/왕관.png">
 					${babsangMaker.uiNickname}
@@ -75,7 +75,7 @@
 					<%-- 즉, 참가자만 출력 (작성자는 기본 고정) --%>
 					<div class="box">
 						<img class="profileImg" src="${userList.uiFilepath}"
-							onclick="location.href='/profile'">
+							onclick="location.href='/profile/${userList.uiNum}'">
 						<div class="nickName" id="partyNickName">${userList.uiNickname}</div>
 					</div>
 				</c:if>

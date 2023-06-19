@@ -58,8 +58,6 @@ public class UserInfoService {
 		userInfoVO = uiMapper.selectUserInfoById(userInfoVO);
 		if(passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd())) {
 			log.info("확인하려는 유저 =>{}", userInfoVO);
-
-			
 			session.setAttribute("user", userInfoVO);
 			return true;
 		}
@@ -599,6 +597,7 @@ public class UserInfoService {
 
 	public UserInfoVO getUserInfoFromBabsang(int uiNum) {
 		// 밥상등록 시 밥상정보에 등록된 uiNum으로 유저리스트에서 해당유저(작성자)정보를 찾는다.
+		// 해당 메소드 밥상상세의 다른 유저 프로필보기 기능 수행시에도 사용
 		return uiMapper.selectUserInfoFromBabsang(uiNum);
 	}
 

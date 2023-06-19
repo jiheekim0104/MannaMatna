@@ -39,11 +39,14 @@ alert('${msg}');
 			연령대 : ${user.uiAge}대<br>
 		</div>
 		<br><br><br><br>
+		<c:if test="${sessionScope.user.uiNum==user.uiNum}">
+		<%-- 해당 버튼들은 상세페이지에서 다른 유저의 정보를 보는 경우 수정 및 탈퇴가 불가능하도록 처리 --%>
 		<div class="buttons">
 			<button class="updateBnt" onclick="location.href='/check-update'">정보수정</button>
 			<button class="withdrawBnt" onclick="location.href='/withdraw'">탈퇴하기</button>
 			<div class="hint"></div>
 		</div>
+		</c:if>
 	</div>
 </div>
 </body>

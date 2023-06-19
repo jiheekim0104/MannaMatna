@@ -80,22 +80,22 @@
 	</update>
 
 	<!-- userInfo.biNum 업데이트문 -->
-	<update id="updateUiBiNum">
+	<update id="updateUiBiNum"> <!-- 밥상 인서트 후 돌려받은 키를 유저인포의 biNum에 업데이트 -->
 		update user_info set bi_num = #{biNum} where ui_num =
 		#{uiNum}
 	</update>
 	
-	<select id="selectUserInfos">
+	<select id="selectUserInfos"><!-- 유저 전체 리스트 검색(관리자페이지 차트용) -->
 		select * from user_info;
 	</select>
 	
 	<select id="selectUserInfosByBiNum"
-		resultType="com.ezen.mannamatna.vo.UserInfoVO">
+		resultType="com.ezen.mannamatna.vo.UserInfoVO"><!-- 유저정보의 biNum으로 해당밥상에 참여중이 유저리스트 검색 -->
 		SELECT * FROM USER_INFO WHERE BI_NUM = #{biNum}
 	</select>
 	
 	<select id="selectUserInfoFromBabsang"
-		resultType="com.ezen.mannamatna.vo.UserInfoVO">
+		resultType="com.ezen.mannamatna.vo.UserInfoVO"><!-- 밥상의 uiNum으로 유저인포 검색 -->
 		SELECT UI_NUM, UI_NICKNAME, UI_PWD, UI_FILEPATH,
 		UI_GENDER,
 		UI_AGE, BI_NUM, UI_CREDAT,

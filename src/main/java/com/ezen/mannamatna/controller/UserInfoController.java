@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -209,6 +210,13 @@ public class UserInfoController {
 	public String profile(@ModelAttribute UserInfoVO userInfoVO, HttpSession session) {
 		userInfoVO = (UserInfoVO) session.getAttribute("user");
 		log.info("컨트롤러/프로필요청 ==>{}",userInfoVO);
+		return "user/user-profile";
+	}
+	@GetMapping("/profile/{uiNum}")
+	public String profileByUiNum(@PathVariable("uiNum") int uiNum, HttpSession session, Model m) {
+		// uiNum을 파라미터로 하는 프로필 화면 전환
+		UserInfoVO userInfoVO = uiService.getUserInfoFromBabsang(uiNum); // 상세페이지의 밥상메이커(작성자)객체의 uiNum을 파라미터로 받았다.
+		m.addAttribute("user", userInfoVO); // 해당객체를 모델에 넣어준 후 프로필화면으로 보내준다.
 		return "user/user-profile";
 	}
 	
