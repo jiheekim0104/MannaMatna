@@ -1,5 +1,7 @@
 package com.ezen.mannamatna.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,9 @@ public class BabsangInfoController {
 	@Autowired
 	private UserInfoService userInfoService;
 
-	/* 기존 밥상 리스트 나열할 때 사용
+	/*
+	 * 기존 밥상 리스트 나열할 때 사용
+	 * 
 	 * @GetMapping("/main") public String goMain(BabsangInfoVO babsang, Model m){
 	 * List<BabsangInfoVO> babsangList =
 	 * babsangInfoService.getBabsangInfoVOs(babsang);
@@ -124,25 +128,82 @@ public class BabsangInfoController {
 		// 참가하기 버튼을 누르면 해당 메소드로 포스트매핑된 후 알림메세지와함께 redirect되도록해보겠다!!
 		// biNum은 모델에 담겨있을거같은데???
 		// 주말에 실험해본다!!
-		String msg = "이미참여중!";
-		String url = "/main";
-		BabsangInfoVO babsangInfoVO = (BabsangInfoVO) m.getAttribute("detail");
-		log.info("상세페이지에 담겨있는 모델의 밥상객체 확인해보자!!{}", babsangInfoVO);
+		String msg = "로그인해주세요!";
+		String url = "/login";
+		log.info("상세페이지에 담겨있는 모델의 밥상객체 확인해보자!!{}", (BabsangInfoVO) m.getAttribute("detail"));
 		log.info("참가하기누르고나서 biNum확인하기!!{}", biNum);
-		if(session.getAttribute("user")!=null) {
+		if (session.getAttribute("user") != null) {
 			// 로그인 세션이 확인 되는 경우만
 			// 세션에서 uiVO 객체를 제공받은 후 해당 객체로 uiService의 biNum업데이트 실행
-			UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user");
-			userInfoVO.setBiNum(biNum);
-			userInfoService.updateBiNum(userInfoVO);
-			msg = "참가되셨습니다!!";
-			url = "/detail/"+biNum;
-			m.addAttribute("msg", msg);
-			m.addAttribute("url", url);
-			
-		} else {
-			
+			url = "/detail/" + biNum;
+			BabsangInfoVO babsangInfoVO = babsangInfoService.getBabsangInfoVO(biNum);
+			List<UserInfoVO> userList = userInfoService.getUserInfosByBiNum(biNum);
+			if (userList.size() == babsangInfoVO.getBiHeadCnt()) {
+				// 만약에 인원이 가득 찼을 경우
+				msg = "인원이 가득 찼습니다!!";
+			} else {
+				// 인원이 가득 차지 않을경우!! 비지니스 로직 실행
+				UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user");
+				userInfoVO.setBiNum(biNum);
+				userInfoService.updateBiNum(userInfoVO);
+				msg = "참가되셨습니다!!";
+			}
 		}
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+		return "common/msg";
+	}
+
+	@GetMapping("/joinCancle/{biNum}")
+	public String joinCancle(Model m, @PathVariable("biNum") int biNum, HttpSession session) {
+		// 참가취소 비지니스로직
+		String msg = "로그인해주세요!";
+		String url = "/login";
+		if (session.getAttribute("user") != null) {
+			// 세션 로그인상태 유지중 참가하기 취소 누른 후
+			// 유저인포 biNum 0으로 업데이트
+			UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user");
+			userInfoVO.setBiNum(0);
+			userInfoService.updateBiNum(userInfoVO);
+			msg = "참가취소되셨습니다!!";
+			url = "/detail/" + biNum;
+		}
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+		return "common/msg";
+	}
+	@GetMapping("/babsangClose/{biNum}")
+	public String closeBabsang(Model m, @PathVariable("biNum") int biNum, HttpSession session) {
+		String msg = "로그인해주세요!";
+		String url = "/login";
+		if (session.getAttribute("user") != null) {
+			// 세션 로그인상태 유지중 마감하기 누른 후
+			// 밥상인포 biClosed 1로 업데이트
+			if(babsangInfoService.blockJoin(biNum)) {
+				// 밥상서비스의 마감메소드 정상 실행 시
+				msg = "밥상마감!!";
+				url = "/detail/" + biNum;
+			}
+		}
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+		return "common/msg";
+	}
+	@GetMapping("/babsangCloseCancle/{biNum}")
+	public String closeBabsangCancle(Model m, @PathVariable("biNum") int biNum, HttpSession session) {
+		String msg = "로그인해주세요!";
+		String url = "/login";
+		if (session.getAttribute("user") != null) {
+			// 세션 로그인상태 유지중 마감취소 누른 후
+			// 밥상인포 biClosed 0로 업데이트
+			if(babsangInfoService.cancleBlockJoin(biNum)) {
+				// 밥상서비스의 마감메소드 정상 실행 시
+				msg = "밥상마감취소!!";
+				url = "/detail/" + biNum;
+			}
+		}
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
 		return "common/msg";
 	}
 }

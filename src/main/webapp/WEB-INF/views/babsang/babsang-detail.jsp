@@ -23,17 +23,36 @@
 			${fn:substring(biMeetingDat,5,7)}. ${fn:substring(biMeetingDat,8,10)}
 			${fn:substring(biMeetingTim,0,2)}시 ${fn:substring(biMeetingTim,3,5)}분</div>
 		<div class="innerContent">${detail.biContent}</div>
-		<c:if test="${sessionScope.user.uiNum != detail.uiNum}">
-		<%-- 로그인유저와 작성자정보가 다른경우 참가하기 버튼 --%>
-			<button class="Btn" type="submit" onclick="location.href = '/babsangJoin/${detail.biNum}'">참가하기</button>
+		<c:if
+			test="${sessionScope.user.uiNum != detail.uiNum && sessionScope.user.biNum != detail.biNum}">
+			<%-- 로그인유저와 작성자정보가 다른경우 참가하기 버튼 --%>
+			<button class="Btn" type="submit"
+				onclick="location.href = '/babsangJoin/${detail.biNum}'">참가하기</button>
+		</c:if>
+		<c:if
+			test="${sessionScope.user.biNum == detail.biNum && sessionScope.user.uiNum != detail.uiNum}">
+			<%-- 로그인유저가 밥상번호가 같은 경우(참가중일경우) 참가 취소버튼 --%>
+			<button class="Btn" type="submit"
+				onclick="location.href='/joinCancle/${detail.biNum}'">참가취소</button>
 		</c:if>
 		<!-- 이 부분 추가했습니다 -->
+		<c:if
+			test="${sessionScope.user.uiNum == detail.uiNum && detail.biClosed==false}">
+			<%-- 세션정보가 작성자이며, 마감하기 하기 전인 경우 마감하기 --%>
+			<button class="Btn" type="submit"
+				onclick="location.href='/babsangClose/${detail.biNum}'">마감하기</button>
+		</c:if>
+		<c:if
+			test="${sessionScope.user.uiNum == detail.uiNum && detail.biClosed==true}">
+			<%-- 세션정보가 작성자이며, 마감상태 후 마감취소버튼 --%>
+			<button class="Btn" type="submit"
+				onclick="location.href='/babsangCloseCancle/${biNum}'">마감취소</button>
+		</c:if>
 		<c:if test="${sessionScope.user.uiNum == detail.uiNum}">
-		<%-- 세션정보가 관리자인 경우 --%>
-			<button class="Btn" type="submit">마감하기</button>
+			<%-- 세션정보가 작성자일 경우 삭제버튼 --%>
 			<button class="Btn"
 				onclick="location.href='/deleteBabsang?biNum=${detail.biNum}'">밥상삭제</button>
-				<%-- 추후 onclick 함수에 넣기 location.href='/deleteBabsang?biNum=${detail.biNum}' --%>
+			<%-- 추후 onclick 함수에 넣기 location.href='/deleteBabsang?biNum=${detail.biNum}' --%>
 		</c:if>
 		<hr>
 		<!-- 참가자정보 영역 -->
@@ -74,11 +93,11 @@
 		<div class="container">
 			<label for="ciContent"></label>
 			<form name="commentInsertForm">
-				<div class = "commentInput">
+				<div class="commentInput">
 					<input type="hidden" name="biNum" value="${detail.biNum}" /> <input
 						type="text" class="form-control" id="ciContent" name="ciContent"
 						placeholder="댓글을 입력하세요."> <span class="input-group-btn">
-						<button class= "commentBtn"type="button" name="commentInsertBtn">작성하기</button>
+						<button class="commentBtn" type="button" name="commentInsertBtn">작성하기</button>
 					</span>
 				</div>
 			</form>

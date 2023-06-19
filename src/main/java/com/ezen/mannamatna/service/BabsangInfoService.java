@@ -41,4 +41,16 @@ public class BabsangInfoService {
 	public BabsangInfoVO updateUiBiNum(int uiBiNum) {
 		return babsangInfoMapper.updateUserInfoBiNum(uiBiNum);
 	}
+	public boolean blockJoin(int biNum) {
+		// 마감하기 서비스
+		BabsangInfoVO babsangInfoVO = babsangInfoMapper.selectBabsangInfo(biNum);
+		babsangInfoVO.setBiClosed(true);
+		return babsangInfoMapper.updateBiClosed(babsangInfoVO)==1;
+	}
+	public boolean cancleBlockJoin(int biNum) {
+		// 마감취소 서비스
+		BabsangInfoVO babsangInfoVO = babsangInfoMapper.selectBabsangInfo(biNum);
+		babsangInfoVO.setBiClosed(false);
+		return babsangInfoMapper.updateBiClosed(babsangInfoVO)==1;
+	}
 }

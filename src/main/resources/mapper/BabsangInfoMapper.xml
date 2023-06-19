@@ -54,6 +54,7 @@
 		DELETE FROM BABSANG_INFO
 		WHERE BI_NUM = #{biNum}
 	</delete>
-	
-	
+	<update id="updateBiClosed">
+	UPDATE BABSANG_INFO SET BI_CLOSED = #{biClosed} WHERE BI_NUM = #{biNum}
+	</update>
 </mapper>
