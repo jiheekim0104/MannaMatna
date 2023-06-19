@@ -6,7 +6,12 @@
 		resultType="com.ezen.mannamatna.vo.UserInfoVO">
 		select * from user_info where ui_Nickname = #{uiNickname}
 	</select>
-
+	
+	<select id="selectUserInfoById"
+		resultType="com.ezen.mannamatna.vo.UserInfoVO">
+		select * from user_info where ui_Id = #{uiId}
+	</select>
+	
 	<select id="selectUserInfoForLogin"
 		resultType="com.ezen.mannamatna.vo.UserInfoVO">
 		select * from user_info where ui_Id = #{uiId} and ui_Pwd =
@@ -79,13 +84,16 @@
 		update user_info set bi_num = #{biNum} where ui_num =
 		#{uiNum}
 	</update>
+	
 	<select id="selectUserInfos">
 		select * from user_info;
 	</select>
+	
 	<select id="selectUserInfosByBiNum"
 		resultType="com.ezen.mannamatna.vo.UserInfoVO">
 		SELECT * FROM USER_INFO WHERE BI_NUM = #{biNum}
 	</select>
+	
 	<select id="selectUserInfoFromBabsang"
 		resultType="com.ezen.mannamatna.vo.UserInfoVO">
 		SELECT UI_NUM, UI_NICKNAME, UI_PWD, UI_FILEPATH,

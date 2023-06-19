@@ -125,7 +125,6 @@ public class UserInfoController {
             userInfoVO = uiService.requestNaverUser(naverToken.getAccess_token()); //유저정보 요청
             log.info("user = {}",userInfoVO);
             log.info("naverToken = {}", naverToken);
-//			session.setAttribute("user", userInfoVO); 
         }
 		if(uiService.join(userInfoVO)) {
 			m.addAttribute("msg","회원가입에 성공하셨습니다.");
@@ -139,24 +138,22 @@ public class UserInfoController {
 		UserInfoVO userInfoVO = null;
 		NaverUserInfoVO naverUserInfoVO = new NaverUserInfoVO();
 		// 네이버 로그인해서 id 돌려받고, 그 아이디를 가진 유저가 있는지 인포 돌아서 확인 이때 비번은 0000 고정임
-		
 		if(code!=null){//네이버측에서 보내준 code가 있다면 출력
             System.out.println("code = " + code);
-            NaverToken naverToken = uiService.requestNaverToken("/naverLogin/",code,state); //카카오 토큰 요청
+            NaverToken naverToken = uiService.requestNaverToken("/naverLogin/",code,state); //네이버 토큰 요청
             log.info("여기서 들어감! naverUserInfoVO={}",naverUserInfoVO);
             userInfoVO = uiService.requestNaverUser(naverToken.getAccess_token()); //유저정보 요청
-            naverUserInfoVO.setNuiId(userInfoVO.getNuiId()); // userInfoVO가 가지고있는 카카오 id값을 kakaoUserInfoVO에 넣음
+            naverUserInfoVO.setNuiId(userInfoVO.getNuiId()); // userInfoVO가 가지고있는 네이버 id값을 naverUserInfoVO에 넣음
             naverUserInfoVO.setNaverImgPath(userInfoVO.getNaverImgPath());
             log.info("로그인요청한 naverUserInfoVO={}",naverUserInfoVO);
-            if(uiService.naverLogin(naverUserInfoVO, session)) { // 카카오유저테이블에 그 id를 가지는 카카오유저가있다면
+            if(uiService.naverLogin(naverUserInfoVO, session)) { // 네이버유저테이블에 그 id를 가지는 네이버유저가있다면
             	 m.addAttribute("url","/main"); 
             	 m.addAttribute("msg", "로그인성공");
             	 return "common/msg";
             }
-            m.addAttribute("msg","카카오 가입 유저가 아닙니다.");
+            m.addAttribute("msg","네이버 가입 유저가 아닙니다.");
     		return "user/login";
         }
-	
 		m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다.");
 		return "user/login";
 }

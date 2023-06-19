@@ -53,12 +53,19 @@ public class UserInfoService {
 	}
 
 	public boolean login(UserInfoVO userInfoVO, HttpSession session) {
-		userInfoVO = uiMapper.selectUserInfoForLogin(userInfoVO);
-		log.info("확인하려는 유저 =>{}", userInfoVO);
-		if (userInfoVO != null) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String inputPwd = userInfoVO.getUiPwd();
+		userInfoVO = uiMapper.selectUserInfoById(userInfoVO);
+		if(passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd())) {
+			log.info("확인하려는 유저 =>{}", userInfoVO);
+
+			
 			session.setAttribute("user", userInfoVO);
 			return true;
 		}
+//		userInfoVO = uiMapper.selectUserInfoForLogin(userInfoVO);
+		
+
 		return false;
 	}
 
@@ -136,8 +143,7 @@ public class UserInfoService {
 					return uiMapper.insertKakaoUserInfo(kakaoUserInfoVO) == 1; // 카카오 유저 테이블에 인서트
 				}
 				return false;
-			}
-			if(naverId!=null) { // 네이버 가입 유저인경우
+			} else if(naverId!=null) { // 네이버 가입 유저인경우
 				if (uiMapper.insertUserInfo(userInfoVO) == 1) { // 일반 유저 테이블에 넣고
 					userInfoVO = uiMapper.selectUserInfo(userInfoVO); // 넣은걸 가져와서
 					log.info("일반db에 추가된거+네이버번호 추가한거={}", userInfoVO);
@@ -151,8 +157,7 @@ public class UserInfoService {
 				}
 				return false;
 			}
-			
-			
+			return false;
 		} else {
 			fileName = userInfoVO.getUiFile().getOriginalFilename();
 			if ("".equals(fileName)) {

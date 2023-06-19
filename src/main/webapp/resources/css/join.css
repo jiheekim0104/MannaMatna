@@ -7,11 +7,15 @@ input{
 	width: 244px;
 	height: 22px;
 	margin: 5px 0px;
+	border-radius:0.3em;
+	border: 1px solid gray;
 }
 
-/* input:focus{ 상자선택시 색변경
-	border: 2px solid #FC522F;
-} */
+input:focus{ /* 상자선택시 색변경 어근데 왜 라디오가 네모냐고 ㅋ */
+	outline: none !important; 
+	border-color: #FC522F; 
+	box-shadow: 0 0 5px #FC522F;
+} 
 
 .uiPwd{
 	width: 350px;
@@ -129,6 +133,12 @@ select{
 	height: 22px;
 	margin: 5px 0px;
 }
+
+select:focus{ /* 상자선택시 색변경 */
+	outline: none !important; 
+	border-color: #FC522F; 
+	box-shadow: 0 0 5px #FC522F;
+} 
 
 .gender{
 	width:15px;

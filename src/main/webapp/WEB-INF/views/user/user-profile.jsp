@@ -18,9 +18,6 @@ alert('${msg}');
 
 <div class="content">
 	<div class="img">
-		<c:if test="${user.uiFilepath!=null}">
-			<img src="${user.uiFilepath}" width="300">
-		</c:if>
 		<c:if test="${user.uiFilepath != null}">	
 			<img src="${user.uiFilepath}" width="300">
 		</c:if>

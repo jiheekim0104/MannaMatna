@@ -22,9 +22,9 @@
 		</div>
 		<div class="info">
 			<div class="filebox">
-	    		<input class="upload-name" placeholder="프로필 사진" >
-	    		<label for="file">업로드</label> 
-	   		 	<input type="file" id="file" name="uiFile" onchange="loadImg(this)">
+	    		<input class="upload-name" placeholder="프로필 사진">
+	    		<label for="file" class="labelBnt" >업로드</label> 
+	   		 	<input type="file" id="file" name="uiFile" onchange="loadImg(this)"  value="N" >
 			</div>
 			<input type="text" name="uiNickname" id="uiNickname" value="${user.uiNickname}">
 			<button class="bnt" type="button" id="nicknameChk" onclick="fn_nicknameChk();" value="N">중복확인</button><br> 
@@ -53,8 +53,10 @@
 			<span>성별</span> 
 			<c:if test="${user.uiGender==true}">
 				<input class="gender" type="radio" name="uiGender" id="uiGender1" value="true" checked="checked"> 남자
+				<input class="gender" type="radio" name="uiGender" id="uiGender2" value="false"> 여자<br>
 			</c:if>	
 			<c:if test="${user.uiGender==false}">
+				<input class="gender" type="radio" name="uiGender" id="uiGender1" value="true"> 남자
 				<input class="gender" type="radio" name="uiGender" id="uiGender2" value="false" checked="checked"> 여자<br>
 			</c:if>	
 			
@@ -69,8 +71,16 @@
 			let imgObj = document.querySelector('#imgDiv');
 			imgObj.src = URL.createObjectURL(file);
 			document.querySelector('#imgDiv').style.display = '';
+			let fileName = $("#file").val().split('/').pop().split('\\').pop();
+			$(".uiFile").val(fileName);
+			$('#file').val('Y'); // 사진이 바뀌었으면 y로 값을 변경함
+			alert(0);
 		}
 		function checkValue(){
+			let prifileImgChk = document.querySelector('#file').value;
+			if(prifileImgChk=="N"){
+				prifileImgChk=='${user.uiFilepath}';
+			}
 			let inputNickname = document.getElementById('uiNickname').value; 
 			if(nicknameChk=="N"){
 				if(inputNickname==${user.uiNickname}){

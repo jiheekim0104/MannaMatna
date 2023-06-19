@@ -9,6 +9,8 @@ import com.ezen.mannamatna.vo.UserInfoVO;
 public interface UserInfoMapper {
 	UserInfoVO selectUserInfo(UserInfoVO userInfoVO);
 	
+	UserInfoVO selectUserInfoById(UserInfoVO userInfoVO);
+	
 	UserInfoVO selectUserInfoForLogin(UserInfoVO userInfoVO);
 	
 	KakaoUserInfoVO selectKakaoUserInfo(KakaoUserInfoVO kakaoUserInfoVO); //카카오 로그인 유저를 찾을때 사용
