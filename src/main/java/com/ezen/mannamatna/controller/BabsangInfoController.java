@@ -121,20 +121,29 @@ public class BabsangInfoController {
 		return "common/common";
 	}
 
-	@PostMapping("/babsangJoin")
-	public String joinBabsang(Model m, @RequestParam("biNum") int biNum, HttpSession session) {
+	@GetMapping("/babsangJoin/{biNum}")
+	public String joinBabsang(Model m, @PathVariable("biNum") int biNum, HttpSession session) {
 		// 참가하기 버튼을 누르면 해당 메소드로 포스트매핑된 후 알림메세지와함께 redirect되도록해보겠다!!
 		// biNum은 모델에 담겨있을거같은데???
 		// 주말에 실험해본다!!
+		String msg = "이미참여중!";
+		String url = "/main";
 		BabsangInfoVO babsangInfoVO = (BabsangInfoVO) m.getAttribute("detail");
 		log.info("상세페이지에 담겨있는 모델의 밥상객체 확인해보자!!{}", babsangInfoVO);
 		log.info("참가하기누르고나서 biNum확인하기!!{}", biNum);
-		UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user");
-		// 세션에서 uiVO 객체를 제공받은 후 해당 객체로 uiService의 biNum업데이트 실행
-		if (userInfoService.updateBiNum(userInfoVO)) {
-			// 서비스가 정상적으로 실행됐을 경우
+		if(session.getAttribute("user")!=null) {
+			// 로그인 세션이 확인 되는 경우만
+			// 세션에서 uiVO 객체를 제공받은 후 해당 객체로 uiService의 biNum업데이트 실행
+			UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user");
+			userInfoVO.setBiNum(biNum);
+			userInfoService.updateBiNum(userInfoVO);
+			msg = "참가되셨습니다!!";
+			url = "/detail/"+biNum;
+			m.addAttribute("msg", msg);
+			m.addAttribute("url", url);
+			
 		} else {
-			// 정상실행 아닐경우
+			
 		}
 		return "common/msg";
 	}

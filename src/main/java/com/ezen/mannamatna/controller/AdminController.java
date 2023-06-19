@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j2;
 public class AdminController {
 	
 	@Autowired
-	GoogleChartService googleChartService; // 구글 차트서비스 의존 추가
+	GoogleChartService googleChartService; // 援ш� 李⑦듃�꽌鍮꾩뒪 �쓽議� 異붽�
 	
 	@GetMapping("/getChart")
 	@ResponseBody
