@@ -12,14 +12,27 @@
 		select * from user_info where ui_Id = #{uiId} and ui_Pwd =
 		#{uiPwd}
 	</select>
+	
 	<select id="selectKakaoUserInfo"
 		resultType="com.ezen.mannamatna.vo.KakaoUserInfoVO">
 		select * from kakao_user_info where kui_Id = #{kuiId}
 	</select>
+	
+	<select id="selectNaverUserInfo"
+		resultType="com.ezen.mannamatna.vo.NaverUserInfoVO">
+		select * from naver_user_info where nui_Id = #{nuiId}
+	</select>
+	
 	<select id="selectUserInfoByKakao"
 		resultType="com.ezen.mannamatna.vo.UserInfoVO">
 		select * from user_info where ui_Num = #{uiNum}
 	</select>
+	
+	<select id="selectUserInfoByNaver"
+		resultType="com.ezen.mannamatna.vo.UserInfoVO">
+		select * from user_info where ui_Num = #{uiNum}
+	</select>
+	
 	<select id="idChk" resultType="int">
 		select count(*) from user_info
 		where ui_Id = #{uiId}
@@ -41,6 +54,12 @@
 		insert into kakao_user_info (ui_num, kui_id)
 		values
 		(#{uiNum},#{kuiId})
+	</insert>
+	
+	<insert id="insertNaverUserInfo">
+		insert into naver_user_info (ui_num, nui_id)
+		values
+		(#{uiNum},#{nuiId})
 	</insert>
 
 	<update id="updateUserInfo">

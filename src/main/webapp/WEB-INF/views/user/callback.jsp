@@ -1,4 +1,6 @@
 <!-- 네이버 로그인시에 사용하는 callback -->
+<%@page import="com.ezen.mannamatna.vo.NaverToken"%>
+<%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.net.URL" %>
 <%@ page import="java.net.HttpURLConnection" %>
@@ -11,7 +13,7 @@
   </head>
   <body>
   <%
-    String clientId = "BSeMnF9B1CusMX9DeEg8";//애플리케이션 클라이언트 아이디값";
+  /*   String clientId = "BSeMnF9B1CusMX9DeEg8";//애플리케이션 클라이언트 아이디값";
     String clientSecret = "fpEWA5y2fc";//애플리케이션 클라이언트 시크릿값";
     String code = request.getParameter("code");
     String state = request.getParameter("state");
@@ -43,6 +45,14 @@
       while ((inputLine = br.readLine()) != null) {
         res.append(inputLine);
       }
+      ObjectMapper mapper = new ObjectMapper();
+      NaverToken naverToken = new NaverToken();
+      naverToken=mapper.readValue(inputLine, NaverToken.class);
+      String access_Token = naverToken.getAccess_token();
+	  String refresh_Token = naverToken.getRefresh_token();
+	  log.info("access_token = {}", access_Token);
+		log.info("refresh_token = {}", refresh_Token);
+		
       br.close();
       if (responseCode == 200) {
     	  System.out.println("합니다~");
@@ -51,7 +61,8 @@
     } catch (Exception e) {
       // Exception 로깅
     }
-    
+    log.info("네이버토큰생성완료>>>{}", naverToken);
+	return naverToken; */
 
   %>
   </body>

@@ -38,8 +38,15 @@
 			<!-- 로그인 시 출력 화면-->
 			<c:if test="${sessionScope.user.uiNickname != null}">
 				<div class="box">
-					<img class="profileImg" src="${sessionScope.user.uiFilepath}"
-					onclick="location.href='/profile'">
+					<c:if test="${sessionScope.user.uiFilepath != null}">	
+						<img class="profileImg" src="${sessionScope.user.uiFilepath}">
+					</c:if>
+					<c:if test="${sessionScope.user.uiFilepath == null && sessionScope.user.kakaoImgPath != null}">	
+						<img class="profileImg" src="${sessionScope.user.kakaoImgPath}">
+					</c:if>
+					<c:if test="${sessionScope.user.uiFilepath == null && sessionScope.user.naverImgPath != null}">	
+						<img class="profileImg" src="${sessionScope.user.naverImgPath}">
+					</c:if>
 				</div>
 				<br>
 				<div class="greetings">

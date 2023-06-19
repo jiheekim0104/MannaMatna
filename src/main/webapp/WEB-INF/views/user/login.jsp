@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>	
+<%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>
 <link rel="stylesheet" href="${path}/resources/css/login.css" />
 <script>
 <c:if test="${msg!=null}">
@@ -22,7 +25,18 @@ alert('${msg}');
 
 		<button class="loginBnt">로그인</button><br>	
 	</form>
-	<button class="naverBnt" onclick="location.href='/naverLogin'"><img src="../../../resources/upload/naverLogo.png">네이버 로그인</button>
+	<%
+	String clientId = "BSeMnF9B1CusMX9DeEg8";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost/naverLogin", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
+         + "&client_id=" + clientId
+         + "&redirect_uri=" + redirectURI
+         + "&state=" + state;
+    session.setAttribute("state", state);
+	%>
+	<button class="naverBnt" onclick="location.href='<%=apiURL%>'"><img src="../../../resources/upload/naverLogo.png">네이버 로그인</button>
 	<button class="kakaoBnt" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b288a9632f49edf850cff8d6eb985755&redirect_uri=http://localhost/kakaoLogin/'"><img src="../../../resources/upload/kakaoLogo.png">카카오 로그인</button>
 	<br>
 	<button class="joinBnt" onclick="location.href='/join'">회원가입</button>

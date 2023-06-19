@@ -19,7 +19,16 @@ alert('${msg}');
 <div class="content">
 	<div class="img">
 		<c:if test="${user.uiFilepath!=null}">
-		<img src="${user.uiFilepath}" width="300">
+			<img src="${user.uiFilepath}" width="300">
+		</c:if>
+		<c:if test="${user.uiFilepath != null}">	
+			<img src="${user.uiFilepath}" width="300">
+		</c:if>
+		<c:if test="${user.uiFilepath == null && user.kakaoImgPath != null}">	
+			<img src="${user.kakaoImgPath}" width="300">
+		</c:if>
+		<c:if test="${user.uiFilepath == null && user.naverImgPath != null}">	
+			<img src="${user.naverImgPath}" width="300">
 		</c:if>
 	</div>
 	<br><br><br>

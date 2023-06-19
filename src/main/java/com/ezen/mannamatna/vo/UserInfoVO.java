@@ -22,4 +22,8 @@ public class UserInfoVO {
 	private String uiDel;
 	
 	private long kuiId;
+	private String kakaoImgPath;
+	
+	private String nuiId;
+	private String naverImgPath;
 }

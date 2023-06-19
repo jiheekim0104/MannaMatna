@@ -6,4 +6,5 @@ import lombok.Data;
 public class KakaoUserInfoVO {
 	private int uiNum;
 	private long kuiId;
+	private String kakaoImgPath;
 }

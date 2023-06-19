@@ -20,6 +20,8 @@ import com.ezen.mannamatna.service.UserInfoService;
 import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.ezen.mannamatna.vo.KakaoToken;
 import com.ezen.mannamatna.vo.KakaoUserInfoVO;
+import com.ezen.mannamatna.vo.NaverToken;
+import com.ezen.mannamatna.vo.NaverUserInfoVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
 
 import lombok.extern.log4j.Log4j2;
@@ -97,6 +99,7 @@ public class UserInfoController {
             log.info("여기서 들어감! kakaoUserInfoVO={}",kakaoUserInfoVO);
             userInfoVO = uiService.requestUser(kakaoToken.getAccess_token()); //유저정보 요청
             kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId()); // userInfoVO가 가지고있는 카카오 id값을 kakaoUserInfoVO에 넣음
+            kakaoUserInfoVO.setKakaoImgPath(userInfoVO.getKakaoImgPath());
             log.info("로그인요청한 kakaoUserInfoVO={}",kakaoUserInfoVO);
             if(uiService.kakaoLogin(kakaoUserInfoVO, session)) { // 카카오유저테이블에 그 id를 가지는 카카오유저가있다면
             	 m.addAttribute("url","/main"); 
@@ -111,18 +114,52 @@ public class UserInfoController {
 		return "user/login";
 }
 	
-	@GetMapping("/naverLogin")
-	public String naverLogin() {
-		return "user/naverLogin";
-	}
 	
 	@GetMapping("/naverPost")
-	public String loginPOSTNaver(HttpSession session) {
+	public String NaverJoin(@RequestParam(value = "code",required = false) String code,@RequestParam(value = "state",required = false) String state, HttpSession session,  Model m) throws IllegalStateException, IOException {
         log.info("callback controller");
+        UserInfoVO userInfoVO = null;
+        if(code!=null){//네이버측에서 보내준 code가 있다면 출력
+            System.out.println("code = " + code);
+            NaverToken naverToken = uiService.requestNaverToken("/naverPost/",code,state); //네이버 토큰 요청
+            userInfoVO = uiService.requestNaverUser(naverToken.getAccess_token()); //유저정보 요청
+            log.info("user = {}",userInfoVO);
+            log.info("naverToken = {}", naverToken);
+//			session.setAttribute("user", userInfoVO); 
+        }
+		if(uiService.join(userInfoVO)) {
+			m.addAttribute("msg","회원가입에 성공하셨습니다.");
+			return "user/login";
+		}
         return "user/callback";
     }
 	
-
+	@GetMapping("/naverLogin")
+	public String naverLogin(@RequestParam(value = "code",required = false) String code,@RequestParam(value = "state",required = false) String state, HttpSession session,  Model m) throws IllegalStateException, IOException{
+		UserInfoVO userInfoVO = null;
+		NaverUserInfoVO naverUserInfoVO = new NaverUserInfoVO();
+		// 네이버 로그인해서 id 돌려받고, 그 아이디를 가진 유저가 있는지 인포 돌아서 확인 이때 비번은 0000 고정임
+		
+		if(code!=null){//네이버측에서 보내준 code가 있다면 출력
+            System.out.println("code = " + code);
+            NaverToken naverToken = uiService.requestNaverToken("/naverLogin/",code,state); //카카오 토큰 요청
+            log.info("여기서 들어감! naverUserInfoVO={}",naverUserInfoVO);
+            userInfoVO = uiService.requestNaverUser(naverToken.getAccess_token()); //유저정보 요청
+            naverUserInfoVO.setNuiId(userInfoVO.getNuiId()); // userInfoVO가 가지고있는 카카오 id값을 kakaoUserInfoVO에 넣음
+            naverUserInfoVO.setNaverImgPath(userInfoVO.getNaverImgPath());
+            log.info("로그인요청한 naverUserInfoVO={}",naverUserInfoVO);
+            if(uiService.naverLogin(naverUserInfoVO, session)) { // 카카오유저테이블에 그 id를 가지는 카카오유저가있다면
+            	 m.addAttribute("url","/main"); 
+            	 m.addAttribute("msg", "로그인성공");
+            	 return "common/msg";
+            }
+            m.addAttribute("msg","카카오 가입 유저가 아닙니다.");
+    		return "user/login";
+        }
+	
+		m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다.");
+		return "user/login";
+}
 	
 	
 	@GetMapping("/logout")
