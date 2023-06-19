@@ -19,16 +19,21 @@
 		<if test='biTitle != null and biTitle != ""'>
 			AND BI.BI_TITLE LIKE CONCAT('%', #{biTitle}, '%')
 		</if>
-		<!-- <if test='biContent != null and biContent != ""'>
+		<!-- 제목 검색기능, 필요 없다 판단하여 주석처리 
+		<if test='biContent != null and biContent != ""'>
 				AND BI_TITLE LIKE CONCAT('%', #{biContent}, '%')
 		</if> -->
+		<if test='biFdCategory != null and biFdCategory != ""'>
+			AND BI.BI_FDCATEGORY LIKE CONCAT(#{biFdCategory})
+		</if>
 		ORDER BY BI.BI_NUM DESC
 	</select>
 	
 	<select id="selectBabsangInfo" parameterType="int" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
 		SELECT BI_NUM, BI_TITLE, BI_CONTENT, BI_MEETINGDAT, BI_MEETINGTIM, 
-		BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY, BI_CLOSED,
-		UI_NUM FROM BABSANG_INFO WHERE BI_NUM = #{biNum}
+		BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY, BI_CLOSED, UI_NUM 
+		FROM BABSANG_INFO 
+		WHERE BI_NUM = #{biNum}
 	</select>
 	
 	<insert id="insertBabsangInfo">

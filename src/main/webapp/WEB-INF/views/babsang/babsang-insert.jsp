@@ -6,10 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- timepicker -->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
+<!-- datepicker -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -25,7 +30,7 @@
 			<option value="" selected>카테고리 선택</option>
 			<option value="한식">한식</option>
 			<option value="중식">중식</option>
-			<option value="일식">일식</option>
+			<option value="중식">일식</option>
 			<option value="양식">양식</option>
 			<option value="분식">분식</option>
 			<option value="패스트푸드">패스트푸드</option>
@@ -33,24 +38,10 @@
 			<option value="족발">족발</option>
 		</select>
 		
-		<input type="date" id="biMeetingDat" name="biMeetingDat" required>
+		<input type="text" id="biMeetingDat" name="biMeetingDat" required>
 		
-		<!-- 나중에 time picker jQuery사용해보기 -->
 		<input type="text" id="biMeetingTim" name="biMeetingTim" class="timePicker" required>
-		<script>
-		$(function() {
-		$("#biMeetingTim").timepicker({
-	    timeFormat: 'h:mm p',
-	    interval: 30,
-	    minTime: '0',
-	    maxTime: '11:59pm',
-	    defaultTime: '0',
-	    startTime: '00:00',
-	    dynamic: false,
-	    dropdown: true,
-	    scrollbar: true
-		});});
-		</script>
+		
 		
 		<select id="biHeadCnt" name="biHeadCnt" required>
 			<option value="" selected>최대 인원 선택</option>
@@ -67,9 +58,45 @@
 		<button onclick="location.href='/main'">취소</button>
 	</form>
 
-	<!-- input-날짜-default값 = today -->
+	<!-- datepicker -->
 	<script>
-		document.getElementById('biMeetingDat').valueAsDate = new Date();
+		$(function() {
+			$( "#biMeetingDat" ).datepicker({
+				dateFormat: 'yy-mm-dd',
+				showMonthAfterYear:true,
+				minDate: 0, //과거 선택 불가
+				prevText: '이전 달',
+				nextText: '다음 달',
+				monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+				dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+				changeYear: true,
+				changeMonth: true
+			});
+			/* default = today */
+			$( "#biMeetingDat" ).datepicker('setDate', 'today');
+			});
+		
+	</script>
+	
+	<!-- timepicker -->
+	<script>
+		/* 30분 간격 */
+		$("#biMeetingTim").timepicker({
+	    timeFormat: 'H:mm',
+	    interval: 30,
+	    defaultTime: '18',
+	    startTime: '00:00',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: true
+		});
+		/* default = now */
+		/* document.ready(function(){
+			$("#biMeetingTim").timepicker('setTime', new Date());
+		}); */
 	</script>
 	
 </body>

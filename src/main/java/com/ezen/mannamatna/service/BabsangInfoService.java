@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ezen.mannamatna.mapper.BabsangInfoMapper;
-import com.ezen.mannamatna.mapper.UserInfoMapper;
 import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -14,8 +13,6 @@ public class BabsangInfoService {
 	
 	@Autowired
 	private BabsangInfoMapper babsangInfoMapper;
-	@Autowired
-	private UserInfoMapper userInfoMapper;
 	
 	/*기존 밥상 리스트 나열
 	 * public List<BabsangInfoVO> getBabsangInfoVOs(BabsangInfoVO babsang){ return

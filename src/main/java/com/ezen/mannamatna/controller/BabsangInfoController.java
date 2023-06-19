@@ -27,9 +27,7 @@ public class BabsangInfoController {
 	@Autowired
 	private UserInfoService userInfoService;
 
-	/*
-	 * 기존 밥상 리스트 나열할 때 사용
-	 * 
+	/* 기존 밥상 리스트 나열할 때 사용
 	 * @GetMapping("/main") public String goMain(BabsangInfoVO babsang, Model m){
 	 * List<BabsangInfoVO> babsangList =
 	 * babsangInfoService.getBabsangInfoVOs(babsang);
