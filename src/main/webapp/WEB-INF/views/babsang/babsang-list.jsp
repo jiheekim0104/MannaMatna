@@ -18,12 +18,14 @@
 
 <body>
 <div class="content">
-	<!-- <h1>여기는 만들어진 밥상 리스트</h1> -->
 	
+	<!-- 제목 검색 기능 -->
 	<form action="/main" method="get" id="searchBabsang">
 		<input type="text" class="inputBiTitle" name="biTitle" placeholder="검색하실 밥상의 제목을 입력해주세요" value="${param.biTitle}">
 		<button class="buttonBiTitle">검색</button>
 	</form>
+	
+	<!-- 카테고리 검색 기능 -->
 	<form action="/main" method="get" id="categoryBabsang">
 		<button class="biFdCategory" name="biFdCategory" value="">전체</button>
 		<button class="biFdCategory" name="biFdCategory" value="한식">한식</button>
@@ -37,33 +39,24 @@
 	</form>
 	
 	<!-- 밥상 리스트 목록 -->
-	
+				
 		<c:if test="${empty page.list}">
 			<div>밥상이 존재하지 않습니다</div>
 		</c:if>
+		
 		<c:forEach items="${page.list}" var="babsangListVO">
-		<div class="babsang">
+		<div class="babsang" onclick=
+			<c:if test="${sessionScope.user.uiNum != null}">
+			"location.href='/detail/${babsangListVO.biNum}'"
+			</c:if>
+			<c:if test="${sessionScope.user.uiNum == null}">
+			"location.href='/cannotSeeBabsang'"
+			</c:if>
+			>
 			<h3 class="biTitle">
-				<!-- 로그인 시 밥상을 구경할 수 있게 -->
-				<c:if test="${sessionScope.user.uiNum != null}">
-					<a href="/detail/${babsangListVO.biNum}">제목 : ${babsangListVO.biTitle}</a>
-				</c:if>
-				<%-- 비로그인 시 밥상을 구경할 수 없게--%>
-				<c:if test="${sessionScope.user.uiNum == null}">
-					<a href="/cannotSeeBabsang">제목 : ${babsangListVO.biTitle}</a>
-				</c:if>
+				제목 : ${babsangListVO.biTitle}
 			</h3>
 			<hr>
-			<!-- 생성자, 보드 번호 -->
-			<%-- <tr>
-				<td colspan="2">밥상 번호 : ${babsangListVO.biNum}
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">밥상 생성자 : ${babsangListVO.uiNum}
-				</td>
-			</tr> --%>
-			
 			<div class="biFdCatecory">카테고리 : ${babsangListVO.biFdCategory}</div>
 			<hr>
 			<div class="biHeadCnt">최대 인원 수 : ${babsangListVO.biHeadCnt}</div>

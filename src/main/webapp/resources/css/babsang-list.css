@@ -2,16 +2,15 @@
 
 .content{
 	min-height: 100%;
-    margin: 0; 
 	display: grid;
 	grid-template-columns: 50% 50%;
-	/* grid-template-rows: 110px minmax(0px, auto) 60px; */
 	grid-template-areas:
 		's s'
 		'c c'
 		'b1 b2'
 		'b3 b4'
 		'p p';
+	align-items: center; /* 수직 중앙정렬 */
 }
 
 #searchBabsang{
@@ -24,9 +23,6 @@
 	grid-area:p;
 }
 
-form{
-	padding-top: 25px;
-}
 .inputBiTitle{
 	width: 40%;
   	background-color: white;
@@ -79,13 +75,21 @@ input::placeholder{
   	border: 2px solid #FC522F;  
 }
 .babsang{
-	border: 1px solid gray;
+  	border: 2px solid #999999;
 	width: 90%;
+	max-width: 375px;
 	height: 166px;
 	border-radius: 30px;
 	text-align: center;
 	margin: 0 auto;
 }
-h3{
+h3, .biMeetingDatTim{
 	margin: 10px auto;
+	width: 90%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.babsang:hover{
+  	border: 2px solid #FC522F;  
 }
