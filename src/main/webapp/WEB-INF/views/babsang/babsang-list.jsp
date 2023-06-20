@@ -3,6 +3,7 @@
 <%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,16 +54,16 @@
 			"location.href='/cannotSeeBabsang'"
 			</c:if>
 			>
-			<h3 class="biTitle">
+			<h3 id="biTitle">
 				제목 : ${babsangListVO.biTitle}
 			</h3>
 			<hr>
-			<div class="biFdCatecory">카테고리 : ${babsangListVO.biFdCategory}</div>
+			<div id="biFdCatecory">카테고리 : ${babsangListVO.biFdCategory}</div>
 			<hr>
-			<div class="biHeadCnt">최대 인원 수 : ${babsangListVO.biHeadCnt}</div>
+			<div id="biHeadCnt">최대 인원 수 : ${babsangListVO.biHeadCnt}</div>
 			<hr>
 			<c:set var="biMeetingTim" value="${babsangListVO.biMeetingTim}" />
-			<div class="biMeetingDatTim">${babsangListVO.biMeetingDat} / ${fn:substring(biMeetingTim,0,5)}</div>
+			<div id="biMeetingDatTim">${babsangListVO.biMeetingDat} / ${fn:substring(biMeetingTim,0,5)}</div>
 			
 			<%-- 밥상 삭제 버튼--%>
 			<%-- <tr>
@@ -78,7 +79,7 @@
 		</c:forEach>
 	
 	 <!-- 페이징 -->
-	<div id="pageDiv" style="text-align:center; color:aqua; font-size:14pt"></div>
+	<div id="pageDiv"></div>
 	<c:if test="${!(empty page.list)}">
 		<script>
 			const pages = ${page.pages};//총페이지

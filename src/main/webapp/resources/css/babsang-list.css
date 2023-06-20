@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+	font-family: 'omyu_pretty';
+}
 .content{
 	min-height: 100%;
 	display: grid;
@@ -29,6 +39,7 @@
   	border: 2px solid #999999;
   	border-radius:0.5em;
   	color: black;
+  	font-family: 'omyu_pretty';
   	font-weight: bolder;
   	padding: 8px 22px;
   	text-align: center;
@@ -43,6 +54,7 @@ input::placeholder{
 }
 
 .buttonBiTitle {
+	font-family: 'omyu_pretty';
   	background-color: white;
   	border: 2px solid #FC522F;
   	border-radius:0.5em;
@@ -52,11 +64,12 @@ input::placeholder{
   	text-align: center;
   	text-decoration: none;
   	display: inline-block;
-  	font-size: 14px;
+  	font-size: 16px;
 }
 
 
 .biFdCategory {
+	font-family: 'omyu_pretty';
   	background-color: white;
   	border: 2px solid #999999;
   	border-radius:0.5em;
@@ -66,7 +79,7 @@ input::placeholder{
   	text-align: center;
   	text-decoration: none;
   	display: inline-block;
-  	font-size: 14px;
+  	font-size: 18px;
 }
 
 .biFdCategory:hover, .buttonBiTitle:hover{
@@ -78,12 +91,13 @@ input::placeholder{
   	border: 2px solid #999999;
 	width: 90%;
 	max-width: 375px;
-	height: 166px;
+	height: 175px;
 	border-radius: 30px;
 	text-align: center;
 	margin: 0 auto;
+	font-size: 19px;
 }
-h3, .biMeetingDatTim{
+h3, .babsang>div{
 	margin: 10px auto;
 	width: 90%;
 	overflow: hidden;
@@ -92,4 +106,14 @@ h3, .biMeetingDatTim{
 }
 .babsang:hover{
   	border: 2px solid #FC522F;  
+}
+
+#pageDiv{
+	text-align: center;
+	color: #FC6646;
+	font-size:14pt;
+}
+#pageDiv>a{
+	text-decoration: none;
+	color: black;
 }
