@@ -32,6 +32,8 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class UserInfoController {
 	
+	int loginCnt =0; // 로그인 횟수 세기
+	
 	@Autowired
 	UserInfoService uiService;
 	
@@ -63,11 +65,18 @@ public class UserInfoController {
 				session.invalidate();
 				return "user/login";
 			}
+//			if(userInfoVO.getUiActive()==2) {
+//				m.addAttribute("msg","이용이 일시정지된 계정입니다.");
+//				session.invalidate();
+//				return "user/login";
+//			}
 			m.addAttribute("url", "/main");
 			m.addAttribute("msg", "로그인성공");
 			return "common/msg";
 	}
-	m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다.");
+	loginCnt++; 
+	m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다. 현재 로그인 시도 횟수:"+loginCnt);
+	
 	return "user/login";
 }
 	
