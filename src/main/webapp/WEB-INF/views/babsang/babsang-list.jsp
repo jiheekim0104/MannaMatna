@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,13 +19,15 @@
 
 <body>
 <div class="content">
-	<!-- <h1>여기는 만들어진 밥상 리스트</h1> -->
 	
-	<form action="/main" method="get" >
+	<!-- 제목 검색 기능 -->
+	<form action="/main" method="get" id="searchBabsang">
 		<input type="text" class="inputBiTitle" name="biTitle" placeholder="검색하실 밥상의 제목을 입력해주세요" value="${param.biTitle}">
 		<button class="buttonBiTitle">검색</button>
 	</form>
-	<form action="/main" method="get" >
+	
+	<!-- 카테고리 검색 기능 -->
+	<form action="/main" method="get" id="categoryBabsang">
 		<button class="biFdCategory" name="biFdCategory" value="">전체</button>
 		<button class="biFdCategory" name="biFdCategory" value="한식">한식</button>
 		<button class="biFdCategory" name="biFdCategory" value="중식">중식</button>
@@ -35,46 +39,32 @@
 		<button class="biFdCategory" name="biFdCategory" value="족발">족발</button>
 	</form>
 	
-	<hr>
 	<!-- 밥상 리스트 목록 -->
-	<table border="1" style="color: black;">
-		<c:if test="${empty page.list}"><%-- babsangList --%>
-			<th>밥상이 존재하지 않습니다</th>
+				
+		<c:if test="${empty page.list}">
+			<div>밥상이 존재하지 않습니다</div>
 		</c:if>
-		<c:forEach items="${page.list}" var="babsangListVO"><!-- babsangList -->
-			<tr>
-				<th colspan="2">
-					<%-- 로그인 시 밥상을 구경할 수 있게--%>
-					<c:if test="${sessionScope.user.uiId != null}">
-						<a href="/detail/${babsangListVO.biNum}">제목 : ${babsangListVO.biTitle}</a>
-					</c:if>
-					<%-- 비로그인 시 밥상을 구경할 수 없게--%>
-					<c:if test="${sessionScope.user.uiId == null}">
-						<a href="/cannotSeeBabsang">제목 : ${babsangListVO.biTitle}</a>
-					</c:if>
-					
-				</th>
-			</tr>
-<!-- 생성자, 보드 번호 -->
-			<%-- <tr>
-				<td colspan="2">밥상 번호 : ${babsangListVO.biNum}
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">밥상 생성자 : ${babsangListVO.uiNum}
-				</td>
-			</tr> --%>
-<!-- 이 까지 -->
-			<tr>
-				<td colspan="2">카테고리 : ${babsangListVO.biFdCategory}</td>
-			</tr>
-			<tr>
-				<td colspan="2">최대 인원 수 : ${babsangListVO.biHeadCnt}</td>
-			</tr>
-			<tr>
-				<td>날짜 : ${babsangListVO.biMeetingDat}</td>
-				<td>시간 : ${babsangListVO.biMeetingTim}</td>
-			</tr>
+		
+		<c:forEach items="${page.list}" var="babsangListVO">
+		<div class="babsang" onclick=
+			<c:if test="${sessionScope.user.uiNum != null}">
+			"location.href='/detail/${babsangListVO.biNum}'"
+			</c:if>
+			<c:if test="${sessionScope.user.uiNum == null}">
+			"location.href='/cannotSeeBabsang'"
+			</c:if>
+			>
+			<h3 id="biTitle">
+				제목 : ${babsangListVO.biTitle}
+			</h3>
+			<hr>
+			<div id="biFdCatecory">카테고리 : ${babsangListVO.biFdCategory}</div>
+			<hr>
+			<div id="biHeadCnt">최대 인원 수 : ${babsangListVO.biHeadCnt}</div>
+			<hr>
+			<c:set var="biMeetingTim" value="${babsangListVO.biMeetingTim}" />
+			<div id="biMeetingDatTim">${babsangListVO.biMeetingDat} / ${fn:substring(biMeetingTim,0,5)}</div>
+			
 			<%-- 밥상 삭제 버튼--%>
 			<%-- <tr>
 				<c:if test="${sessionScope.user.uiNum == babsangListVO.uiNum}">
@@ -85,11 +75,11 @@
 					</td>
 				</c:if>
 			</tr>  --%>
+		</div>
 		</c:forEach>
-	</table>
 	
 	 <!-- 페이징 -->
-	<div id="pageDiv" style="text-align:center; color:aqua; font-size:14pt"></div>
+	<div id="pageDiv"></div>
 	<c:if test="${!(empty page.list)}">
 		<script>
 			const pages = ${page.pages};//총페이지

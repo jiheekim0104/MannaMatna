@@ -1,14 +1,45 @@
 @charset "UTF-8";
 
-form{
-	padding-top: 25px;
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
+
+body{
+	font-family: 'omyu_pretty';
+}
+.content{
+	min-height: 100%;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-areas:
+		's s'
+		'c c'
+		'b1 b2'
+		'b3 b4'
+		'p p';
+	align-items: center; /* 수직 중앙정렬 */
+}
+
+#searchBabsang{
+	grid-area:s;
+}
+#categoryBabsang{
+	grid-area:c;
+}
+#pageDiv{
+	grid-area:p;
+}
+
 .inputBiTitle{
 	width: 40%;
   	background-color: white;
   	border: 2px solid #999999;
   	border-radius:0.5em;
   	color: black;
+  	font-family: 'omyu_pretty';
   	font-weight: bolder;
   	padding: 8px 22px;
   	text-align: center;
@@ -23,6 +54,7 @@ input::placeholder{
 }
 
 .buttonBiTitle {
+	font-family: 'omyu_pretty';
   	background-color: white;
   	border: 2px solid #FC522F;
   	border-radius:0.5em;
@@ -32,11 +64,12 @@ input::placeholder{
   	text-align: center;
   	text-decoration: none;
   	display: inline-block;
-  	font-size: 14px;
+  	font-size: 16px;
 }
 
 
 .biFdCategory {
+	font-family: 'omyu_pretty';
   	background-color: white;
   	border: 2px solid #999999;
   	border-radius:0.5em;
@@ -46,11 +79,41 @@ input::placeholder{
   	text-align: center;
   	text-decoration: none;
   	display: inline-block;
-  	font-size: 14px;
+  	font-size: 18px;
 }
 
 .biFdCategory:hover, .buttonBiTitle:hover{
   	background-color: #FC522F;
   	color: #FFFFFF;
   	border: 2px solid #FC522F;  
+}
+.babsang{
+  	border: 2px solid #999999;
+	width: 90%;
+	max-width: 375px;
+	height: 175px;
+	border-radius: 30px;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 19px;
+}
+h3, .babsang>div{
+	margin: 10px auto;
+	width: 90%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.babsang:hover{
+  	border: 2px solid #FC522F;  
+}
+
+#pageDiv{
+	text-align: center;
+	color: #FC6646;
+	font-size:14pt;
+}
+#pageDiv>a{
+	text-decoration: none;
+	color: black;
 }

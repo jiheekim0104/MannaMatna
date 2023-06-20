@@ -55,21 +55,31 @@ public class UserInfoService {
 			session.setAttribute("user", userInfoVO);
 			return true;
 		}
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String inputPwd = userInfoVO.getUiPwd();
-		if(userInfoVO.getUiId()==null) {
-			userInfoVO = uiMapper.selectUserInfoByNum(userInfoVO);
-		} else {
-			userInfoVO = uiMapper.selectUserInfoById(userInfoVO);
+		if(uiMapper.selectUserInfoById(userInfoVO)!=null) {
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String inputPwd = userInfoVO.getUiPwd();
+			if(userInfoVO.getUiId()==null) {
+				userInfoVO = uiMapper.selectUserInfoByNum(userInfoVO);
+			} else {
+				userInfoVO = uiMapper.selectUserInfoById(userInfoVO);
+			}
+			
+			log.info("matches=====>{}", passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd()));
+			//visible
+			//딜레이
+			//히든
+			if(passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd())) {
+				log.info("확인하려는 유저 =>{}", userInfoVO);
+				session.setAttribute("user", userInfoVO);
+				return true;
+			}
 		}
+		//visible
+		//딜레이
+		//히든
 		
-		log.info("matches=====>{}", passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd()));
-		if(passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd())) {
-			log.info("확인하려는 유저 =>{}", userInfoVO);
-			session.setAttribute("user", userInfoVO);
-			return true;
-		}
 		return false;
+		
 	}
 
 	public boolean kakaoLogin(KakaoUserInfoVO kakaoUserInfoVO, HttpSession session) { // 여기서 문제가 생기는듯 ㅇㅅ ㅇ?
@@ -189,6 +199,10 @@ public class UserInfoService {
 		return uiMapper.insertUserInfo(userInfoVO) == 1;
 	}
 
+	public boolean updateActive(UserInfoVO userInfoVO, HttpSession session) {
+		return uiMapper.updateUserInfoActive(userInfoVO) == 1;
+	}
+	
 	public boolean delete(UserInfoVO userInfoVO, HttpSession session) {
 		return uiMapper.deleteUserInfo(userInfoVO) == 1;
 	}

@@ -14,7 +14,8 @@
 </head>
 <body>
 
-
+<!-- <div id="loading" class="loading">
+</div> 로그인 딜레이 작업해보려고 써둔것임 -->
 	<header>
 		<div class="mainText">만나맛나</div>
 		<div class="subText">1인가구를 위한 신개념 밥상 매칭 사이트</div>

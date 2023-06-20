@@ -83,10 +83,22 @@ button>img {
 	color: #FFFFFF;
 }
 
-/* .bnt:visited{ 선택해서 버튼이 y값을 가지면 색이 바뀌게하고싶은데..^^..
-	background-color: #FC522F;
+.selected {
+	width: 100px;
+	height: 30px;
+	background-color: #c8c8c8;
+	border: 2px solid #c8c8c8;
+	border-radius:0.5em;
 	color: #FFFFFF;
-} */
+	font-weight: bolder;
+	padding: 0px 22px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin-top: 10px;
+	pointer-events: none;
+}
 
 .filebox .upload-name {
 	width: 244px;

@@ -15,7 +15,6 @@
 </head>
 <body>
 <div class="content">
-${user}
 	<form action="/profile-update" method="POST" onsubmit="return checkValue()" enctype="multipart/form-data">
 		<div id="imgDiv" class="img">
 			<c:if test="${user.uiFilepath != null}">	
@@ -34,54 +33,61 @@ ${user}
 	    		<label for="file" class="labelBnt" >업로드</label> 
 	   		 	<input type="file" id="file" name="uiFile" onchange="loadImg(this)">
 			</div>
-			<input type="text" name="uiNickname" id="uiNickname" value="${user.uiNickname}" onkeyup="bntChange()">
+			<input type="text" name="uiNickname" id="uiNickname" value="${user.uiNickname}" onkeyup="nicknameBntChange()">
 			<button class="bnt" type="button" id="nicknameChk" onclick="fn_nicknameChk();" value="N">중복확인</button><br> 	
 			<input type="password" class="uiPwd" name="uiPwd" id="uiPwd" placeholder="비밀번호"><br> 
 			<input type="password" class="uiPwdCheck" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
 			<select name="uiAge" id="uiAge">
-				
-				<option value="0">${user.uiAge}대</option>
-					<option value="10">10대</option>
+
+			<option value="0">${user.uiAge}대</option>
+				<c:if test="${user.uiAge==10}">
+					<option value="10" selected="selected">10대</option>
 					<option value="20">20대</option>
-					<option value="20">30대</option>
-					<option value="20">40대</option>
-					<option value="20">50대</option>
+					<option value="30">30대</option>
+					<option value="40">40대</option>
+					<option value="50">50대</option>
 <%-- 				<c:if test="${user.uiAge==10}">
 					<option value="10" selected="selected">10대</option>
 					<option value="20">20대</option>
-					<option value="20">30대</option>
-					<option value="20">40대</option>
-					<option value="20">50대</option>
+					<option value="30">30대</option>
+					<option value="40">40대</option>
+					<option value="50">50대</option>
+=======
+					<option value="30">30대</option>
+					<option value="40">40대</option>
+					<option value="50">50대</option>
+>>>>>>> branch 'master' of https://github.com/jiheekim0104/MannaMatna.git
 				</c:if>	
 				<c:if test="${user.uiAge==20}">
-					<option value="20">10대</option>
+					<option value="10">10대</option>
 					<option value="20" selected="selected">20대</option>
-					<option value="20">30대</option>
-					<option value="20">40대</option>
-					<option value="20">50대</option>
+					<option value="30">30대</option>
+					<option value="40">40대</option>
+					<option value="50">50대</option>
 				</c:if>
 				<c:if test="${user.uiAge==30}">
-					<option value="20">10대</option>
+					<option value="10">10대</option>
 					<option value="20">20대</option>
 					<option value="30" selected="selected">30대</option>
-					<option value="20">40대</option>
-					<option value="20">50대</option>
+					<option value="40">40대</option>
+					<option value="50">50대</option>
 				</c:if>
 				<c:if test="${user.uiAge==40}">
-					<option value="20">10대</option>
+					<option value="10">10대</option>
 					<option value="20">20대</option>
-					<option value="20">30대</option>
+					<option value="30">30대</option>
 					<option value="40" selected="selected">40대</option>
-					<option value="20">50대</option>
+					<option value="50">50대</option>
 				</c:if>
 				<c:if test="${user.uiAge==50}">
-					<option value="20">10대</option>
+					<option value="10">10대</option>
 					<option value="20">20대</option>
-					<option value="20">30대</option>
-					<option value="20">40대</option>
+					<option value="30">30대</option>
+					<option value="40">40대</option>
 					<option value="50" selected="selected">50대 이상</option>
 				</c:if>	 --%>
-				
+
+				</c:if>
 			</select><br>
 			<span>성별</span> 
 			<c:if test="${user.uiGender==true}">
@@ -99,8 +105,9 @@ ${user}
 		<button class="bnt" type="button">취소하기</button>
 	</form>
 	<script>
-	function bntChange(){
+	function nicknameBntChange(){
 		$('#nicknameChk').val('N'); // 중복확인 이후에 다시 닉네임을 바꿨을 경우에 중복확인을 하지않은 상태로 바꿈 
+		$('#nicknameChk').removeClass('selected');
 	}
 		function loadImg(obj) {
 			let file =obj.files[0];
@@ -177,6 +184,7 @@ ${user}
 						} else if (data.result == 0) {
 							$('#nicknameChk').val('Y');
 							alert("사용가능한 닉네임입니다.");
+							$('#nicknameChk').addClass('selected');
 						}
 					}
 				})
