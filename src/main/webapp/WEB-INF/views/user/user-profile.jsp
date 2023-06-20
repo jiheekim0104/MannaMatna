@@ -17,6 +17,7 @@ alert('${msg}');
 <body>
 
 <div class="content">
+${user}
 	<div class="img">
 		<c:if test="${user.uiFilepath != null}">	
 			<img src="${user.uiFilepath}" width="300">

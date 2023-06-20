@@ -266,8 +266,7 @@ public class UserInfoController {
 	
 	
 	@GetMapping("/withdraw")
-	public String withdraw() {
-		// 사유씀 
+	public String withdraw() {// 사유씀 
 		return "user/user-withdraw"; 
 	}
 	
