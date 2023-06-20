@@ -36,8 +36,6 @@
 		<button class="biFdCategory" name="biFdCategory" value="족발">족발</button>
 	</form>
 	
-	<hr>
-	
 	<!-- 밥상 리스트 목록 -->
 	
 		<c:if test="${empty page.list}">
@@ -85,8 +83,6 @@
 			</tr>  --%>
 		</div>
 		</c:forEach>
-	
-	<hr>
 	
 	 <!-- 페이징 -->
 	<div id="pageDiv" style="text-align:center; color:aqua; font-size:14pt"></div>
