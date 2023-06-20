@@ -1,5 +1,25 @@
 @charset "UTF-8";
 
+.content{
+	min-height: 100%;
+    margin: 0; 
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: 110px minmax(0px, auto) 60px;
+	grid-template-areas:
+		's s'
+		'c c'
+		'b1 b2'
+		'b3 b4';
+}
+
+#searchBabsang{
+	grid-area:s;
+}
+#categoryBabsang{
+	grid-area:c;
+}
+
 form{
 	padding-top: 25px;
 }
@@ -53,4 +73,15 @@ input::placeholder{
   	background-color: #FC522F;
   	color: #FFFFFF;
   	border: 2px solid #FC522F;  
+}
+.babsang{
+	border: 1px solid gray;
+	width: 90%;
+	height: 166px;
+	border-radius: 30px;
+	text-align: center;
+	margin: 0 auto;
+}
+h3{
+	margin: 10px auto;
 }
