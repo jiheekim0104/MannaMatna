@@ -33,9 +33,9 @@
 	<button class="kakaoBnt"onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b288a9632f49edf850cff8d6eb985755&redirect_uri=http://localhost/kakaoPost/'"><img src="../../../resources/upload/kakaoLogo.png"> 카카오 간편가입</button>
 	<br>
 	<form action="/join-ok" method="POST" onsubmit="return checkValue()" enctype="multipart/form-data">
-		<input type="text" name="uiId" id="uiId" placeholder="아이디">
-		<button type="button" id="idChk" class="bnt" onclick="fn_idChk()" value="N">중복확인</button><br> 
-		<input type="text" name="uiNickname" id="uiNickname" placeholder="닉네임">
+		<input type="text" name="uiId" id="uiId" placeholder="아이디" onkeyup="idBntChange()">
+		<button type="button" id="idChk" class="bnt" onclick="fn_idChk()" value="N" >중복확인</button><br> 
+		<input type="text" name="uiNickname" id="uiNickname" placeholder="닉네임" onkeyup="nicknameBntChange()">
 		<button type="button" id="nicknameChk" class="bnt" onclick="fn_nicknameChk()" value="N">중복확인</button><br> 
 		<input type="password" class="uiPwd" name="uiPwd" id="uiPwd" placeholder="비밀번호"><br> 
 		<input type="password" class="uiPwdCheck" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
@@ -62,6 +62,21 @@
 </div>
 </body>
 <script>	
+	function idBntChange(){
+		$('#idChk').val('N'); // 중복확인 이후에 다시 아이디를 바꿨을 경우에 중복확인을 하지않은 상태로 바꿈 
+		$('#idChk').removeClass('selected');
+/* 		document.getElementById("idChk").style.backgroundColor = "#FFFFFF";
+		document.getElementById("idChk").style.color = "#FC522F";
+		document.getElementById("idChk").style.border = "2px solid #FC522F";
+		document.getElementById("idChk").style.pointerEvents = "auto"; */	
+		//호버기능까지 되돌릴수없나? 그래서 addClass 와 removeClass 활용함!
+	}
+	
+	function nicknameBntChange(){
+		$('#nicknameChk').val('N'); // 중복확인 이후에 다시 닉네임을 바꿨을 경우에 중복확인을 하지않은 상태로 바꿈 
+		$('#nicknameChk').removeClass('selected');
+	}
+	
 	function loadImg(obj){
 		let file =obj.files[0];
 		let imgObj = document.querySelector('#imgDiv>img');
@@ -138,9 +153,12 @@
 					} else if (data.result == 0) {
 						$('#idChk').val('Y');
 						alert("사용가능한 아이디입니다.");
-					} else if (data.result == -1) {
-						alert("아이디를 입력하세요.");
-					}
+						$('#idChk').addClass('selected');
+/* 						document.getElementById("idChk").style.backgroundColor = "#c8c8c8";
+						document.getElementById("idChk").style.color = "#FFFFFF";
+						document.getElementById("idChk").style.border = "2px solid #c8c8c8";
+						document.getElementById("idChk").style.pointerEvents = "none"; */
+					} 
 				}
 			})
 		}
@@ -165,6 +183,7 @@
 					} else if (data.result == 0) {
 						$('#nicknameChk').val('Y');
 						alert("사용가능한 닉네임입니다.");
+						$('#nicknameChk').addClass('selected');
 					}
 				}
 			})
