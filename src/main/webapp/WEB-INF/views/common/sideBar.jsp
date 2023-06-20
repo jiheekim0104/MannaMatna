@@ -78,7 +78,7 @@
 			
 			
 			<!-- 관리자로 로그인 시 출력 화면-->
-			<c:if test="${sessionScope.user.uiId=='Administer'}">
+			<c:if test="${sessionScope.user.uiId=='administer'}">
 			<script>
 			console.log('${sessionScope.user.uiId}');
 			</script>

@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script>
+<c:if test="${msg!=null}">
+alert('${msg}');
+</c:if>
+</script>
 <link rel="stylesheet" href="${path}/resources/css/user-check.css" />
 <body>
 	<div class="content">
