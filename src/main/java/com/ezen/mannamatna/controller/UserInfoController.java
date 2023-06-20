@@ -286,15 +286,29 @@ public class UserInfoController {
 	
 	@PostMapping("/check-withdraw")
 	public String checkWithdrawOk(@ModelAttribute UserInfoVO userInfoVO,HttpSession session,Model m) {
-		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
-		sessionUserInfo.setUiActive(1); //엑티브 1처리
-		userInfoVO = sessionUserInfo;
-		log.info("컨트롤러 체크-윗드로우 ==>{}",userInfoVO);
-		if(uiService.delete(userInfoVO, session)) { // 앞에서 입력한 사유를 이때 저장함 (업데이트)
-			m.addAttribute("msg","정상적으로 탈퇴처리되었습니다.");
-			session.invalidate();
-		}	
-		return "babsang/babsang-list";
+		log.info("userInfoVO={}",userInfoVO);
+		String inputPwd = userInfoVO.getUiPwd();
+		userInfoVO = (UserInfoVO) session.getAttribute("user");
+		userInfoVO.setUiPwd(inputPwd);
+		log.info("넘어갈userInfoVO={}",userInfoVO);
+		if(uiService.login(userInfoVO, session)) { //유저를 찾는 로직이 같아서 login 씀
+			log.info("컨트롤러 체크-윗드로우 ==>{}",userInfoVO);
+			userInfoVO.setUiActive(1); //엑티브 1처리
+			if(uiService.delete(userInfoVO, session)) { // 앞에서 입력한 사유를 이때 저장함 (업데이트)
+				m.addAttribute("msg","정상적으로 탈퇴처리되었습니다.");
+				session.invalidate();
+			}	
+			return "babsang/babsang-list";
+		}
+		m.addAttribute("msg","비밀번호가 잘못되었습니다.");	
+		return "user/user-check-withdraw";
+		
+		
+//		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
+//		
+//		sessionUserInfo.setUiActive(1); //엑티브 1처리
+//		userInfoVO = sessionUserInfo;
+	
 	}
 	
 	

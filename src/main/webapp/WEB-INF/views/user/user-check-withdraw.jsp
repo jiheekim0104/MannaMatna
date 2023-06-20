@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="${path}/resources/css/user-check.css" />
 <body>
 	<div class="content">
-		<form action="/check-update"  method="POST" onsubmit="return checkValue()">
+		<form action="/check-withdraw"  method="POST" onsubmit="return checkValue()">
 		<br><br>
 			<div class="inform">
 				<span class="uiNickname">${user.uiNickname}</span>님이 맞는지 한번더 확인할게요.<br>
