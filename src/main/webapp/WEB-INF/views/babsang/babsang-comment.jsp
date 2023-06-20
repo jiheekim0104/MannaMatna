@@ -25,7 +25,19 @@
 							$.each(data,function(key, value) {
 											// console.log('세션스코프 : ' + ${sessionScope.user.uiNum});
 											a += '<div class = "commentBox">';
-											a += '<div class="commentInfo'+value.ciNum+'">' +'<img src="' + value.uiFilepath + '" class = "profileImg" id = "commentImg" onclick="location.href="\'/profile/value.uiNum'"><br><span class = "commentNickName" id = "commentNickName">' + value.uiNickname + '</span><span class ="commentTime" id="commentTime">' + value.ciCredat + '</span><br>';
+											a += '<div class="commentInfo'+value.ciNum+'"><div class = "box"';
+											if(value.uiNum == ${babsangMaker.uiNum}){
+												// 작성자인경우 img style속성 추가 주황테두리
+											a += ' style = "border : 2px solid #FC522F;"';
+											}
+											a += '><img src="' + value.uiFilepath + '"';
+											a += ' class = "profileImg" id = "commentImg" onclick="location.href=\'/profile/' + value.uiNum + '\'"></div>';
+											a += '<br><span class = "commentNickName" id = "commentNickName">';
+											if(value.uiNum == ${babsangMaker.uiNum}){
+												// 로그인유저가 밥상작성자인 경우 닉네임 옆에 왕관이미지추가
+											a += '<img class="crown" id = "crown" src="../../../resources/upload/왕관.png">';
+											}
+											a += value.uiNickname + '</span><span class ="commentTime" id="commentTime">' + value.ciCredat + ' ' + value.ciCretim + '</span><br>';
 												a += '<div class="commentCiContent'+value.ciNum+'"> <span class="commentContent" id="commentContent">'+ value.ciContent+ '</span>';
 												// 로그인시 수정, 삭제기능 가능토록 추가
 												if(${sessionScope.user.uiNum}==value.uiNum && ${sessionScope.user.uiNum}!=null){
@@ -63,13 +75,15 @@
 	//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
 	function commentUpdate(ciNum, ciContent){
 	    let a ='';
-	    
+	   
 	    a += '<div>';
-	    a += '<input type="text" name="ciContent_'+ciNum+'" value="'+ciContent+'"/>';
-	    a += '<span><button type="button" onclick="commentUpdateProc('+ciNum+');">수정</button>';
-	    a += '<button onclick="commentUpdateCancle()">취소</button></span>';
-	    a += '</div>';
+	    a += '<input class = "form-control" id="commentUpdate" type="text" name="ciContent_'+ciNum+'" value="'+ciContent+'"/>';
+	    a += '<div class = "commentBtn"><span onclick="commentUpdateProc('+ciNum+');">수정완료</span>';
+	    a += '<span onclick="commentUpdateCancle()">취소</span>';
+	    a += '</div></div>';
 	    $('.commentCiContent'+ciNum).html(a);
+	    let btn = document.getElementById('commentUpdate');
+	    btn.focus();
 	}
 	//댓글 수정
 	function commentUpdateProc(ciNum){
@@ -98,7 +112,6 @@
 	        }
 	    });
 	}
-	
 	$(document).ready(function() {
 		commentList(); // 페이지 로딩 시 댓글 목록 출력
 	});

@@ -40,14 +40,13 @@ ${user}
 			<input type="password" class="uiPwdCheck" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
 			<select name="uiAge" id="uiAge">
 				
-
 				<option value="0">${user.uiAge}대</option>
 					<option value="10">10대</option>
 					<option value="20">20대</option>
-					<option value="30">30대</option>
-					<option value="40">40대</option>
-					<option value="50">50대</option>
-<%-- 			<c:if test="${user.uiAge==10}">
+					<option value="20">30대</option>
+					<option value="20">40대</option>
+					<option value="20">50대</option>
+<%-- 				<c:if test="${user.uiAge==10}">
 					<option value="10" selected="selected">10대</option>
 					<option value="20">20대</option>
 					<option value="20">30대</option>
@@ -81,7 +80,7 @@ ${user}
 					<option value="20">30대</option>
 					<option value="20">40대</option>
 					<option value="50" selected="selected">50대 이상</option>
-				</c:if>	  --%>
+				</c:if>	 --%>
 				
 			</select><br>
 			<span>성별</span> 

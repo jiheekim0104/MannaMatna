@@ -42,6 +42,7 @@ public class CommentInfoController {
 	public List<CommentInfoVO> commentInfoList(int biNum){
 		// 파라미터로 @PathVariable 빼니깐 동작함...uri와 관련이 있는 것 같다..!
 		// 댓글 리스트
+		log.info("왜 ci 타임이 null인거야 대체???{}", commentInfoService.getCommentInfosService(biNum));
 		return commentInfoService.getCommentInfosService(biNum);
 	}
 	
