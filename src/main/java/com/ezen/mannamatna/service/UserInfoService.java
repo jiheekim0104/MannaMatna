@@ -243,7 +243,7 @@ public class UserInfoService {
 			String redirectURI = "&redirect_uri=http://localhost" + addURI;
 			sb.append("grant_type=authorization_code"); // grant_type를 authorization_code로 고정등록해야함
 			sb.append("&client_id=b288a9632f49edf850cff8d6eb985755");
-			sb.append(redirectURI); // 이부분이 바뀌어야하는건가? join과 login시에 url이 다르니까?
+			sb.append(redirectURI); 
 			sb.append("&code=" + code); // 인자로 받아온 인증코드
 			bw.write(sb.toString());
 			bw.flush();// 실제 요청을 보내는 부분
@@ -364,7 +364,7 @@ public class UserInfoService {
 				uiGender = false;
 			}
 			userInfoVO.setUiGender(uiGender);// 성별
-
+//			원래는 사진을 저장하는 방법을 썼으나 바로 불러오는 방법으로 수정함	
 //			URL imageUrl = null;
 //			InputStream inputStream = null;
 //			OutputStream outputStream = null;
@@ -495,10 +495,8 @@ public class UserInfoService {
 			ObjectMapper mapper = new ObjectMapper();
 			// 결과 json을 HashMap 형태로 변환하여 resultMap에 담음
 			HashMap<String, Object> resultMap = mapper.readValue(result, HashMap.class);
-			//--------------------------------------------------
+
 			
-		
-	
 			// 결과json 안에 response key는 json Object를 value로 가짐
 			HashMap<String, Object> response = (HashMap<String, Object>) resultMap.get("response");
 			String id = (String)response.get("id");
@@ -545,8 +543,7 @@ public class UserInfoService {
 				uiGender = false;
 			}
 			userInfoVO.setUiGender(uiGender);// 성별
-			//--------------------------------------------------
-			
+//			원래는 사진을 저장하는 방법을 썼으나 바로 불러오는 방법으로 수정함			
 //			URL imageUrl = null;
 //			InputStream inputStream = null;
 //			OutputStream outputStream = null;

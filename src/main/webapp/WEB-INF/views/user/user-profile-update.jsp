@@ -41,11 +41,11 @@ ${user}
 			<select name="uiAge" id="uiAge">
 				
 				<option value="0">연령대를 선택하세요.</option>
-					<option value="10">10대</option>
+ 					<option value="10">10대</option>
 					<option value="20">20대</option>
-					<option value="20">30대</option>
-					<option value="20">40대</option>
-					<option value="20">50대</option>
+					<option value="30">30대</option>
+					<option value="40">40대</option>
+					<option value="50">50대</option>
 <%-- 				<c:if test="${user.uiAge==10}">
 					<option value="10" selected="selected">10대</option>
 					<option value="20">20대</option>
@@ -80,7 +80,7 @@ ${user}
 					<option value="20">30대</option>
 					<option value="20">40대</option>
 					<option value="50" selected="selected">50대 이상</option>
-				</c:if>	 --%>
+				</c:if>	  --%>
 				
 			</select><br>
 			<span>성별</span> 
