@@ -199,6 +199,10 @@ public class UserInfoService {
 		return uiMapper.insertUserInfo(userInfoVO) == 1;
 	}
 
+	public boolean updateActive(UserInfoVO userInfoVO, HttpSession session) {
+		return uiMapper.updateUserInfoActive(userInfoVO) == 1;
+	}
+	
 	public boolean delete(UserInfoVO userInfoVO, HttpSession session) {
 		return uiMapper.deleteUserInfo(userInfoVO) == 1;
 	}

@@ -28,6 +28,8 @@ public interface UserInfoMapper {
 	int insertKakaoUserInfo(KakaoUserInfoVO kakaoUserInfoVO);
 	
 	int insertNaverUserInfo(NaverUserInfoVO naverUserInfoVO);
+	
+	int updateUserInfoActive(UserInfoVO userInfoVO);
 
 	int deleteUserInfo(UserInfoVO userInfoVO);
 

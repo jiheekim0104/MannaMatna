@@ -68,6 +68,11 @@
 		ui_pwd = #{uiPwd}, ui_filepath = #{uiFilepath}, ui_gender = #{uiGender} , ui_age = #{uiAge}
 		where ui_num = #{uiNum}
 	</update>
+	
+	<update id="updateUserInfoActive">
+		update user_info set ui_active = #{uiActive}
+		where ui_id = #{uiId}
+	</update>
 
 	<update id="deleteUserInfo"> <!-- 회원 탈퇴 목적이지만 db에는 업데이트로 기록됨 -->
 		update user_info set ui_active = #{uiActive}, ui_del = #{uiDel}
