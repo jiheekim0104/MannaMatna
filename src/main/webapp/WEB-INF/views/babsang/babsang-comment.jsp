@@ -25,7 +25,7 @@
 							$.each(data,function(key, value) {
 											// console.log('세션스코프 : ' + ${sessionScope.user.uiNum});
 											a += '<div class = "commentBox">';
-											a += '<div class="commentInfo'+value.ciNum+'">' +'<img src="' + value.uiFilepath + '" class = "profileImg" id = "commentImg"><br><span class = "commentNickName" id = "commentNickName">' + value.uiNickname + '</span><span class ="commentTime" id="commentTime">' + value.ciCredat + '</span><br>';
+											a += '<div class="commentInfo'+value.ciNum+'">' +'<img src="' + value.uiFilepath + '" class = "profileImg" id = "commentImg" onclick="location.href="\'/profile/value.uiNum'"><br><span class = "commentNickName" id = "commentNickName">' + value.uiNickname + '</span><span class ="commentTime" id="commentTime">' + value.ciCredat + '</span><br>';
 												a += '<div class="commentCiContent'+value.ciNum+'"> <span class="commentContent" id="commentContent">'+ value.ciContent+ '</span>';
 												// 로그인시 수정, 삭제기능 가능토록 추가
 												if(${sessionScope.user.uiNum}==value.uiNum && ${sessionScope.user.uiNum}!=null){
