@@ -278,7 +278,7 @@ public class UserInfoController {
 		return "user/user-check-withdraw";
 	}
 	
-	@GetMapping("/user/user-check-withdraw") // 비밀번호 재확인
+	@GetMapping("/check-withdraw") // 비밀번호 재확인
 	public String checkWithdraw() {
 		return "user/user-check-withdraw";
 	}
@@ -301,7 +301,8 @@ public class UserInfoController {
 			}
 		}
 		m.addAttribute("msg","비밀번호가 잘못되었습니다.");
-		return "user/user-check-withdraw";
+		m.addAttribute("url", "/check-withdraw");
+		return "common/msg";
 		
 		
 //		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");

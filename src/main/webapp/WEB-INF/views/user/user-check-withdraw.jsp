@@ -32,11 +32,5 @@ function checkValue(){
 		alert("비밀번호는 필수입력 사항입니다.");
 		return false;
 	} 
-	if(inputPwd!=${user.uiPwd}){
-		alert("비밀번호가 일치하지않습니다.");
-		return false; 
-	}
-	return true;
-	}
 </script>
 </html>
