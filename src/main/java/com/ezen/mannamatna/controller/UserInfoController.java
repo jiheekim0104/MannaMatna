@@ -295,11 +295,12 @@ public class UserInfoController {
 			userInfoVO.setUiActive(1); //엑티브 1처리
 			if(uiService.delete(userInfoVO, session)) { // 앞에서 입력한 사유를 이때 저장함 (업데이트)
 				m.addAttribute("msg","정상적으로 탈퇴처리되었습니다.");
+				m.addAttribute("url", "/main");
 				session.invalidate();
-			}	
-			return "babsang/babsang-list";
+				return "common/msg";
+			}
 		}
-		m.addAttribute("msg","비밀번호가 잘못되었습니다.");	
+		m.addAttribute("msg","비밀번호가 잘못되었습니다.");
 		return "user/user-check-withdraw";
 		
 		
