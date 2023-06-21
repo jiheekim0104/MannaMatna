@@ -43,4 +43,5 @@ public interface UserInfoMapper {
 
 	UserInfoVO selectUserInfoFromBabsang(int uiNum); // 밥상에 uiNum으로 uiVO(작성자) 데이터 한줄 가져옴
 	
+	List<UserInfoVO> selectUserInfosByCredat(); // 날짜별 회원가입인원수 조회
 }

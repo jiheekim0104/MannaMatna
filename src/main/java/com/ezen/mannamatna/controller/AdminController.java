@@ -20,9 +20,9 @@ public class AdminController {
 	@Autowired
 	GoogleChartService googleChartService; // 구글 차트서비스 의존 추가
 	
-	@GetMapping("/getChart")
+	@GetMapping("/getPieChart")
 	@ResponseBody
-	public JSONObject getChart(UserInfoVO userInfoVO, HttpSession session) {
+	public JSONObject getPieChart(UserInfoVO userInfoVO, HttpSession session) {
 		log.info("내가만든 json데이터 확인 ====>{}", googleChartService.getGenderChart(userInfoVO, session));
 		return googleChartService.getGenderChart(userInfoVO, session);
 	}
@@ -31,10 +31,16 @@ public class AdminController {
 	public String goChart() {
 		return "admin/chart";
 	}
-	@GetMapping("/getChart1")
+	
+	@GetMapping("/getColumnChart")
 	@ResponseBody
-	public JSONObject getChart1(UserInfoVO userInfoVO, HttpSession session) {
+	public JSONObject getColumnChart(UserInfoVO userInfoVO, HttpSession session) {
 		log.info("내가만든 json데이터 확인 ====>{}", googleChartService.getAgeChart(userInfoVO, session));
 		return googleChartService.getAgeChart(userInfoVO, session);
+	}
+	@GetMapping("/getLineChart")
+	@ResponseBody
+	public JSONObject getLineChart(HttpSession session) {
+		return googleChartService.getCredatChart(session);
 	}
 }

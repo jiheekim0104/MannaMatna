@@ -20,7 +20,7 @@ public class UserInfoVO {
 	private String uiId;
 	private int uiActive;
 	private String uiDel;
-	
+	private int uiUserCnt; // 날짜별 유저수 조회용
 	private long kuiId;
 	private String kakaoImgPath;
 	

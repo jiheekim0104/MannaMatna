@@ -104,4 +104,9 @@
 		FROM USER_INFO WHERE
 		UI_NUM = #{uiNum};
 	</select>
+	<select id="selectUserInfosByCredat" resultType="com.ezen.mannamatna.vo.UserInfoVO">
+	<!-- 가입날짜(년-월-일)별로 유저수 조회 쿼리문 추가(구글차트용) -->
+	SELECT DATE_FORMAT(UI_CREDAT, '%Y-%m-%d') UI_CREDAT, COUNT(*) UI_USERCNT FROM USER_INFO GROUP BY DATE_FORMAT(UI_CREDAT, '%Y-%m-%d')
+	 ORDER BY UI_CREDAT ASC;
+	</select>
 </mapper>

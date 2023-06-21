@@ -633,5 +633,11 @@ public class UserInfoService {
 		// 해당 메소드 밥상상세의 다른 유저 프로필보기 기능 수행시에도 사용
 		return uiMapper.selectUserInfoFromBabsang(uiNum);
 	}
+	public List<UserInfoVO> getUserInfosByCredat(HttpSession session){
+		// 날짜별 가입인원수 조회서비스
+		List<UserInfoVO> userList = uiMapper.selectUserInfosByCredat();
+		log.info("서비스에서 유저리스트의 정보 {}", userList);
+		return uiMapper.selectUserInfosByCredat();
+	}
 
 }
