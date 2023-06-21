@@ -290,7 +290,13 @@ public class UserInfoController {
 	
 	
 	@GetMapping("/withdraw")
-	public String withdraw() {// 사유씀 
+	public String withdraw(@ModelAttribute UserInfoVO userInfoVO,HttpSession session,Model m) {// 사유씀 
+		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
+		if(sessionUserInfo.getBiNum()!=0) {
+			m.addAttribute("msg","현재 진행중인 밥상이 있습니다.");
+			m.addAttribute("url","/detail/"+sessionUserInfo.getBiNum()); 
+			return "common/msg";
+		}
 		return "user/user-withdraw"; 
 	}
 	
