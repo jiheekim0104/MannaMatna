@@ -66,6 +66,22 @@
 	}
 </script>
 </head>
+<style>
+
+#genderChart{
+	background-color: red; /* 이건 작업해보시고 지우세용. 튀어나오나 확인해봤음 */
+	width : 600px;
+	display: inline-block;
+}
+#ageChart{
+	background-color: blue; /* 이건 작업해보시고 지우세용. 튀어나오나 확인해봤음 */
+	width : 600px;
+	display: inline-block;
+}
+#joinDateChart{
+	background-color: yellow; /* 이건 작업해보시고 지우세용. 튀어나오나 확인해봤음 */
+}
+</style>
 <body>
 	<div class="content">
 		<h2>통계페이지</h2>
