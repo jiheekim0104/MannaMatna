@@ -31,4 +31,10 @@ public class AdminController {
 	public String goChart() {
 		return "admin/chart";
 	}
+	@GetMapping("/getChart1")
+	@ResponseBody
+	public JSONObject getChart1(UserInfoVO userInfoVO, HttpSession session) {
+		log.info("내가만든 json데이터 확인 ====>{}", googleChartService.getAgeChart(userInfoVO, session));
+		return googleChartService.getAgeChart(userInfoVO, session);
+	}
 }
