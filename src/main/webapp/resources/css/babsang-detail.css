@@ -204,6 +204,7 @@
 }
 
 .content .container .commentInput .commentBtn {
+	font-family: 'omyu_pretty';/* 버튼 글꼴 */
 	border: none;
 	outline: none;
 	display: inline;
