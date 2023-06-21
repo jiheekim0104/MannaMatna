@@ -13,12 +13,12 @@ input:focus{
 
 #uiIdNullMsg{
 	color: red;
-	font-size: small;
+	font-size: medium;
 }
 
 #uiPwdNullMsg{
 	color: red;
-	font-size: small;
+	font-size: medium;
 }
 
 .loginBnt {

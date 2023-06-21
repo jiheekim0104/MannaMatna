@@ -1,13 +1,9 @@
 @charset "UTF-8";
 
-@font-face {
-    font-family: 'omyu_pretty';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
 .content{
 	margin-top: 50px;	
+	font-family: none;
+	font-size: 14px;
 }
 
 input{
@@ -70,7 +66,6 @@ button>img {
 }
 
 .bnt {
-	font-family: 'omyu_pretty';/* 버튼들 글꼴 */
 	width: 100px;
 	height: 30px;
 	background-color: #FFFFFF;
@@ -117,7 +112,6 @@ button>img {
 }
 
 .filebox label {
-	font-family: 'omyu_pretty';
     width: 53px;
 	height: 26px;
 	background-color: #FFFFFF;

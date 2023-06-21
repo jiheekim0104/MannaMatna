@@ -216,14 +216,19 @@ public class UserInfoService {
 
 	public boolean update(@ModelAttribute UserInfoVO userInfoVO, HttpSession session)
 			throws IllegalStateException, IOException {
+		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
 		log.info("userInfoVO====>{}", userInfoVO);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		userInfoVO.setUiPwd(passwordEncoder.encode(userInfoVO.getUiPwd())); 
-		String fileName = userInfoVO.getUiFile().getOriginalFilename();
-		log.info("fileName====>{}", fileName);
-		if ("".equals(fileName)) {
-			userInfoVO.setUiFilepath("/resources/upload/nophoto.png");
-		} else if (!"".equals(fileName)) {
+		userInfoVO.setUiPwd(passwordEncoder.encode(userInfoVO.getUiPwd()));
+		log.info("들어가기전 확인=>{}", userInfoVO.getUiFile());
+		if("".equals(userInfoVO.getUiFilepath())) {
+			userInfoVO.setUiFilepath(sessionUserInfo.getUiFilepath());
+			log.info("안바꾼거면 여기=>{}", userInfoVO.getUiFilepath());
+			log.info("안바꾼거면 여기=>{}", sessionUserInfo.getUiFilepath());
+		} else if (userInfoVO.getUiFile()!=null) {
+			String fileName = userInfoVO.getUiFile().getOriginalFilename();
+			log.info("fileName====>{}", fileName);
+			log.info("바꾼거면 여기=>{}", userInfoVO.getUiFilepath());
 			int idx = fileName.lastIndexOf(".");
 			String extName = "";
 			if (idx != -1) {
@@ -434,8 +439,8 @@ public class UserInfoService {
 
 	public NaverToken requestNaverToken(String addURI,String code, String state) throws UnsupportedEncodingException {
 		NaverToken naverToken = new NaverToken();
-		String clientId = "BSeMnF9B1CusMX9DeEg8";// 애플리케이션 클라이언트 아이디값";
-		String clientSecret = "fpEWA5y2fc";// 애플리케이션 클라이언트 시크릿값";
+		String clientId = "BSeMnF9B1CusMX9DeEg8";// 애플리케이션 클라이언트 아이디값
+		String clientSecret = "fpEWA5y2fc";// 애플리케이션 클라이언트 시크릿값
 //	    code = request.getParameter("code");
 //	    state = request.getParameter("state");
 		String redirectURI = URLEncoder.encode("http://localhost" + addURI, "UTF-8");

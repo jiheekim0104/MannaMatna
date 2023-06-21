@@ -13,19 +13,19 @@
 .inform{
 	text-align: left;
 	font-weight: bolder;
-	font-size: 25px;
+	font-size: 35px;
 }
 
 .inform>.uiNickname{
 	color: #FC522F;
 	font-weight: bolder;
-	font-size: 25px;
+	font-size: 35px;
 }
 
 input{
 	width: 350px;
 	height: 22px;
-	margin: 5px 0px;
+	margin: 3px 0px;
 }
 
 input:focus{ 
@@ -43,7 +43,6 @@ textarea{
 }
 
 .updateBnt { /* 이 css가 check-update & check-withdraw 에 같이 적용되다보니 달라야하는 부분이있어서 나눠줬음 */
-	font-family: 'omyu_pretty';
 	width: 100px;
 	height: 30px;
 	background-color: #FC522F;
@@ -55,8 +54,9 @@ textarea{
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 15px;
+	font-size: 12px;
 	margin-top: 10px;
+	vertical-align: -1px;
 }
 
 .updateBnt:hover{

@@ -29,9 +29,10 @@
 		</div>
 		<div class="info">
 			<div class="filebox">
-	    		<input class="upload-name" placeholder="프로필 사진">
-	    		<label for="file" class="labelBnt" >업로드</label> 
-	   		 	<input type="file" id="file" name="uiFile" onchange="loadImg(this)">
+	    		<input class="upload-name" name="uiFilepath" placeholder="프로필 사진">
+	    		<label for="file" class="labelBnt" onclick="newUpload()">업로드</label> 
+	   		 	<input type="file" id="file" name="uiFile" onchange="loadImg(this)" value="N">
+	   		 	<button id="uploadChk" value="N"></button>
 			</div>
 			<input type="text" name="uiNickname" id="uiNickname" value="${user.uiNickname}" onkeyup="nicknameBntChange()">
 			<button class="bnt" type="button" id="nicknameChk" onclick="fn_nicknameChk();" value="N">중복확인</button><br> 	
@@ -46,17 +47,6 @@
 					<option value="30">30대</option>
 					<option value="40">40대</option>
 					<option value="50">50대</option>
-<%-- 				<c:if test="${user.uiAge==10}">
-					<option value="10" selected="selected">10대</option>
-					<option value="20">20대</option>
-					<option value="30">30대</option>
-					<option value="40">40대</option>
-					<option value="50">50대</option>
-=======
-					<option value="30">30대</option>
-					<option value="40">40대</option>
-					<option value="50">50대</option>
->>>>>>> branch 'master' of https://github.com/jiheekim0104/MannaMatna.git
 				</c:if>	
 				<c:if test="${user.uiAge==20}">
 					<option value="10">10대</option>
@@ -85,9 +75,8 @@
 					<option value="30">30대</option>
 					<option value="40">40대</option>
 					<option value="50" selected="selected">50대 이상</option>
-				</c:if>	 --%>
+				</c:if>	
 
-				</c:if>
 			</select><br>
 			<span>성별</span> 
 			<c:if test="${user.uiGender==true}">
@@ -105,6 +94,11 @@
 		<button class="bnt" type="button">취소하기</button>
 	</form>
 	<script>
+/* 	function newUpload(){
+		alert('누름!');
+		$('#uploadChk').val('Y');
+		alert(document.querySelector('#uploadChk').value);
+	} */
 	function nicknameBntChange(){
 		$('#nicknameChk').val('N'); // 중복확인 이후에 다시 닉네임을 바꿨을 경우에 중복확인을 하지않은 상태로 바꿈 
 		$('#nicknameChk').removeClass('selected');
@@ -118,6 +112,13 @@
 			$(".upload-name").val(fileName);
 		}
 		function checkValue(){
+/* 			alert(document.querySelector('#uploadChk').value);
+			let newUploadChk = document.querySelector('#uploadChk').value;
+			if(newUploadChk=='N'){
+				$('.upload-name').val == '${user.uiFilepath}';
+				alert(document.querySelector('.upload-name').value);
+			}
+			alert(document.querySelector('.upload-name').value); */
 			let inputNickname = document.getElementById('uiNickname').value; 
 			let nicknameChk = document.getElementById('nicknameChk').value;
 			if(nicknameChk=='N'){
