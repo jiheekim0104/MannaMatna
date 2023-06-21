@@ -81,6 +81,13 @@ public class UserInfoService {
 		return false;
 		
 	}
+	
+	public boolean findUser(UserInfoVO userInfoVO) {
+		if(uiMapper.selectUserInfoById(userInfoVO)!=null) {
+			return true;
+		}
+		return false;
+	}
 
 	public boolean kakaoLogin(KakaoUserInfoVO kakaoUserInfoVO, HttpSession session) { // 여기서 문제가 생기는듯 ㅇㅅ ㅇ?
 
