@@ -113,6 +113,7 @@ public class BabsangInfoController {
 					// 해당 밥상에 참여중인 유저리스트에 모든 biNum을 0으로 초기화
 					// 데이터 무결성
 					user.setBiNum(0);
+					userSession.setBiNum(0);
 					userInfoService.updateBiNum(user); // delete 성공 시 유저서비스의 update 실행
 				}
 				// 유저리스트의 biNum 전부 0으로 업데이트 후 삭제!!
