@@ -21,7 +21,7 @@ public class GoogleChartService {
 	UserInfoService userInfoService; // 유저인포서비스 의존주입
 
 	public JSONObject getGenderChart(UserInfoVO userInfoVO, HttpSession session) {
-
+		// 성별차트 서비스
 		List<UserInfoVO> items = userInfoService.getUserInfos(userInfoVO, session);
 		log.info("구글차트서비스에서 의존주입받은 유저서비스 메소드실행 후 유저리스트==>{}", items); // 유저서비스 메소드 정상실행 확인
 
@@ -87,6 +87,7 @@ public class GoogleChartService {
 		return jsonData; // 이 데이터가 넘어가면 json형식으로 넘어가게되서 json이 만들어지게 된다.
 	}
 	public JSONObject getAgeChart(UserInfoVO userInfoVO, HttpSession session) {
+		// 연령대 차트 서비스
 		List<UserInfoVO> items = userInfoService.getUserInfos(userInfoVO, session);
 		log.info("구글차트서비스에서 의존주입받은 유저서비스 메소드실행 후 유저리스트==>{}", items); // 유저서비스 메소드 정상실행 확인 
 		int teenager = 0;
@@ -201,5 +202,10 @@ public class GoogleChartService {
         
 		return jsonData;
 	}
-	
+	public JSONObject getCredatChart(UserInfoVO userInfoVO, HttpSession session) {
+		// 날자별 가입인원수 동향 선차트
+		JSONObject jsonData = new JSONObject(); // 해당 서비스에서 jsonObject를 컨트롤러에 리턴한다.
+		JSONArray columns = new JSONArray(); // 컬럼 생성
+		return jsonData;
+	}
 }

@@ -48,7 +48,7 @@
 				.getElementById('ageChart'));
 		var options = {
 			title : '만나맛나 회원 성별 비율',
-			width : 800,
+			width : 600,
 			height : 200
 		};
 		var options1 = {
