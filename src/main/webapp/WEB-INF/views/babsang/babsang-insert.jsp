@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,47 +17,57 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- css -->
+<link rel="stylesheet" href="${path}/resources/css/babsang-insert.css" />
+
 </head>
 
 <body>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
-	<form method="POST" action="/addBabsang">
-		<!-- required = 필수요소-->
-		<input type="text" id="biTitle" name="biTitle" 
-		placeholder="제목" style="width: 50%;" required ><br>
+	<form method="POST" action="/addBabsang" class="content">
+		<div class="wrapper">
+			<input type="text" id="biTitle" name="biTitle" placeholder="제목을 입력해주세요"  required ><br>
+
+			<input type="text" id="biMeetingDat" name="biMeetingDat" required>
+		
+			<input type="text" id="biMeetingTim" name="biMeetingTim" class="timePicker" required>
 			
-		<select id="biFdCategory"name="biFdCategory" required>
-			<option value="" selected>카테고리 선택</option>
-			<option value="한식">한식</option>
-			<option value="중식">중식</option>
-			<option value="중식">일식</option>
-			<option value="양식">양식</option>
-			<option value="분식">분식</option>
-			<option value="패스트푸드">패스트푸드</option>
-			<option value="해산물">해산물</option>
-			<option value="족발">족발</option>
-		</select>
+			<select id="biFdCategory"name="biFdCategory" required>
+				<option value="" selected>카테고리 선택</option>
+				<option value="한식">한식</option>
+				<option value="중식">중식</option>
+				<option value="중식">일식</option>
+				<option value="양식">양식</option>
+				<option value="분식">분식</option>
+				<option value="패스트푸드">패스트푸드</option>
+				<option value="해산물">해산물</option>
+				<option value="족발">족발</option>
+			</select>
 		
-		<input type="text" id="biMeetingDat" name="biMeetingDat" required>
-		
-		<input type="text" id="biMeetingTim" name="biMeetingTim" class="timePicker" required>
-		
-		
-		<select id="biHeadCnt" name="biHeadCnt" required>
-			<option value="" selected>최대 인원 선택</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-		</select><br> <input type="text" id="biContent" name="biContent"
-			placeholder="내용" style="width: 50%; height: 300px"><br>
-		<button>등록</button>
-		<button onclick="location.href='/main'">취소</button>
+			<select id="biHeadCnt" name="biHeadCnt" required>
+				<option value="" selected>최대 인원 선택</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+			</select>
+			
+			<br>
+			
+			<input type="text" id="biContent" name="biContent" placeholder="내용"><br>
+			
+			<br>
+			
+			<button id="submit">등록</button>
+			
+			<button id="cancle" onclick="location.href='/main'">취소</button>
+		</div>
 	</form>
 
 	<!-- datepicker -->
