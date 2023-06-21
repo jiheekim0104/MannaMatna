@@ -20,7 +20,7 @@ public class GoogleChartService {
 	@Autowired
 	UserInfoService userInfoService; // 유저인포서비스 의존주입
 
-	public JSONObject getChartData(UserInfoVO userInfoVO, HttpSession session) {
+	public JSONObject getGenderChart(UserInfoVO userInfoVO, HttpSession session) {
 
 		List<UserInfoVO> items = userInfoService.getUserInfos(userInfoVO, session);
 		log.info("구글차트서비스에서 의존주입받은 유저서비스 메소드실행 후 유저리스트==>{}", items); // 유저서비스 메소드 정상실행 확인

@@ -11,6 +11,27 @@
 <title>밥상상세페이지</title>
 <link rel="stylesheet" href="${path}/resources/css/babsang-detail.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+// 마감된 밥상의 경우 방장의 입장에서만 마감취소 혹은 맛남완료 버튼만 활성화
+window.onload = function(){
+	let btnList = document.querySelectorAll('.Btn');
+	console.log(btnList);
+	console.log('콘솔로찍은 biClosed = ' + ${detail.biClosed});
+	if(${detail.biClosed}==true){
+		// 해당밥상의 biClosed = true 일때, 마감한 밥상인 경우 버튼
+		for(let i = 0;i<btnList.length;i++){
+			if(btnList[i].innerText == '마감취소' || btnList[i].innerText == '맛남완료'){
+				console.log('버튼텍스트' + btnList[i].innerText);
+				continue;
+			}
+			btnList[i].style.backgroundColor = 'gray';
+			btnList[i].style.border = 'gray';
+			btnList[i].onclick = null;
+			btnList[i].classList.add('ended');
+		}
+	}
+}
+</script>
 </head>
 <body>
 	<div class="content">
@@ -46,13 +67,14 @@
 			test="${sessionScope.user.uiNum == detail.uiNum && detail.biClosed==true}">
 			<%-- 세션정보가 작성자이며, 마감상태 후 마감취소버튼 --%>
 			<button class="Btn" type="submit"
-				onclick="location.href='/babsangCloseCancle/${biNum}'">마감취소</button>
+				onclick="location.href='/babsangCloseCancle/${detail.biNum}'">마감취소</button>
 		</c:if>
 		<c:if test="${sessionScope.user.uiNum == detail.uiNum}">
-			<%-- 세션정보가 작성자일 경우 삭제버튼 --%>
+			<%-- 세션정보가 작성자일 경우 삭제버튼 즉, 로그인유저가 작성자인 경우 버튼 2개 추가 --%>
 			<button class="Btn"
 				onclick="location.href='/deleteBabsang?biNum=${detail.biNum}'">밥상삭제</button>
-			<%-- 추후 onclick 함수에 넣기 location.href='/deleteBabsang?biNum=${detail.biNum}' --%>
+			<button class="Btn"
+				onclick="location.href='/successBabsang/${detail.biNum}'">맛남완료</button>
 		</c:if>
 		<hr>
 		<!-- 참가자정보 영역 -->

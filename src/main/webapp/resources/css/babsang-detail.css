@@ -26,6 +26,7 @@
 	width: 80px;
 	position: absolute;
 	margin-left: 55%;
+	font-weight: bolder;
 }
 
 .content .time {
@@ -43,6 +44,7 @@
 }
 
 .content .Btn {
+	font-weight:bolder;
 	width: 115px;
 	height: 30px;
 	background-color: #FC522F;
@@ -54,6 +56,12 @@
 	font-size: 15px;
 	margin-top: 10px;
 	margin-right: 10px;
+}
+.content .Btn:hover:not(.ended){
+	/* .ended 클래스가 있는 버튼은 호버적용 x */
+	background-color: #FFFFFF;
+	color: #FC522F;
+	cursor: pointer;
 }
 
 .content .userImages {
@@ -79,6 +87,7 @@
 	margin-left: -200px;
 	margin-right: 250px;
 	float: left;
+	cursor: pointer;
 }
 
 .content .userImages .box .crown {
@@ -133,6 +142,7 @@
 	position: absolute;
 	margin-left: 10px;
 	margin-top: 10px;
+ 	cursor: pointer;
 }
 
 .content .container .commentBox .box .profileImg {
@@ -177,6 +187,7 @@
 .content .container .commentBox .commentBtn :hover {
 	/* 각 버튼 마우스 오버시 텍스트 색 변경 */
 	color: #FC522F;
+	cursor: pointer;
 }
 
 .content .container .commentBox .commentBtn span {
@@ -185,23 +196,34 @@
 
 .content .container .commentInput {
 	margin: 0 auto;
+	margin-top: -120px;
+	margin-bottom: 50px;
 }
 
 .content .container .commentInput .form-control {
 	border: 1px solid darkgray;
-	width: 90%;
+	width: 89%;
 	height: 40px;
 	border-radius: 15px;
 	display: inline;
-	margin-bottom: 20px;
+	padding-left: 20px;
 }
 
 .content .container .commentInput .commentBtn {
 	border: none;
 	outline: none;
-	display: inline;
+	display: inline block;
 	background-color: white;
-	margin-left: -8%;
+	font-weight: bolder;
+	width: 70px;
+	position: absolute;
+	margin-top: 10px;
+	margin-left: -130px;
+	
+}
+.content .container .commentInput .commentBtn:hover{
+	color: #FC522F;
+	cursor: pointer;
 }
 
 #commentUpdate {
@@ -216,6 +238,6 @@
 }
 
 #commentUpdate:focus {
-	outline-color: #FC522F;
+	outline-color: gray;
 	outline-style: solid;
 }

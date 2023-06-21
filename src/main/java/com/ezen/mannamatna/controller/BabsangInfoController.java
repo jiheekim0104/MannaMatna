@@ -105,7 +105,11 @@ public class BabsangInfoController {
 			// 로그인 유저가 확인됐을 경우에만 삭제 가능
 			msg = "이미 마감된 밥상입니다!!";
 			url = "/detail/"+biNum; // 해당페이지 redirect
-			if (!babsangInfoVO.isBiClosed()) {
+			if(userList.size()>1) {
+				// 해당밥상에 유저리스트에 다른 유저가 존재할 경우 삭제기능x
+				msg = "해당 밥상에 이미 참여중인 유저가 존재합니다!";
+			}
+			else if (!babsangInfoVO.isBiClosed()) {
 				// biClosed = false 인 경우만 삭제기능 가능
 				// 밥상이 마감된 상태면 삭제할 수 없어여!!
 				for(UserInfoVO user : userList) {

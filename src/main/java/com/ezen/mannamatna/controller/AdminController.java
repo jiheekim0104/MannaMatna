@@ -23,8 +23,8 @@ public class AdminController {
 	@GetMapping("/getChart")
 	@ResponseBody
 	public JSONObject getChart(UserInfoVO userInfoVO, HttpSession session) {
-		log.info("내가만든 json데이터 확인 ====>{}", googleChartService.getChartData(userInfoVO, session));
-		return googleChartService.getChartData(userInfoVO, session);
+		log.info("내가만든 json데이터 확인 ====>{}", googleChartService.getGenderChart(userInfoVO, session));
+		return googleChartService.getGenderChart(userInfoVO, session);
 	}
 	
 	@GetMapping("/chart")
