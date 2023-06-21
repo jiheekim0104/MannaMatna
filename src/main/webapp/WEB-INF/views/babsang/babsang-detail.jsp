@@ -14,6 +14,10 @@
 <script>
 // 마감된 밥상의 경우 방장의 입장에서만 마감취소 혹은 맛남완료 버튼만 활성화
 window.onload = function(){
+	if(${fn:length(babsangUserList)}==0){
+		alert('이미 맛남이 완료된 밥상입니다!');
+		location.href='/main';
+	}
 	let btnList = document.querySelectorAll('.Btn');
 	console.log(btnList);
 	console.log('콘솔로찍은 biClosed = ' + ${detail.biClosed});

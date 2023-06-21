@@ -31,7 +31,7 @@
 	
 	<select id="selectBabsangInfo" parameterType="int" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
 		SELECT BI_NUM, BI_TITLE, BI_CONTENT, BI_MEETINGDAT, BI_MEETINGTIM, 
-		BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY, BI_CLOSED, UI_NUM 
+		BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY, BI_CLOSED, UI_NUM, BI_USERCNT 
 		FROM BABSANG_INFO 
 		WHERE BI_NUM = #{biNum}
 	</select>
@@ -56,5 +56,8 @@
 	</delete>
 	<update id="updateBiClosed">
 	UPDATE BABSANG_INFO SET BI_CLOSED = #{biClosed} WHERE BI_NUM = #{biNum}
+	</update>
+	<update id="updateBiUserCnt">
+	UPDATE BABSANG_INFO SET BI_USERCNT = #{biUserCnt} WHERE BI_NUM = #{biNum}
 	</update>
 </mapper>

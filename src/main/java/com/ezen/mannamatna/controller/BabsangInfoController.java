@@ -104,15 +104,14 @@ public class BabsangInfoController {
 		if (userSession != null) {
 			// 로그인 유저가 확인됐을 경우에만 삭제 가능
 			msg = "이미 마감된 밥상입니다!!";
-			url = "/detail/"+biNum; // 해당페이지 redirect
-			if(userList.size()>1) {
+			url = "/detail/" + biNum; // 해당페이지 redirect
+			if (userList.size() > 1) {
 				// 해당밥상에 유저리스트에 다른 유저가 존재할 경우 삭제기능x
 				msg = "해당 밥상에 이미 참여중인 유저가 존재합니다!";
-			}
-			else if (!babsangInfoVO.isBiClosed()) {
+			} else if (!babsangInfoVO.isBiClosed()) {
 				// biClosed = false 인 경우만 삭제기능 가능
 				// 밥상이 마감된 상태면 삭제할 수 없어여!!
-				for(UserInfoVO user : userList) {
+				for (UserInfoVO user : userList) {
 					// 삭제기능 실행 시
 					// 해당 밥상에 참여중인 유저리스트에 모든 biNum을 0으로 초기화
 					// 데이터 무결성
@@ -189,7 +188,7 @@ public class BabsangInfoController {
 			} else {
 				// 로그인 상태 중, 밥상이 마감되지 않은 경우
 				UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user"); // 로그인 유저객체
-				userInfoVO.setBiNum(0); 
+				userInfoVO.setBiNum(0);
 				userInfoService.updateBiNum(userInfoVO); // 유저인포의 biNum 0으로 업데이트
 				msg = "참가 취소되셨습니다!!";
 			}
@@ -209,7 +208,7 @@ public class BabsangInfoController {
 			// 밥상인포 biClosed 1로 업데이트
 			if (babsangInfoService.blockJoin(biNum)) {
 				// 밥상서비스의 마감메소드 정상 실행 시
-				msg = "밥상마감!!";
+				msg = "밥상 마감시 더이상 다른 유저가 참여할 수 없습니다!";
 				url = "/detail/" + biNum; // 해당 페이지 redirect
 			}
 		}
@@ -230,6 +229,40 @@ public class BabsangInfoController {
 				// 밥상서비스의 마감메소드 정상 실행 시
 				msg = "밥상마감취소!!";
 				url = "/detail/" + biNum; // 해당 상세페이지 redirect
+			}
+		}
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+		return "common/msg";
+	}
+
+	@GetMapping("/successBabsang/{biNum}")
+	public String goMeeting(Model m, @PathVariable("biNum") int biNum, HttpSession session) {
+		String msg = "로그인 먼저 해주세요!";
+		String url = "/login";
+		// 맛남완료 버튼을 누르게되면 삭제와 동일하게 user의 biNum을 전부 0으로 초기화
+		List<UserInfoVO> userList = userInfoService.getUserInfosByBiNum(biNum);
+		UserInfoVO userSession = (UserInfoVO) session.getAttribute("user"); // 맛남 후 세션에 바로 적용해야하는 객체
+		BabsangInfoVO babsangInfoVO = babsangInfoService.getBabsangInfoVO(biNum);
+		if (session.getAttribute("user") != null) {
+			// 세션 유저객체가 확인이 되었을 경우만
+			if (!babsangInfoVO.isBiClosed()) {
+				// biClosed = false 인 경우(마감기능안했을시)
+				msg = "마감하기를 먼저 진행해주세요!!";
+				url = "/detail/" + biNum;
+			} else {
+				// 마감기능 활성화 확인 시
+				for (UserInfoVO user : userList) {
+					// 맛남완료기능 실행 시 삭제랑 동일한 비지니스로직 수행
+					// 해당 밥상에 참여중인 유저리스트에 모든 biNum을 0으로 초기화
+					user.setBiNum(0);
+					userSession.setBiNum(0);
+					userInfoService.updateBiNum(user); // 맛남 성공 시 유저서비스의 update 실행
+				}
+				babsangInfoVO.setBiUserCnt(userList.size()); // 유저리스트의 사이즈(현재인원) 밥상에 set
+				babsangInfoService.meetingSuccess(babsangInfoVO); // 이후 서비스 업데이트메소드 실행
+				msg = "맛남완료!!!!";
+				url = "/main";
 			}
 		}
 		m.addAttribute("msg", msg);

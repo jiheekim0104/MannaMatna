@@ -17,4 +17,6 @@ public interface BabsangInfoMapper {
 	BabsangInfoVO updateUserInfoBiNum(int uiBiNum); // 유저정보 - biNum
 	
 	int updateBiClosed(BabsangInfoVO babsangInfoVO); // 마감하기누르면 biClosed 업데이트
+
+	int updateBiUserCnt(BabsangInfoVO babsangInfoVO); // 맛남완료 후 해당밥상의 현재인원 업데이트
 }
