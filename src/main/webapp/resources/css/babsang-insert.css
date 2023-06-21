@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* .content{
+	display: grid;
+	grid-template-areas:
+		't t t t'
+		'o1 o2 o3 o4'
+		'c c c c'
+		'b1 b1 b2 b2';
+	place-items:center; 수직 중앙정렬
+} */
+.content{
+	display: flex;
+ 	justify-content: center;
+}
+.wrapper{
+	border: 1px solid white;
+	width: 90%;
+	height: 500px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+/* #biTitle{
+	grid-area:t;
+}
+#biFdCategory{
+	grid-area:o1;
+}
+#biHeadCnt{
+	grid-area:o2;
+}
+#biMeetingDat{
+	grid-area:o3;
+}
+#biMeetingTim{
+	grid-area:o4;
+}
+#biContent{
+	grid-area:c;
+}
+#submit{
+	grid-area:b1;
+}
+#cancle{
+	grid-area:b2;
+}
+ */
+#biTitle, #biFdCategory, #biHeadCnt, #biMeetingDat,
+#biMeetingTim, #biContent, #submit, #cancle{
+	width: 60%;
+  	background-color: white;
+  	border: 2px solid #999999;
+  	border-radius:0.5em;
+  	color: black;
+  	display: inline-block;
+  	font-size: 16px;
+}
+#biContent{
+	height: 300px;
+}
