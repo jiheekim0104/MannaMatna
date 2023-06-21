@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 .content {
 	font-size: 20px;
 }
@@ -43,6 +49,7 @@
 }
 
 .content .Btn {
+	font-family: 'omyu_pretty';/* 버튼 글꼴 */
 	width: 115px;
 	height: 30px;
 	background-color: #FC522F;

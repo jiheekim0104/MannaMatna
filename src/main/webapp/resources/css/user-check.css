@@ -1,4 +1,12 @@
 @charset "UTF-8";
+
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .content{
 	text-align: inherit;
 }
@@ -35,6 +43,7 @@ textarea{
 }
 
 .updateBnt { /* 이 css가 check-update & check-withdraw 에 같이 적용되다보니 달라야하는 부분이있어서 나눠줬음 */
+	font-family: 'omyu_pretty';
 	width: 100px;
 	height: 30px;
 	background-color: #FC522F;

@@ -3,6 +3,14 @@
 	color: #FC522F;
 	font-size: 20px;
 }
+
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .img > img{
 	 float: left;
 	 margin-top: 10px;
@@ -26,6 +34,7 @@
 } 
 
 .updateBnt {
+	font-family: 'omyu_pretty';
 	width: 150px;
 	height: 35px;
 	background-color: #FC522F;
@@ -47,6 +56,7 @@
 } 
 
 .withdrawBnt {
+	font-family: 'omyu_pretty';
 	width: 150px;
 	height: 35px;
 	background-color: #FFFFFF;
