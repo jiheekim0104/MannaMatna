@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>만나맛나 : 1인가구를 위한 신개념 밥상 매칭 사이트</title>
 </head>
 <body>
 <div class="left">
