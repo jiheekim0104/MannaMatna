@@ -217,10 +217,23 @@
 	padding: 10px;
 }
 
+@keyframes vibration {
+/* 0.5도씩 흔들리는 효과 정의 */
+  from {
+    transform: rotate(0.5deg);
+  }
+  to {
+    transform: rotate(-0.5deg);
+  }
+}
 .content .container .commentInput {
 	margin: 0 auto;
 	margin-top: -120px;
 	margin-bottom: 50px;
+}
+.content .container .commentInput.vibration {
+	/* 댓글 내용 공란일 시 애니메이션 추가 */
+	animation: vibration 0.1s infinite;
 }
 
 .content .container .commentInput .form-control {
@@ -232,6 +245,8 @@
 	display: inline;
 	padding-left: 20px;
 }
+
+
 
 .content .container .commentInput .commentBtn {
 	/* 댓글 작성하기 버튼 */

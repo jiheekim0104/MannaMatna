@@ -7,8 +7,24 @@
 
 	$('[name=commentInsertBtn]').click(function() { //댓글 등록 버튼 클릭시 
 		console.log('댓글등록눌렀따!!!');
+		let content = commentInsertForm.ciContent;
+		let inputBox = document.querySelector('.commentInput');
+		console.log('댓글내용 : ' + content.value);
+		if(content.value == ''){
+			// 내용이 없는 없는경우에는 commentInsert 실행하지 않는다.!!
+			content.placeholder='내용은 필수입니다.';
+			inputBox.classList.add('vibration');
+			console.log(inputBox);
+			console.log(inputBox.classList);
+			setTimeout(function(){
+				inputBox.classList.remove('vibration');
+			}, 400);
+			content.focus();
+		}else{
+			// 내용이 있는 경우에만 인서트 실행
 		let insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
 		commentInsert(insertData); //Insert 함수호출(아래)
+		}
 	});
 
 	//댓글 목록 
