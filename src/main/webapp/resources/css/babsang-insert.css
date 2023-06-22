@@ -7,41 +7,26 @@
     font-style: normal;
 }
 
-/* .content{
+.content{
 	display: grid;
 	grid-template-areas:
-		't t t t'
-		'o1 o2 o3 o4'
-		'c c c c'
-		'b1 b1 b2 b2';
-	place-items:center; 수직 중앙정렬
-} */
-.content{
-	display: flex;
- 	justify-content: center;
-}
-.wrapper{
-	border: 1px solid white;
-	width: 90%;
-	height: 500px;
-	text-align: center;
-	margin: 0 auto;
+		't t'
+		'o o'
+		'c c'
+		'b1 b2';
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 0px;
+	row-gap: 10px;
+	align-content: center;
+	align-items: stretch;
 }
 
-/* #biTitle{
+#biTitle{
 	grid-area:t;
+	
 }
-#biFdCategory{
-	grid-area:o1;
-}
-#biHeadCnt{
-	grid-area:o2;
-}
-#biMeetingDat{
-	grid-area:o3;
-}
-#biMeetingTim{
-	grid-area:o4;
+.options{
+	grid-area: o;
 }
 #biContent{
 	grid-area:c;
@@ -52,17 +37,44 @@
 #cancle{
 	grid-area:b2;
 }
- */
-#biTitle, #biFdCategory, #biHeadCnt, #biMeetingDat,
-#biMeetingTim, #biContent, #submit, #cancle{
+
+#biTitle, #biContent, #submit, #cancle{
+	font-family: 'omyu_pretty';
 	width: 60%;
+	margin: auto;
   	background-color: white;
   	border: 2px solid #999999;
   	border-radius:0.5em;
   	color: black;
-  	display: inline-block;
-  	font-size: 16px;
+  	font-size: 25px;
 }
-#biContent{
+#biTitle{
+  	font-size: 25px;
+}
+.options{
+	width: 60%;
+	margin: auto;
+	justify-content: center;
+}
+#biMeetingDat, #biMeetingTim, #biFdCategory, #biHeadCnt{
+	font-family: 'omyu_pretty';
+	width: 24%;
+	background-color: white;
+  	border: 2px solid #999999;
+  	border-radius:0.5em;
+  	color: black;
+  	font-size: 20px;
+}
+textarea{
 	height: 300px;
+	resize: none;
+}
+#submit, #cancle{
+	width: 10%;
+	min-width: 60px;
+}
+#cancle:hover, #submit:hover{
+	background-color: rgb(252,229,205);
+  	border: 2px solid #FC522F;
+  	color: #FC522F;
 }

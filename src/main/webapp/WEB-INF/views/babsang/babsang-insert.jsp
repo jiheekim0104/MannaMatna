@@ -28,9 +28,10 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 	<form method="POST" action="/addBabsang" class="content">
-		<div class="wrapper">
-			<input type="text" id="biTitle" name="biTitle" placeholder="제목을 입력해주세요"  required ><br>
-
+		
+			<input type="text" id="biTitle" name="biTitle" placeholder="제목을 입력해주세요 (최대 길이 50자)" maxlength="50" required >
+			
+		<div class="options">
 			<input type="text" id="biMeetingDat" name="biMeetingDat" required>
 		
 			<input type="text" id="biMeetingTim" name="biMeetingTim" class="timePicker" required>
@@ -58,16 +59,13 @@
 				<option value="8">8</option>
 			</select>
 			
-			<br>
-			
-			<input type="text" id="biContent" name="biContent" placeholder="내용"><br>
-			
-			<br>
-			
-			<button id="submit">등록</button>
-			
-			<button id="cancle" onclick="location.href='/main'">취소</button>
 		</div>
+			<textarea id="biContent" name="biContent" placeholder="내용을 입력해주세요 (최대 길이 500자)" maxlength="500"></textarea>
+		
+			<button id="cancle" onclick="location.href='/main'">취소</button>
+		
+			<button id="submit">등록</button> <br>
+			
 	</form>
 
 	<!-- datepicker -->
