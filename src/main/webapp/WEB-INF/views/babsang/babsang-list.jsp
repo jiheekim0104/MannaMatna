@@ -11,10 +11,7 @@
 <title>만나맛나 : 1인가구를 위한 신개념 밥상 매칭 사이트</title>
 <link rel="stylesheet" href="${path}/resources/css/babsang-list.css" />
 
-<style type="text/css">
-
-</style>
-
+<script type="text/javascript" src=""></script>
 </head>
 
 <body>
@@ -44,15 +41,28 @@
 		<c:if test="${empty page.list}">
 			<div>밥상이 존재하지 않습니다</div>
 		</c:if>
-		
 		<c:forEach items="${page.list}" var="babsangListVO">
-		<div class="babsang" onclick=
+		<div class="babsang"
+		
+			onclick=
 			<c:if test="${sessionScope.user.uiNum != null}">
 			"location.href='/detail/${babsangListVO.biNum}'"
 			</c:if>
 			<c:if test="${sessionScope.user.uiNum == null}">
 			"location.href='/cannotSeeBabsang'"
 			</c:if>
+			
+			style=
+			<c:if test="${babsangListVO.biFdCategory == '중식'}">
+			"background-image: url('https://i.namu.wiki/i/IuQwaTmppRSulggeu1XyTm1G_m6viDokh0lN4E_p_gXAnhQgmVOJid25ZqlOfpHS4vvVay9pnP5K0IclP4xv4xekogpfMIFodzj1Unu0btFY5sCSrjYZQf0WOOWs_ryD_9lc_jm6cWIHmxvN-sLNKA.webp');"
+			</c:if>
+			<c:if test="${babsangListVO.biFdCategory == '양식'}">
+			"background-image: url('https://recipe1.ezmember.co.kr/cache/recipe/2022/09/30/8e7eb8e3019532a8dc6d39a9a325aad41.jpg');"
+			</c:if>
+			<c:if test="${babsangListVO.biFdCategory == '한식'}">
+			"background-image: url('https://cdn-bastani.stunning.kr/prod/portfolios/15e92d6a-cfdf-4352-a81d-72f220d4f815/contents/7c74ba433deb488257200574425196e5a34818c7d27eb5362ea94ee18e8a0718_v2.jpg');"
+			</c:if>
+			
 			>
 			<h3 id="biTitle">
 				제목 : ${babsangListVO.biTitle}

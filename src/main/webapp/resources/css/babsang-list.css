@@ -7,6 +7,7 @@
     font-style: normal;
 }
 
+
 body{
 	font-family: 'omyu_pretty';
 }
@@ -21,6 +22,7 @@ body{
 		'b3 b4'
 		'p p';
 	align-items: center; /* 수직 중앙정렬 */
+	align-content: space-evenly;
 }
 
 #searchBabsang{
@@ -80,22 +82,25 @@ input::placeholder{
   	text-decoration: none;
   	display: inline-block;
   	font-size: 18px;
-}
+  }
 
 .biFdCategory:hover, .buttonBiTitle:hover{
   	background-color: #FC522F;
   	color: #FFFFFF;
   	border: 2px solid #FC522F;  
 }
+
 .babsang{
   	border: 2px solid #999999;
-	width: 90%;
+	width: 70%;
 	/* max-width: 375px; */
 	height: 175px;
 	border-radius: 30px;
 	text-align: center;
 	margin: 0 auto;
 	font-size: 19px;
+	background-size: 100%;
+	
 }
 h3, .babsang>div{
 	margin: 10px auto;
