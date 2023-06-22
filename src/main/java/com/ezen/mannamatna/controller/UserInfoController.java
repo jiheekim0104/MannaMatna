@@ -47,6 +47,11 @@ public class UserInfoController {
 		return "index"; 
 	}
 	
+	@GetMapping("/info") 
+	public String ShowInfo() {
+		return "user/info"; 
+	}
+	
 	@GetMapping("/login")
 	public String login() {
 		return "user/login";

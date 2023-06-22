@@ -1,0 +1,50 @@
+@charset "UTF-8";
+html{
+	height: 100%;
+}
+
+.content{
+	font-size: 20px;
+	padding:0;
+}
+span{
+	color: #FC522F;
+	font-weight: bolder;
+	font-size: 30px;	
+}
+
+.info1{
+	width: 30%;
+	float: right;
+}
+
+.info2{
+	width: 30%;
+	float: left;
+}
+
+.infoBox1{
+	display: none;
+	animation: fadein 3s;
+}
+
+.infoBox2{
+	display: none;
+	animation: fadein 3s;
+}
+
+.image{
+	display: none;
+	animation: fadein 3s;
+}
+
+
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

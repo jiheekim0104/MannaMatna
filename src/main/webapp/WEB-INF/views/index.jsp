@@ -21,7 +21,7 @@
 </div>
 <div class="buttons">
 	<button class="mainBnt" onclick="location.href='/main'">메인페이지로 이동하기</button><br>
-	<button class="infoBnt" onclick="location.href='/main'">'만나맛나'란?</button>
+	<button class="infoBnt" onclick="location.href='/info'">'만나맛나'란?</button>
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -42,5 +42,7 @@ setInterval(function(){             //setInterval(); 함수 반복 실행 메소
   //animate( {애니메이션 속성}, "효과 속도" [, 콜백함수] ); 콜백함수는 동작이 완료되면 실행되는 함수입니다. [선택요소] */
 });
 
+setTimeout(function(){    
+	document.querySelector('.buttons').style.display="block";},1000);
 </script>
 </html>

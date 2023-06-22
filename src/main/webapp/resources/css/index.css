@@ -48,7 +48,8 @@ body{
 .buttons{
 	position: absolute;
 	right: 20%;
-	bottom: 40%;
+	bottom: 25%;
+	display: none;
 }
 
 .mainBnt {
@@ -64,7 +65,6 @@ body{
 	text-decoration: none;
 	font-size: 25px;
 	margin-top: 10px;
-	animation-delay: 3s;
 	animation: fadein 3s;
 }
 
@@ -87,7 +87,6 @@ body{
 	text-decoration: none;
 	font-size: 25px;
 	margin-top: 10px;
-	animation-delay:3s;
 	animation: fadein 3s;
 }
 
