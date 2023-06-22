@@ -67,7 +67,6 @@
 
 		var pieChartOptions = {
 			title : '만나맛나 회원 성별 비율',
-			width : 600,
 			height : 200,
 			fontSize: 15,
 			fontName : 'omyu_pretty',
@@ -85,7 +84,6 @@
 		};
 		var columnChartOptions = {
 			title : '만나맛나 회원 연령대 분포도',
-			width : 600,
 			height : 200,
 			fontSize: 15,
 			fontName : 'omyu_pretty',
@@ -104,7 +102,6 @@
 		};
 		var lineChartOptions = {
 			title : '만나맛나 날짜별 가입회원 수 동향',
-			width : 1300,
 			height : 300,
 			fontName : 'omyu_pretty',
 			fontSize: 15,
@@ -142,17 +139,18 @@ color: #FC522F;
 }
 
 #genderChart {
-	width: 600px;
+	width: 49%;
 	display: inline-block;
 }
 
 #ageChart {
-	width: 600px;
+	width: 49%;
 	display: inline-block;
 }
 #credatChart {
-	width: 1300px;
+	width: 110%;
 	display: inline-block;
+	float: left;
 }
 
 #btn {
