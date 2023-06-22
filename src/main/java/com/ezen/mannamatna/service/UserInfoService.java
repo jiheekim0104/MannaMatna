@@ -36,46 +36,45 @@ import lombok.extern.log4j.Log4j2;
 public class UserInfoService {
 	private final String absolutePath = System.getProperty("user.dir"); // 시스템속성으로 프로젝트경로불러옴
 	private final String uploadFilePath = absolutePath + "\\src\\main\\webapp\\resources\\upload";
+	
 	@Autowired
 	private UserInfoMapper uiMapper;
 
-	public int idChk(UserInfoVO userInfoVO) {
+	public int idChk(UserInfoVO userInfoVO) { //중복아이디를 찾음
 		log.info("여기는서비스=====>{}", userInfoVO);
-		return uiMapper.idChk(userInfoVO);
+		return uiMapper.idChk(userInfoVO); //중복되는 수를 리턴
 	}
 
-	public int nicknameChk(UserInfoVO userInfoVO) {
+	public int nicknameChk(UserInfoVO userInfoVO) { //중복닉네임을 찾음
 		// TODO Auto-generated method stub
-		return uiMapper.nicknameChk(userInfoVO);
+		return uiMapper.nicknameChk(userInfoVO); //중복되는 수를 리턴
 	}
 
 	public boolean login(UserInfoVO userInfoVO, HttpSession session) {
 		log.info("userInfoVO=====>{}", userInfoVO);
-		if (userInfoVO.getUiPwd().equals("0000") && userInfoVO.getUiId() == null) {//SNS연동 로그인시
+		if (userInfoVO.getUiPwd().equals("0000") && userInfoVO.getUiId() == null) {//SNS로만 가입한 계정이 로그인할떄
 			session.setAttribute("user", userInfoVO);
 			return true;
 		}
-		if (uiMapper.selectUserInfoById(userInfoVO) != null) {
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String inputPwd = userInfoVO.getUiPwd();
-			if (userInfoVO.getUiId() == null) {
-				userInfoVO = uiMapper.selectUserInfoByNum(userInfoVO);
+		if (uiMapper.selectUserInfoById(userInfoVO) != null) { // 입력한 id와 일치하는 유저가 DB에 있다면
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); 
+			String inputPwd = userInfoVO.getUiPwd(); // 입력한 pwd
+			if (userInfoVO.getUiId() == null) { //??????????이거 뭐더라 ㅇㅅㅇ;
+				userInfoVO = uiMapper.selectUserInfoByNum(userInfoVO); //고유번호로 유저를 찾음
 			} else {
-				userInfoVO = uiMapper.selectUserInfoById(userInfoVO);
+				userInfoVO = uiMapper.selectUserInfoById(userInfoVO); //ID로 유저를 찾음
 			}
 
 			log.info("matches=====>{}", passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd()));
 			// visible
 			// 딜레이
 			// 히든
-			if (passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd())) {
-				log.info("확인하려는 유저 =>{}", userInfoVO);
-				session.setAttribute("user", userInfoVO);
-				
-				if(findKakaoUser(userInfoVO)!=0) {
-					userInfoVO.setKuiId(findKakaoUser(userInfoVO));
-				} else if (findNaverUser(userInfoVO)!=null){
-					userInfoVO.setNuiId((findNaverUser(userInfoVO)));
+			if (passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd())) { // 입력한 PWD와 DB에 있는 유저의 PWD가 일치하는지 확인함
+				session.setAttribute("user", userInfoVO); //일치하면 세션으로
+				if(findKakaoUser(userInfoVO)!=0) { //만약 카카오 DB에 일치하는 고유번호가 있다면 (일반유저+카카오연동)
+					userInfoVO.setKuiId(findKakaoUser(userInfoVO)); //세션으로 넘어올때 카카오 고유번호도 담아줌
+				} else if (findNaverUser(userInfoVO)!=null){//또는 네이버 DB에 일치하는 고유번호가 있다면 (일반유저+네이버연동)
+					userInfoVO.setNuiId((findNaverUser(userInfoVO)));//세션으로 넘어올때 카카오 고유번호도 담아줌
 				}
 				return true;
 			}
@@ -84,44 +83,41 @@ public class UserInfoService {
 		// 딜레이
 		// 히든
 
-		return false;
+		return false; //입력한 ID가 없거나, 비번이 틀렸거나
 
 	}
 
-	public boolean findUser(UserInfoVO userInfoVO) {
+	public boolean findUser(UserInfoVO userInfoVO) { //ID로 유저찾기
 		if (uiMapper.selectUserInfoById(userInfoVO) != null) {
 			return true;
 		}
 		return false;
 	}
 
-	public long findKakaoUser(UserInfoVO userInfoVO) { // 연동로그인 기능 구현중
-		if (uiMapper.selectKakaoUserInfoByNum(userInfoVO) != null) {
-			return uiMapper.selectKakaoUserInfoByNum(userInfoVO).getKuiId();
+	public long findKakaoUser(UserInfoVO userInfoVO) { // 일반회원->카카오연동가입시 카카오 고유번호를 받기위해 사용
+		if (uiMapper.selectKakaoUserInfoByNum(userInfoVO) != null) { //카카오DB에서 일반회원의 고유번호와 일치하는 번호를 갖는 카카오유저가있는지확인하고
+			return uiMapper.selectKakaoUserInfoByNum(userInfoVO).getKuiId(); //일치하는 번호를 가진 유저의 카카오 고유번호를 리턴
 		}
 		return 0;
 	}
 
-	public String findNaverUser(UserInfoVO userInfoVO) { // 연동로그인 기능 구현중
-		if (uiMapper.selectNaverUserInfoByNum(userInfoVO) != null) {
-			return uiMapper.selectNaverUserInfoByNum(userInfoVO).getNuiId();
+	public String findNaverUser(UserInfoVO userInfoVO) { // 일반회원->네이버연동가입시 카카오 고유번호를 받기위해 사용
+		if (uiMapper.selectNaverUserInfoByNum(userInfoVO) != null) {//네이버DB에서 일반회원의 고유번호와 일치하는 번호를 갖는 네이버유저가있는지확인하고
+			return uiMapper.selectNaverUserInfoByNum(userInfoVO).getNuiId(); //일치하는 번호를 가진 유저의 카카오 고유번호를 리턴
 		}
 		return null;
 	}
 
-	public boolean kakaoLogin(KakaoUserInfoVO kakaoUserInfoVO, HttpSession session) { // 여기서 문제가 생기는듯 ㅇㅅ ㅇ?
+	public boolean kakaoLogin(KakaoUserInfoVO kakaoUserInfoVO, HttpSession session) { //카카오 로그인
+		String kakaoImgPath = kakaoUserInfoVO.getKakaoImgPath(); //카카오 프로필사진을 저장없이 바로 path로 받음
+		kakaoUserInfoVO = uiMapper.selectKakaoUserInfo(kakaoUserInfoVO); //해당 카카오고유번호랑 일치하는 유저를 찾음
 
-		log.info("확인하려는 유저 =>{}", kakaoUserInfoVO);
-		String kakaoImgPath = kakaoUserInfoVO.getKakaoImgPath();
-		kakaoUserInfoVO = uiMapper.selectKakaoUserInfo(kakaoUserInfoVO);
-
-		log.info("돌려받은 유저 =>{}", kakaoUserInfoVO); // 카db에 제대로 안올라갔으니까 여기서 못찾아온거같음ㅇㅇ
-		if (kakaoUserInfoVO != null) {
-			UserInfoVO userInfoVO = new UserInfoVO();
+		if (kakaoUserInfoVO != null) { // 일치하는 유저가있다면
+			UserInfoVO userInfoVO = new UserInfoVO(); 
 			userInfoVO.setUiNum(kakaoUserInfoVO.getUiNum()); // 카카오 로그인 유저의 유저번호를 userInfoVO에 담기
-			UserInfoVO newUserInfoVO = uiMapper.selectUserInfoByNum(userInfoVO);
-			newUserInfoVO.setKuiId(kakaoUserInfoVO.getKuiId());
-			newUserInfoVO.setKakaoImgPath(kakaoImgPath);
+			UserInfoVO newUserInfoVO = uiMapper.selectUserInfoByNum(userInfoVO);//그번호와 일치하는 userInfoVO를 찾아서 담고
+			newUserInfoVO.setKuiId(kakaoUserInfoVO.getKuiId()); // 카카오 고유번호 추가함
+			newUserInfoVO.setKakaoImgPath(kakaoImgPath); // 카카오 사진 경로 추가함
 			// uiNum 정보만 가지고 있는 VO를 넣고 리턴은 다시 셀렉트문으로 찾은 모든 정보를 가지고 있는 uiVO 객체를 다시 돌려받는다.
 			// uiVO와 kakaoVO가 연결되는것은 uiNum 인데 찾은 uiNum으로 uiVO를 셀렉트해서 찾는 쿼리문이 없었음
 			// 매퍼에 해당 메소드 및 쿼리문 추가하여 kakaoLogin()에 추가함
@@ -134,19 +130,16 @@ public class UserInfoService {
 		return false;
 	}
 
-	public boolean naverLogin(NaverUserInfoVO naverUserInfoVO, HttpSession session) { // 여기서 문제가 생기는듯 ㅇㅅ ㅇ?
+	public boolean naverLogin(NaverUserInfoVO naverUserInfoVO, HttpSession session) {
+		String naverImgPath = naverUserInfoVO.getNaverImgPath();//네이버 프로필사진을 저장없이 바로 path로 받음
+		naverUserInfoVO = uiMapper.selectNaverUserInfo(naverUserInfoVO);//해당 네이버고유번호랑 일치하는 유저를 찾음
 
-		log.info("확인하려는 유저 =>{}", naverUserInfoVO);
-		String naverImgPath = naverUserInfoVO.getNaverImgPath();
-		naverUserInfoVO = uiMapper.selectNaverUserInfo(naverUserInfoVO);
-
-		log.info("돌려받은 유저 =>{}", naverUserInfoVO);
-		if (naverUserInfoVO != null) {
+		if (naverUserInfoVO != null) {// 일치하는 유저가있다면
 			UserInfoVO userInfoVO = new UserInfoVO();
 			userInfoVO.setUiNum(naverUserInfoVO.getUiNum()); // 네이버 로그인 유저의 유저번호를 userInfoVO에 담기
-			UserInfoVO newUserInfoVO = uiMapper.selectUserInfoByNum(userInfoVO);
-			newUserInfoVO.setNuiId(naverUserInfoVO.getNuiId());
-			newUserInfoVO.setNaverImgPath(naverImgPath);
+			UserInfoVO newUserInfoVO = uiMapper.selectUserInfoByNum(userInfoVO);//그번호와 일치하는 userInfoVO를 찾아서 담고
+			newUserInfoVO.setNuiId(naverUserInfoVO.getNuiId());// 네이버 고유번호 추가함
+			newUserInfoVO.setNaverImgPath(naverImgPath); // 카카오 사진 경로 추가함
 			log.info("네이버 로그인 서비스 =>{}", newUserInfoVO);
 			session.setAttribute("user", newUserInfoVO);
 			log.info("서비스에서 네이버 세션값확인={}", session.getAttribute("user"));
@@ -157,48 +150,48 @@ public class UserInfoService {
 
 	public boolean join(UserInfoVO userInfoVO) throws IllegalStateException, IOException {
 		String fileName = null;
-		if (userInfoVO.getUiId() == null) { // sns 연동으로 최초 가입하는 유저
+		if (userInfoVO.getUiId() == null) { // (1) SNS 연동으로 최초 가입하는 유저
 			/*
 			 * fileName = userInfoVO.getUiFilepath().replace(absolutePath +
 			 * "\\src\\main\\webapp", ""); // 각 시스템환경마다 경로 // 공유되도록 수정
 			 * userInfoVO.setUiFilepath(fileName);
 			 */
-			userInfoVO.setUiPwd("0000"); // null일수 없어서 넣어둠
+			userInfoVO.setUiPwd("0000"); // null일수 없어서 초기값 설정해줌
 			log.info("프로젝트절대경로===={}", System.getProperty("user.dir"));
 			log.info("일반db에 넣기전={}", userInfoVO);
-			long kakaoId = userInfoVO.getKuiId();
+			long kakaoId = userInfoVO.getKuiId(); 
 			log.info("kakaoId={}", kakaoId);
 			String naverId = userInfoVO.getNuiId();
 			log.info("naverId={}", naverId);
 			if (kakaoId != 0) { // 카카오로 최초 가입 유저인경우
-				if (uiMapper.insertUserInfo(userInfoVO) == 1) { // 일반 유저 테이블에 넣고
+				if (uiMapper.insertUserInfo(userInfoVO) == 1) { // 일반 유저 테이블에 넣고 (이때 일반회원 고유 번호가 생김)
 					userInfoVO = uiMapper.selectUserInfo(userInfoVO); // 넣은걸 가져와서
 					log.info("일반db에 추가된거+카카오번호 추가한거={}", userInfoVO);
-					userInfoVO.setKuiId(kakaoId);
+					userInfoVO.setKuiId(kakaoId); // 카카오 고유 아이디를 userInfoVO에 추가해줌
 					log.info("일반db에 추가된거+카카오번호 추가한거={}", userInfoVO);
-					KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO(); // 카카오 유저 객체에 넣어주고
-					kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId());
-					kakaoUserInfoVO.setUiNum(userInfoVO.getUiNum());
+					KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO(); // 카카오 유저 객체를 만들어서
+					kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId()); // 카카오 고유 아이디를 kakaoUserInfoVO에 추가해줌
+					kakaoUserInfoVO.setUiNum(userInfoVO.getUiNum()); // 일반회원 고유 번호를 kakaoUserInfoVO에 추가해줌
 					log.info("카카오db에추가할거임={}", kakaoUserInfoVO);
 					return uiMapper.insertKakaoUserInfo(kakaoUserInfoVO) == 1; // 카카오 유저 테이블에 인서트
 				}
 				return false;
 			} else if (naverId != null) { // 네이버로 최초 가입 유저인경우
-				if (uiMapper.insertUserInfo(userInfoVO) == 1) { // 일반 유저 테이블에 넣고
+				if (uiMapper.insertUserInfo(userInfoVO) == 1) { // 일반 유저 테이블에 넣고 (이때 일반회원 고유 번호가 생김)
 					userInfoVO = uiMapper.selectUserInfo(userInfoVO); // 넣은걸 가져와서
 					log.info("일반db에 추가된거+네이버번호 추가한거={}", userInfoVO);
-					userInfoVO.setNuiId(naverId);
-					log.info("일반db에 추가된거+네이버번호 추가한거={}", userInfoVO);
+					userInfoVO.setNuiId(naverId); // 네이버 고유 아이디를 userInfoVO에 추가해줌
+					log.info("일반db에 추가된거+네이버번호 추가한거={}", userInfoVO); 
 					NaverUserInfoVO naverUserInfoVO = new NaverUserInfoVO(); // 네이버 유저 객체에 넣어주고
-					naverUserInfoVO.setNuiId(userInfoVO.getNuiId());
-					naverUserInfoVO.setUiNum(userInfoVO.getUiNum());
+					naverUserInfoVO.setNuiId(userInfoVO.getNuiId()); // 네이버 고유 아이디를 kakaoUserInfoVO에 추가해줌
+					naverUserInfoVO.setUiNum(userInfoVO.getUiNum()); // 일반회원 고유 번호를 kakaoUserInfoVO에 추가해줌
 					log.info("네이버db에추가할거임={}", naverUserInfoVO);
 					return uiMapper.insertNaverUserInfo(naverUserInfoVO) == 1; // 네이버 유저 테이블에 인서트
 				}
 				return false;
 			}
 			return false;
-		} else if (userInfoVO.getUiId()!= null && (userInfoVO.getKuiId()!=0 ||userInfoVO.getNuiId()!=null)) {// 일반가입 유저가 sns 연동 버튼을 누른경우
+		} else if (userInfoVO.getUiId()!= null && (userInfoVO.getKuiId()!=0 ||userInfoVO.getNuiId()!=null)) {// (2) 일반가입 유저가 sns 연동 버튼을 누른경우
 			long kakaoId = userInfoVO.getKuiId();
 			log.info("kakaoId={}", kakaoId);
 			String naverId = userInfoVO.getNuiId();
@@ -218,28 +211,24 @@ public class UserInfoService {
 			}
 			return false;
 		} else {
-			fileName = userInfoVO.getUiFile().getOriginalFilename(); // 일반가입인 경우
-			if ("".equals(fileName)) {
-				userInfoVO.setUiFilepath("/resources/upload/nophoto.png");
-			} else if (!"".equals(fileName)) {
-				int idx = fileName.lastIndexOf(".");
+			fileName = userInfoVO.getUiFile().getOriginalFilename(); // (3) 일반가입인 경우
+			if ("".equals(fileName)) { // 가입시 등록한 사진이 없다면
+				userInfoVO.setUiFilepath("/resources/upload/nophoto.png");// 기본사진을 경로로 추가함
+			} else if (!"".equals(fileName)) { // 등록한 사진이 있다면
+				int idx = fileName.lastIndexOf("."); //뒤에서 .의 위치를 찾음
 				String extName = "";
 				if (idx != -1) {
-					extName = fileName.substring(idx);
+					extName = fileName.substring(idx); //. 위치 뒷부분 자른것(파일확장자명)
 				}
-				String name = UUID.randomUUID().toString();
-				log.info("name====>{}", name);
-				File file = new File(uploadFilePath, name + extName);
-				userInfoVO.getUiFile().transferTo(file);
-				userInfoVO.setUiFilepath("/resources/upload/" + name + extName);
-				log.info("저장됨====>{}", userInfoVO);
+				String name = UUID.randomUUID().toString(); // 랜덤하게 번호 생성
+				File file = new File(uploadFilePath, name + extName); // uploadFilePath에 랜덤 번호 + . 위치 뒷부분 자른것(파일확장자명)으로 파일을 만들어서
+				userInfoVO.getUiFile().transferTo(file);//지정경로에 저장
+				userInfoVO.setUiFilepath("/resources/upload/" + name + extName);//경로도 저장
 			}
 		}
-		log.info("fileName====>{}", fileName);
-
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		userInfoVO.setUiPwd(passwordEncoder.encode(userInfoVO.getUiPwd()));
-		return uiMapper.insertUserInfo(userInfoVO) == 1;
+		userInfoVO.setUiPwd(passwordEncoder.encode(userInfoVO.getUiPwd()));//입력한 비밀번호를 암호화한다음
+		return uiMapper.insertUserInfo(userInfoVO) == 1; //일반유저 DB에 인서트
 	}
 
 	public boolean updateActive(UserInfoVO userInfoVO, HttpSession session) {
