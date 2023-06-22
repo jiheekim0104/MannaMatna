@@ -8,9 +8,9 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
 .content {
 	font-size: 25px;
+	width: 100%;
 }
 
 .content .title {
@@ -81,7 +81,8 @@
 }
 
 .content .userImages {
-	height: 6%;
+	height: 200px;
+
 }
 
 .content .userImages .participents {
@@ -134,22 +135,19 @@
 }
 
 .content .container {
-	margin-top: 150px;
 }
 
 .content .container .commentList {
-	/*margin-bottom: 20px;*/
-	
 }
 
-.content .container .commentBox {
+.content .container .commentList .commentBox {
 	border: 1px solid darkgray;
 	border-radius: 20px;
 	width: 90%;
 	font-size: 18px;
 	height: 100px;
 	margin: 0 auto;
-	margin-bottom: 30px;
+	margin-top: 30px;
 }
 
 .content .container .commentBox .box {
@@ -227,9 +225,9 @@
   }
 }
 .content .container .commentInput {
-	margin: 0 auto;
-	margin-top: -120px;
-	margin-bottom: 50px;
+	/* 댓글 입력 창 */
+	margin-bottom: 3%;
+	margin-top: 1%;
 }
 .content .container .commentInput.vibration {
 	/* 댓글 내용 공란일 시 애니메이션 추가 */
@@ -245,9 +243,6 @@
 	display: inline;
 	padding-left: 20px;
 }
-
-
-
 .content .container .commentInput .commentBtn {
 	/* 댓글 작성하기 버튼 */
 	font-family: 'omyu_pretty'; /* 버튼 글꼴 */
