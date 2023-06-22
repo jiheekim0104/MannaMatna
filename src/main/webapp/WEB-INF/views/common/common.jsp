@@ -6,7 +6,7 @@ UserInfoVO user = (UserInfoVO) session.getAttribute("user");
 if (user == null) {
 %>
 <script>
-	alert('밥상을 보려면 로그인을 해주세요 🍔');
+	alert('로그인이 필요한 서비스입니다. 🍔');
 	location.href = '/login';
 </script>
 <%
