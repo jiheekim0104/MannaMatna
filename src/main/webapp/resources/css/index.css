@@ -1,0 +1,23 @@
+@charset "UTF-8";
+html{
+	height: 100%;
+}
+
+body{
+	min-height: 100%;
+    margin: 0; 
+	display: grid;
+	grid-template-columns: 25% 75%;
+	grid-template-areas:
+		'a b';
+}
+
+.left{
+	grid-area:a;
+	background-color: #FC522F;
+}
+
+.left>img{
+	margin-top: 40%;
+	margin-left: 16%;
+}
