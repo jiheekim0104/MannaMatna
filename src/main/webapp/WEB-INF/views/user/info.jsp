@@ -28,7 +28,7 @@
 		<br><br>
 		<span>혹은 혼자 먹으려니까 괜히 입맛이 떨어지지</span> 않나요?<br>
 		<sapn>맨날 혼자서 같은거 먹기 질려!</sapn> 누가 맛집좀 알려주면 좋겠다구요?<br>
-		그런 당신을 위한 신개념 밥상 매칭 사이트!<br>
+		그런 당신을 위한 신개념 밥상 매칭 사이트!<br><br><br><br><br><br><br><br><br>
 	</div>
 	<div class="image">
 		<img src="../../../resources/upload/logo.png"><br>
@@ -38,27 +38,46 @@
 
 
 <br><br>
-<span>맛집</span>이라는 공간을 통해 <span>사람</span>과 사람을 연결하고,<br> 
-경험을 공유하며, 사용자에게 <span>일상</span>의 행복을 부여합니다.
-<br><br>
-<hr>
-1. 밥상에 참여하는 방법
- (1) 내가 직접 밥상을 만든다.
-  - 밥상생성 버튼을 클릭한다.
-  - 제목, 만나는 날짜, 만나는 시간, 음식 카테고리, 만나는 최대인원수를 설정하고 내용을 입력해주세요.
-  - 인원이 어느정도 모였으면, 마감하기 버튼을 눌러주세요. 더이상 다른 유저가 참여할수없어요. 혹시나 추가 참여인원을 모집하고 싶다면 마감취소버튼을 눌러주세요.
-  - 만남이 이루어지고나면 맛남완료 버튼을 꼭 눌러주세요.
-  
- (2) 만들어져있는 밥상에 참여한다.
-  - 원하는 카테고리가있다면 선택할수있어요.
-  - 게시글을 눌러서 밥상내용을 확인해요.
-  - 참여하기 누르면 참여 끝!
-  - 참석이 불가능해진 경우에는 참여취소 버튼을 눌러주요. (단,방장이 인원마감을 한 경우에는 참여취소 버튼을 누를수 없어요.)
-  - 만남 이후에 방장이 '맛남완료'버튼을 누르면 다른 밥상에 참여할수있어요.
-
-2. 탈퇴는 어떻게해요?
-3. 유저신고 가능한가요?
-
+	<div class="infoBox3">
+		<span>맛집</span>이라는 공간을 통해 <span>사람</span>과 사람을 연결하고,<br> 
+		경험을 공유하며, 사용자에게 <span>일상</span>의 행복을 부여합니다.
+		<br><br>
+		<button class="accordion">밥상에는 어떻게 참여할수있나요? (방장편)</button>
+			<div class="panel">
+	  			<p>
+	  		  -	내가 직접 밥상을 만든다.<br>
+			  - 밥상생성 버튼을 클릭한다.<br>
+			  - 제목, 만나는 날짜, 만나는 시간, 음식 카테고리, 만나는 최대인원수를 설정하고 내용을 입력해주세요.<br>
+			  - 인원이 어느정도 모였으면, 마감하기 버튼을 눌러주세요. 더이상 다른 유저가 참여할수없어요. 혹시나 추가 참여인원을 모집하고 싶다면 마감취소버튼을 눌러주세요.<br>
+			  - 만남이 이루어지고나면 맛남완료 버튼을 꼭 눌러주세요.</p>
+			</div>
+	
+		<button class="accordion">밥상에는 어떻게 참여할수있나요? (참여자편)</button>
+			<div class="panel">
+	  			<p>
+	  		  - 만들어져있는 밥상에 참여한다.<br>
+			  - 원하는 카테고리가있다면 선택할수있어요.<br>
+			  - 게시글을 눌러서 밥상내용을 확인해요.<br>
+			  - 참여하기 누르면 참여 끝!<br>
+			  - 참석이 불가능해진 경우에는 참여취소 버튼을 눌러주요. (단,방장이 인원마감을 한 경우에는 참여취소 버튼을 누를수 없어요.)<br>
+			  - 만남 이후에 방장이 '맛남완료'버튼을 누르면 다른 밥상에 참여할수있어요.</p>
+			</div>
+	
+		<button class="accordion">탈퇴는 어떻게하나요?</button>
+			<div class="panel">
+		 		<p>
+		 	- 본인이 방장인데 참여 인원이 없는경우 : 삭제하기 -> 탈퇴<br>
+			- 본인이 방장인데 참여 인원이 있는경우 : 마감 -> 만남완료 -> 탈퇴 <br>
+			- 밥상에 참여중인경우 : 참여취소 -> 탈퇴<br>
+			- 밥상이 인원마감된경우 : 방장이 만남완료를 눌러줄때까지 대기(왜냐면 지가 간다그래놓고 안가는거니까 ^^) -> 탈퇴</p>
+			</div>
+		<button class="accordion">유저신고는 어떻게하나요?</button>
+			<div class="panel">
+		 		<p>우측 하단에 있는 챗봇을 통해 관리자와 소통해주세요.<br>
+		 		정확한 신고사유 및 근거를 함께 보내주시면 빠른 시일내에 조치하도록 하겠습니다. </p>
+		</div>		
+	</div>
+	<br>
 </div>	
 <!--관리자 채딩 기능-->
 <script type="text/javascript">
@@ -83,6 +102,27 @@ setTimeout(function(){
 	
 setTimeout(function(){            
 	document.querySelector('.image').style.display="block";},3000);	
+	
+setTimeout(function(){            
+	document.querySelector('.infoBox3').style.display="block";},3000);
+	
+	var acc = document.getElementsByClassName("accordion");
+	var i;
+
+	var acc = document.getElementsByClassName("accordion");
+	var i;
+
+	for (i = 0; i < acc.length; i++) {
+	  acc[i].addEventListener("click", function() {
+	    this.classList.toggle("active");
+	    var panel = this.nextElementSibling;
+	    if (panel.style.maxHeight) {
+	      panel.style.maxHeight = null;
+	    } else {
+	      panel.style.maxHeight = panel.scrollHeight + "px";
+	    } 
+	  });
+	}
 </script>
 
 </html>

@@ -38,7 +38,10 @@ span{
 	animation: fadein 3s;
 }
 
-
+.infoBox3{
+	display: none;
+	animation: fadein 3s;
+} 
 
 @keyframes fadein {
 	from {
@@ -48,3 +51,48 @@ span{
 		opacity: 1;
 	}
 }
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+	font-family: 'omyu_pretty';
+  background-color: #FC522F;
+  color: #FFFFFF;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+  font-weight:bolder;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #FC522F;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #FFFFFF;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.panel > p{
+	text-align: left;
+}
+
