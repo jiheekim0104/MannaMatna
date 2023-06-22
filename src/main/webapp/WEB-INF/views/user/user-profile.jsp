@@ -68,13 +68,20 @@ alert('${msg}');
 </div>
 </body>
 <script>
-
-if(${user.uiId!=null} && ${user.kakaoImgPath==null}){ 
-
+if(${user.uiId==null}){
+	document.querySelector('.naverBnt').style.display = "none";
+	document.querySelector('.kakaoBnt').style.display = "none";
+}
+if(${user.uiId!=null} && ${user.kuiId!=0}){ 
+	document.querySelector('.uiId').innerHTML = '(${user.uiId}, 카카오 가입 연동)';
 } 
-if(${user.uiId!=null} && ${user.naverImgPath==null}){ 
-	
+if(${user.uiId!=null} && ${user.nuiId!=null}){ 
+	document.querySelector('.uiId').innerHTML = '(${user.uiId}, 네이버 가입 연동)';
 } 
+if(${user.uiId!=null} && (${user.kuiId!=0}||${user.nuiId!=null})){
+	document.querySelector('.naverBnt').style.display = "none";
+	document.querySelector('.kakaoBnt').style.display = "none";
+}
 if(${user.uiId==null}){
 	document.querySelector('.uiId').innerHTML = '(SNS가입 연동)';
 	document.querySelector('.hint').innerHTML = '* SNS가입 연동고객의 초기 비밀번호는 0000 입니다.';

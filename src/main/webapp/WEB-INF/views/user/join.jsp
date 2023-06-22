@@ -14,7 +14,6 @@
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-
 <div class="content">
 	<h1>회원가입</h1>
 	<span>SNS 연동</span>

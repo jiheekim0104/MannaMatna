@@ -14,7 +14,7 @@ alert('${msg}');
 <html>
 <body>
 	<div class="content">
-	<br><br><br><br><br>
+		<h1>로그인</h1>
 	<form action="/login" method="POST" onsubmit="return checkValue()">
 		<input type="text" name="uiId" id="uiId" placeholder="아이디를 입력해주세요."><br>
 		<div id="uiIdNullMsg" name="uiIdNullMsg"></div>

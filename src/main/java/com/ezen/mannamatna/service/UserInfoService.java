@@ -51,56 +51,62 @@ public class UserInfoService {
 
 	public boolean login(UserInfoVO userInfoVO, HttpSession session) {
 		log.info("userInfoVO=====>{}", userInfoVO);
-		if(userInfoVO.getUiPwd().equals("0000")&&userInfoVO.getUiId()==null){
+		if (userInfoVO.getUiPwd().equals("0000") && userInfoVO.getUiId() == null) {//SNS연동 로그인시
 			session.setAttribute("user", userInfoVO);
 			return true;
 		}
-		if(uiMapper.selectUserInfoById(userInfoVO)!=null) {
+		if (uiMapper.selectUserInfoById(userInfoVO) != null) {
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String inputPwd = userInfoVO.getUiPwd();
-			if(userInfoVO.getUiId()==null) {
+			if (userInfoVO.getUiId() == null) {
 				userInfoVO = uiMapper.selectUserInfoByNum(userInfoVO);
 			} else {
 				userInfoVO = uiMapper.selectUserInfoById(userInfoVO);
 			}
-			
+
 			log.info("matches=====>{}", passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd()));
-			//visible
-			//딜레이
-			//히든
-			if(passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd())) {
+			// visible
+			// 딜레이
+			// 히든
+			if (passwordEncoder.matches(inputPwd, userInfoVO.getUiPwd())) {
 				log.info("확인하려는 유저 =>{}", userInfoVO);
 				session.setAttribute("user", userInfoVO);
+				
+				if(findKakaoUser(userInfoVO)!=0) {
+					userInfoVO.setKuiId(findKakaoUser(userInfoVO));
+				} else if (findNaverUser(userInfoVO)!=null){
+					userInfoVO.setNuiId((findNaverUser(userInfoVO)));
+				}
 				return true;
 			}
 		}
-		//visible
-		//딜레이
-		//히든
-		
+		// visible
+		// 딜레이
+		// 히든
+
 		return false;
-		
+
 	}
-	
+
 	public boolean findUser(UserInfoVO userInfoVO) {
-		if(uiMapper.selectUserInfoById(userInfoVO)!=null) {
+		if (uiMapper.selectUserInfoById(userInfoVO) != null) {
 			return true;
 		}
 		return false;
 	}
-	
-	public boolean findKakaoUser(UserInfoVO userInfoVO) { // 연동로그인 기능 구현중
-		if(uiMapper.selectKakaoUserInfoByNum(userInfoVO)!=null) {
-			return true;
+
+	public long findKakaoUser(UserInfoVO userInfoVO) { // 연동로그인 기능 구현중
+		if (uiMapper.selectKakaoUserInfoByNum(userInfoVO) != null) {
+			return uiMapper.selectKakaoUserInfoByNum(userInfoVO).getKuiId();
 		}
-		return false;
+		return 0;
 	}
-	
-	public boolean findNaverUser(UserInfoVO userInfoVO) { // 연동로그인 기능 구현중
-		if(uiMapper.selectNaverUserInfoByNum(userInfoVO)!=null) {
-			return true;
+
+	public String findNaverUser(UserInfoVO userInfoVO) { // 연동로그인 기능 구현중
+		if (uiMapper.selectNaverUserInfoByNum(userInfoVO) != null) {
+			return uiMapper.selectNaverUserInfoByNum(userInfoVO).getNuiId();
 		}
-		return false;
+		return null;
 	}
 
 	public boolean kakaoLogin(KakaoUserInfoVO kakaoUserInfoVO, HttpSession session) { // 여기서 문제가 생기는듯 ㅇㅅ ㅇ?
@@ -108,7 +114,7 @@ public class UserInfoService {
 		log.info("확인하려는 유저 =>{}", kakaoUserInfoVO);
 		String kakaoImgPath = kakaoUserInfoVO.getKakaoImgPath();
 		kakaoUserInfoVO = uiMapper.selectKakaoUserInfo(kakaoUserInfoVO);
-		
+
 		log.info("돌려받은 유저 =>{}", kakaoUserInfoVO); // 카db에 제대로 안올라갔으니까 여기서 못찾아온거같음ㅇㅇ
 		if (kakaoUserInfoVO != null) {
 			UserInfoVO userInfoVO = new UserInfoVO();
@@ -127,14 +133,14 @@ public class UserInfoService {
 		}
 		return false;
 	}
-	
+
 	public boolean naverLogin(NaverUserInfoVO naverUserInfoVO, HttpSession session) { // 여기서 문제가 생기는듯 ㅇㅅ ㅇ?
 
 		log.info("확인하려는 유저 =>{}", naverUserInfoVO);
 		String naverImgPath = naverUserInfoVO.getNaverImgPath();
 		naverUserInfoVO = uiMapper.selectNaverUserInfo(naverUserInfoVO);
-		
-		log.info("돌려받은 유저 =>{}", naverUserInfoVO); 
+
+		log.info("돌려받은 유저 =>{}", naverUserInfoVO);
 		if (naverUserInfoVO != null) {
 			UserInfoVO userInfoVO = new UserInfoVO();
 			userInfoVO.setUiNum(naverUserInfoVO.getUiNum()); // 네이버 로그인 유저의 유저번호를 userInfoVO에 담기
@@ -148,12 +154,10 @@ public class UserInfoService {
 		}
 		return false;
 	}
-	
-	
 
 	public boolean join(UserInfoVO userInfoVO) throws IllegalStateException, IOException {
 		String fileName = null;
-		if (userInfoVO.getUiFile() == null) { // sns 연동으로 최초 가입하는 유저
+		if (userInfoVO.getUiId() == null) { // sns 연동으로 최초 가입하는 유저
 			/*
 			 * fileName = userInfoVO.getUiFilepath().replace(absolutePath +
 			 * "\\src\\main\\webapp", ""); // 각 시스템환경마다 경로 // 공유되도록 수정
@@ -166,7 +170,7 @@ public class UserInfoService {
 			log.info("kakaoId={}", kakaoId);
 			String naverId = userInfoVO.getNuiId();
 			log.info("naverId={}", naverId);
-			if(kakaoId!=0) { // 카카오로 최초 가입 유저인경우
+			if (kakaoId != 0) { // 카카오로 최초 가입 유저인경우
 				if (uiMapper.insertUserInfo(userInfoVO) == 1) { // 일반 유저 테이블에 넣고
 					userInfoVO = uiMapper.selectUserInfo(userInfoVO); // 넣은걸 가져와서
 					log.info("일반db에 추가된거+카카오번호 추가한거={}", userInfoVO);
@@ -179,7 +183,7 @@ public class UserInfoService {
 					return uiMapper.insertKakaoUserInfo(kakaoUserInfoVO) == 1; // 카카오 유저 테이블에 인서트
 				}
 				return false;
-			} else if(naverId!=null) { // 네이버로 최초 가입 유저인경우
+			} else if (naverId != null) { // 네이버로 최초 가입 유저인경우
 				if (uiMapper.insertUserInfo(userInfoVO) == 1) { // 일반 유저 테이블에 넣고
 					userInfoVO = uiMapper.selectUserInfo(userInfoVO); // 넣은걸 가져와서
 					log.info("일반db에 추가된거+네이버번호 추가한거={}", userInfoVO);
@@ -194,28 +198,27 @@ public class UserInfoService {
 				return false;
 			}
 			return false;
-		} else if(userInfoVO.getUiFile() != null) {//일반가입 유저가 sns 연동 버튼을 누른경우
+		} else if (userInfoVO.getUiId()!= null && (userInfoVO.getKuiId()!=0 ||userInfoVO.getNuiId()!=null)) {// 일반가입 유저가 sns 연동 버튼을 누른경우
 			long kakaoId = userInfoVO.getKuiId();
 			log.info("kakaoId={}", kakaoId);
 			String naverId = userInfoVO.getNuiId();
 			log.info("naverId={}", naverId);
-			if(kakaoId!=0) { // 일반가임 + 카카오 연동을 누른경우
-					KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO(); // 카카오 유저 객체에 넣어주고
-					kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId());
-					kakaoUserInfoVO.setUiNum(userInfoVO.getUiNum());
-					log.info("카카오db에추가할거임={}", kakaoUserInfoVO);
-					return uiMapper.insertKakaoUserInfo(kakaoUserInfoVO) == 1; // 카카오 유저 테이블에 인서트
-			} else if(naverId!=null) { // 일반가임 + 네이버 연동을 누른경우
-					NaverUserInfoVO naverUserInfoVO = new NaverUserInfoVO(); // 네이버 유저 객체에 넣어주고
-					naverUserInfoVO.setNuiId(userInfoVO.getNuiId());
-					naverUserInfoVO.setUiNum(userInfoVO.getUiNum());
-					log.info("네이버db에추가할거임={}", naverUserInfoVO);
-					return uiMapper.insertNaverUserInfo(naverUserInfoVO) == 1; // 네이버 유저 테이블에 인서트
+			if (kakaoId != 0) { // 일반가임 + 카카오 연동을 누른경우
+				KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO(); // 카카오 유저 객체에 넣어주고
+				kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId());
+				kakaoUserInfoVO.setUiNum(userInfoVO.getUiNum());
+				log.info("카카오db에추가할거임={}", kakaoUserInfoVO);
+				return uiMapper.insertKakaoUserInfo(kakaoUserInfoVO) == 1; // 카카오 유저 테이블에 인서트
+			} else if (naverId != null) { // 일반가임 + 네이버 연동을 누른경우
+				NaverUserInfoVO naverUserInfoVO = new NaverUserInfoVO(); // 네이버 유저 객체에 넣어주고
+				naverUserInfoVO.setNuiId(userInfoVO.getNuiId());
+				naverUserInfoVO.setUiNum(userInfoVO.getUiNum());
+				log.info("네이버db에추가할거임={}", naverUserInfoVO);
+				return uiMapper.insertNaverUserInfo(naverUserInfoVO) == 1; // 네이버 유저 테이블에 인서트
 			}
 			return false;
-		}
-		else {
-			fileName = userInfoVO.getUiFile().getOriginalFilename(); //일반가입인 경우
+		} else {
+			fileName = userInfoVO.getUiFile().getOriginalFilename(); // 일반가입인 경우
 			if ("".equals(fileName)) {
 				userInfoVO.setUiFilepath("/resources/upload/nophoto.png");
 			} else if (!"".equals(fileName)) {
@@ -242,7 +245,7 @@ public class UserInfoService {
 	public boolean updateActive(UserInfoVO userInfoVO, HttpSession session) {
 		return uiMapper.updateUserInfoActive(userInfoVO) == 1;
 	}
-	
+
 	public boolean delete(UserInfoVO userInfoVO, HttpSession session) {
 		return uiMapper.deleteUserInfo(userInfoVO) == 1;
 	}
@@ -254,11 +257,11 @@ public class UserInfoService {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		userInfoVO.setUiPwd(passwordEncoder.encode(userInfoVO.getUiPwd()));
 		log.info("들어가기전 확인=>{}", userInfoVO.getUiFile());
-		if("".equals(userInfoVO.getUiFilepath())) {
+		if ("".equals(userInfoVO.getUiFilepath())) {
 			userInfoVO.setUiFilepath(sessionUserInfo.getUiFilepath());
 			log.info("안바꾼거면 여기=>{}", userInfoVO.getUiFilepath());
 			log.info("안바꾼거면 여기=>{}", sessionUserInfo.getUiFilepath());
-		} else if (userInfoVO.getUiFile()!=null) {
+		} else if (userInfoVO.getUiFile() != null) {
 			String fileName = userInfoVO.getUiFile().getOriginalFilename();
 			log.info("fileName====>{}", fileName);
 			log.info("바꾼거면 여기=>{}", userInfoVO.getUiFilepath());
@@ -302,7 +305,7 @@ public class UserInfoService {
 			String redirectURI = "&redirect_uri=http://localhost" + addURI;
 			sb.append("grant_type=authorization_code"); // grant_type를 authorization_code로 고정등록해야함
 			sb.append("&client_id=b288a9632f49edf850cff8d6eb985755");
-			sb.append(redirectURI); 
+			sb.append(redirectURI);
 			sb.append("&code=" + code); // 인자로 받아온 인증코드
 			bw.write(sb.toString());
 			bw.flush();// 실제 요청을 보내는 부분
@@ -470,7 +473,51 @@ public class UserInfoService {
 		return userInfoVO;
 	}
 
-	public NaverToken requestNaverToken(String addURI,String code, String state) throws UnsupportedEncodingException {
+	public long requestUserForKuiId(String accessToken) { // 카카오 유저 정보
+		log.info("카카오 requestUser 시작");
+		String strUrl = "https://kapi.kakao.com/v2/user/me"; // request를 보낼 주소
+		UserInfoVO userInfoVO = new UserInfoVO(); // response를 받을 객체
+		KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO(); // response를 받을 카카오 유저 객체
+		try {
+			URL url = new URL(strUrl);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // url Http 연결 생성
+
+			// POST 요청
+			conn.setRequestMethod("POST");
+			conn.setDoOutput(true);// outputStreamm으로 post 데이터를 넘김
+
+			// 전송할 header 작성, 인자로 받은 access_token전송
+			conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+			// 실제 요청을 보내는 부분, 결과 코드가 200이라면 성공
+			int responseCode = conn.getResponseCode();
+			log.info("requestUser의 responsecode(200이면성공): {}", responseCode);
+
+			// 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line = "";
+			String result = "";
+
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+			br.close();
+
+			log.info("response body: {}", result);
+
+			// Jackson으로 json 파싱할 것임
+			ObjectMapper mapper = new ObjectMapper();
+			// 결과 json을 HashMap 형태로 변환하여 resultMap에 담음
+			HashMap<String, Object> resultMap = mapper.readValue(result, HashMap.class);
+			// json 파싱하여 id 가져오기
+			return Long.valueOf(String.valueOf(resultMap.get("id")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public NaverToken requestNaverToken(String addURI, String code, String state) throws UnsupportedEncodingException {
 		NaverToken naverToken = new NaverToken();
 		String clientId = "BSeMnF9B1CusMX9DeEg8";// 애플리케이션 클라이언트 아이디값
 		String clientSecret = "fpEWA5y2fc";// 애플리케이션 클라이언트 시크릿값
@@ -517,7 +564,7 @@ public class UserInfoService {
 		log.info("네이버토큰생성완료>>>{}", naverToken);
 		return naverToken;
 	}
-
+		
 	public UserInfoVO requestNaverUser(String access_token) {
 		log.info("네이버 requestUser 시작");
 		String strUrl = "https://openapi.naver.com/v1/nid/me"; // request를 보낼 주소
@@ -555,31 +602,30 @@ public class UserInfoService {
 			// 결과 json을 HashMap 형태로 변환하여 resultMap에 담음
 			HashMap<String, Object> resultMap = mapper.readValue(result, HashMap.class);
 
-			
 			// 결과json 안에 response key는 json Object를 value로 가짐
 			HashMap<String, Object> response = (HashMap<String, Object>) resultMap.get("response");
-			String id = (String)response.get("id");
+			String id = (String) response.get("id");
 			String nickname = (String) response.get("nickname"); // 유니코드 형태
-			String profile_image = (String) response.get("profile_image"); //http 주소
+			String profile_image = (String) response.get("profile_image"); // http 주소
 			userInfoVO.setNaverImgPath(profile_image);
 			String age = (String) response.get("age"); // 나이 범위
 			String gender = (String) response.get("gender"); // M or F
-			
+
 			// 유저정보 세팅
-			userInfoVO.setNuiId(id); // 고유 ID 
-			
+			userInfoVO.setNuiId(id); // 고유 ID
+
 			StringBuffer resultNickname = new StringBuffer(); // 유니코드인 닉네임 변환 과정
-		    
-		    for(int i=0; i<nickname.length(); i++){
-		        if(nickname.charAt(i) == '\\' &&  nickname.charAt(i+1) == 'u'){    
-		            Character c = (char)Integer.parseInt(nickname.substring(i+2, i+6), 16);
-		            resultNickname.append(c);
-		            i+=5;
-		        }else{
-		        	resultNickname.append(nickname.charAt(i));
-		        }
-		    }
-		    
+
+			for (int i = 0; i < nickname.length(); i++) {
+				if (nickname.charAt(i) == '\\' && nickname.charAt(i + 1) == 'u') {
+					Character c = (char) Integer.parseInt(nickname.substring(i + 2, i + 6), 16);
+					resultNickname.append(c);
+					i += 5;
+				} else {
+					resultNickname.append(nickname.charAt(i));
+				}
+			}
+
 			userInfoVO.setUiNickname(resultNickname.toString());// 닉네임
 
 			int uiAge = 0;
@@ -596,7 +642,7 @@ public class UserInfoService {
 			}
 
 			userInfoVO.setUiAge(uiAge); // 연령대
-			
+
 			boolean uiGender = true;
 			if (gender.equals("F")) {
 				uiGender = false;
@@ -649,6 +695,53 @@ public class UserInfoService {
 		return userInfoVO;
 	}
 
+	public String requestNaverUserForNuiId(String access_token) {
+		log.info("네이버 requestUser 시작");
+		String strUrl = "https://openapi.naver.com/v1/nid/me"; // request를 보낼 주소
+		UserInfoVO userInfoVO = new UserInfoVO(); // response를 받을 객체
+		NaverUserInfoVO naverUserInfoVO = new NaverUserInfoVO(); // response를 받을 카카오 유저 객체
+		try {
+			URL url = new URL(strUrl);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // url Http 연결 생성
+
+			// POST 요청
+			conn.setRequestMethod("POST");
+			conn.setDoOutput(true);// outputStreamm으로 post 데이터를 넘김
+
+			// 전송할 header 작성, 인자로 받은 access_token전송
+			conn.setRequestProperty("Authorization", "Bearer " + access_token);
+
+			// 실제 요청을 보내는 부분, 결과 코드가 200이라면 성공
+			int responseCode = conn.getResponseCode();
+			log.info("requestUser의 responsecode(200이면성공): {}", responseCode);
+
+			// 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line = "";
+			String result = "";
+
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+			br.close();
+
+			log.info("response body: {}", result);
+
+			// Jackson으로 json 파싱할 것임
+			ObjectMapper mapper = new ObjectMapper();
+			// 결과 json을 HashMap 형태로 변환하여 resultMap에 담음
+			HashMap<String, Object> resultMap = mapper.readValue(result, HashMap.class);
+
+			
+			// 결과json 안에 response key는 json Object를 value로 가짐
+			HashMap<String, Object> response = (HashMap<String, Object>) resultMap.get("response");
+			return (String)response.get("id");
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public List<UserInfoVO> getUserInfos(UserInfoVO userInfoVO, HttpSession session) {
 		// 회원데이터를 모두 담은 객체 get
 		// session데이터로 추후 관리자가 아닐 경우 검사
@@ -666,7 +759,8 @@ public class UserInfoService {
 		// 해당 메소드 밥상상세의 다른 유저 프로필보기 기능 수행시에도 사용
 		return uiMapper.selectUserInfoFromBabsang(uiNum);
 	}
-	public List<UserInfoVO> getUserInfosByCredat(HttpSession session){
+
+	public List<UserInfoVO> getUserInfosByCredat(HttpSession session) {
 		// 날짜별 가입인원수 조회서비스
 		List<UserInfoVO> userList = uiMapper.selectUserInfosByCredat();
 		log.info("서비스에서 유저리스트의 정보 {}", userList);
