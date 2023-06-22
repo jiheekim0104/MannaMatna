@@ -132,11 +132,41 @@ h3{
 }
 
 #pageDiv{
-	text-align: center;
-	color: #FC6646;
-	font-size:14pt;
+	display: inline-block;
+	margin:0 auto;
+	font-size: 20px;
 }
-#pageDiv>a{
-	text-decoration: none;
-	color: black;
+
+
+#pageDiv {
+  display: inline-block;
 }
+
+#pageDiv a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+}
+
+#pageDiv a.active {
+  background-color: #FC522F;
+  color: white;
+  border: 1px solid #FC522F;
+}
+
+#pageDiv a:hover:not(.active) {
+	background-color: #EEEEEE;
+}
+
+#pageDiv a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#pageDiv a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+	

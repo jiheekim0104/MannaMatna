@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>만나맛나 : 1인가구를 위한 신개념 밥상 매칭 사이트</title>
 </head>
 <body>
 <div class="left">
@@ -28,14 +28,14 @@
 <script>
 //아래에서 위로 올라가는 이미지 슬라이드. 
 setInterval(function(){             //setInterval(); 함수 반복 실행 메소드
-  $(".image1").delay("1500");       
-  $(".image1").animate({marginTop:  "-929px" },"2500");  
-  $(".image2").delay("4000");                          
-  $(".image2").animate({marginTop:  "-929px" },"5000");  
-  $(".image3").delay("6500");                          
-  $(".image3").animate({marginTop:  "-929px" },"7500");  
-  $(".image4").delay("9000");                          
-  $(".image4").animate({marginTop:  "-929px" },"10000");    
+  $(".image1").delay("2000");       
+  $(".image1").animate({marginTop:  "-929px" },"4000");  
+  $(".image2").delay("6000");                          
+  $(".image2").animate({marginTop:  "-929px" },"8000");  
+  $(".image3").delay("10000");                          
+  $(".image3").animate({marginTop:  "-929px" },"12000");  
+  $(".image4").delay("14000");                          
+  $(".image4").animate({marginTop:  "-929px" },"16000");    
 /*  $(".image5").delay("11500");     
   $(".image5").animate({marginTop:  "0px" },"12500");
   });
