@@ -35,6 +35,8 @@ window.onload = function(){
 			btnList[i].classList.add('ended');
 		}
 	}
+	let commentBoxes = document.querySelectorAll('.commentList');
+	console.log('페이지로딩 후 확인 ' + commentBoxes.classList);
 }
 </script>
 </head>

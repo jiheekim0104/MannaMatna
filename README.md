@@ -1,4 +1,5 @@
-# __🍴Manna Matna😋__
+# **🍴Manna Matna😋**
+
 <img width="80%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/4d2bc797-6a48-40ed-b4af-16ec9e282403"/><br>
 팀장 : 김지희<br>
 팀원 : 오성철, 최재환<br>
@@ -6,66 +7,89 @@
 주제 : 같이 식사할수있는 사람을 찾는 커뮤니티 사이트<br>
 <br>
 
-# __개요__
+# **개요**
+
 🎬PPT 시연 영상 (업로드 예정)<br>
 🎬홈페이지 시연 영상 (업로드 예정)<br>
 <br>
 
-# __📋개발목적__
-## __기획 목적__ 
+# **📋개발목적**
+
+## **기획 목적**
+
 <!-- 이거 밑에 줄어떻게 넣습미까..? -->
+
 1. API 사용방법 학습 (카카오&네이버 SNS 연동 및 GOOGLE 차트)
 2. 가장 기본적인 CRUD에서 시작하여 각자가 고도화 할 수 있는 정도까지 도전해볼것
-<br>
+   <br>
 
-## __주제 선정__
+## **주제 선정**
+
 <!-- 이거 밑에 줄어떻게 넣습미까..? -->
+
 점점 늘어나는 1인 가구의 비중, 오늘도 많은 사람들이 혼자서 밥을먹는다.<br>
 혼자서 밥을 먹었을때 건강에도 좋지 않은 영향을 준다는 연구결과도있는데, <br>
 맛집에 모여서 새로운 사람들을 만나고 함께 일상을 공유할수있는 건강한 공간을 만들어보고 싶었다. <br>
 <br>
 
-# __💻개발 환경/시스템 구성__
-|항목|내용|
-|------|---|
-|언어|Java11,HTML/CSS, JavaScript|
-|서버|Springboot Embedded Web Server|
-|프레임워크|SpirngBoot(2.7.12), Mybatis(2.3.1)| <!-- 여기 더 추가될거있을듯?-->
-|DB|MySQL Workbench(8.0.32)|
-|IDE|Eclipse IDE 2023-03 (4.27.0)|
-|협업 도구|Git-hub, Zoom, KakaoTalk, GoogleSheet, GoogleSlide |
-|API 또는 라이브러리|	Google : Chart<br>Kakao : Login<br>Naver : Login<br>tawk|
+# **💻개발 환경/시스템 구성**
+
+| 항목                | 내용                                                     |
+| ------------------- | -------------------------------------------------------- | ------------------------------- |
+| 언어                | Java11,HTML/CSS, JavaScript                              |
+| 서버                | Springboot Embedded Web Server                           |
+| 프레임워크          | SpirngBoot(2.7.12), Mybatis(2.3.1)                       | <!-- 여기 더 추가될거있을듯?--> |
+| DB                  | MySQL Workbench(8.0.32)                                  |
+| IDE                 | Eclipse IDE 2023-03 (4.27.0)                             |
+| 협업 도구           | Git-hub, Zoom, KakaoTalk, GoogleSheet, GoogleSlide       |
+| API 또는 라이브러리 | Google : Chart<br>Kakao : Login<br>Naver : Login<br>tawk |
+
 <br>
 
-# __↗Flowchart__
-<!-- 이거 밑에 줄어떻게 넣습미까..? -->
--최종 사진으로 넣을것
-<br>
+# **↗Flowchart**
 
-# __Entity Relationship Diagram__
 <!-- 이거 밑에 줄어떻게 넣습미까..? -->
--최종 사진으로 넣을것
-<br>
 
-# __💡Software Requirement Specification__
-<!-- 이거 밑에 줄어떻게 넣습미까..? -->
 -최종 사진으로 넣을것
 <br>
 
-# __📆Work Breakdown Structure__
+# **Entity Relationship Diagram**
+
 <!-- 이거 밑에 줄어떻게 넣습미까..? -->
+
 -최종 사진으로 넣을것
 <br>
-# __👀웹 구성요소__
-## __🌟Main Page🌟__
+
+# **💡Software Requirement Specification**
+
+<!-- 이거 밑에 줄어떻게 넣습미까..? -->
+
 -최종 사진으로 넣을것
-## __🌟Join Page🌟__
-## __🌟Login Page🌟__
-## __🌟Profile Page🌟__
+<br>
+
+# **📆Work Breakdown Structure**
+
+<!-- 이거 밑에 줄어떻게 넣습미까..? -->
+
+-최종 사진으로 넣을것
+<br>
+
+# **👀웹 구성요소**
+
+## **🌟Main Page🌟**
+
+-최종 사진으로 넣을것
+
+## **🌟Join Page🌟**
+
+## **🌟Login Page🌟**
+
+## **🌟Profile Page🌟**
+
 <!-- 모든 페이지 추가 -->
 <br>
 
-# __⚒️Trouble Shooting⚒️__
+# **⚒️Trouble Shooting⚒️**
 
 ### 2023.06.05
 
@@ -325,4 +349,31 @@
     $('#idChk').addClass('selected');
     $('#idChk').removeClass('selected');
   ```
-  ***
+
+### 2023. 06. 21
+
+- 가입날짜별 유저 수를 구한 후 관리자 페이지의 LineChart에 적용을 원하여 `UserInfoMapper.xml`에 아래에 해당하는 쿼리문을 추가하였고, `UserInfoVO.java`에 담을 변수 `int uiUserCnt`를 선언하였다.
+
+  ```xml
+  <select id="selectUserInfosByCredat" resultType="com.ezen.mannamatna.vo.UserInfoVO">
+    <!-- 가입날짜(년-월-일)별로 유저수 조회 쿼리문 추가(구글차트용) -->
+    SELECT DATE_FORMAT(UI_CREDAT, '%Y-%m-%d'), COUNT(*) FROM USER_INFO GROUP BY DATE_FORMAT(UI_CREDAT, '%Y-%m-%d')
+    ORDER BY UI_CREDAT ASC;
+    </select>
+  ```
+
+  ```java
+  @Data
+  public class UserInfoVO
+    private int uiUserCnt; // 날짜별 유저수 조회용
+  ```
+
+- 이후 SELECT 한 `DATE_FORMAT(UI_CREDAT, '%Y-%m-%d'), COUNT(*)` 컬럼으로 MyBatis가 해당 UserInfoVO에서 맞는 필드를 찾지 못하여 에러가 발생하였다. 이후 sql함수로 가져온 데이터를 VO에 원하는 컬럼형식으로 별칭처리하여 주었더니 서비스에서 해당 데이터를 잘 매핑하여 처리되는 것을 확인하였다. 쿼리문 추가시 반복되는 실수이다. 잘 확인하도록 하자.
+  ```xml
+    <select id="selectUserInfosByCredat" resultType="com.ezen.mannamatna.vo.UserInfoVO">
+    <!-- 가입날짜(년-월-일)별로 유저수 조회 쿼리문 추가(구글차트용) -->
+    <!-- VO의 필드형식으로 별칭을 선언해주었다. -->
+    SELECT DATE_FORMAT(UI_CREDAT, '%Y-%m-%d') UI_CREDAT, COUNT(*) UI_USERCNT FROM USER_INFO GROUP BY DATE_FORMAT(UI_CREDAT, '%Y-%m-%d')
+    ORDER BY UI_CREDAT ASC;
+    </select>
+  ```

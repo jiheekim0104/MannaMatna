@@ -10,16 +10,21 @@
 		let content = commentInsertForm.ciContent;
 		let inputBox = document.querySelector('.commentInput');
 		console.log('댓글내용 : ' + content.value);
-		if(content.value == ''){
+		if(content.value.trim() == ''){
 			// 내용이 없는 없는경우에는 commentInsert 실행하지 않는다.!!
-			content.placeholder='내용은 필수입니다.';
-			inputBox.classList.add('vibration');
+			content.placeholder='내용은 필수입니다.'; // 인풋박스의 placeholder 변경
+			inputBox.classList.add('vibration'); // 애니메이션 클래스 추가
 			console.log(inputBox);
 			console.log(inputBox.classList);
 			setTimeout(function(){
+				// 0.4초 후 애니메이션 클래스 제거
 				inputBox.classList.remove('vibration');
 			}, 400);
-			content.focus();
+			setTimeout(function(){
+				// 0.8초 후 placeholder 원상복귀 처리
+				content.placeholder='댓글을 입력하세요.';
+			}, 1000);
+			content.focus(); // 인풋박스 포커스되도록 설정
 		}else{
 			// 내용이 있는 경우에만 인서트 실행
 		let insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
@@ -69,8 +74,17 @@
 							a += '<div><h4><strong>등록된 댓글이 없습니다.</strong></h4>';
 							a += '</div></div>';
 						}
-
+						
 						$(".commentList").html(a);
+						let commentBoxes = document.querySelectorAll('.commentBox');
+						// 댓글 작성 후 생기는 commentBox 배열중에서 가장 마지막인덱스의 댓글에만 애니메이션 1초 적용 후 제거
+							commentBoxes[commentBoxes.length-1].classList.add('fadeInUp');
+							setTimeout(function(){
+								// 1초 후 placeholder 원상복귀 처리
+								commentBoxes[commentBoxes.length-1].classList.remove('fadeInUp');
+								console.log('진행중 클래스 확인 : ' + commentBoxes[commentBoxes.length-1].classList);
+							}, 1000);
+							console.log('클래스 삭제 후 확인 : ' + commentBoxes[commentBoxes.length-1].classList);
 					}
 				});
 	}

@@ -8,6 +8,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
 .content {
 	font-size: 25px;
 	width: 100%;
@@ -82,7 +83,6 @@
 
 .content .userImages {
 	height: 200px;
-
 }
 
 .content .userImages .participents {
@@ -135,9 +135,11 @@
 }
 
 .content .container {
+	
 }
 
 .content .container .commentList {
+	
 }
 
 .content .container .commentList .commentBox {
@@ -148,6 +150,20 @@
 	height: 100px;
 	margin: 0 auto;
 	margin-top: 30px;
+}
+
+@keyframes fadeInUp { 
+	0% {
+	opacity: 0;
+	transform: translate3d(0, 100%, 0);
+	}
+	to {
+	opacity: 1;
+	transform: translateZ(0);
+	}
+}
+.content .container .commentList .commentBox.fadeInUp {
+	animation: fadeInUp 1s;
 }
 
 .content .container .commentBox .box {
@@ -200,7 +216,7 @@
 	/* 댓글마다 수정 삭제 버튼 자리 고정 */
 	position: absolute;
 	padding-top: 10px;
-	margin-left: 50%;
+	margin-left: 1000px;
 	font-weight: bold;
 	font-size: 16px;
 }
@@ -216,19 +232,22 @@
 }
 
 @keyframes vibration {
-/* 0.5도씩 흔들리는 효과 정의 */
-  from {
-    transform: rotate(0.5deg);
-  }
-  to {
-    transform: rotate(-0.5deg);
-  }
+	/* 0.5도씩 흔들리는 효과 정의 */ 
+	from { 
+	transform:rotate(0.5deg);
+	}
+
+	to {
+		transform: rotate(-0.5deg);
+	}
 }
+
 .content .container .commentInput {
 	/* 댓글 입력 창 */
 	margin-bottom: 3%;
 	margin-top: 1%;
 }
+
 .content .container .commentInput.vibration {
 	/* 댓글 내용 공란일 시 애니메이션 추가 */
 	animation: vibration 0.1s infinite;
@@ -243,6 +262,7 @@
 	display: inline;
 	padding-left: 20px;
 }
+
 .content .container .commentInput .commentBtn {
 	/* 댓글 작성하기 버튼 */
 	font-family: 'omyu_pretty'; /* 버튼 글꼴 */
