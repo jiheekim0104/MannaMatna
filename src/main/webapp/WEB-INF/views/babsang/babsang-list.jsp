@@ -25,15 +25,15 @@
 	
 	<!-- 카테고리 검색 기능 -->
 	<form action="/main" method="get" id="categoryBabsang">
-		<button class="biFdCategory" name="biFdCategory" value="">전체</button>
-		<button class="biFdCategory" name="biFdCategory" value="한식">한식</button>
-		<button class="biFdCategory" name="biFdCategory" value="중식">중식</button>
-		<button class="biFdCategory" name="biFdCategory" value="일식">일식</button>
-		<button class="biFdCategory" name="biFdCategory" value="양식">양식</button>
-		<button class="biFdCategory" name="biFdCategory" value="분식">분식</button>
-		<button class="biFdCategory" name="biFdCategory" value="패스트푸드">패스트푸드</button>
-		<button class="biFdCategory" name="biFdCategory" value="해산물">해산물</button>
-		<button class="biFdCategory" name="biFdCategory" value="족발">족발</button>
+		<button class="Category" name="Category" value="">전체</button>
+		<button class="Category" name="Category" value="한식">한식</button>
+		<button class="Category" name="Category" value="중식">중식</button>
+		<button class="Category" name="Category" value="일식">일식</button>
+		<button class="Category" name="Category" value="양식">양식</button>
+		<button class="Category" name="Category" value="분식">분식</button>
+		<button class="Category" name="Category" value="패스트푸드">패스트푸드</button>
+		<button class="Category" name="Category" value="해산물">해산물</button>
+		<button class="Category" name="Category" value="족발">족발</button>
 	</form>
 	
 	<!-- 밥상 리스트 목록 -->
@@ -53,25 +53,43 @@
 			</c:if>
 			
 			style=
+			<c:if test="${babsangListVO.biFdCategory == '한식'}">
+			"background-image: url('../../../resources/upload/babsang/foodImg/bibimbap.jpg');"
+			</c:if>
 			<c:if test="${babsangListVO.biFdCategory == '중식'}">
-			"background-image: url('https://i.namu.wiki/i/IuQwaTmppRSulggeu1XyTm1G_m6viDokh0lN4E_p_gXAnhQgmVOJid25ZqlOfpHS4vvVay9pnP5K0IclP4xv4xekogpfMIFodzj1Unu0btFY5sCSrjYZQf0WOOWs_ryD_9lc_jm6cWIHmxvN-sLNKA.webp');"
+			"background-image: url('../../../resources/upload/babsang/foodImg/blacknoodle.jpg');"
+			</c:if>
+			<c:if test="${babsangListVO.biFdCategory == '일식'}">
+			"background-image: url('../../../resources/upload/babsang/foodImg/sakedong.jpg');"
 			</c:if>
 			<c:if test="${babsangListVO.biFdCategory == '양식'}">
-			"background-image: url('https://recipe1.ezmember.co.kr/cache/recipe/2022/09/30/8e7eb8e3019532a8dc6d39a9a325aad41.jpg');"
+			"background-image: url('../../../resources/upload/babsang/foodImg/steak.jpg');"
 			</c:if>
-			<c:if test="${babsangListVO.biFdCategory == '한식'}">
-			"background-image: url('https://cdn-bastani.stunning.kr/prod/portfolios/15e92d6a-cfdf-4352-a81d-72f220d4f815/contents/7c74ba433deb488257200574425196e5a34818c7d27eb5362ea94ee18e8a0718_v2.jpg');"
+			<c:if test="${babsangListVO.biFdCategory == '분식'}">
+			"background-image: url('../../../resources/upload/babsang/foodImg/ramen.jpg');"
 			</c:if>
-			
+			<c:if test="${babsangListVO.biFdCategory == '패스트푸드'}">
+			"background-image: url('../../../resources/upload/babsang/foodImg/hambuger.jpg');"
+			</c:if>
+			<c:if test="${babsangListVO.biFdCategory == '해산물'}">
+			"background-image: url('../../../resources/upload/babsang/foodImg/seafood.jpg');"
+			</c:if>
+			<c:if test="${babsangListVO.biFdCategory == '족발'}">
+			"background-image: url('../../../resources/upload/babsang/foodImg/pigfoot.png');"
+			</c:if>
 			>
 			<h3 id="biTitle">
 				제목 : ${babsangListVO.biTitle}
 			</h3>
-			<hr>
-			<div id="biFdCatecory">카테고리 : ${babsangListVO.biFdCategory}</div>
-			<hr>
+			
+			<div id="biFdCatecory" style="background-image: url('../../../resources/upload/babsang/tag2.jpg');">
+				<div id="text"> 
+					${babsangListVO.biFdCategory}
+				</div>
+			</div>
+			
 			<div id="biHeadCnt">최대 인원 수 : ${babsangListVO.biHeadCnt}</div>
-			<hr>
+			
 			<c:set var="biMeetingTim" value="${babsangListVO.biMeetingTim}" />
 			<div id="biMeetingDatTim">${babsangListVO.biMeetingDat} / ${fn:substring(biMeetingTim,0,5)}</div>
 			
