@@ -37,7 +37,7 @@
 												// 로그인유저가 밥상작성자인 경우 닉네임 옆에 왕관이미지추가
 											a += '<img class="crown" id = "crown" src="../../../resources/upload/왕관.png">';
 											}
-											a += value.uiNickname + '</span><span class ="commentTime" id="commentTime">' + value.ciCredat + ' ' + value.ciCretim + '</span><br>';
+											a += value.uiNickname + '</span><span class ="commentTime" id="commentTime">' + value.ciCredat + ' ' + value.ciCretim + '</span><br><br>';
 												a += '<div class="commentCiContent'+value.ciNum+'"> <span class="commentContent" id="commentContent">'+ value.ciContent+ '</span>';
 												// 로그인시 수정, 삭제기능 가능토록 추가
 												if(${sessionScope.user.uiNum}==value.uiNum && ${sessionScope.user.uiNum}!=null){

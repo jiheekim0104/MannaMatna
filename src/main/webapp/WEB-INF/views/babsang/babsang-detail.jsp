@@ -86,7 +86,7 @@ window.onload = function(){
 		<div class="userImages">
 			<div class="participents">참여자정보</div>
 			<br>
-			<div class="userCount">${fn:length(babsangUserList)}(현재인원)/
+			<div class="userCount">${fn:length(babsangUserList)}(현재인원)&nbsp;/
 				${detail.biHeadCnt} (최대인원)</div>
 			<div class="box" id="makerBox">
 				<img class="profileImg" src="${babsangMaker.uiFilepath}"
