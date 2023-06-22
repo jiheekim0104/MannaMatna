@@ -23,9 +23,19 @@
 		select * from kakao_user_info where kui_Id = #{kuiId}
 	</select>
 	
+	<select id="selectKakaoUserInfoByNum"
+		resultType="com.ezen.mannamatna.vo.KakaoUserInfoVO">
+		select * from kakao_user_info where ui_Id = #{uiId}
+	</select>
+	
 	<select id="selectNaverUserInfo"
 		resultType="com.ezen.mannamatna.vo.NaverUserInfoVO">
 		select * from naver_user_info where nui_Id = #{nuiId}
+	</select>
+	
+	<select id="selectNaverUserInfoByNum"
+		resultType="com.ezen.mannamatna.vo.NaverUserInfoVO">
+		select * from naver_user_info where ui_Id = #{uiId}
 	</select>
 	
 	<select id="selectUserInfoByNum"

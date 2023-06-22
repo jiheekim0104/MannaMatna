@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>    
 <%@ include file= "/WEB-INF/views/common/sideBar.jsp"%>
 <%@ include file="/WEB-INF/views/common/common.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>       
@@ -16,7 +19,6 @@ alert('${msg}');
 </c:if>
 </script>
 <body>
-
 <div class="content">
 	<div class="img">
 		<c:if test="${user.uiFilepath != null}">	
@@ -46,12 +48,33 @@ alert('${msg}');
 			<button class="updateBnt" onclick="location.href='/check-update'">정보수정</button>
 			<button class="withdrawBnt" onclick="location.href='/withdraw'">탈퇴하기</button>
 			<div class="hint"></div>
+			<%
+		String clientId = "BSeMnF9B1CusMX9DeEg8";//애플리케이션 클라이언트 아이디값";
+   		String redirectURI = URLEncoder.encode("http://localhost/naverPost", "UTF-8");
+   		SecureRandom random = new SecureRandom();
+    	String state = new BigInteger(130, random).toString();
+    	String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
+         + "&client_id=" + clientId
+         + "&redirect_uri=" + redirectURI
+         + "&state=" + state;
+    	session.setAttribute("state", state);
+		%>
+		<button class="naverBnt" onclick="location.href='<%=apiURL%>'"><img src="../../../resources/upload/naverLogo.png"> 네이버 간편가입</button>
+		<button class="kakaoBnt"onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b288a9632f49edf850cff8d6eb985755&redirect_uri=http://localhost/kakaoPost/'"><img src="../../../resources/upload/kakaoLogo.png"> 카카오 간편가입</button>
+		
 		</div>
 		</c:if>
 	</div>
 </div>
 </body>
 <script>
+
+if(${user.uiId!=null} && ${user.kakaoImgPath==null}){ 
+
+} 
+if(${user.uiId!=null} && ${user.naverImgPath==null}){ 
+	
+} 
 if(${user.uiId==null}){
 	document.querySelector('.uiId').innerHTML = '(SNS가입 연동)';
 	document.querySelector('.hint').innerHTML = '* SNS가입 연동고객의 초기 비밀번호는 0000 입니다.';

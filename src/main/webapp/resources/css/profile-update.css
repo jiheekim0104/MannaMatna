@@ -35,40 +35,6 @@ input:focus{
 }
 
 
-.naverBnt {
-	width: 135px;
-	height: 40px;
-	background-color: #FFFFFF;
-	border: 0px solid #FFFFFF;
-	border-radius:0.5em;
-	font-weight: bolder;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 12px;
-	margin-top: 10px;
-}
-
-button>img {
-	width:30px;
-	vertical-align: -8px;
-}
-
-.kakaoBnt {
-	width: 135px;
-	height: 40px;
-	background-color: #FFFFFF;
-	border: 0px solid #FFFFFF;
-	border-radius:0.5em;
-	color: rgb(60,30,30);
-	font-weight: bolder;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 12px;
-	margin-top: 10px;
-}
-
 .bnt {
 	width: 100px;
 	height: 30px;

@@ -78,6 +78,51 @@
 	color: #FFFFFF;
 }
 
+.naverBnt {
+	width: 175px;
+	height: 40px;
+	background-color: rgb(6,189,52);
+	border: 2px solid rgb(6,189,52);
+	border-radius:0.5em;
+	color: #FFFFFF;
+	font-weight: bolder;
+	padding: 2px 22px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin-top: 10px;
+}
+
+.naverBnt>img{
+	vertical-align: -9px;
+}
+
+button>img {
+	width:30px;
+}
+
+.kakaoBnt {
+	width: 175px;
+	height: 40px;
+	background-color: rgb(254,242,0);
+	border: 2px solid rgb(254,242,0);
+	border-radius:0.5em;
+	color: rgb(60,30,30);
+	font-weight: bolder;
+	padding: 2px 22px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin-top: 10px;
+	line-height: 40px;
+}
+
+.kakaoBnt>img{
+	vertical-align: -9px;
+}
+
 .hint{
 	font-size: 13px;
 }

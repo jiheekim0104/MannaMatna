@@ -88,6 +88,20 @@ public class UserInfoService {
 		}
 		return false;
 	}
+	
+	public boolean findKakaoUser(UserInfoVO userInfoVO) { // 연동로그인 기능 구현중
+		if(uiMapper.selectKakaoUserInfoByNum(userInfoVO)!=null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean findNaverUser(UserInfoVO userInfoVO) { // 연동로그인 기능 구현중
+		if(uiMapper.selectNaverUserInfoByNum(userInfoVO)!=null) {
+			return true;
+		}
+		return false;
+	}
 
 	public boolean kakaoLogin(KakaoUserInfoVO kakaoUserInfoVO, HttpSession session) { // 여기서 문제가 생기는듯 ㅇㅅ ㅇ?
 
@@ -139,7 +153,7 @@ public class UserInfoService {
 
 	public boolean join(UserInfoVO userInfoVO) throws IllegalStateException, IOException {
 		String fileName = null;
-		if (userInfoVO.getUiFile() == null) { // sns 연동 유저
+		if (userInfoVO.getUiFile() == null) { // sns 연동으로 최초 가입하는 유저
 			/*
 			 * fileName = userInfoVO.getUiFilepath().replace(absolutePath +
 			 * "\\src\\main\\webapp", ""); // 각 시스템환경마다 경로 // 공유되도록 수정
@@ -152,10 +166,9 @@ public class UserInfoService {
 			log.info("kakaoId={}", kakaoId);
 			String naverId = userInfoVO.getNuiId();
 			log.info("naverId={}", naverId);
-			if(kakaoId!=0) { // 카카오 가입 유저인경우
+			if(kakaoId!=0) { // 카카오로 최초 가입 유저인경우
 				if (uiMapper.insertUserInfo(userInfoVO) == 1) { // 일반 유저 테이블에 넣고
 					userInfoVO = uiMapper.selectUserInfo(userInfoVO); // 넣은걸 가져와서
-
 					log.info("일반db에 추가된거+카카오번호 추가한거={}", userInfoVO);
 					userInfoVO.setKuiId(kakaoId);
 					log.info("일반db에 추가된거+카카오번호 추가한거={}", userInfoVO);
@@ -166,7 +179,7 @@ public class UserInfoService {
 					return uiMapper.insertKakaoUserInfo(kakaoUserInfoVO) == 1; // 카카오 유저 테이블에 인서트
 				}
 				return false;
-			} else if(naverId!=null) { // 네이버 가입 유저인경우
+			} else if(naverId!=null) { // 네이버로 최초 가입 유저인경우
 				if (uiMapper.insertUserInfo(userInfoVO) == 1) { // 일반 유저 테이블에 넣고
 					userInfoVO = uiMapper.selectUserInfo(userInfoVO); // 넣은걸 가져와서
 					log.info("일반db에 추가된거+네이버번호 추가한거={}", userInfoVO);
@@ -181,8 +194,28 @@ public class UserInfoService {
 				return false;
 			}
 			return false;
-		} else {
-			fileName = userInfoVO.getUiFile().getOriginalFilename();
+		} else if(userInfoVO.getUiFile() != null) {//일반가입 유저가 sns 연동 버튼을 누른경우
+			long kakaoId = userInfoVO.getKuiId();
+			log.info("kakaoId={}", kakaoId);
+			String naverId = userInfoVO.getNuiId();
+			log.info("naverId={}", naverId);
+			if(kakaoId!=0) { // 일반가임 + 카카오 연동을 누른경우
+					KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO(); // 카카오 유저 객체에 넣어주고
+					kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId());
+					kakaoUserInfoVO.setUiNum(userInfoVO.getUiNum());
+					log.info("카카오db에추가할거임={}", kakaoUserInfoVO);
+					return uiMapper.insertKakaoUserInfo(kakaoUserInfoVO) == 1; // 카카오 유저 테이블에 인서트
+			} else if(naverId!=null) { // 일반가임 + 네이버 연동을 누른경우
+					NaverUserInfoVO naverUserInfoVO = new NaverUserInfoVO(); // 네이버 유저 객체에 넣어주고
+					naverUserInfoVO.setNuiId(userInfoVO.getNuiId());
+					naverUserInfoVO.setUiNum(userInfoVO.getUiNum());
+					log.info("네이버db에추가할거임={}", naverUserInfoVO);
+					return uiMapper.insertNaverUserInfo(naverUserInfoVO) == 1; // 네이버 유저 테이블에 인서트
+			}
+			return false;
+		}
+		else {
+			fileName = userInfoVO.getUiFile().getOriginalFilename(); //일반가입인 경우
 			if ("".equals(fileName)) {
 				userInfoVO.setUiFilepath("/resources/upload/nophoto.png");
 			} else if (!"".equals(fileName)) {

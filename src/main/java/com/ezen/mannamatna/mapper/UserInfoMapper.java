@@ -17,7 +17,11 @@ public interface UserInfoMapper {
 	
 	KakaoUserInfoVO selectKakaoUserInfo(KakaoUserInfoVO kakaoUserInfoVO); //카카오 로그인 유저를 찾을때 사용
 	
-	NaverUserInfoVO selectNaverUserInfo(NaverUserInfoVO naverUserInfoVO); //네이버 로그인 유저를 찾을때 사용
+	KakaoUserInfoVO selectKakaoUserInfoByNum(UserInfoVO userInfoVO);
+	
+	NaverUserInfoVO selectNaverUserInfo(NaverUserInfoVO naverUserInfoVO);//네이버 로그인 유저를 찾을때 사용
+	
+	NaverUserInfoVO selectNaverUserInfoByNum(UserInfoVO userInfoVO);
 	
 	int idChk(UserInfoVO userInfoVO);
 	
