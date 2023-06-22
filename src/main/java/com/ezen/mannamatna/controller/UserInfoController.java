@@ -102,17 +102,24 @@ public class UserInfoController {
 	
 	@GetMapping("/kakaoPost")
 	  public String kakaoJoin(@RequestParam(value = "code",required = false) String code, HttpSession session,  Model m) throws IllegalStateException, IOException{
-		UserInfoVO userInfoVO = null;
+		UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user");
 		if(code!=null){//카카오측에서 보내준 code가 있다면 출력
             System.out.println("code = " + code);
             KakaoToken kakaoToken = uiService.requestToken("/kakaoPost/",code); //카카오 토큰 요청
+            log.info("userInfoVO = {}",userInfoVO);
+            if(session.getAttribute("user")!=null) {
+            	userInfoVO.setKuiId(uiService.requestUserForKuiId(kakaoToken.getAccess_token()));
+            	log.info("연동user = {}",userInfoVO);
+                log.info("kakaoToken = {}", kakaoToken);
+            } else {
             userInfoVO = uiService.requestUser(kakaoToken.getAccess_token()); //유저정보 요청
             log.info("user = {}",userInfoVO);
             log.info("kakoToken = {}", kakaoToken);
-//			session.setAttribute("user", userInfoVO); 
+            }
         }
 		if(uiService.join(userInfoVO)) {
 			m.addAttribute("msg","회원가입에 성공하셨습니다.");
+			session.invalidate();
 			return "user/login";
 		}
 		return "user/kakaoPost";
@@ -149,19 +156,27 @@ public class UserInfoController {
 	@GetMapping("/naverPost")
 	public String NaverJoin(@RequestParam(value = "code",required = false) String code,@RequestParam(value = "state",required = false) String state, HttpSession session,  Model m) throws IllegalStateException, IOException {
         log.info("callback controller");
-        UserInfoVO userInfoVO = null;
+        UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user");
         if(code!=null){//네이버측에서 보내준 code가 있다면 출력
             System.out.println("code = " + code);
             NaverToken naverToken = uiService.requestNaverToken("/naverPost/",code,state); //네이버 토큰 요청
-            userInfoVO = uiService.requestNaverUser(naverToken.getAccess_token()); //유저정보 요청
-            log.info("user = {}",userInfoVO);
-            log.info("naverToken = {}", naverToken);
-        }
+            log.info("userInfoVO = {}",userInfoVO);
+            if(session.getAttribute("user")!=null) {
+            	userInfoVO.setNuiId(uiService.requestNaverUserForNuiId(naverToken.getAccess_token()));
+            	log.info("연동user = {}",userInfoVO);
+                log.info("naverToken = {}", naverToken);
+            } else {
+            	userInfoVO = uiService.requestNaverUser(naverToken.getAccess_token()); //유저정보 요청
+                log.info("user = {}",userInfoVO);
+                log.info("naverToken = {}", naverToken);
+            } 
+        } 
 		if(uiService.join(userInfoVO)) {
 			m.addAttribute("msg","회원가입에 성공하셨습니다.");
+			session.invalidate();
 			return "user/login";
 		}
-        return "user/callback";
+        return "user/naverPost";
     }
 	
 	@GetMapping("/naverLogin")

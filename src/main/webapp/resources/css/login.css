@@ -4,6 +4,9 @@ input{
 	height: 22px;
 	margin: 5px 0px;
 }
+.content{
+	margin-top: 50px;
+}
 
 input:focus{ 
 	outline: none !important; 

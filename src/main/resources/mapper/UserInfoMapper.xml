@@ -25,7 +25,7 @@
 	
 	<select id="selectKakaoUserInfoByNum"
 		resultType="com.ezen.mannamatna.vo.KakaoUserInfoVO">
-		select * from kakao_user_info where ui_Id = #{uiId}
+		select * from kakao_user_info where ui_Num = #{uiNum}
 	</select>
 	
 	<select id="selectNaverUserInfo"
@@ -35,7 +35,7 @@
 	
 	<select id="selectNaverUserInfoByNum"
 		resultType="com.ezen.mannamatna.vo.NaverUserInfoVO">
-		select * from naver_user_info where ui_Id = #{uiId}
+		select * from naver_user_info where ui_Num = #{uiNum}
 	</select>
 	
 	<select id="selectUserInfoByNum"

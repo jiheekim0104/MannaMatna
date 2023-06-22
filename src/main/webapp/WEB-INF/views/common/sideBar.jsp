@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>만나맛나 : 1인가구를 위한 신개념 밥상 매칭 사이트</title>
+<link rel="icon" href="../../../resources/upload/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="${path}/resources/css/header.css" />
 <link rel="stylesheet" href="${path}/resources/css/sideBar.css" />
 <link rel="stylesheet" href="${path}/resources/css/footer.css" />
