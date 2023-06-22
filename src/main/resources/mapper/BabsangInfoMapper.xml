@@ -60,4 +60,7 @@
 	<update id="updateBiUserCnt">
 	UPDATE BABSANG_INFO SET BI_USERCNT = #{biUserCnt} WHERE BI_NUM = #{biNum}
 	</update>
+	<select id ="selectBiCnt" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
+	SELECT COUNT(*) BI_CNT FROM BABSANG_INFO WHERE BI_CLOSED = 1 AND BI_USERCNT IS NOT NULL;
+	</select>
 </mapper>

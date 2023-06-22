@@ -1,5 +1,7 @@
 package com.ezen.mannamatna.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,5 +61,9 @@ public class BabsangInfoService {
 	public boolean meetingSuccess(BabsangInfoVO babsangInfoVO) {
 		// 밥상 맛남 완료 후 맛남 유저 수 업데이트
 		return babsangInfoMapper.updateBiUserCnt(babsangInfoVO) == 1;
+	}
+	public BabsangInfoVO getBabsangInfoCnt(HttpSession session) {
+		// 맛남 성사된 밥상 리턴 받는 서비스
+		return babsangInfoMapper.selectBiCnt();
 	}
 }

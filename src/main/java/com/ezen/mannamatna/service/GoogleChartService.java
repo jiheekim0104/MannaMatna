@@ -191,7 +191,7 @@ public class GoogleChartService {
 		JSONArray dataRow5Values = new JSONArray();
 		JSONObject dataRow5Value1 = new JSONObject();
 
-		dataRow5Value1.put("v", "50대");
+		dataRow5Value1.put("v", "50대이상");
 		dataRow5Values.add(dataRow5Value1);
 		JSONObject dataRow5Value2 = new JSONObject();
 		dataRow5Value2.put("v", fifties);

@@ -68,26 +68,57 @@
 		var pieChartOptions = {
 			title : '만나맛나 회원 성별 비율',
 			width : 600,
-			height : 200
+			height : 200,
+			fontSize: 15,
+			fontName : 'omyu_pretty',
+			titleTextStyle: {
+				fontSize: 18,
+			},
+			slices: {
+				0 : {
+					color : '#0d9ca4',
+				},
+				1 : {
+					color : '#FC522F',
+				},
+			}
 		};
 		var columnChartOptions = {
 			title : '만나맛나 회원 연령대 분포도',
 			width : 600,
 			height : 200,
+			fontSize: 15,
+			fontName : 'omyu_pretty',
+			colors: ['#FC522F'],
+			legend:{
+				position: 'none',
+			},
+			titleTextStyle: {
+				fontSize: 18,
+			},
 			animation : {
 				startup : true,
-				duration : 1000,
-				easing : 'out'
+				duration : 1500,
+				easing : 'in'
 			}
 		};
 		var lineChartOptions = {
 			title : '만나맛나 날짜별 가입회원 수 동향',
 			width : 1300,
 			height : 300,
+			fontName : 'omyu_pretty',
+			fontSize: 15,
+			colors: ['#FC522F'],
+			legend:{
+				position: 'none',
+			},
+			titleTextStyle: {
+				fontSize: 18,
+			},
 			animation : {
 				startup : true,
-				duration : 1000,
-				easing : 'out'
+				duration : 1500,
+				easing : 'in'
 			}
 		};
 		pieChart.draw(pieChartData, pieChartOptions);
@@ -100,6 +131,14 @@
 .content .chart {
 	margin-top: 50px;
 	margin-bottom: 10px;
+}
+.content .title{
+font-size: 35px;
+text-align: left;
+padding: 20px;
+padding-bottom: 10px;
+margin-left: 30px;
+color: #FC522F;
 }
 
 #genderChart {
@@ -141,6 +180,8 @@
 </style>
 <body>
 	<div class="content">
+		<div class = "title">현재 누적 맛남 수 ${babsangInfoVO.biCnt}</div>
+		<hr>
 		<div class="chart" id="genderChart"></div>
 		<div class="chart" id="ageChart"></div>
 		<hr>
