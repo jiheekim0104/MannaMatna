@@ -90,22 +90,29 @@ window.onload = function(){
 			<br>
 			<div class="userCount">${fn:length(babsangUserList)}(현재인원)&nbsp;/
 				${detail.biHeadCnt} (최대인원)</div>
+				<div class="outterBox">
 			<div class="box" id="makerBox">
+				
 				<img class="profileImg" src="${babsangMaker.uiFilepath}"
 					onclick="location.href='/profile/${babsangMaker.uiNum}'">
 				<div class="nickName" id="makerNickName">
 					<img class="crown" src="../../../resources/upload/왕관.png">
 					${babsangMaker.uiNickname}
 				</div>
+				
+			</div>
 			</div>
 			<c:forEach items="${babsangUserList}" var="userList">
 				<c:if test="${userList.uiNum!=detail.uiNum}">
 					<%-- 유저리스트의 uiNum과 해당밥상의 uiNum 이 같지 않을 경우만 실행 --%>
 					<%-- 즉, 참가자만 출력 (작성자는 기본 고정) --%>
+						<div class="outterBox">
 					<div class="box">
+				
 						<img class="profileImg" src="${userList.uiFilepath}"
 							onclick="location.href='/profile/${userList.uiNum}'">
 						<div class="nickName" id="partyNickName">${userList.uiNickname}</div>
+					</div>
 					</div>
 				</c:if>
 			</c:forEach>
