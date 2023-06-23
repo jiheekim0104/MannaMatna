@@ -135,6 +135,12 @@ public class UserInfoController {
             kakaoUserInfoVO.setKakaoImgPath(userInfoVO.getKakaoImgPath()); // 이미지 경로도 추가
             log.info("로그인요청한 kakaoUserInfoVO={}",kakaoUserInfoVO);
             if(uiService.kakaoLogin(kakaoUserInfoVO, session)) { // 카카오유저테이블에 그 카카오 고유번호를 가지는 카카오유저가있다면
+            	UserInfoVO sessionUserInofoVO = (UserInfoVO) session.getAttribute("user");
+            	if(sessionUserInofoVO.getUiActive()==1) { // 액티브가 1이면 탈퇴요청된 계정
+    				m.addAttribute("msg","탈퇴처리된 계정입니다.");
+    				session.invalidate();
+    				return "user/login";
+    			}
             	 m.addAttribute("url","/main"); 
             	 m.addAttribute("msg", "오늘도 즐거운 맛남하세요! 🥰");
             	 return "common/msg";
@@ -187,6 +193,12 @@ public class UserInfoController {
             naverUserInfoVO.setNaverImgPath(userInfoVO.getNaverImgPath());
             log.info("로그인요청한 naverUserInfoVO={}",naverUserInfoVO);
             if(uiService.naverLogin(naverUserInfoVO, session)) { // 네이버유저테이블에 그 id를 가지는 네이버유저가있다면
+            	UserInfoVO sessionUserInofoVO = (UserInfoVO) session.getAttribute("user");
+            	if(sessionUserInofoVO.getUiActive()==1) { // 액티브가 1이면 탈퇴요청된 계정
+    				m.addAttribute("msg","탈퇴처리된 계정입니다.");
+    				session.invalidate();
+    				return "user/login";
+    			}
             	 m.addAttribute("url","/main"); 
             	 m.addAttribute("msg", "오늘도 즐거운 맛남하세요! 🥰");
             	 return "common/msg";

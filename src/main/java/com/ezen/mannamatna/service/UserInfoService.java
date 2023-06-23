@@ -111,7 +111,7 @@ public class UserInfoService {
 	public boolean kakaoLogin(KakaoUserInfoVO kakaoUserInfoVO, HttpSession session) { //카카오 로그인
 		String kakaoImgPath = kakaoUserInfoVO.getKakaoImgPath(); //카카오 프로필사진을 저장없이 바로 path로 받음
 		kakaoUserInfoVO = uiMapper.selectKakaoUserInfo(kakaoUserInfoVO); //해당 카카오고유번호랑 일치하는 유저를 찾음
-
+		
 		if (kakaoUserInfoVO != null) { // 일치하는 유저가있다면
 			UserInfoVO userInfoVO = new UserInfoVO(); 
 			userInfoVO.setUiNum(kakaoUserInfoVO.getUiNum()); // 카카오 로그인 유저의 유저번호를 userInfoVO에 담기
@@ -242,10 +242,21 @@ public class UserInfoService {
 	public boolean update(@ModelAttribute UserInfoVO userInfoVO, HttpSession session)
 			throws IllegalStateException, IOException {
 		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user"); //세션에 있는 유저(변경되기 이전의 정보를 가지고있음)를 가져오고
+		log.info("누구시죠! ={}",sessionUserInfo);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		userInfoVO.setUiPwd(passwordEncoder.encode(userInfoVO.getUiPwd())); // 이전페이지에서 바꾸려고 입력한 pwd를 시큐리티로 암호화해서 다시 지정함 (그냥 일반적인 숫자로 들어가면 로그인 할수없음, 로그인과정에서 암호화가 또 일어나기때문에 match flase됨)
 		if ("".equals(userInfoVO.getUiFilepath())) {//(1) 프로필 변경시 사진을 업로드하지않음, 원래 사진을 그대로 쓰는경우
-			userInfoVO.setUiFilepath(sessionUserInfo.getUiFilepath()); //변경되기 이전의 유저가 가지고있는 filepath를 그대로 지정해줌
+			if(sessionUserInfo.getUiId()==null) { //sns 만 연동된 계정이 업데이트를 한경우
+				if(sessionUserInfo.getKuiId()!=0){
+					userInfoVO.setUiFilepath(sessionUserInfo.getKakaoImgPath());
+				} else if(sessionUserInfo.getNuiId()!=null) {
+					userInfoVO.setUiFilepath(sessionUserInfo.getNaverImgPath());
+				}
+			} else if(sessionUserInfo.getUiId()==null&&(sessionUserInfo.getKuiId()!=0||sessionUserInfo.getNuiId()!=null)){//일반+ 연동계정이 업데이트를 한경우
+					userInfoVO.setUiFilepath(sessionUserInfo.getUiFilepath());
+			} else userInfoVO.setUiFilepath(sessionUserInfo.getUiFilepath()); //변경되기 이전의 유저가 가지고있는 filepath를 그대로 지정해줌
+			log.info("바꿧음! ={}",sessionUserInfo.getUiFilepath());
+			log.info("바꿧음! ={}",userInfoVO);
 		} else if (userInfoVO.getUiFile() != null) {//(2) 이전에 사진과 다른 어떤 사진을 업로드 한 경우
 			String fileName = userInfoVO.getUiFile().getOriginalFilename();
 			int idx = fileName.lastIndexOf("."); //뒤에서 .의 위치를 찾음
