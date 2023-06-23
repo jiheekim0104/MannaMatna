@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>밥상 생성</title>
 
 <!-- timepicker -->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
@@ -27,15 +27,12 @@
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
+
 	<form method="POST" action="/addBabsang" class="content">
-		
-			<input type="text" id="biTitle" name="biTitle" placeholder="제목을 입력해주세요 (최대 길이 50자)" maxlength="50" required >
-			
+		<input type="text" id="biTitle" name="biTitle" placeholder="제목을 입력해주세요 (최대 길이 50자)" maxlength="50" required >
 		<div class="options">
 			<input type="text" id="biMeetingDat" name="biMeetingDat" required>
-		
 			<input type="text" id="biMeetingTim" name="biMeetingTim" class="timePicker" required>
-			
 			<select id="biFdCategory"name="biFdCategory" required>
 				<option value="" selected>카테고리 선택</option>
 				<option value="한식">한식</option>
@@ -47,7 +44,6 @@
 				<option value="해산물">해산물</option>
 				<option value="족발">족발</option>
 			</select>
-		
 			<select id="biHeadCnt" name="biHeadCnt" required>
 				<option value="" selected>최대 인원 선택</option>
 				<option value="2">2</option>
@@ -58,14 +54,10 @@
 				<option value="7">7</option>
 				<option value="8">8</option>
 			</select>
-			
 		</div>
-			<textarea id="biContent" name="biContent" placeholder="내용을 입력해주세요 (최대 길이 500자)" maxlength="500"></textarea>
-		
-			<button id="cancle" onclick="location.href='/main'">취소</button>
-		
-			<button id="submit">등록</button> <br>
-			
+		<textarea id="biContent" name="biContent" placeholder="내용을 입력해주세요 (최대 길이 500자)" maxlength="500"></textarea>
+		<button id="cancle" onclick="location.href='/main'">취소</button>
+		<button id="submit">등록</button> <br>
 	</form>
 
 	<!-- datepicker -->

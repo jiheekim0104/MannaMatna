@@ -36,14 +36,13 @@
 		<button class="Category" name="Category" value="족발">족발</button>
 	</form>
 	
-	<!-- 밥상 리스트 목록 -->
+	<!-- 밥상 목록 -->
 				
 		<c:if test="${empty page.list}">
 			<div>밥상이 존재하지 않습니다</div>
 		</c:if>
 		<c:forEach items="${page.list}" var="babsangListVO">
 		<div class="babsang"
-		
 			onclick=
 			<c:if test="${sessionScope.user.uiNum != null}">
 			"location.href='/detail/${babsangListVO.biNum}'"
@@ -94,57 +93,48 @@
 			<div id="biMeetingDatTim">${babsangListVO.biMeetingDat} / ${fn:substring(biMeetingTim,0,5)}</div>
 			
 			<%-- 밥상 삭제 버튼--%>
-			<%-- <tr>
-				<c:if test="${sessionScope.user.uiNum == babsangListVO.uiNum}">
-					<td colspan="2" align="center">
-						<button
-							onclick="location.href='/deleteBabsang?biNum=${babsangListVO.biNum}'">밥상
-							삭제</button>
-					</td>
-				</c:if>
-			</tr>  --%>
+			<%-- <c:if test="${sessionScope.user.uiNum == babsangListVO.uiNum}">
+						<button	onclick="location.href='/deleteBabsang?biNum=${babsangListVO.biNum}'">밥상 삭제</button>
+				</c:if> --%>
 		</div>
 		</c:forEach>
 	
-	 <!-- 페이징 -->
+	<!-- 페이징 -->
 	<div id="pageDiv"></div>
-	<c:if test="${!(empty page.list)}">
-		<script>
-			const pages = ${page.pages};//총페이지
-			const page = ${page.pageNum};//현재페이지
-			const start = Math.floor((page-1)/5)*5+1;//묶음페이지에서 첫페이지
-			const end = (start + 4) > pages ? pages : (start + 4);//묶음페이지에서 끝페이지
+		<c:if test="${!(empty page.list)}">
+			<script>
+				const pages = ${page.pages};//총페이지
+				const page = ${page.pageNum};//현재페이지
+				const start = Math.floor((page-1)/5)*5+1;//묶음페이지에서 첫페이지
+				const end = (start + 4) > pages ? pages : (start + 4);//묶음페이지에서 끝페이지
 
-			let html = '';
+				let html = '';
 			
-			if(11<=page){
-				html +='<a href="/main?page=1&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}"><<</a>  '
-			}//page가 11 이상일때만 맨 처음으로 버튼 보임
-			if(start!=1){
-				html += '<a href="/main?page=' + (start-1) + '&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}"><</a>'
-			}//<버튼 누르면 현재 묶음페이지의 start에서 -1로 (묶음페이지가 첫페이지(1~5)가 아닐 때만 보임)
+				if(11<=page){
+					html +='<a href="/main?page=1&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}"><<</a>  '
+				}//page가 11 이상일때만 맨 처음으로 버튼 보임
+				if(start!=1){
+					html += '<a href="/main?page=' + (start-1) + '&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}"><</a>'
+				}//<버튼 누르면 현재 묶음페이지의 start에서 -1로 (묶음페이지가 첫페이지(1~5)가 아닐 때만 보임)
 			
-			for(let i=start; i<=end; i++){
-				if(i==page){
-					html += '<a class="active">' + i + '</a>';
-				}else{
-					html += ' <a href="/main?page=' + i + '&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}">' + i + '</a>' ;
+				for(let i=start; i<=end; i++){
+					if(i==page){
+						html += '<a class="active">' + i + '</a>';
+					}else{
+						html += ' <a href="/main?page=' + i + '&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}">' + i + '</a>' ;
+					}
 				}
-			}
 			
-			if(end!=pages){
-				html += ' <a href="/main?page=' + (end+1) + '&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}">></a>';
-				
-			}//>버튼 누르면 묶음페이지 +1로 (묶음페이지가 첫페이지(1~5)가 아닐 때만 보임)
-			
-			if((end/5)<=(Math.ceil(pages/5))-2){
-				html +='  <a href="/main?page=' + pages + '&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}">>></a>'
+				if(end!=pages){
+					html += ' <a href="/main?page=' + (end+1) + '&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}">></a>';
+				}//>버튼 누르면 묶음페이지 +1로 (묶음페이지가 첫페이지(1~5)가 아닐 때만 보임)
+				if((end/5)<=(Math.ceil(pages/5))-2){
+					html +='  <a href="/main?page=' + pages + '&biTitle=${param.biTitle}&biFdCategory=${param.biFdCategory}">>></a>'
 				}//>>버튼 누르면 마지막 묶음페이지로 */
-				
-			document.querySelector('#pageDiv').innerHTML = html;
-		</script>
-	</c:if>
-</div>	 
+				document.querySelector('#pageDiv').innerHTML = html;
+			</script>
+		</c:if>
+	</div>	 
 
 <!--관리자 채딩 기능-->
 <script type="text/javascript">

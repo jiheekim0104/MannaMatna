@@ -32,14 +32,17 @@ public class BabsangInfoService {
 		return babsangInfoMapper.selectBabsangInfo(biNum);
 	}
 
+	/* 밥상 생성 */
 	public boolean addBabsangInfo(BabsangInfoVO babsang) {
 		return babsangInfoMapper.insertBabsangInfo(babsang) == 1;
 	}
 
+	/* 밥상 삭제 */
 	public boolean deleteBabsangInfo(int biNum) {
 		return babsangInfoMapper.deleteBabsangInfo(biNum) == 1;
 	}
 
+	/* 밥상 생성 시 autoIncrement될 BiNum을 받음 */
 	public BabsangInfoVO updateUiBiNum(int uiBiNum) {
 		return babsangInfoMapper.updateUserInfoBiNum(uiBiNum);
 	}

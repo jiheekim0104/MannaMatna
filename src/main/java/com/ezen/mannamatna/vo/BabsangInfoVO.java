@@ -14,7 +14,7 @@ public class BabsangInfoVO {
 	private String biFdCategory;
 	private boolean biClosed;
 	private int uiNum;
-	private int uiBiNum;//밥상이 생성되며 autoincrement되는 biNum을 따로받음
+	private int uiBiNum;//밥상이 생성시 autoIncrement될 biNum을 받음
 	private int uiNickname;
 	private int biUserCnt;
 	private int biCnt; // 맛남이루어진 밥상 개수 담을 필드

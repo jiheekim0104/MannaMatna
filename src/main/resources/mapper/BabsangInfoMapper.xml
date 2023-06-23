@@ -19,7 +19,7 @@
 		<if test='biTitle != null and biTitle != ""'>
 			AND BI.BI_TITLE LIKE CONCAT('%', #{biTitle}, '%')
 		</if>
-		<!-- 제목 검색기능, 필요 없다 판단하여 주석처리 
+		<!-- 내용 검색기능, 필요 없다 판단하여 주석처리 
 		<if test='biContent != null and biContent != ""'>
 				AND BI_TITLE LIKE CONCAT('%', #{biContent}, '%')
 		</if> -->
@@ -29,6 +29,7 @@
 		ORDER BY BI.BI_NUM DESC
 	</select>
 	
+	<!-- 밥상 상세 정보 -->
 	<select id="selectBabsangInfo" parameterType="int" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
 		SELECT BI_NUM, BI_TITLE, BI_CONTENT, BI_MEETINGDAT, BI_MEETINGTIM, 
 		BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY, BI_CLOSED, UI_NUM, BI_USERCNT 
@@ -36,6 +37,7 @@
 		WHERE BI_NUM = #{biNum}
 	</select>
 	
+	<!-- 밥상 생성 -->
 	<insert id="insertBabsangInfo">
 		INSERT INTO BABSANG_INFO(
 		BI_TITLE, BI_CONTENT, BI_MEETINGDAT, BI_MEETINGTIM, 
@@ -50,6 +52,7 @@
 		)
 	</insert>
 	
+	<!-- 밥상 삭제 -->
 	<delete id="deleteBabsangInfo">
 		DELETE FROM BABSANG_INFO
 		WHERE BI_NUM = #{biNum}

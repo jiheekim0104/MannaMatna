@@ -44,12 +44,14 @@ public class BabsangInfoController {
 		m.addAttribute("page", babsangInfoService.getPagingBansang(babsang));
 		return "babsang/babsang-list";
 	}
-
+	
+	/* 밥상생성 버튼 클릭 시 페이지 이동 */
 	@GetMapping("/addBabsang")
 	public String goCreateBabsang() {
 		return "babsang/babsang-insert";
 	}
 
+	/* 밥상생성 - 등록 버튼 클릭 시 작동 */
 	@PostMapping("/addBabsang")
 	public String insertBabsang(BabsangInfoVO babsang, UserInfoVO userInfoVO, Model m, HttpSession session) {
 		UserInfoVO userSession = (UserInfoVO) session.getAttribute("user");
