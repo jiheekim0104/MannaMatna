@@ -4,8 +4,11 @@
 	// ajax를 이용한 댓글 목록 출력
 	let biNum = '${detail.biNum}'; // 게시글 번호
 	console.log(biNum);
-
-	$('[name=commentInsertBtn]').click(function() { //댓글 등록 버튼 클릭시 
+	let inputBtn = document.querySelector('.commentBtn');
+	console.log(document.getElementById('#ciContent'));
+	
+	function clickEvent() { //댓글 등록 버튼 클릭시 
+		
 		console.log('댓글등록눌렀따!!!');
 		let content = commentInsertForm.ciContent;
 		let inputBox = document.querySelector('.commentInput');
@@ -30,8 +33,10 @@
 		let insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
 		commentInsert(insertData); //Insert 함수호출(아래)
 		}
-	});
+	};
+	
 
+	
 	//댓글 목록 
 	function commentList() {
 		$.ajax({
@@ -77,7 +82,6 @@
 						
 						$(".commentList").html(a);
 						let commentBoxes = document.querySelectorAll('.commentBox');
-						console.log('작성후 생기자마자 확인 : ' + commentBoxes[commentBoxes.length-1].classList);
 						let commentBoxesEnd = document.querySelectorAll('.end'); // end 붙은 코멘트들확인
 						console.log('end 코멘트확인 + ' + commentBoxesEnd);
 						// 댓글 작성 후 생기는 commentBox 배열중에서 가장 마지막인덱스의 댓글에만 애니메이션 1초 적용 후 제거
@@ -153,6 +157,11 @@
 	}
 	$(document).ready(function() {
 		commentList(); // 페이지 로딩 시 댓글 목록 출력
+		
+		 $("#ciContent").keydown(function(key){
+		        if(key.keyCode==13) {
+		        	$('[name=commentInsertBtn]').click(clickEvent());
+		        }
+		    });
 	});
-	
 </script>
