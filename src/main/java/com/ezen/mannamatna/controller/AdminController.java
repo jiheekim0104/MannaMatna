@@ -35,6 +35,7 @@ public class AdminController {
 	
 	@GetMapping("/chart")
 	public String goChart(Model m, HttpSession session) {
+		// 차트페이지로 넘어갈 시 모델에 밥상정보로 맛남이 성사된 밥상객체를 넣어준다.
 		m.addAttribute("babsangInfoVO", babsangInfoService.getBabsangInfoCnt(session));
 		log.info("biCnt 가 몇이야????{}", babsangInfoService.getBabsangInfoCnt(session));
 		return "admin/chart";

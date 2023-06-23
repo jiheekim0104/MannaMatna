@@ -40,36 +40,36 @@ public class GoogleChartService {
 		}
 		JSONObject jsonData = new JSONObject(); // 리턴할 JSONObject 생성
 		JSONArray columns = new JSONArray(); // 컬럼 생성
+		// 테이블형식으로 이해하면 좋습니다.
+		// [col1, col2, ...] = cols
+		// [row1, ..
+		// [row2, ..
+		// [row3, ...
+		JSONObject cols1 = new JSONObject(); // 컬럼2생성
+		cols1.put("label", "유저성별"); // 컬럼1의 이름
+		cols1.put("type", "string"); // 컬럼1의 타입
+		columns.add(cols1); // 전체 컬럼 JSONArray에 컬럼1 추가
 
-		// Create the "Sex" column
-		JSONObject cols1 = new JSONObject();
-		cols1.put("label", "유저성별");
-		cols1.put("type", "string");
-		columns.add(cols1);
+		JSONObject cols2 = new JSONObject(); // 컬럼2 생성
+		cols2.put("label", "성별회원수"); // 컬럼2 이름
+		cols2.put("type", "number"); // 컬럼2 타입
+		columns.add(cols2); // 전체 컬럼 JSONArray에 컬럼2 추가
 
-		// Create the "Membership" column
-		JSONObject cols2 = new JSONObject();
-		cols2.put("label", "성별회원수");
-		cols2.put("type", "number");
-		columns.add(cols2);
+		jsonData.put("cols", columns); // 리턴해줄 전체 JSONObject에 "cols"라는 이름으로 전체 컬럼을 추가
+		
+		JSONArray dataRows = new JSONArray(); // 컬럼에 맞춰 넣을 데이터객체 생성
 
-		// Add the columns to the main JSONObject
-		jsonData.put("cols", columns);
-
-		// Create a JSONArray to hold the data rows
-		JSONArray dataRows = new JSONArray();
-
-		// Add the data rows as JSONObjects
-		JSONObject dataRow1 = new JSONObject();
-		JSONArray dataRow1Values = new JSONArray();
-		JSONObject dataRow1Value1 = new JSONObject();
-		dataRow1Value1.put("v", "남자");
-		dataRow1Values.add(dataRow1Value1);
-		JSONObject dataRow1Value2 = new JSONObject();
-		dataRow1Value2.put("v", countMale);
-		dataRow1Values.add(dataRow1Value2);
-		dataRow1.put("c", dataRow1Values);
-		dataRows.add(dataRow1);
+		JSONObject dataRow1 = new JSONObject(); // 데이터는 [남자, 인원수] 형식으로 만들어주어야한다.
+		JSONArray dataRow1Values = new JSONArray(); // 컬럼2가지의 데이터를 한번에 넣어줄 객체 생성
+		JSONObject dataRow1Value1 = new JSONObject(); // 컬럼1의 데이터
+		dataRow1Value1.put("v", "남자"); // 컬럼1의 데이터로 남자(string)를 넣음
+		dataRow1Values.add(dataRow1Value1); // 전체 데이터에 컬럼1의 데이터를 넣음
+		JSONObject dataRow1Value2 = new JSONObject(); // 컬럼2의 데이터
+		dataRow1Value2.put("v", countMale); // 컬럼2의 데이터로 남자회원수(number)를 넣음
+		dataRow1Values.add(dataRow1Value2); // 전체 데이터에 컬럼2의 데이터를 넣음
+		// 이 두 데이터를 하나의 행으로 묶어서 [남자, countMale]형식으로 열 하나를 만들어준다.
+		dataRow1.put("c", dataRow1Values); // 컬럼1데이터, 컬럼2데이터를 묶어서 하나의 열로 묶고
+		dataRows.add(dataRow1); // 만들어진 열을 전체 데이터 한줄로 넣음.
 
 		JSONObject dataRow2 = new JSONObject();
 		JSONArray dataRow2Values = new JSONArray();
@@ -91,12 +91,13 @@ public class GoogleChartService {
 		// 연령대 차트 서비스
 		List<UserInfoVO> items = userInfoService.getUserInfos(userInfoVO, session);
 		log.info("구글차트서비스에서 의존주입받은 유저서비스 메소드실행 후 유저리스트==>{}", items); // 유저서비스 메소드 정상실행 확인
-		int teenager = 0;
-		int twenties = 0;
-		int thirties = 0;
-		int forties = 0;
-		int fifties = 0;
+		int teenager = 0; // 10대 인원수
+		int twenties = 0; // 20대 인원수
+		int thirties = 0; // 30대 인원수
+		int forties = 0; // 40대 인원수
+		int fifties = 0; // 50대 이상 인원수
 		for (UserInfoVO user : items) {
+			// 유저리스트에서 각 연령대별 인원수를 파악
 			if (user.getUiAge() == 10) {
 				teenager++;
 				continue;
@@ -126,19 +127,15 @@ public class GoogleChartService {
 		cols1.put("type", "string");
 		columns.add(cols1);
 
-		// Create the "Membership" column
 		JSONObject cols2 = new JSONObject();
 		cols2.put("label", "연령대별회원");
 		cols2.put("type", "number");
 		columns.add(cols2);
 
-		// Add the columns to the main JSONObject
 		jsonData.put("cols", columns);
 
-		// Create a JSONArray to hold the data rows
 		JSONArray dataRows = new JSONArray();
-
-		// Add the data rows as JSONObjects
+		
 		JSONObject dataRow1 = new JSONObject();
 		JSONArray dataRow1Values = new JSONArray();
 		JSONObject dataRow1Value1 = new JSONObject();
@@ -207,6 +204,7 @@ public class GoogleChartService {
 	public JSONObject getCredatChart(HttpSession session) {
 		// 날자별 가입인원수 동향 선차트
 		List<UserInfoVO> items = userInfoService.getUserInfosByCredat(session);
+		// 이 리스트는 [가입날짜, 인원수] 의 형식으로 조회된다.
 		JSONObject jsonData = new JSONObject(); // 해당 서비스에서 jsonObject를 컨트롤러에 리턴한다.
 		JSONArray columns = new JSONArray(); // 컬럼 생성
 
@@ -215,8 +213,7 @@ public class GoogleChartService {
 		cols1.put("type", "string");
 		columns.add(cols1);
 	
-		// Create the "Membership" column
-		JSONObject cols2 = new JSONObject();
+		JSONObject cols2 = new JSONObject(); // 두번째 컬럼
 		cols2.put("label", "가입날짜별회원수");
 		cols2.put("type", "number");
 		columns.add(cols2);
@@ -225,8 +222,7 @@ public class GoogleChartService {
 		
 		JSONArray dataRows = new JSONArray();
 		for (UserInfoVO user : items) {
-			// 날짜별 회원수 반복하며 열에 추가
-			// Add the data rows as JSONObjects
+			// 날짜별 회원수 반복하며 데이터에 추가
 			JSONObject dataRow = new JSONObject();
 			JSONArray dataRowValues = new JSONArray();
 			JSONObject dataRowValue1 = new JSONObject();

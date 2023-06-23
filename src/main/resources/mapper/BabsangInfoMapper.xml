@@ -62,9 +62,11 @@
 	UPDATE BABSANG_INFO SET BI_CLOSED = #{biClosed} WHERE BI_NUM = #{biNum}
 	</update>
 	<update id="updateBiUserCnt">
+	<!-- 해당밥상을 방장이 맛남완료를 누르게되면 밥상정보에 참가회원수가 업데이트된다. -->
 	UPDATE BABSANG_INFO SET BI_USERCNT = #{biUserCnt} WHERE BI_NUM = #{biNum}
 	</update>
 	<select id ="selectBiCnt" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
+	<!-- 밥상이 마감된 상태인 밥상중에 맛남완료시 인원수가 NULL이 아닌 객체의 수를 조회한다. -->
 	SELECT COUNT(*) BI_CNT FROM BABSANG_INFO WHERE BI_CLOSED = 1 AND BI_USERCNT IS NOT NULL;
 	</select>
 </mapper>
