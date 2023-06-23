@@ -71,9 +71,35 @@ nav{
   display: block;
 }
 
+@keyframes shake{
+	 /* 흔들리는 애니메이션 추가 */
+     0%{
+        transform: rotate(0deg);
+      }
+      10%{
+        transform: rotate(4deg);
+      }
+      20%{
+        transform: rotate(-4deg);
+      }
+      30%{
+        transform: rotate(2deg);
+      }
+      40%{
+        transform: rotate(-2deg);
+      }
+      50%{
+        transform: rotate(0deg);
+      }
+} 
 /* 마우스 올리면 메뉴 색 변경 */
 .sidenav a:hover {
   color: #FC522F;
+    transform-origin: 50% 0%;
+      animation-name: shake;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-delay: 0.1s;
 }
 
 /* 연결되는 페이지 내용 */

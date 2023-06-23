@@ -77,14 +77,23 @@
 						
 						$(".commentList").html(a);
 						let commentBoxes = document.querySelectorAll('.commentBox');
+						console.log('작성후 생기자마자 확인 : ' + commentBoxes[commentBoxes.length-1].classList);
+						let commentBoxesEnd = document.querySelectorAll('.end'); // end 붙은 코멘트들확인
+						console.log('end 코멘트확인 + ' + commentBoxesEnd);
 						// 댓글 작성 후 생기는 commentBox 배열중에서 가장 마지막인덱스의 댓글에만 애니메이션 1초 적용 후 제거
-							commentBoxes[commentBoxes.length-1].classList.add('fadeInUp');
+								if(commentBoxes[commentBoxes.length-1].classList.contains('end')==false){
+									commentBoxes[commentBoxes.length-1].classList.add('fadeInUp');
 							setTimeout(function(){
 								// 1초 후 placeholder 원상복귀 처리
 								commentBoxes[commentBoxes.length-1].classList.remove('fadeInUp');
 								console.log('진행중 클래스 확인 : ' + commentBoxes[commentBoxes.length-1].classList);
 							}, 1000);
-							console.log('클래스 삭제 후 확인 : ' + commentBoxes[commentBoxes.length-1].classList);
+							for(let i = 0;i<commentBoxes.length;i++){
+								// 리스트 전체에 end 클래스를 추가하여 더이상 애니메이션이 작동하지않도록!
+								commentBoxes[i].classList.add('end');
+							}
+							console.log('클래스 추가 후 확인 : ' + commentBoxes[commentBoxes.length-1].classList);
+							}
 					}
 				});
 	}
