@@ -72,7 +72,7 @@ public class BabsangInfoController {
 			userSession.setBiNum(biNum); // 세션의 biNum >> 밥상 insert 할 때 받아온 biNum으로 set
 			log.info("userSession.biNum ===> {}", userSession.getBiNum()); // 확인
 
-			msg = "밥상 등록 성공";
+			msg = "밥상이 잘 차려졌어요! 🍛";
 			url = "/main";
 			userInfoService.updateBiNum(userInfoVO); // insert성공 시 유저서비스의 update 실행
 			log.info("==== 밥상 insert 끝 ====");
@@ -204,13 +204,18 @@ public class BabsangInfoController {
 		// 밥상 마감하기
 		String msg = "로그인해주세요!";
 		String url = "/login";
+		
 		if (session.getAttribute("user") != null) {
 			// 세션 로그인상태 유지중 마감하기 누른 후
 			// 밥상인포 biClosed 1로 업데이트
-			if (babsangInfoService.blockJoin(biNum)) {
+			if(userInfoService.getUserInfosByBiNum(biNum).size()==1) {
+				// 참여인원이 방장 혼자밖에없는 경우 삭제만 가능!
+				msg = "참여인원이 아무도 없습니다! 밥상 삭제를 이용해주세요. 😭";
+				url = "/detail/" + biNum; // 해당 페이지 redirect
+			}
+			else if (babsangInfoService.blockJoin(biNum)) {
 				// 밥상서비스의 마감메소드 정상 실행 시
 				msg = "밥상 마감시 더이상 다른 유저가 참여할 수 없습니다!";
-				url = "/detail/" + biNum; // 해당 페이지 redirect
 			}
 		}
 		m.addAttribute("msg", msg);
