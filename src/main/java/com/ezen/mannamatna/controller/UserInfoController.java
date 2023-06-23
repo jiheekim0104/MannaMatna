@@ -59,33 +59,29 @@ public class UserInfoController {
 	
 	@PostMapping("/login")
 	public String gologin(@ModelAttribute UserInfoVO userInfoVO, BabsangInfoVO babsang, HttpSession session, Model m) {
-		log.info("=============1>{}",userInfoVO);
-		log.info("=============1>{}",uiService.login(userInfoVO, session));
-		if(uiService.login(userInfoVO, session)) {
-			log.info("=============2>{}",userInfoVO);
-			userInfoVO = (UserInfoVO) session.getAttribute("user");
-			log.info("=============>{}",userInfoVO);
-			if(userInfoVO.getUiActive()==1) {
+		if(uiService.login(userInfoVO, session)) { // 입력한 id pwd가 일치하는 유저가 있다면
+			userInfoVO = (UserInfoVO) session.getAttribute("user"); // 그 유저를 담아옴
+			if(userInfoVO.getUiActive()==1) { // 액티브가 1이면 탈퇴요청된 계정
 				m.addAttribute("msg","탈퇴처리된 계정입니다.");
 				session.invalidate();
 				return "user/login";
 			}
-			if(userInfoVO.getUiActive()==2) {
+			if(userInfoVO.getUiActive()==2) { // 액티브가 2이면 사용이 일시정지된 계정
 				m.addAttribute("msg","이용이 일시정지된 계정입니다. 관리자에게 문의하세요.");
 				session.invalidate();
 				return "user/main";
 			}
 			m.addAttribute("url", "/main");
-			m.addAttribute("msg", "로그인성공");
+			m.addAttribute("msg", "오늘도 즐거운 맛남하세요! 🥰");
 			return "common/msg";
 	}
 	
-	loginCnt++; 
+	loginCnt++; // 아이디가 없거나, 비번이 틀린경우에 로그인 시행횟수가 추가됨
 	m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다. (로그인 시도 횟수:"+loginCnt+")");
 	
-	if(loginCnt==5) {
-		if(uiService.findUser(userInfoVO)) { //아이디가 있는지 확인하고 있으면 해당 계정 엑티브 변경
-			userInfoVO.setUiActive(2);
+	if(loginCnt==5) { //시행횟수가 5번이 되면
+		if(uiService.findUser(userInfoVO)) { //아이디가 있는지 확인하여 해당유저가있다면
+			userInfoVO.setUiActive(2); //액티브 2로 변경
 			uiService.updateActive(userInfoVO, session);
 			m.addAttribute("msg", "비정상적인 로그인시도로 해당 계정이 일시정지 되었습니다. 관리자에게 문의하세요.");
 			m.addAttribute("url", "/main");
@@ -101,47 +97,46 @@ public class UserInfoController {
 }
 	
 	@GetMapping("/kakaoPost")
-	  public String kakaoJoin(@RequestParam(value = "code",required = false) String code, HttpSession session,  Model m) throws IllegalStateException, IOException{
+	public String kakaoJoin(@RequestParam(value = "code",required = false) String code, HttpSession session,  Model m) throws IllegalStateException, IOException{
 		UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("user");
 		if(code!=null){//카카오측에서 보내준 code가 있다면 출력
             System.out.println("code = " + code);
-            KakaoToken kakaoToken = uiService.requestToken("/kakaoPost/",code); //카카오 토큰 요청
+            KakaoToken kakaoToken = uiService.requestKakaoToken("/kakaoPost/",code); //카카오 토큰 요청
             log.info("userInfoVO = {}",userInfoVO);
-            if(session.getAttribute("user")!=null) {
-            	userInfoVO.setKuiId(uiService.requestUserForKuiId(kakaoToken.getAccess_token()));
+            if(session.getAttribute("user")!=null) { // (1)일반 유저가 연동가입을 하는경우
+            	userInfoVO.setKuiId(uiService.requestUserForKuiId(kakaoToken.getAccess_token())); // 카카오 고유 번호만 담아줌
             	log.info("연동user = {}",userInfoVO);
                 log.info("kakaoToken = {}", kakaoToken);
-            } else {
-            userInfoVO = uiService.requestUser(kakaoToken.getAccess_token()); //유저정보 요청
+            } else { 
+            // (2)카카오로 최초가입한경우
+            userInfoVO = uiService.requestKakaoUser(kakaoToken.getAccess_token()); //유저정보 요청
             log.info("user = {}",userInfoVO);
             log.info("kakoToken = {}", kakaoToken);
             }
         }
-		if(uiService.join(userInfoVO)) {
+		if(uiService.join(userInfoVO)) { //join 로직을 따름
 			m.addAttribute("msg","회원가입에 성공하셨습니다.");
 			session.invalidate();
 			return "user/login";
 		}
-		return "user/kakaoPost";
+		return "user/kakaoPost"; //가입시 오류페이지 작업해볼까
 	}
 	
 	@GetMapping("/kakaoLogin") 
 	public String kakaoLogin(@RequestParam(value = "code",required = false) String code, HttpSession session,  Model m) throws IllegalStateException, IOException{
 		UserInfoVO userInfoVO = null;
 		KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO();
-		// 카카오 로그인해서 id 돌려받고, 그 아이디를 가진 유저가 있는지 인포 돌아서 확인 이때 비번은 0000 고정임
-		
 		if(code!=null){//카카오측에서 보내준 code가 있다면 출력
             System.out.println("code = " + code);
-            KakaoToken kakaoToken = uiService.requestToken("/kakaoLogin/",code); //카카오 토큰 요청
+            KakaoToken kakaoToken = uiService.requestKakaoToken("/kakaoLogin/",code); //카카오 토큰 요청
             log.info("여기서 들어감! kakaoUserInfoVO={}",kakaoUserInfoVO);
-            userInfoVO = uiService.requestUser(kakaoToken.getAccess_token()); //유저정보 요청
-            kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId()); // userInfoVO가 가지고있는 카카오 id값을 kakaoUserInfoVO에 넣음
-            kakaoUserInfoVO.setKakaoImgPath(userInfoVO.getKakaoImgPath());
+            userInfoVO = uiService.requestKakaoUser(kakaoToken.getAccess_token()); //유저정보 요청
+            kakaoUserInfoVO.setKuiId(userInfoVO.getKuiId()); // userInfoVO가 가지고있는 카카오 고유번호를 kakaoUserInfoVO에 넣음
+            kakaoUserInfoVO.setKakaoImgPath(userInfoVO.getKakaoImgPath()); // 이미지 경로도 추가
             log.info("로그인요청한 kakaoUserInfoVO={}",kakaoUserInfoVO);
-            if(uiService.kakaoLogin(kakaoUserInfoVO, session)) { // 카카오유저테이블에 그 id를 가지는 카카오유저가있다면
+            if(uiService.kakaoLogin(kakaoUserInfoVO, session)) { // 카카오유저테이블에 그 카카오 고유번호를 가지는 카카오유저가있다면
             	 m.addAttribute("url","/main"); 
-            	 m.addAttribute("msg", "로그인성공");
+            	 m.addAttribute("msg", "오늘도 즐거운 맛남하세요! 🥰");
             	 return "common/msg";
             }
             m.addAttribute("msg","카카오 가입 유저가 아닙니다.");
@@ -152,7 +147,6 @@ public class UserInfoController {
 		return "user/login";
 }
 	
-	
 	@GetMapping("/naverPost")
 	public String NaverJoin(@RequestParam(value = "code",required = false) String code,@RequestParam(value = "state",required = false) String state, HttpSession session,  Model m) throws IllegalStateException, IOException {
         log.info("callback controller");
@@ -161,17 +155,18 @@ public class UserInfoController {
             System.out.println("code = " + code);
             NaverToken naverToken = uiService.requestNaverToken("/naverPost/",code,state); //네이버 토큰 요청
             log.info("userInfoVO = {}",userInfoVO);
-            if(session.getAttribute("user")!=null) {
+            if(session.getAttribute("user")!=null) { // (1)일반 유저가 연동가입을 하는경우
             	userInfoVO.setNuiId(uiService.requestNaverUserForNuiId(naverToken.getAccess_token()));
             	log.info("연동user = {}",userInfoVO);
                 log.info("naverToken = {}", naverToken);
             } else {
+            	// (2)네이버로 최초가입한경우
             	userInfoVO = uiService.requestNaverUser(naverToken.getAccess_token()); //유저정보 요청
                 log.info("user = {}",userInfoVO);
                 log.info("naverToken = {}", naverToken);
             } 
         } 
-		if(uiService.join(userInfoVO)) {
+		if(uiService.join(userInfoVO)) { //join 로직을 따름
 			m.addAttribute("msg","회원가입에 성공하셨습니다.");
 			session.invalidate();
 			return "user/login";
@@ -183,18 +178,17 @@ public class UserInfoController {
 	public String naverLogin(@RequestParam(value = "code",required = false) String code,@RequestParam(value = "state",required = false) String state, HttpSession session,  Model m) throws IllegalStateException, IOException{
 		UserInfoVO userInfoVO = null;
 		NaverUserInfoVO naverUserInfoVO = new NaverUserInfoVO();
-		// 네이버 로그인해서 id 돌려받고, 그 아이디를 가진 유저가 있는지 인포 돌아서 확인 이때 비번은 0000 고정임
 		if(code!=null){//네이버측에서 보내준 code가 있다면 출력
             System.out.println("code = " + code);
             NaverToken naverToken = uiService.requestNaverToken("/naverLogin/",code,state); //네이버 토큰 요청
             log.info("여기서 들어감! naverUserInfoVO={}",naverUserInfoVO);
             userInfoVO = uiService.requestNaverUser(naverToken.getAccess_token()); //유저정보 요청
-            naverUserInfoVO.setNuiId(userInfoVO.getNuiId()); // userInfoVO가 가지고있는 네이버 id값을 naverUserInfoVO에 넣음
+            naverUserInfoVO.setNuiId(userInfoVO.getNuiId()); // userInfoVO가 가지고있는 네이버 고유번호를 naverUserInfoVO에 넣음
             naverUserInfoVO.setNaverImgPath(userInfoVO.getNaverImgPath());
             log.info("로그인요청한 naverUserInfoVO={}",naverUserInfoVO);
             if(uiService.naverLogin(naverUserInfoVO, session)) { // 네이버유저테이블에 그 id를 가지는 네이버유저가있다면
             	 m.addAttribute("url","/main"); 
-            	 m.addAttribute("msg", "로그인성공");
+            	 m.addAttribute("msg", "오늘도 즐거운 맛남하세요! 🥰");
             	 return "common/msg";
             }
             m.addAttribute("msg","네이버 가입 유저가 아닙니다.");
@@ -203,7 +197,6 @@ public class UserInfoController {
 		m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다.");
 		return "user/login";
 }
-	
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
@@ -218,7 +211,6 @@ public class UserInfoController {
 	
 	@PostMapping("/join-ok")
 	public String joinOk(@ModelAttribute UserInfoVO userInfoVO,HttpSession session, Model m) throws IllegalStateException, IOException {
-		log.info("조인ok=====>{}",userInfoVO);
 		if(uiService.join(userInfoVO)) {
 			m.addAttribute("msg","회원가입에 성공하셨습니다.");
 			return "user/login";
@@ -229,24 +221,20 @@ public class UserInfoController {
 	@PostMapping("/idChk")
 	@ResponseBody
 	public Map<String, Integer> idChk(@ModelAttribute UserInfoVO userInfoVO, @RequestBody Map<String, String> checkMap) {
+		userInfoVO.setUiId(checkMap.get("uiId")); // 입력한 아이디를 받아서
+		int result = uiService.idChk(userInfoVO); // 중복된게있는지 확인
 		Map<String, Integer> map = new HashMap<>();
-		userInfoVO.setUiId(checkMap.get("uiId"));
-		log.info("여기는 컨트롤러1===========>{}",userInfoVO.getUiId());
-		int result = uiService.idChk(userInfoVO);
-		log.info("여기는 컨트롤러2===========>{}",result);
-		map.put("result", result);
-		return map; 
+		map.put("result", result);// 중복된 수를 저장해서
+		return map; //맵으로 리턴
 	}
 	
 	@PostMapping("/nicknameChk")
 	@ResponseBody
 	public Map<String, Integer> nicknameChk(@ModelAttribute UserInfoVO userInfoVO, @RequestBody Map<String, String> checkMap) {
-		userInfoVO.setUiNickname(checkMap.get("uiNickname"));
-		log.info("여기는 컨트롤러1===========>{}",userInfoVO.getUiNickname());
-		int result = uiService.nicknameChk(userInfoVO);
-		log.info("여기는 컨트롤러2===========>{}",result);
-		Map<String, Integer> map = new HashMap<>();
-		map.put("result", result);
+		userInfoVO.setUiNickname(checkMap.get("uiNickname")); // 입력한 닉네임을 받아서
+		int result = uiService.nicknameChk(userInfoVO); // 중복된게있는지 확인
+		Map<String, Integer> map = new HashMap<>(); // 중복된 수를 저장해서
+		map.put("result", result); //맵으로 리턴
 		return map; 
 	}
 	
@@ -254,7 +242,6 @@ public class UserInfoController {
 	@GetMapping("/profile") // 프로필 화면 연결
 	public String profile(@ModelAttribute UserInfoVO userInfoVO, HttpSession session) {
 		userInfoVO = (UserInfoVO) session.getAttribute("user");
-		log.info("컨트롤러/프로필요청 ==>{}",userInfoVO);
 		return "user/user-profile";
 	}
 	
@@ -313,7 +300,7 @@ public class UserInfoController {
 	public String withdraw(@ModelAttribute UserInfoVO userInfoVO,HttpSession session,Model m) {// 사유씀 
 		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
 		if(sessionUserInfo.getBiNum()!=0) {
-			m.addAttribute("msg","현재 진행중인 밥상이 있습니다.");
+			m.addAttribute("msg","현재 진행중인 밥상이 있습니다."); // 참가되어있는 밥상이 있으면 알림창이 먼저뜸
 			m.addAttribute("url","/detail/"+sessionUserInfo.getBiNum()); 
 			return "common/msg";
 		}

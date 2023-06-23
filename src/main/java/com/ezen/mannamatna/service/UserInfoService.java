@@ -231,43 +231,35 @@ public class UserInfoService {
 		return uiMapper.insertUserInfo(userInfoVO) == 1; //일반유저 DB에 인서트
 	}
 
-	public boolean updateActive(UserInfoVO userInfoVO, HttpSession session) {
+	public boolean updateActive(UserInfoVO userInfoVO, HttpSession session) { // 고유번호와 일치하는 유저의 액티브만 변경 (비정상적 로그인시 사용)
 		return uiMapper.updateUserInfoActive(userInfoVO) == 1;
 	}
 
-	public boolean delete(UserInfoVO userInfoVO, HttpSession session) {
+	public boolean delete(UserInfoVO userInfoVO, HttpSession session) { // 고유번호와 일치하는 유저의 액티브와 탈퇴사유 변경
 		return uiMapper.deleteUserInfo(userInfoVO) == 1;
 	}
 
 	public boolean update(@ModelAttribute UserInfoVO userInfoVO, HttpSession session)
 			throws IllegalStateException, IOException {
-		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user");
-		log.info("userInfoVO====>{}", userInfoVO);
+		UserInfoVO sessionUserInfo = (UserInfoVO) session.getAttribute("user"); //세션에 있는 유저(변경되기 이전의 정보를 가지고있음)를 가져오고
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		userInfoVO.setUiPwd(passwordEncoder.encode(userInfoVO.getUiPwd()));
-		log.info("들어가기전 확인=>{}", userInfoVO.getUiFile());
-		if ("".equals(userInfoVO.getUiFilepath())) {
-			userInfoVO.setUiFilepath(sessionUserInfo.getUiFilepath());
-			log.info("안바꾼거면 여기=>{}", userInfoVO.getUiFilepath());
-			log.info("안바꾼거면 여기=>{}", sessionUserInfo.getUiFilepath());
-		} else if (userInfoVO.getUiFile() != null) {
+		userInfoVO.setUiPwd(passwordEncoder.encode(userInfoVO.getUiPwd())); // 이전페이지에서 바꾸려고 입력한 pwd를 시큐리티로 암호화해서 다시 지정함 (그냥 일반적인 숫자로 들어가면 로그인 할수없음, 로그인과정에서 암호화가 또 일어나기때문에 match flase됨)
+		if ("".equals(userInfoVO.getUiFilepath())) {//(1) 프로필 변경시 사진을 업로드하지않음, 원래 사진을 그대로 쓰는경우
+			userInfoVO.setUiFilepath(sessionUserInfo.getUiFilepath()); //변경되기 이전의 유저가 가지고있는 filepath를 그대로 지정해줌
+		} else if (userInfoVO.getUiFile() != null) {//(2) 이전에 사진과 다른 어떤 사진을 업로드 한 경우
 			String fileName = userInfoVO.getUiFile().getOriginalFilename();
-			log.info("fileName====>{}", fileName);
-			log.info("바꾼거면 여기=>{}", userInfoVO.getUiFilepath());
-			int idx = fileName.lastIndexOf(".");
+			int idx = fileName.lastIndexOf("."); //뒤에서 .의 위치를 찾음
 			String extName = "";
 			if (idx != -1) {
-				extName = fileName.substring(idx);
+				extName = fileName.substring(idx); //. 위치 뒷부분 자른것(파일확장자명)
 			}
-			String name = UUID.randomUUID().toString();
-			log.info("name====>{}", name);
-			File file = new File(uploadFilePath, name + extName);
-			userInfoVO.getUiFile().transferTo(file);
-			userInfoVO.setUiFilepath("/resources/upload/" + name + extName);
-			log.info("저장됨====>{}", userInfoVO);
+			String name = UUID.randomUUID().toString(); // 랜덤하게 번호 생성
+			File file = new File(uploadFilePath, name + extName); // uploadFilePath에 랜덤 번호 + . 위치 뒷부분 자른것(파일확장자명)으로 파일을 만들어서
+			userInfoVO.getUiFile().transferTo(file); //지정경로에 저장
+			userInfoVO.setUiFilepath("/resources/upload/" + name + extName); //경로도 저장
 		}
 		log.info("서비스/업데이트==>{}", userInfoVO);
-		return uiMapper.updateUserInfo(userInfoVO) == 1;
+		return uiMapper.updateUserInfo(userInfoVO) == 1; // 유저정보를 전체 업데이트함
 	}
 
 	public boolean updateBiNum(UserInfoVO userInfoVO) {
@@ -275,11 +267,11 @@ public class UserInfoService {
 		return uiMapper.updateUiBiNum(userInfoVO) == 1;
 	}
 
-	// 인증코드로 token요청하기
-	public KakaoToken requestToken(String addURI, String code) {
-		String strUrl = "https://kauth.kakao.com/oauth/token"; // request를 보낼 주소
+	public KakaoToken requestKakaoToken(String addURI, String code) { // 인증코드로 token요청하기
+		// addURI : Redirect URI에서 http://localhost 뒤에 붙는 부분을 달리해주기 위해 추가함
+		// code : https://kauth.kakao.com/oauth/authorize? ~ 에서 넘겨줌
+		String strUrl = "https://kauth.kakao.com/oauth/token"; // request를 보낼 주소(토큰발급용)
 		KakaoToken kakaoToken = new KakaoToken(); // response를 받을 객체
-
 		try {
 			URL url = new URL(strUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // url Http 연결 생성
@@ -291,9 +283,9 @@ public class UserInfoService {
 			// 파라미터 세팅
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
-			String redirectURI = "&redirect_uri=http://localhost" + addURI;
+			String redirectURI = "&redirect_uri=http://localhost" + addURI; 
 			sb.append("grant_type=authorization_code"); // grant_type를 authorization_code로 고정등록해야함
-			sb.append("&client_id=b288a9632f49edf850cff8d6eb985755");
+			sb.append("&client_id=b288a9632f49edf850cff8d6eb985755"); // 카카오 개발자에서 발급받은 클라이언트 아이디
 			sb.append(redirectURI);
 			sb.append("&code=" + code); // 인자로 받아온 인증코드
 			bw.write(sb.toString());
@@ -302,6 +294,7 @@ public class UserInfoService {
 			// 실제 요청을 보내는 부분, 결과 코드가 200이라면 성공
 			int responseCode = conn.getResponseCode();
 			log.info("responsecode(200이면성공): {}", responseCode);
+			//여기서 400이면 Redirect URI가 일치하지 않는경우임
 
 			// 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -336,11 +329,10 @@ public class UserInfoService {
 		return kakaoToken;
 	}
 
-	public UserInfoVO requestUser(String accessToken) { // 카카오 유저 정보
+	public UserInfoVO requestKakaoUser(String accessToken) { // 카카오 유저 정보 요청
 		log.info("requestUser 시작");
-		String strUrl = "https://kapi.kakao.com/v2/user/me"; // request를 보낼 주소
+		String strUrl = "https://kapi.kakao.com/v2/user/me"; // request를 보낼 주소(유저요청용)
 		UserInfoVO userInfoVO = new UserInfoVO(); // response를 받을 객체
-		KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO(); // response를 받을 카카오 유저 객체
 		try {
 			URL url = new URL(strUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // url Http 연결 생성
@@ -378,25 +370,20 @@ public class UserInfoService {
 			// 결과json 안에 properties key는 json Object를 value로 가짐
 			HashMap<String, Object> properties = (HashMap<String, Object>) resultMap.get("properties");
 			String profile_image = (String) properties.get("profile_image");
-			userInfoVO.setKakaoImgPath(profile_image);
+			userInfoVO.setKakaoImgPath(profile_image); //저장하지않고 바로 경로를 담아줌
 			String nickname = (String) properties.get("nickname");
 
 			// 결과json 안에 kakao_account key는 json Object를 value로 가짐
 			HashMap<String, Object> kakao_account = (HashMap<String, Object>) resultMap.get("kakao_account");
 
-			String age_range = (String) kakao_account.get("age_range");
-			String gender = (String) kakao_account.get("gender");
-
-			// 카카오 유저인포에 인서트하는 내용이 들어가야함!
-			/*
-			 * kakaoUserInfoVO.setKuiId(id); uiMapper.insertKakaoUserInfo(kakaoUserInfoVO);
-			 */
+			String age_range = (String) kakao_account.get("age_range"); // 10~19 형태로 줌
+			String gender = (String) kakao_account.get("gender"); // T or F
 
 			// 유저정보 세팅
-			userInfoVO.setKuiId(id);
+			userInfoVO.setKuiId(id); // 카카오 고유번호 
 			userInfoVO.setUiNickname(nickname);// 닉네임
 
-			int uiAge = 0;
+			int uiAge = 0;  // 연령대에 맞춰서 나눠서 저장
 			if (age_range.startsWith("0") || age_range.startsWith("1")) {
 				uiAge = 10;
 			} else if (age_range.startsWith("2")) {
@@ -410,11 +397,13 @@ public class UserInfoService {
 			}
 
 			userInfoVO.setUiAge(uiAge); // 연령대
+			
 			boolean uiGender = true;
 			if (gender.equals("female")) {
 				uiGender = false;
 			}
 			userInfoVO.setUiGender(uiGender);// 성별
+			
 //			원래는 사진을 저장하는 방법을 썼으나 바로 불러오는 방법으로 수정함	
 //			URL imageUrl = null;
 //			InputStream inputStream = null;
@@ -425,7 +414,6 @@ public class UserInfoService {
 //				inputStream = imageUrl.openStream();
 //				name = UUID.randomUUID().toString();
 //				outputStream = new FileOutputStream(uploadFilePath + "\\" + name + ".jpg");
-//
 //				while (true) {
 //					int data = inputStream.read();
 //					if (data == -1) {
@@ -433,10 +421,8 @@ public class UserInfoService {
 //					}
 //					outputStream.write(data); // 이미지 데이터값을 컴퓨터 또는 서버공간에 저장
 //				}
-//
 //				inputStream.close();
 //				outputStream.close();
-//
 //			} catch (Exception e) {
 //				// 예외처리
 //				e.printStackTrace();
@@ -448,7 +434,6 @@ public class UserInfoService {
 //					outputStream.close();
 //				}
 //			}
-//
 //			userInfoVO.setUiFilepath(uploadFilePath + "\\" + name + ".jpg");// 사진
 
 			log.info("resultMap= {}", resultMap);
@@ -462,11 +447,9 @@ public class UserInfoService {
 		return userInfoVO;
 	}
 
-	public long requestUserForKuiId(String accessToken) { // 카카오 유저 정보
+	public long requestUserForKuiId(String accessToken) { // 카카오 유저 정보 요청인데 카카오 고유번호만 필요한 경우 ( 일반회원 + 카카오 연동시 사용)
 		log.info("카카오 requestUser 시작");
 		String strUrl = "https://kapi.kakao.com/v2/user/me"; // request를 보낼 주소
-		UserInfoVO userInfoVO = new UserInfoVO(); // response를 받을 객체
-		KakaoUserInfoVO kakaoUserInfoVO = new KakaoUserInfoVO(); // response를 받을 카카오 유저 객체
 		try {
 			URL url = new URL(strUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // url Http 연결 생성
@@ -506,7 +489,9 @@ public class UserInfoService {
 		return 0;
 	}
 	
-	public NaverToken requestNaverToken(String addURI, String code, String state) throws UnsupportedEncodingException {
+	public NaverToken requestNaverToken(String addURI, String code, String state) throws UnsupportedEncodingException { // 인증코드로 token요청하기
+		// addURI : Redirect URI에서 http://localhost 뒤에 붙는 부분을 달리해주기 위해 추가함
+		// state :  세션 유지 및 위조 방지용 상태 토큰, 정상적인 요청인지 비정상적인 요청인지 확인가능
 		NaverToken naverToken = new NaverToken();
 		String clientId = "BSeMnF9B1CusMX9DeEg8";// 애플리케이션 클라이언트 아이디값
 		String clientSecret = "fpEWA5y2fc";// 애플리케이션 클라이언트 시크릿값
@@ -554,11 +539,10 @@ public class UserInfoService {
 		return naverToken;
 	}
 		
-	public UserInfoVO requestNaverUser(String access_token) {
+	public UserInfoVO requestNaverUser(String access_token) { // 네이버 유저 정보 요청
 		log.info("네이버 requestUser 시작");
 		String strUrl = "https://openapi.naver.com/v1/nid/me"; // request를 보낼 주소
 		UserInfoVO userInfoVO = new UserInfoVO(); // response를 받을 객체
-		NaverUserInfoVO naverUserInfoVO = new NaverUserInfoVO(); // response를 받을 카카오 유저 객체
 		try {
 			URL url = new URL(strUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // url Http 연결 생성
@@ -596,13 +580,14 @@ public class UserInfoService {
 			String id = (String) response.get("id");
 			String nickname = (String) response.get("nickname"); // 유니코드 형태
 			String profile_image = (String) response.get("profile_image"); // http 주소
-			userInfoVO.setNaverImgPath(profile_image);
+			userInfoVO.setNaverImgPath(profile_image);  //저장하지않고 바로 경로를 담아줌
 			String age = (String) response.get("age"); // 나이 범위
 			String gender = (String) response.get("gender"); // M or F
 
 			// 유저정보 세팅
-			userInfoVO.setNuiId(id); // 고유 ID
-
+			userInfoVO.setNuiId(id); // 네이버 고유번호 
+			
+			
 			StringBuffer resultNickname = new StringBuffer(); // 유니코드인 닉네임 변환 과정
 
 			for (int i = 0; i < nickname.length(); i++) {
@@ -617,7 +602,7 @@ public class UserInfoService {
 
 			userInfoVO.setUiNickname(resultNickname.toString());// 닉네임
 
-			int uiAge = 0;
+			int uiAge = 0;  // 연령대에 맞춰서 나눠서 저장
 			if (age.startsWith("0") || age.startsWith("1")) {
 				uiAge = 10;
 			} else if (age.startsWith("2")) {
@@ -684,11 +669,9 @@ public class UserInfoService {
 		return userInfoVO;
 	}
 
-	public String requestNaverUserForNuiId(String access_token) {
+	public String requestNaverUserForNuiId(String access_token) { // 네이버 유저 정보 요청인데 네이버 고유번호만 필요한 경우 ( 일반회원 + 네이버 연동시 사용)
 		log.info("네이버 requestUser 시작");
 		String strUrl = "https://openapi.naver.com/v1/nid/me"; // request를 보낼 주소
-		UserInfoVO userInfoVO = new UserInfoVO(); // response를 받을 객체
-		NaverUserInfoVO naverUserInfoVO = new NaverUserInfoVO(); // response를 받을 카카오 유저 객체
 		try {
 			URL url = new URL(strUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // url Http 연결 생성
