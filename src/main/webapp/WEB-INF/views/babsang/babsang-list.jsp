@@ -25,15 +25,15 @@
 	
 	<!-- 카테고리 검색 기능 -->
 	<form action="/main" method="get" id="categoryBabsang">
-		<button class="Category" name="Category" value="">전체</button>
-		<button class="Category" name="Category" value="한식">한식</button>
-		<button class="Category" name="Category" value="중식">중식</button>
-		<button class="Category" name="Category" value="일식">일식</button>
-		<button class="Category" name="Category" value="양식">양식</button>
-		<button class="Category" name="Category" value="분식">분식</button>
-		<button class="Category" name="Category" value="패스트푸드">패스트푸드</button>
-		<button class="Category" name="Category" value="해산물">해산물</button>
-		<button class="Category" name="Category" value="족발">족발</button>
+		<button class="Category" name="biFdCategory" value="">전체</button>
+		<button class="Category" name="biFdCategory" value="한식">한식</button>
+		<button class="Category" name="biFdCategory" value="중식">중식</button>
+		<button class="Category" name="biFdCategory" value="일식">일식</button>
+		<button class="Category" name="biFdCategory" value="양식">양식</button>
+		<button class="Category" name="biFdCategory" value="분식">분식</button>
+		<button class="Category" name="biFdCategory" value="패스트푸드">패스트푸드</button>
+		<button class="Category" name="biFdCategory" value="해산물">해산물</button>
+		<button class="Category" name="biFdCategory" value="족발">족발</button>
 	</form>
 	
 	<!-- 밥상 목록 -->
@@ -82,6 +82,7 @@
 			</h3>
 			
 			<div id="biFdCatecory" style="background-image: url('../../../resources/upload/babsang/tag2.jpg');">
+				<textarea id="text" ></textarea>
 				<div id="text"> 
 					${babsangListVO.biFdCategory}
 				</div>
