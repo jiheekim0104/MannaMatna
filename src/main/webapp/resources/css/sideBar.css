@@ -33,7 +33,7 @@ body{
 	grid-template-areas:
 		'a b c d'
 		'a b e d'
-		'a f f d';
+		'a b f d';
 }
 
 header{
@@ -51,7 +51,6 @@ nav{
   left: 0;
   border-right: 5px solid #FC522F;
   overflow-x: hidden; /* x축 스크롤 숨김 */
-  padding-top: 20px;
 }
 
 .logo{
