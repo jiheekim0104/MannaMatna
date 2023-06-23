@@ -30,26 +30,20 @@
 		}).responseText; //제이슨파일을 text파일로 읽어들인다는 뜻
 		console.log(pieChartJson);
 
-		var columnChartJson = $.ajax({ //비동기적 방식으로 호출
+		var columnChartJson = $.ajax({
 			url : '/getColumnChart',
 			type : 'get',
-			// 컨트롤러로 이동해 맵핑해서 제이슨을 동적으로 직접만들어 그 만든 json을 직접 보낸다.
-			// 확장자가 json이면 url 맵핑을 꼭 해주어야 한다. 안해주면 자바파일인줄 알고 404에러가 발생한다.
-			// 그렇기 때문에 servlet-context파일에서 리소스를 맵핑해준다.
 			dataType : 'json',
 			async : false
-		}).responseText; //제이슨파일을 text파일로 읽어들인다는 뜻
+		}).responseText;
 		console.log(columnChartJson);
 
-		var lineChartJson = $.ajax({ //비동기적 방식으로 호출
+		var lineChartJson = $.ajax({
 			url : '/getLineChart',
 			type : 'get',
-			// 컨트롤러로 이동해 맵핑해서 제이슨을 동적으로 직접만들어 그 만든 json을 직접 보낸다.
-			// 확장자가 json이면 url 맵핑을 꼭 해주어야 한다. 안해주면 자바파일인줄 알고 404에러가 발생한다.
-			// 그렇기 때문에 servlet-context파일에서 리소스를 맵핑해준다.
 			dataType : 'json',
 			async : false
-		}).responseText; //제이슨파일을 text파일로 읽어들인다는 뜻
+		}).responseText;
 		console.log(lineChartJson);
 
 		//데이터테이블 생성
@@ -66,19 +60,19 @@
 				.getElementById('credatChart'));
 
 		var pieChartOptions = {
-			title : '만나맛나 회원 성별 비율',
-			height : 200,
-			fontSize: 15,
-			fontName : 'omyu_pretty',
+			title : '만나맛나 회원 성별 비율', // 차트제목설정
+			height : 200, // 차트 높이만 설정
+			fontSize: 15, // 글자크기
+			fontName : 'omyu_pretty', // 폰트이름
 			titleTextStyle: {
-				fontSize: 18,
+				fontSize: 18, // 차트제목 폰트크기
 			},
 			slices: {
 				0 : {
-					color : '#0d9ca4',
+					color : '#0d9ca4', // 데이터1의 색상 설정
 				},
 				1 : {
-					color : '#FC522F',
+					color : '#FC522F', // 데이터2의 색상 설정
 				},
 			}
 		};
@@ -89,15 +83,15 @@
 			fontName : 'omyu_pretty',
 			colors: ['#FC522F'],
 			legend:{
-				position: 'none',
+				position: 'none', // 범례는 없앤다.
 			},
 			titleTextStyle: {
 				fontSize: 18,
 			},
 			animation : {
-				startup : true,
-				duration : 1500,
-				easing : 'in'
+				startup : true, // 초기로딩시부터 애니메이션적용
+				duration : 1500, // 1.5초동안
+				easing : 'in' // 처음은 느리고 점점빠르게 적용
 			}
 		};
 		var lineChartOptions = {
@@ -118,7 +112,7 @@
 				easing : 'in'
 			}
 		};
-		pieChart.draw(pieChartData, pieChartOptions);
+		pieChart.draw(pieChartData, pieChartOptions); // 차트그리기
 		columnChart.draw(columnChartData, columnChartOptions);
 		lineChart.draw(lineChartData, lineChartOptions);
 	}
@@ -186,7 +180,7 @@ color: #FC522F;
 		<div class="chart" id="credatChart"></div>
 		<!-- 차트가 그려지는 영역 -->
 		<!-- 차트 새로고침 버튼 -->
-		<button id="btn" type="button" onclick="drawChart()">refresh</button>
+		<button id="btn" type="button" onclick="drawChart()">다시보기</button>
 	</div>
 </body>
 

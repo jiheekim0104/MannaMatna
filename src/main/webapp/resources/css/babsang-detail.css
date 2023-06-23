@@ -79,6 +79,12 @@
 	background-color: #FFFFFF;
 	color: #FC522F;
 	cursor: pointer;
+	/* 사이드바에 있는 애니메이션 shake 적용 */
+	 transform-origin: 50% 0%;
+      animation-name: shake;
+      animation-duration: 1s;
+      animation-iteration-count: infinite; /* 반복회수 무한 */
+      animation-delay: 0.1s;
 }
 
 .content .userImages {
@@ -105,9 +111,13 @@
 	float: left;
 	cursor: pointer;
 	margin-left: 60px;
+	/* 트랜지션 = 변화에 대한 속성 */
+	/* 너비와 높이 모두 트랜지션(점진적변화) 적용한다. */
+	/* 0.3초 동안 빠르게 천천히 */
 	transition:all 0.3s ease;
 }
 @keyframes swing {
+	/* 위아래 스윙 효과 */
     15% {
         -webkit-transform: translateY(5px);
         transform: translateY(5px);
@@ -138,7 +148,7 @@
 }
 .content .userImages .outterBox:hover
 {
-    animation: swing 1s ease;
+    animation: swing 1s ease; /* ease = 천천 빠름 천천 */
     animation-iteration-count: 1;
 }
 
@@ -270,7 +280,7 @@
 }
 
 @keyframes vibration {
-	/* 0.5도씩 흔들리는 효과 정의 */ 
+	/* 0.5도씩 좌우로 흔들리는 효과 정의 */ 
 	from { 
 	transform:rotate(0.5deg);
 	}
