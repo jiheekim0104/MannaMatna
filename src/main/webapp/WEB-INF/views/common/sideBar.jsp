@@ -24,7 +24,7 @@
 
 	<nav>
 		<div class="sidenav">
-			<img src="../../../resources/upload/logo.png"
+			<img src="../../../resources/upload/logo(shake).gif"
 				class="logo" onclick="location.href='/main'" style="cursor: pointer;">
 				
 			<!-- 비로그인 시 출력 화면-->

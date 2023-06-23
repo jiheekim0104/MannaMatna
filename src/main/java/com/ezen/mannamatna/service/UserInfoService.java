@@ -59,7 +59,7 @@ public class UserInfoService {
 		if (uiMapper.selectUserInfoById(userInfoVO) != null) { // 입력한 id와 일치하는 유저가 DB에 있다면
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); 
 			String inputPwd = userInfoVO.getUiPwd(); // 입력한 pwd
-			if (userInfoVO.getUiId() == null) { //??????????이거 뭐더라 ㅇㅅㅇ;
+			if (userInfoVO.getUiId() == null) { //일반적인 로그인에서 쓰는건 아니고, sns 연동 계정이 본인 확인할때 사용함
 				userInfoVO = uiMapper.selectUserInfoByNum(userInfoVO); //고유번호로 유저를 찾음
 			} else {
 				userInfoVO = uiMapper.selectUserInfoById(userInfoVO); //ID로 유저를 찾음
