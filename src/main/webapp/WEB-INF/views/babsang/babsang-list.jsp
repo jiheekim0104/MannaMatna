@@ -18,22 +18,22 @@
 <div class="content">
 	
 	<!-- 제목 검색 기능 -->
-	<form action="/main" method="get" id="searchBabsang">
+	<form action="/main" method="get" id="searchTitle">
 		<input type="text" class="inputBiTitle" name="biTitle" placeholder="검색하실 밥상의 제목을 입력해주세요" value="${param.biTitle}">
-		<button class="buttonBiTitle">검색</button>
+		<button class="btnBiTitle">검색</button>
 	</form>
 	
 	<!-- 카테고리 검색 기능 -->
-	<form action="/main" method="get" id="categoryBabsang">
-		<button class="Category" name="biFdCategory" value="">전체</button>
-		<button class="Category" name="biFdCategory" value="한식">한식</button>
-		<button class="Category" name="biFdCategory" value="중식">중식</button>
-		<button class="Category" name="biFdCategory" value="일식">일식</button>
-		<button class="Category" name="biFdCategory" value="양식">양식</button>
-		<button class="Category" name="biFdCategory" value="분식">분식</button>
-		<button class="Category" name="biFdCategory" value="패스트푸드">패스트푸드</button>
-		<button class="Category" name="biFdCategory" value="해산물">해산물</button>
-		<button class="Category" name="biFdCategory" value="족발">족발</button>
+	<form action="/main" method="get" id="searchCategory">
+		<button class="btnCategory" name="biFdCategory" value="">전체</button>
+		<button class="btnCategory" name="biFdCategory" value="한식">한식</button>
+		<button class="btnCategory" name="biFdCategory" value="중식">중식</button>
+		<button class="btnCategory" name="biFdCategory" value="일식">일식</button>
+		<button class="btnCategory" name="biFdCategory" value="양식">양식</button>
+		<button class="btnCategory" name="biFdCategory" value="분식">분식</button>
+		<button class="btnCategory" name="biFdCategory" value="패스트푸드">패스트푸드</button>
+		<button class="btnCategory" name="biFdCategory" value="해산물">해산물</button>
+		<button class="btnCategory" name="biFdCategory" value="족발">족발</button>
 	</form>
 	
 	<!-- 밥상 목록 -->
@@ -81,11 +81,11 @@
 				제목 : ${babsangListVO.biTitle}
 			</h3>
 			
-			<div id="biFdCatecory" style="background-image: url('../../../resources/upload/babsang/tag2.jpg');">
-				<textarea id="text" ></textarea>
-				<div id="text"> 
+			<div id="biFdCatecory" ><!-- style="background-image: url('../../../resources/upload/babsang/tag2.jpg');" -->
+			<button id="text">${babsangListVO.biFdCategory}</button>
+				<%-- <div id="text"> 
 					${babsangListVO.biFdCategory}
-				</div>
+				</div> --%>
 			</div>
 			
 			<div id="biHeadCnt">최대 인원 수 : ${babsangListVO.biHeadCnt}</div>

@@ -25,10 +25,10 @@ body{
 	align-content: space-evenly;
 }
 
-#searchBabsang{
+#searchTitle{
 	grid-area:s;
 }
-#categoryBabsang{
+#searchCategory{
 	grid-area:c;
 }
 #pageDiv{
@@ -55,7 +55,7 @@ input::placeholder{
 	color: #b7b7b7;
 }
 
-.buttonBiTitle {
+.btnBiTitle {
 	font-family: 'omyu_pretty';
   	background-color: white;
   	border: 2px solid #FC522F;
@@ -70,7 +70,7 @@ input::placeholder{
 }
 
 
-.Category {
+.btnCategory {
 	font-family: 'omyu_pretty';
   	background-color: white;
   	border: 2px solid #999999;
@@ -85,7 +85,7 @@ input::placeholder{
   	
   }
 
-.biFdCategory:hover, .buttonBiTitle:hover{
+.btnCategory:hover, .btnBiTitle:hover{
   	background-color: #FC522F;
   	color: #FFFFFF;
   	border: 2px solid #FC522F;
@@ -123,15 +123,25 @@ h3, .babsang>div{
 h3{
 	text-align: center;
 }
-#biFdCatecory{
-	/* padding-top: 0px; */
+/* #biFdCatecory{
+	padding-top: 0px;
 	background-repeat: no-repeat;
 	background-position: right;
-}
+} */
 #text{
+	border:none; /* 테두리 제거 */
+	font-family: 'omyu_pretty'; /* 폰트 설정 */
+	font-size:18px;
+	background-image: url("../upload/babsang/tag2.jpg");
+	background-repeat: no-repeat;
+	background-position: right;
+	background-size: cover;
 	text-align: right;
-	margin-right: 7px;
-	margin-bottom: 7px;
+	/* margin-right: 7px;
+	margin-bottom: 7px; */
+	resize: none; /* 사이즈 조절 불가 */
+	width: auto;
+	height: 22px;
 }
 @keyframes shakeForBabsang{
 	 /* 흔들리는 애니메이션 추가 밥상은 수치를 좀 다르게 주겠다.*/
