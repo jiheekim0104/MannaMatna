@@ -12,12 +12,14 @@
 	</select>
 	<select id="selectCommentInfos" parameterType="int"
 		resultType="com.ezen.mannamatna.vo.CommentInfoVO">
+		<!-- 시간을 SELECT할 시 SQL 함수를 이용하여 적용하였다. -->
 		SELECT u.UI_FILEPATH, u.UI_NICKNAME, c.CI_NUM, c.CI_CONTENT, date_format(c.CI_CREDAT, '%Y. %m. %d') CI_CREDAT, 
 		date_format(c.CI_CRETIM, '%H시 %i분') CI_CRETIM, c.BI_NUM, c.UI_NUM FROM COMMENT_INFO c 
 		JOIN USER_INFO u ON c.UI_NUM = u.UI_NUM WHERE c.BI_NUM = #{biNum}
 	</select>
 	<insert id="insertCommentInfo"
 		parameterType="com.ezen.mannamatna.vo.CommentInfoVO">
+		<!-- DEFAULT는 MySql에서 적용된 DEFAULT로 바로 INSERT된다. -->
 		INSERT INTO COMMENT_INFO (CI_CONTENT, CI_CREDAT,
 		CI_CRETIM, UI_NUM, BI_NUM) VALUES
 		(#{ciContent}, DEFAULT,

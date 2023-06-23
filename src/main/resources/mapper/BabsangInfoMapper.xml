@@ -58,6 +58,7 @@
 		WHERE BI_NUM = #{biNum}
 	</delete>
 	<update id="updateBiClosed">
+	<!-- 마감하기를 누르면 해당밥상의 BI_NUM으로 BI_CLOSED 를 업데이트한다.  -->
 	UPDATE BABSANG_INFO SET BI_CLOSED = #{biClosed} WHERE BI_NUM = #{biNum}
 	</update>
 	<update id="updateBiUserCnt">

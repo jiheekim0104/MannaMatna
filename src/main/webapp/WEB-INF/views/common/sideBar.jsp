@@ -24,8 +24,8 @@
 
 	<nav>
 		<div class="sidenav">
-			<a href="/main"><img src="../../../resources/upload/logo.png"
-				class="logo"></a>
+			<img src="../../../resources/upload/logo.png"
+				class="logo" onclick="location.href='/main'" style="cursor: pointer;">
 				
 			<!-- 비로그인 시 출력 화면-->
 			<c:if test="${sessionScope.user.uiNickname == null}">

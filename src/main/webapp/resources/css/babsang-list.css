@@ -139,16 +139,16 @@ h3{
         transform: rotate(0deg);
       }
       10%{
-        transform: rotate(2deg);
-      }
-      20%{
-        transform: rotate(-2deg);
-      }
-      30%{
         transform: rotate(1deg);
       }
-      40%{
+      20%{
         transform: rotate(-1deg);
+      }
+      30%{
+        transform: rotate(0.5deg);
+      }
+      40%{
+        transform: rotate(-0.5deg);
       }
       50%{
         transform: rotate(0deg);

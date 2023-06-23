@@ -50,14 +50,14 @@ public class BabsangInfoService {
 	public boolean blockJoin(int biNum) {
 		// 마감하기 서비스
 		BabsangInfoVO babsangInfoVO = babsangInfoMapper.selectBabsangInfo(biNum);
-		babsangInfoVO.setBiClosed(true);
+		babsangInfoVO.setBiClosed(true); // VO에 값을 해당 서비스에서 SET 후 MAPPER에 보낸다.
 		return babsangInfoMapper.updateBiClosed(babsangInfoVO) == 1;
 	}
 
 	public boolean cancleBlockJoin(int biNum) {
 		// 마감취소 서비스
 		BabsangInfoVO babsangInfoVO = babsangInfoMapper.selectBabsangInfo(biNum);
-		babsangInfoVO.setBiClosed(false);
+		babsangInfoVO.setBiClosed(false); // VO에 값을 해당 서비스에서 SET 후 MAPPER에 보낸다.
 		return babsangInfoMapper.updateBiClosed(babsangInfoVO) == 1;
 	}
 
