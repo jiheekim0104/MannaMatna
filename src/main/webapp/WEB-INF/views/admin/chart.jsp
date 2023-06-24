@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/sideBar.jsp"%>
 <%@ include file="/WEB-INF/views/common/common.jsp"%>
+<%@ include file="/WEB-INF/views/common/admin.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>

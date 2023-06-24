@@ -12,13 +12,4 @@ if (user == null) {
 <%
 return;
 }
-else if(!user.getUiId().equals("administer")){	
-%>
-<script>
-	alert('관리자 권한이 필요한 서비스입니다. 🍔');
-	location.href = '/login';
-</script>
-<%
-return;
-}
 %>
