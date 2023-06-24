@@ -42,50 +42,72 @@
 			<div>밥상이 존재하지 않습니다</div>
 		</c:if>
 		<c:forEach items="${page.list}" var="babsangListVO">
-		<div class="babsang"
+			<div class="babsang"
 			onclick=
-			<c:if test="${sessionScope.user.uiNum != null}">
-			"location.href='/detail/${babsangListVO.biNum}'"
-			</c:if>
-			<c:if test="${sessionScope.user.uiNum == null}">
-			"location.href='/cannotSeeBabsang'"
-			</c:if>
-			
-			style=
-			<c:if test="${babsangListVO.biFdCategory == '한식'}">
-			"background-image: url('../../../resources/upload/babsang/foodImg/bibimbap.jpg');"
-			</c:if>
-			<c:if test="${babsangListVO.biFdCategory == '중식'}">
-			"background-image: url('../../../resources/upload/babsang/foodImg/blacknoodle.jpg');"
-			</c:if>
-			<c:if test="${babsangListVO.biFdCategory == '일식'}">
-			"background-image: url('../../../resources/upload/babsang/foodImg/sakedong.jpg');"
-			</c:if>
-			<c:if test="${babsangListVO.biFdCategory == '양식'}">
-			"background-image: url('../../../resources/upload/babsang/foodImg/steak.jpg');"
-			</c:if>
-			<c:if test="${babsangListVO.biFdCategory == '분식'}">
-			"background-image: url('../../../resources/upload/babsang/foodImg/ramen.jpg');"
-			</c:if>
-			<c:if test="${babsangListVO.biFdCategory == '패스트푸드'}">
-			"background-image: url('../../../resources/upload/babsang/foodImg/hambuger.jpg');"
-			</c:if>
-			<c:if test="${babsangListVO.biFdCategory == '해산물'}">
-			"background-image: url('../../../resources/upload/babsang/foodImg/seafood.jpg');"
-			</c:if>
-			<c:if test="${babsangListVO.biFdCategory == '족발'}">
-			"background-image: url('../../../resources/upload/babsang/foodImg/pigfoot.png');"
-			</c:if>
+				<c:if test="${sessionScope.user.uiNum != null}">
+				"location.href='/detail/${babsangListVO.biNum}'"
+				</c:if>
+				<c:if test="${sessionScope.user.uiNum == null}">
+				"location.href='/cannotSeeBabsang'"
+				</c:if>
+				style=
+				<c:if test="${babsangListVO.biFdCategory == '한식'}">
+				"background-image: url('../../../resources/upload/babsang/foodImg/bibimbap.jpg');"
+				</c:if>
+				<c:if test="${babsangListVO.biFdCategory == '중식'}">
+				"background-image: url('../../../resources/upload/babsang/foodImg/blacknoodle.jpg');"
+				</c:if>
+				<c:if test="${babsangListVO.biFdCategory == '일식'}">
+				"background-image: url('../../../resources/upload/babsang/foodImg/sakedong.jpg');"
+				</c:if>
+				<c:if test="${babsangListVO.biFdCategory == '양식'}">
+				"background-image: url('../../../resources/upload/babsang/foodImg/steak.jpg');"
+				</c:if>
+				<c:if test="${babsangListVO.biFdCategory == '분식'}">
+				"background-image: url('../../../resources/upload/babsang/foodImg/ramen.jpg');"
+				</c:if>
+				<c:if test="${babsangListVO.biFdCategory == '패스트푸드'}">
+				"background-image: url('../../../resources/upload/babsang/foodImg/hambuger.jpg');"
+				</c:if>
+				<c:if test="${babsangListVO.biFdCategory == '해산물'}">
+				"background-image: url('../../../resources/upload/babsang/foodImg/seafood.jpg');"
+				</c:if>
+				<c:if test="${babsangListVO.biFdCategory == '족발'}">
+				"background-image: url('../../../resources/upload/babsang/foodImg/pigfoot.png');"
+				</c:if>
 			>
+			
 			<h3 id="biTitle">
 				제목 : ${babsangListVO.biTitle}
 			</h3>
 			
-			<div id="biFdCatecory" ><!-- style="background-image: url('../../../resources/upload/babsang/tag2.jpg');" -->
-			<button id="text">${babsangListVO.biFdCategory}</button>
-				<%-- <div id="text"> 
-					${babsangListVO.biFdCategory}
-				</div> --%>
+			<div id="biFdCatecory">
+				<img src=
+					<c:if test="${babsangListVO.biFdCategory == '한식'}">
+					"../../../resources/upload/babsang/tag/korfoodtag.jpg"
+					</c:if>
+					<c:if test="${babsangListVO.biFdCategory == '중식'}">
+					"../../../resources/upload/babsang/tag/chifoodtag.jpg"
+					</c:if>
+					<c:if test="${babsangListVO.biFdCategory == '일식'}">
+					"../../../resources/upload/babsang/tag/japfoodtag.jpg"
+					</c:if>
+					<c:if test="${babsangListVO.biFdCategory == '양식'}">
+					"../../../resources/upload/babsang/tag/amefoodtag.jpg"
+					</c:if>
+					<c:if test="${babsangListVO.biFdCategory == '분식'}">
+					"../../../resources/upload/babsang/tag/snackfoodtag.jpg"
+					</c:if>
+					<c:if test="${babsangListVO.biFdCategory == '패스트푸드'}">
+					"../../../resources/upload/babsang/tag/fastfoodtag.jpg"
+					</c:if>
+					<c:if test="${babsangListVO.biFdCategory == '해산물'}">
+					"../../../resources/upload/babsang/tag/seafoodtag.jpg"
+					</c:if>
+					<c:if test="${babsangListVO.biFdCategory == '족발'}">
+					"../../../resources/upload/babsang/tag/pigfoottag.jpg"
+					</c:if>
+				>
 			</div>
 			
 			<div id="biHeadCnt">최대 인원 수 : ${babsangListVO.biHeadCnt}</div>
@@ -97,7 +119,7 @@
 			<%-- <c:if test="${sessionScope.user.uiNum == babsangListVO.uiNum}">
 						<button	onclick="location.href='/deleteBabsang?biNum=${babsangListVO.biNum}'">밥상 삭제</button>
 				</c:if> --%>
-		</div>
+			</div>
 		</c:forEach>
 	
 	<!-- 페이징 -->

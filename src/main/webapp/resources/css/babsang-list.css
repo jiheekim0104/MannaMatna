@@ -109,6 +109,7 @@ input::placeholder{
 	font-size: 19px;
 	background-repeat: no-repeat;
 	background-position: left bottom;
+	background-size: 25%;
 }
 
 h3, .babsang>div{
@@ -123,25 +124,8 @@ h3, .babsang>div{
 h3{
 	text-align: center;
 }
-/* #biFdCatecory{
-	padding-top: 0px;
-	background-repeat: no-repeat;
-	background-position: right;
-} */
-#text{
-	border:none; /* 테두리 제거 */
-	font-family: 'omyu_pretty'; /* 폰트 설정 */
-	font-size:18px;
-	background-image: url("../upload/babsang/tag2.jpg");
-	background-repeat: no-repeat;
-	background-position: right;
-	background-size: cover;
-	text-align: right;
-	/* margin-right: 7px;
-	margin-bottom: 7px; */
-	resize: none; /* 사이즈 조절 불가 */
-	width: auto;
-	height: 22px;
+#biFdCatecory>img{
+	height: 24px;
 }
 @keyframes shakeForBabsang{
 	 /* 흔들리는 애니메이션 추가 밥상은 수치를 좀 다르게 주겠다.*/
