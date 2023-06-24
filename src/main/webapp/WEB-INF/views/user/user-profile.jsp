@@ -19,7 +19,6 @@ alert('${msg}');
 </c:if>
 </script>
 <body>
-${user}
 <div class="content">
 	<div class="img">
 		<c:if test="${user.uiFilepath != null}">	

@@ -250,12 +250,17 @@ public class UserInfoService {
 		userInfoVO.setUiPwd(passwordEncoder.encode(userInfoVO.getUiPwd())); // 이전페이지에서 바꾸려고 입력한 pwd를 시큐리티로 암호화해서 다시 지정함 (그냥 일반적인 숫자로 들어가면 로그인 할수없음, 로그인과정에서 암호화가 또 일어나기때문에 match flase됨)
 		if ("".equals(userInfoVO.getUiFilepath())) {//(1) 프로필 변경시 사진을 업로드하지않음, 원래 사진을 그대로 쓰는경우
 			if(sessionUserInfo.getUiId()==null) { //sns 만 연동된 계정이 업데이트를 한경우
-				if(sessionUserInfo.getKuiId()!=0){
-					userInfoVO.setUiFilepath(sessionUserInfo.getKakaoImgPath());
-				} else if(sessionUserInfo.getNuiId()!=null) {
-					userInfoVO.setUiFilepath(sessionUserInfo.getNaverImgPath());
+				if(sessionUserInfo.getUiFilepath()==null) { //원래도 사진이 없었으면 
+					if(sessionUserInfo.getKuiId()!=0){
+						userInfoVO.setUiFilepath(sessionUserInfo.getKakaoImgPath());
+					} else if(sessionUserInfo.getNuiId()!=null) {
+						userInfoVO.setUiFilepath(sessionUserInfo.getNaverImgPath());
+					}
+				} else {
+					userInfoVO.setUiFilepath(sessionUserInfo.getUiFilepath());
 				}
-			} else if(sessionUserInfo.getUiId()==null&&(sessionUserInfo.getKuiId()!=0||sessionUserInfo.getNuiId()!=null)){//일반+ 연동계정이 업데이트를 한경우
+				
+			} else if(sessionUserInfo.getUiId()!=null&&(sessionUserInfo.getKuiId()!=0||sessionUserInfo.getNuiId()!=null)){//일반+ 연동계정이 업데이트를 한경우
 					userInfoVO.setUiFilepath(sessionUserInfo.getUiFilepath());
 			} else userInfoVO.setUiFilepath(sessionUserInfo.getUiFilepath()); //변경되기 이전의 유저가 가지고있는 filepath를 그대로 지정해줌
 			log.info("바꿧음! ={}",sessionUserInfo.getUiFilepath());
@@ -271,6 +276,11 @@ public class UserInfoService {
 			File file = new File(uploadFilePath, name + extName); // uploadFilePath에 랜덤 번호 + . 위치 뒷부분 자른것(파일확장자명)으로 파일을 만들어서
 			userInfoVO.getUiFile().transferTo(file); //지정경로에 저장
 			userInfoVO.setUiFilepath("/resources/upload/" + name + extName); //경로도 저장
+			if(sessionUserInfo.getKuiId()!=0){
+				userInfoVO.setKuiId(sessionUserInfo.getKuiId());
+			} else if(sessionUserInfo.getNuiId()!=null) {
+				userInfoVO.setNuiId(sessionUserInfo.getNuiId());
+			}
 		}
 		log.info("서비스/업데이트==>{}", userInfoVO);
 		return uiMapper.updateUserInfo(userInfoVO) == 1; // 유저정보를 전체 업데이트함
