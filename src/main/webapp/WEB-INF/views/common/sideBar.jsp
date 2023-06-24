@@ -21,7 +21,6 @@
 		<div class="mainText">만나맛나</div>
 		<div class="subText">1인가구를 위한 신개념 밥상 매칭 사이트</div>
 	</header>
-
 	<nav>
 		<div class="sidenav">
 			<img src="../../../resources/upload/logo(shake).gif"
@@ -68,11 +67,12 @@
 				-->
 				
 				<!-- 내가 만든 밥상이 없을 때 보이는 버튼-->
-				<c:if test="${user.biNum == 0}">
+				<!-- 관리자면 통계, 회원관리 버튼만 나오게 이부분 수정하였습니다 -->
+				<c:if test="${user.biNum == 0 && user.uiId != 'administer'}">
 					<a class="addBabsang" href="/addBabsang">밥상 생성</a>
 				</c:if>
 				<!-- 내가 만든 밥상이 있을 때 보이는 버튼-->
-				<c:if test="${user.biNum != 0}">
+				<c:if test="${user.biNum != 0 && user.uiId != 'administer'}">
 					<a class="addBabsang" href="/detail/${user.biNum}">내 밥상<br>보러가기</a>
 				</c:if>
 				
@@ -86,6 +86,7 @@
 			</script>
 			<br>
 			<!-- 통계 조회 버튼 추가 -->
+			<a class="addBabsang" href="/manageUser">회원 관리</a><br>
 			<a class="addBabsang" href="/chart">통계 조회</a>
 			</c:if>
 			

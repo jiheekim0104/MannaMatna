@@ -26,4 +26,8 @@ public class UserInfoVO {
 	
 	private String nuiId;
 	private String naverImgPath;
+	
+	// 탈퇴요청, 정지유저 리스트 페이징
+	private int page = 1; // 기본 디폴트 1페이지
+	private int rows = 10; // 한페이지에 10개 객체
 }

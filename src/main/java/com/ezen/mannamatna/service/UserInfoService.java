@@ -22,12 +22,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.ezen.mannamatna.mapper.UserInfoMapper;
+import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.ezen.mannamatna.vo.KakaoToken;
 import com.ezen.mannamatna.vo.KakaoUserInfoVO;
 import com.ezen.mannamatna.vo.NaverToken;
 import com.ezen.mannamatna.vo.NaverUserInfoVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -748,6 +751,16 @@ public class UserInfoService {
 		List<UserInfoVO> userList = uiMapper.selectUserInfosByCredat();
 		log.info("서비스에서 유저리스트의 정보 {}", userList);
 		return uiMapper.selectUserInfosByCredat();
+	}
+	// 탈퇴신청 유저 페이징
+	public PageInfo<UserInfoVO> getPagingUiActive1(UserInfoVO userInfoVO) {
+		PageHelper.startPage(userInfoVO.getPage(), userInfoVO.getRows());
+		return new PageInfo<>(uiMapper.selectUserInfosByUiActive1(userInfoVO));
+	}
+	// 정지유저 페이징
+	public PageInfo<UserInfoVO> getPagingUiActive2(UserInfoVO userInfoVO) {
+		PageHelper.startPage(userInfoVO.getPage(), userInfoVO.getRows());
+		return new PageInfo<>(uiMapper.selectUserInfosByUiActive2(userInfoVO));
 	}
 
 }

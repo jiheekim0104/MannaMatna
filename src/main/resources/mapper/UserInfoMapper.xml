@@ -119,4 +119,20 @@
 	SELECT DATE_FORMAT(UI_CREDAT, '%Y-%m-%d') UI_CREDAT, COUNT(*) UI_USERCNT FROM USER_INFO GROUP BY DATE_FORMAT(UI_CREDAT, '%Y-%m-%d')
 	 ORDER BY UI_CREDAT ASC;
 	</select>
+	<select id ="selectUserInfosByUiActive1" resultType="com.ezen.mannamatna.vo.UserInfoVO">
+		SELECT UI_NUM, UI_NICKNAME, UI_PWD, UI_FILEPATH,
+		UI_GENDER,
+		UI_AGE, BI_NUM, UI_CREDAT,
+		UI_ID, UI_ACTIVE, UI_DEL
+		FROM USER_INFO WHERE
+		UI_ACTIVE = 1
+	</select>
+		<select id ="selectUserInfosByUiActive2" resultType="com.ezen.mannamatna.vo.UserInfoVO">
+		SELECT UI_NUM, UI_NICKNAME, UI_PWD, UI_FILEPATH,
+		UI_GENDER,
+		UI_AGE, BI_NUM, UI_CREDAT,
+		UI_ID, UI_ACTIVE, UI_DEL
+		FROM USER_INFO WHERE
+		UI_ACTIVE = 2
+	</select>
 </mapper>

@@ -73,6 +73,10 @@ public class UserInfoController {
 			}
 			m.addAttribute("url", "/main");
 			m.addAttribute("msg", "오늘도 즐거운 맛남하세요! 🥰");
+			if(userInfoVO.getUiId().equals("administer")){
+				// 관리자로 로그인하는 경우, msg만 변경
+				m.addAttribute("msg", "관리자로 로그인 하셨습니다! 🥰");
+			}
 			return "common/msg";
 	}
 	
