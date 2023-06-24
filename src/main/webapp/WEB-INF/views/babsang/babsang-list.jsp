@@ -42,7 +42,7 @@
 			<div>밥상이 존재하지 않습니다</div>
 		</c:if>
 		<c:forEach items="${page.list}" var="babsangListVO">
-			<div class="babsang"
+			<div class="babsang" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"
 			onclick=
 				<c:if test="${sessionScope.user.uiNum != null}">
 				"location.href='/detail/${babsangListVO.biNum}'"
@@ -158,6 +158,19 @@
 			</script>
 		</c:if>
 	</div>	 
+
+<script type="text/javascript">
+	function zoomIn(event) {
+		event.target.style.transform = "scale(1.05)";
+		event.target.style.zIndex = 1;
+		event.target.style.transition = "all 0.3s";
+	}
+	function zoomOut(event) {
+		event.target.style.transform = "scale(1)";
+		event.target.style.zIndex = 0;
+		event.target.style.transition = "all 0.3s";
+	}
+</script>
 
 <!--관리자 채딩 기능-->
 <script type="text/javascript">
