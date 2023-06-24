@@ -82,7 +82,7 @@ window.onload = function(){
 			<button class="Btn"
 				onclick="location.href='/deleteBabsang?biNum=${detail.biNum}'">밥상삭제</button>
 		</c:if>
-				<c:if test="${sessionScope.user.uiNum == detail.uiNum && ssessionScope.user.uiId != 'administer'}">
+				<c:if test="${sessionScope.user.uiNum == detail.uiNum && ssessionScope.user.uiId != 'administer' && babsangUserList.size()!=0}">
 			<%-- 로그인유저가 작성자인 경우, 맛남완료 버튼 추가 --%>
 			<button class="Btn"
 				onclick="location.href='/successBabsang/${detail.biNum}'">맛남완료</button>
