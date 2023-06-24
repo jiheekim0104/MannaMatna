@@ -30,12 +30,12 @@
 			<c:if test="${sessionScope.user.uiNickname == null}">
 				<a href="/login">Login</a>
 				<a href="/join">Join</a>
+				<a class="information" href="/info">만나맛나란?</a>
 				<!-- 테스트 완료
 				<a>세션.uiNum = ${sessionScope.user.uiNum}</a>
 				<a>유저.uiNum = ${user.uiNum}</a>
 				-->
 			</c:if>
-
 			<!-- 로그인 시 출력 화면-->
 			<c:if test="${sessionScope.user.uiNickname != null}">
 				<div class="box">
@@ -57,7 +57,7 @@
 				<br>
 				<a href="/profile">Profile</a>
 				<a href="/logout">Logout</a>
-				<br>
+				<a class="information" href="/info">만나맛나란?</a>
 				
 				<!-- 테스트 완료
 				<a>세션.biNum = ${sessionScope.user.biNum}</a>
@@ -77,8 +77,6 @@
 				</c:if>
 				
 			</c:if>
-			
-			
 			<!-- 관리자로 로그인 시 출력 화면-->
 			<c:if test="${sessionScope.user.uiId=='administer'}">
 			<script>
@@ -89,7 +87,6 @@
 			<a class="addBabsang" href="/manageUser">회원 관리</a><br>
 			<a class="addBabsang" href="/chart">통계 조회</a>
 			</c:if>
-			
 		</div>
 		<!-- sidenav END -->
 	</nav>
