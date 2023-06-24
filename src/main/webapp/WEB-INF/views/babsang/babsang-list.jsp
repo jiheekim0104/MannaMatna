@@ -16,7 +16,7 @@
 
 <body>
 <div class="content">
-	
+
 	<!-- 제목 검색 기능 -->
 	<form action="/main" method="get" id="searchTitle">
 		<input type="text" class="inputBiTitle" name="biTitle" placeholder="검색하실 밥상의 제목을 입력해주세요" value="${param.biTitle}">
@@ -42,7 +42,7 @@
 		<div>밥상이 존재하지 않습니다</div>
 	</c:if>
 	<c:forEach items="${page.list}" var="babsangListVO">
-		<div class="babsang" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"
+		<div class="babsang" onmouseenter="zoomIn(event,${babsangListVO.biClosed})" onmouseleave="zoomOut(event,${babsangListVO.biClosed})"
 		onclick=
 			<c:if test="${sessionScope.user.uiNum != null}">
 			"location.href='/detail/${babsangListVO.biNum}'"
@@ -52,7 +52,7 @@
 			</c:if>
 			style=
 			<c:choose>
-				<c:when  test="${babsangListVO.biClosed != '0'}">
+				<c:when test="${babsangListVO.biClosed != '0'}">
 				"background-image: url('../../../resources/upload/babsang/closedG.png');
 				background-size: contain;"
 				</c:when>
@@ -168,12 +168,19 @@
 	</div>	 
 
 	<script type="text/javascript">
-		function zoomIn(event) {
+		function zoomIn(event,closed) {
+ 			if(closed){
+ 				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedR.png')";
+ 			}
 			event.target.style.transform = "scale(1.05)";
 			event.target.style.zIndex = 1;
 			event.target.style.transition = "all 0.3s";
+			
 		}
-		function zoomOut(event) {
+		function zoomOut(event,closed) {
+			if(closed){
+				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedG.png')";
+ 			}
 			event.target.style.transform = "scale(1)";
 			event.target.style.zIndex = 0;
 			event.target.style.transition = "all 0.3s";
