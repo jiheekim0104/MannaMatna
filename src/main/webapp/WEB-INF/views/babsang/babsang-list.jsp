@@ -73,7 +73,7 @@
 				"background-image: url('../../../resources/upload/babsang/foodImg/seafood.jpg');"
 				</c:if>
 				<c:if test="${babsangListVO.biFdCategory == '족발'}">
-				"background-image: url('../../../resources/upload/babsang/foodImg/pigfoot.png');"
+				"background-image: url('../../../resources/upload/babsang/foodImg/pigfoot.jpg');"
 				</c:if>
 			>
 			
