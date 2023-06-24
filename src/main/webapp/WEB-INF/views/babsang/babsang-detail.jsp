@@ -93,12 +93,13 @@ window.onload = function(){
 			<div class="participents">참여자정보</div>
 			<br>
 			<div class="userCount">
-			<c:if test="${sessionScope.user.uiId != 'administer'}">
+			<c:if test="${detail.biClosed==false}">
 			${fn:length(babsangUserList)}(현재인원)
 			</c:if>
-			<c:if test="${sessionScope.user.uiId == 'administer'}">${detail.biUserCnt}(마감인원)
+			<c:if test="${sessionScope.user.uiId == 'administer' && detail.biClosed==true}">
+			${detail.biUserCnt}(마감인원)
 			</c:if>
-			&nbsp;/${detail.biHeadCnt} (최대인원)</div>
+			&nbsp;/&nbsp;${detail.biHeadCnt}(최대인원)</div>
 			<div class="outterBox">
 			<div class="box" id="makerBox">
 				
