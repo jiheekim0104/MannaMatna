@@ -85,6 +85,13 @@
 	
 	<!-- timepicker -->
 	<script>
+		/* let hours = today.getHours();
+		let minutes = today.getminutes();
+		if(minutes>30){minutes = 30;}
+		else{
+			minutes = 0;
+			hours += 1;
+		} */
 		/* 30분 간격 */
 		$("#biMeetingTim").timepicker({
 	    timeFormat: 'H:mm',
@@ -101,5 +108,11 @@
 		}); */
 	</script>
 	
+	<script type="text/javascript">
+	function hour(now) {
+		now.
+		
+	}
+	</script>
 </body>
 </html>
