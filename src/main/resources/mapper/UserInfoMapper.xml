@@ -124,15 +124,23 @@
 		UI_GENDER,
 		UI_AGE, BI_NUM, UI_CREDAT,
 		UI_ID, UI_ACTIVE, UI_DEL
-		FROM USER_INFO WHERE
-		UI_ACTIVE = 1 ORDER BY UI_CREDAT DESC
+		FROM USER_INFO WHERE UI_ACTIVE = 1 
+		<if test='uiNickname != null and uiNickname != ""'>
+		<!-- 유저 닉네임으로 검색기능 추가(닉네임 유니크속성) -->
+		AND UI_NICKNAME LIKE CONCAT('%', #{uiNickname}, '%')
+		</if>
+		ORDER BY UI_CREDAT DESC
 	</select>
 		<select id ="selectUserInfosByUiActive2" resultType="com.ezen.mannamatna.vo.UserInfoVO">
 		SELECT UI_NUM, UI_NICKNAME, UI_PWD, UI_FILEPATH,
 		UI_GENDER,
 		UI_AGE, BI_NUM, UI_CREDAT,
 		UI_ID, UI_ACTIVE, UI_DEL
-		FROM USER_INFO WHERE
-		UI_ACTIVE = 2 ORDER BY UI_CREDAT DESC
+		FROM USER_INFO WHERE UI_ACTIVE = 2 
+		<if test='uiNickname != null and uiNickname != ""'>
+		<!-- 유저 닉네임으로 검색기능 추가(닉네임 유니크속성) -->
+		AND UI_NICKNAME LIKE CONCAT('%', #{uiNickname}, '%')
+		</if>
+		ORDER BY UI_CREDAT DESC
 	</select>
 </mapper>

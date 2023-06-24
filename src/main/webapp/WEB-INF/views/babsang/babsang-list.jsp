@@ -44,11 +44,14 @@
 	<c:forEach items="${page.list}" var="babsangListVO">
 		<div class="babsang" onmouseenter="zoomIn(event,${babsangListVO.biClosed})" onmouseleave="zoomOut(event,${babsangListVO.biClosed})"
 		onclick=
-			<c:if test="${sessionScope.user.uiNum != null}">
+			<c:if test="${babsangListVO.biClosed == false || sessionScope.user.uiId == 'administer'}">
 			"location.href='/detail/${babsangListVO.biNum}'"
 			</c:if>
-			<c:if test="${sessionScope.user.uiNum == null}">
+			<c:if test="${sessionScope.user.uiNum == null && babsangListVO.biClosed == false}">
 			"location.href='/cannotSeeBabsang'"
+			</c:if>
+			<c:if test="${babsangListVO.biClosed == true}">
+			"alert('이미 마감된 밥상입니다!');" 
 			</c:if>
 			style=
 			<c:choose>
@@ -118,7 +121,14 @@
 			>
 		</div>
 			
-		<div id="biHeadCnt">최대 인원 수 : ${babsangListVO.biHeadCnt}</div>
+		<div id="biHeadCnt">
+		<c:if test="${babsangListVO.biClosed == false}">
+		최대 인원 수 : ${babsangListVO.biHeadCnt}
+		</c:if>
+		<c:if test="${babsangListVO.biClosed == true}">
+		마감 인원 수 : ${babsangListVO.biUserCnt}
+		</c:if>
+		</div>
 		
 		<c:set var="biMeetingTim" value="${babsangListVO.biMeetingTim}" />
 		<div id="biMeetingDatTim">${babsangListVO.biMeetingDat} / ${fn:substring(biMeetingTim,0,5)}</div>

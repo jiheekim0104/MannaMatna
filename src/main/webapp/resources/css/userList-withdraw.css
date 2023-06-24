@@ -26,6 +26,25 @@ cursor: pointer;
      animation-iteration-count: infinite; /* 반복회수 무한 */
      animation-delay: 0.1s;
 }
+.content .inputUiNickname{
+	width: 40%;
+  	background-color: white;
+  	border: 2px solid #999999;
+  	border-radius:0.5em;
+  	color: black;
+  	font-family: 'omyu_pretty';
+  	font-weight: bolder;
+  	padding: 8px 22px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 16px;
+    
+}
+.content .inputUiNickname::placeholder{
+	font-size: 16px;
+	color: #b7b7b7;
+}
 .content .userTable{
 	font-size: 25px;
 	display: inline-block;

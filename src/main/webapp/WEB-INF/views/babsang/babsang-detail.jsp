@@ -15,14 +15,15 @@
 <script>
 // 마감된 밥상의 경우 방장의 입장에서만 마감취소 혹은 맛남완료 버튼만 활성화
 window.onload = function(){
-	if(${fn:length(babsangUserList)}==0){
+	
+	if(${userList.size()==0 && sessionScope.user.uiId != 'administer'}){
 		alert('이미 맛남이 완료된 밥상입니다!');
 		location.href='/main';
 	}
 	let btnList = document.querySelectorAll('.Btn');
 	console.log(btnList);
 	console.log('콘솔로찍은 biClosed = ' + ${detail.biClosed});
-	if(${detail.biClosed}==true){
+	if(${detail.biClosed==true && sessionScope.user.uiNum!=160}){
 		// 해당밥상의 biClosed = true 일때, 마감한 밥상인 경우 버튼
 		for(let i = 0;i<btnList.length;i++){
 			if(btnList[i].innerText == '마감취소' || btnList[i].innerText == '맛남완료'){
@@ -52,34 +53,37 @@ window.onload = function(){
 			${fn:substring(biMeetingTim,0,2)}시 ${fn:substring(biMeetingTim,3,5)}분</div>
 		<div class="innerContent">${detail.biContent}</div>
 		<c:if
-			test="${sessionScope.user.uiNum != detail.uiNum && sessionScope.user.biNum != detail.biNum}">
-			<%-- 로그인유저와 작성자정보가 다른경우 참가하기 버튼 --%>
+			test="${sessionScope.user.uiNum != detail.uiNum && sessionScope.user.biNum != detail.biNum && sessionScope.user.uiId != 'administer'}">
+			<%-- 로그인유저와 작성자정보가 다른경우, 및 관리자가 아닐 경우 참가하기 버튼 --%>
 			<button class="Btn" type="submit"
 				onclick="location.href = '/babsangJoin/${detail.biNum}'">참가하기</button>
 		</c:if>
 		<c:if
-			test="${sessionScope.user.biNum == detail.biNum && sessionScope.user.uiNum != detail.uiNum}">
-			<%-- 로그인유저가 밥상번호가 같은 경우(참가중일경우) 참가 취소버튼 --%>
+			test="${sessionScope.user.biNum == detail.biNum && sessionScope.user.uiNum != detail.uiNum && sessionScope.user.uiId != 'administer'}">
+			<%-- 로그인유저가 밥상번호가 같은 경우(참가중일경우), 및 관리자가 아닐 경우 참가 취소버튼 --%>
 			<button class="Btn" type="submit"
 				onclick="location.href='/joinCancle/${detail.biNum}'">참가취소</button>
 		</c:if>
 		<!-- 이 부분 추가했습니다 -->
 		<c:if
-			test="${sessionScope.user.uiNum == detail.uiNum && detail.biClosed==false}">
-			<%-- 세션정보가 작성자이며, 마감하기 하기 전인 경우 마감하기 --%>
+			test="${sessionScope.user.uiNum == detail.uiNum && detail.biClosed==false && sessionScope.user.uiId != 'administer'}">
+			<%-- 세션정보가 작성자이며, 관리자가 아닐 경우 마감하기 하기 전인 경우 마감하기 --%>
 			<button class="Btn" type="submit"
 				onclick="location.href='/babsangClose/${detail.biNum}'">마감하기</button>
 		</c:if>
 		<c:if
-			test="${sessionScope.user.uiNum == detail.uiNum && detail.biClosed==true}">
-			<%-- 세션정보가 작성자이며, 마감상태 후 마감취소버튼 --%>
+			test="${sessionScope.user.uiNum == detail.uiNum && sessionScope.user.uiId != 'administer' && detail.biClosed==true}">
+			<%-- 세션정보가 작성자이며, 관리자가 아닐 경우 마감상태 후 마감취소버튼 --%>
 			<button class="Btn" type="submit"
 				onclick="location.href='/babsangCloseCancle/${detail.biNum}'">마감취소</button>
 		</c:if>
-		<c:if test="${sessionScope.user.uiNum == detail.uiNum}">
-			<%-- 세션정보가 작성자일 경우 삭제버튼 즉, 로그인유저가 작성자인 경우 버튼 2개 추가 --%>
+		<c:if test="${sessionScope.user.uiNum == detail.uiNum || sessionScope.user.uiId == 'administer'}">
+			<%-- 세션정보가 작성자일 경우, 로그인유저가 작성자 및 관리자 인 경우 밥상삭제 버튼 추가 --%>
 			<button class="Btn"
 				onclick="location.href='/deleteBabsang?biNum=${detail.biNum}'">밥상삭제</button>
+		</c:if>
+				<c:if test="${sessionScope.user.uiNum == detail.uiNum && ssessionScope.user.uiId != 'administer'}">
+			<%-- 로그인유저가 작성자인 경우, 맛남완료 버튼 추가 --%>
 			<button class="Btn"
 				onclick="location.href='/successBabsang/${detail.biNum}'">맛남완료</button>
 		</c:if>

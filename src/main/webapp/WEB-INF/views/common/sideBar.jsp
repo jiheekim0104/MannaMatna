@@ -68,11 +68,11 @@
 				
 				<!-- 내가 만든 밥상이 없을 때 보이는 버튼-->
 				<!-- 관리자면 통계, 회원관리 버튼만 나오게 이부분 수정하였습니다 -->
-				<c:if test="${user.biNum == 0 && user.uiId != 'administer'}">
+				<c:if test="${sessionScope.user.biNum == 0 && sessionScope.user.uiId != 'administer'}">
 					<a class="addBabsang" href="/addBabsang">밥상 생성</a>
 				</c:if>
 				<!-- 내가 만든 밥상이 있을 때 보이는 버튼-->
-				<c:if test="${user.biNum != 0 && user.uiId != 'administer'}">
+				<c:if test="${sessionScope.user.biNum != 0 && sessionScope.user.uiId != 'administer'}">
 					<a class="addBabsang" href="/detail/${user.biNum}">내 밥상<br>보러가기</a>
 				</c:if>
 				

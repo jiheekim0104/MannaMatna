@@ -16,8 +16,11 @@
 		<div class="title" id="withdrawTitle"
 			onclick="location.href='/manageUser'">탈퇴회원관리</div>
 		<div class="title" id="blockTitle"
-			onclick="location.href='/blockUser'">정지회원관리</div>
-		<hr>
+			onclick="location.href='/blockUser'">정지회원관리</div><br>
+	<form action="/blockUser" method="get" id="searchUiNickname">
+		<input type="text" class="inputUiNickname" name="uiNickname" placeholder="유저 닉네임 입력해주세요." value="${param.uiNickname}">
+		<button class="Btn">검색</button>
+	</form>
 		<table class="userTable">
 			<tr>
 				<th>회원번호</th>
