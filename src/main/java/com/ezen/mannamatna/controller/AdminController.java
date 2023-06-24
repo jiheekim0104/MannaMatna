@@ -33,7 +33,7 @@ public class AdminController {
 	@Autowired
 	UserInfoService userInfoService; // 회원리스트 의존성 추가
 
-	@GetMapping("/getPieChart")
+	@PostMapping("/getPieChart")
 	@ResponseBody
 	public JSONObject getPieChart(UserInfoVO userInfoVO, HttpSession session) {
 		log.info("내가만든 json데이터 확인 ====>{}", googleChartService.getGenderChart(userInfoVO, session));
@@ -48,14 +48,14 @@ public class AdminController {
 		return "admin/chart";
 	}
 
-	@GetMapping("/getColumnChart")
+	@PostMapping("/getColumnChart")
 	@ResponseBody
 	public JSONObject getColumnChart(UserInfoVO userInfoVO, HttpSession session) {
 		log.info("내가만든 json데이터 확인 ====>{}", googleChartService.getAgeChart(userInfoVO, session));
 		return googleChartService.getAgeChart(userInfoVO, session);
 	}
 
-	@GetMapping("/getLineChart")
+	@PostMapping("/getLineChart")
 	@ResponseBody
 	public JSONObject getLineChart(HttpSession session) {
 		return googleChartService.getCredatChart(session);

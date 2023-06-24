@@ -21,7 +21,7 @@
 	function drawChart() {
 		var pieChartJson = $.ajax({ //비동기적 방식으로 호출
 			url : '/getPieChart',
-			type : 'get',
+			type : 'post',
 			// 컨트롤러로 이동해 맵핑해서 제이슨을 동적으로 직접만들어 그 만든 json을 직접 보낸다.
 			// 확장자가 json이면 url 맵핑을 꼭 해주어야 한다. 안해주면 자바파일인줄 알고 404에러가 발생한다.
 			// 그렇기 때문에 servlet-context파일에서 리소스를 맵핑해준다.
@@ -32,7 +32,7 @@
 
 		var columnChartJson = $.ajax({
 			url : '/getColumnChart',
-			type : 'get',
+			type : 'post',
 			dataType : 'json',
 			async : false
 		}).responseText;
@@ -40,7 +40,7 @@
 
 		var lineChartJson = $.ajax({
 			url : '/getLineChart',
-			type : 'get',
+			type : 'post',
 			dataType : 'json',
 			async : false
 		}).responseText;
