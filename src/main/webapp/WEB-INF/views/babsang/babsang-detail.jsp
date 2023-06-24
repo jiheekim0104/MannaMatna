@@ -92,9 +92,14 @@ window.onload = function(){
 		<div class="userImages">
 			<div class="participents">참여자정보</div>
 			<br>
-			<div class="userCount">${fn:length(babsangUserList)}(현재인원)&nbsp;/
-				${detail.biHeadCnt} (최대인원)</div>
-				<div class="outterBox">
+			<div class="userCount">
+			<c:if test="${sessionScope.user.uiId != 'administer'}">
+			${fn:length(babsangUserList)}(현재인원)
+			</c:if>
+			<c:if test="${sessionScope.user.uiId == 'administer'}">${detail.biUserCnt}(마감인원)
+			</c:if>
+			&nbsp;/${detail.biHeadCnt} (최대인원)</div>
+			<div class="outterBox">
 			<div class="box" id="makerBox">
 				
 				<img class="profileImg" src="${babsangMaker.uiFilepath}"
