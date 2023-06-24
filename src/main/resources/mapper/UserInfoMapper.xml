@@ -125,7 +125,7 @@
 		UI_AGE, BI_NUM, UI_CREDAT,
 		UI_ID, UI_ACTIVE, UI_DEL
 		FROM USER_INFO WHERE
-		UI_ACTIVE = 1
+		UI_ACTIVE = 1 ORDER BY UI_CREDAT DESC
 	</select>
 		<select id ="selectUserInfosByUiActive2" resultType="com.ezen.mannamatna.vo.UserInfoVO">
 		SELECT UI_NUM, UI_NICKNAME, UI_PWD, UI_FILEPATH,
@@ -133,6 +133,6 @@
 		UI_AGE, BI_NUM, UI_CREDAT,
 		UI_ID, UI_ACTIVE, UI_DEL
 		FROM USER_INFO WHERE
-		UI_ACTIVE = 2
+		UI_ACTIVE = 2 ORDER BY UI_CREDAT DESC
 	</select>
 </mapper>

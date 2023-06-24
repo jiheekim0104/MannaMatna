@@ -69,35 +69,34 @@
 				let html = '';
 			
 				if(11<=page){
-					html +='<a href="/manage?page=1"><<</a>  '
+					html +='<a href="/blockUser?page=1"><<</a>  '
 				}//page가 11 이상일때만 맨 처음으로 버튼 보임
 				if(start!=1){
-					html += '<a href="/manage?page=' + (start-1) + '"><</a>'
+					html += '<a href="/blockUser?page=' + (start-1) + '"><</a>'
 				}//<버튼 누르면 현재 묶음페이지의 start에서 -1로 (묶음페이지가 첫페이지(1~5)가 아닐 때만 보임)
 			
 				for(let i=start; i<=end; i++){
 					if(i==page){
 						html += '<a class="active">' + i + '</a>';
 					}else{
-						html += ' <a href="/manage?page=' + i + '">' + i + '</a>' ;
+						html += ' <a href="/blockUser?page=' + i + '">' + i + '</a>' ;
 					}
 				}
 			
 				if(end!=pages){
-					html += ' <a href="/manage?page=' + (end+1) + '">></a>';
+					html += ' <a href="/blockUser?page=' + (end+1) + '">></a>';
 				}//>버튼 누르면 묶음페이지 +1로 (묶음페이지가 첫페이지(1~5)가 아닐 때만 보임)
 				if((end/5)<=(Math.ceil(pages/5))-2){
-					html +='  <a href="/manage?page=' + pages + '">>></a>'
+					html +='  <a href="/blockUser?page=' + pages + '">>></a>'
 				}//>>버튼 누르면 마지막 묶음페이지로 */
 				document.querySelector('#pageDiv').innerHTML = html;
 			</script>
-			<script>
-			let title = document.getElementById('withdrawTitle');
-			console.log(title);
-			console.log(title.classList);
-			title.classList.add('cancle');
-			</script>
 		</c:if>
+				<script>
+				let blockTitle1 = document.getElementById('blockTitle');
+				let withdrawTitle1 = document.getElementById('withdrawTitle');
+				withdrawTitle1.classList.add('cancle');
+				</script>
 	</div>
 </body>
 </html>

@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-.content{
-}
 .content .title{
 display: inline-block;
 font-size: 35px;
@@ -11,7 +9,6 @@ margin-left: 30px;
 cursor: pointer;
 }
 #withdrawTitle:not(.cancle){
-	cursor: pointer;
 	color: #FC522F;
 	/* 사이드바에 있는 애니메이션 shake 적용 */
 	 transform-origin: 50% 0%;
@@ -29,23 +26,66 @@ cursor: pointer;
      animation-iteration-count: infinite; /* 반복회수 무한 */
      animation-delay: 0.1s;
 }
-.content .title:hover{
-
-}
 .content .userTable{
 	font-size: 25px;
 	display: inline-block;
 	padding: 15px;
 	border-collapse: collapse;
+	width:100%;
 }
 .content .userTable tr, th, td{
 	padding: 10px;
 	border-color: #FC522F;
 }
-
 .content .userTable th:nth-child(7), td:nth-child(7){
+	text-align: left;	
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 400px;
 	width: 400px;
-	text-align: left;
+}
+.content .userTable th:nth-child(2), td:nth-child(2){
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 100px;
+	width: 110px;
+}
+.content .userTable th:nth-child(3), td:nth-child(3){
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 110px;
+	width: 120px;
+}
+.content .userTable th:nth-child(4), td:nth-child(4){
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 110px;
+	width: 120px;
+}
+.content .userTable th:nth-child(6), td:nth-child(6){
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 100px;
+	width: 110px;
+}
+.content .userTable th:nth-child(1), td:nth-child(1){
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 80px;
+	width: 90px;
+}
+.content .userTable th:nth-child(5), td:nth-child(5){
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 60px;
+	width: 70px;
 }
 .content .userTable th{
 	border-bottom: 2px solid #FC522F;
@@ -53,9 +93,7 @@ cursor: pointer;
 .content .userTable td{
 	border-bottom: 1px solid rgba(128, 128, 128, 0.2);
 }
-.content .userTable td:nth-child(4){
-	width: 120px;
-}
+
 .content .Btn {
 	font-weight: 700;
 	font-family: 'omyu_pretty'; /* 버튼 글꼴 */
