@@ -9,6 +9,7 @@ html{
 	font-family: 'omyu_pretty';
     background-size: cover;
     height: 100%;
+    cursor: url(../upload/cursor.cur), auto; 
 }
 
 .loading{ /* 로그인 딜레이 작업해보려고 써둔것임 */
