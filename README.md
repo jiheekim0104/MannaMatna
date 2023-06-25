@@ -9,7 +9,7 @@
 
 # **개요**
 
-[🎬PPT 시연 영상 ]((https://www.youtube.com/watch?v=w5JAgxHHhw8))<br>
+[🎬PPT 시연 영상 ](https://www.youtube.com/watch?v=w5JAgxHHhw8)<br>
 🎬홈페이지 시연 영상 (업로드 예정)<br>
 <br>
 
