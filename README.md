@@ -17,13 +17,11 @@
 
 ## **기획 목적**
 
-
 1. API 사용방법 학습 (카카오&네이버 SNS 연동 및 GOOGLE 차트)
 2. 가장 기본적인 CRUD에서 시작하여 각자가 고도화 할 수 있는 정도까지 도전해볼것
    <br>
 
 ## **주제 선정**
-
 
 점점 늘어나는 1인 가구의 비중, 오늘도 많은 사람들이 혼자서 밥을먹는다.<br>
 혼자서 밥을 먹었을때 건강에도 좋지 않은 영향을 준다는 연구결과도있는데, <br>
@@ -45,11 +43,13 @@
 <br>
 
 # **↗Flowchart**
+
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/9da410e7-488d-44d0-a4d4-dc3dda6b1219"/><br>
 <br>
 <br>
 
 # **Entity Relationship Diagram**
+
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/7a0f9c52-f676-4653-a009-369dc4a55a59"/><br>
 <br>
 <br>
@@ -531,7 +531,7 @@
 ### 2023. 06. 24(4)
 
 - 밥상이 마감되거나, 더 이상 참여가 불가능한 경우에는 보여지는 이미지 배경을 달리하고싶은데 태그립 조건문을 다음과 같이 쓰면 작동하지 않음을 발견했다.
-  
+
   ```jsp
   <c:if test="조건1">
      <c:if test="조건2">
@@ -539,10 +539,10 @@
      <c:if test="조건3">
      </c:if> // 조건3
   </c:if> // 조건1
-   ```
-  
+  ```
+
 - 이렇게 조건문을쓰는 실수가 잦다고한다. 다음과 같이 수정해서 사용해야한다.
-  
+
   ```jsp
   <c:choose>
   <c:when test="조건1">
@@ -554,7 +554,7 @@
         </c:if> // 조건3
      </c:otherwise>
   </c:choose>
-   ```
+  ```
 
 ---
 
@@ -562,52 +562,89 @@
 
 -zoomin & zoomout 시에 babsangListVO.biClosed 의 값이 true, false 인지에 따라서 배경색이 바뀌는 효과를 주고싶었는데 스트립트에서 babsangListVO.biClosed 의 값을 읽지 못했다. 다음은 수정전 코드이다.
 
-   ```jsp
-   <c:forEach items="${page.list}" var="babsangListVO">
+```jsp
+<c:forEach items="${page.list}" var="babsangListVO">
 		<div class="babsang" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" // 뒤에 생략
-   ```
-   ```script
-   function zoomIn(event) {
- 			if(${babsangListVO.biClosed}){
+```
+
+```script
+function zoomIn(event) {
+			if(${babsangListVO.biClosed}){
+				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedR.png')";
+			}
+			event.target.style.transform = "scale(1.05)";
+			event.target.style.zIndex = 1;
+			event.target.style.transition = "all 0.3s";
+
+		}
+		function zoomOut(event) {
+			if(${babsangListVO.biClosed}){
+				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedG.png')";
+			}
+			event.target.style.transform = "scale(1)";
+			event.target.style.zIndex = 0;
+			event.target.style.transition = "all 0.3s";
+		}
+```
+
+-스크립트 영역에서 자꾸 ${babsangListVO.biClosed}값을 찾지 못하고있어서, 원인을 찾아보니 forEach가 실행되면서 각각의 div가 생성될때 마우스효과가 들어가는 것임을 확인하고 그때 스트립트 영역으로 넘길 함수에 ${babsangListVO.biClosed}값을 넣어주어서 해결했다.
+
+```jsp
+<c:forEach items="${page.list}" var="babsangListVO">
+		<div class="babsang" onmouseenter="zoomIn(event,${babsangListVO.biClosed})" onmouseleave="zoomOut(event,${babsangListVO.biClosed})" // 뒤에 생략
+```
+
+```script
+function zoomIn(event,closed) {
+ 			if(closed){
  				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedR.png')";
  			}
 			event.target.style.transform = "scale(1.05)";
 			event.target.style.zIndex = 1;
 			event.target.style.transition = "all 0.3s";
-			
+
 		}
-		function zoomOut(event) {
-			if(${babsangListVO.biClosed}){
+		function zoomOut(event,closed) {
+			if(closed){
 				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedG.png')";
  			}
 			event.target.style.transform = "scale(1)";
 			event.target.style.zIndex = 0;
 			event.target.style.transition = "all 0.3s";
 		}
-   ```
+```
 
--스크립트 영역에서 자꾸 ${babsangListVO.biClosed}값을 찾지 못하고있어서, 원인을 찾아보니 forEach가 실행되면서 각각의 div가 생성될때 마우스효과가 들어가는 것임을 확인하고 그때 스트립트 영역으로 넘길 함수에 ${babsangListVO.biClosed}값을 넣어주어서 해결했다.
+---
 
-   ```jsp
-   <c:forEach items="${page.list}" var="babsangListVO">
-		<div class="babsang" onmouseenter="zoomIn(event,${babsangListVO.biClosed})" onmouseleave="zoomOut(event,${babsangListVO.biClosed})" // 뒤에 생략
-   ```
-   ```script
-   function zoomIn(event,closed) {
-    			if(closed){
-    				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedR.png')";
-    			}
-   			event.target.style.transform = "scale(1.05)";
-   			event.target.style.zIndex = 1;
-   			event.target.style.transition = "all 0.3s";
-   			
-   		}
-   		function zoomOut(event,closed) {
-   			if(closed){
-   				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedG.png')";
-    			}
-   			event.target.style.transform = "scale(1)";
-   			event.target.style.zIndex = 0;
-   			event.target.style.transition = "all 0.3s";
-   		}
-   ```
+### 2023. 06. 25
+
+- 밥상생성 후 마감시, 맛남종료 시에 따른 UI 변화 및 접근 가능 조건 수정 및 보완작업중에 방장이 마감하기를 누른 이후 메인페이지에서 해당 밥상을 누르면 이미 마감 된 밥상이라고 알람이 뜨며 접근하지 못함을 발견하였다. 해당 밥상 참여자인 경우에도 마찬가지로 맛남종료가 아닌 단순 인원모집마감조건에도 상세페이지에 접근하지 못하였으며, 이에 해당하는 `babsang-list.jsp`의 밥상페이지객체의 onclick 조건들을 확인해보았다.
+
+- `babsang-list.jsp` 수정 전
+
+```jsp
+<c:if test="${babsangListVO.biClosed == true}">
+  <!-- 해당 조건으로는 세션객체가 만든 밥상이어도 해당하는 biNum과 관련된 조건이 없어서 biNum 관계없이 항상 실행되고 있었다. -->
+  "alert('이미 마감 된 밥상입니다!');"
+</c:if>
+```
+
+- `babsang-list.jsp` 수정 후 : 여러가지 조건을 체크해 본 후 총 3가지 조건을 추가하였다.
+
+```jsp
+<c:if test="${babsangListVO.biClosed == true && sessionScope.user.biNum == babsangListVO.biNum && babsangListVO.biUserCnt == 0}">
+<!-- 해당 조건은 밥상이 마감된 상태, 로그인유저가 밥상참여자(방장포함)일 경우 및 해당 밥상의 맛남완료(마감인원0)가 되기 전 상태이다. -->
+<!-- 즉, 맛남완료가 되기 전, 참여자, 인원모집만 마감된 경우 접근 가능 -->
+  "location.href='/detail/${babsangListVO.biNum}'"
+</c:if>
+<c:if test="${babsangListVO.biClosed == true && sessionScope.user.biNum != babsangListVO.biNum && babsangListVO.biUserCnt == 0}">
+<!-- 해당 조건은 밥상이 마감된 상태, 해당 밥상의 맛남완료(마감인원0)가 되기 전 상태이지만, 밥상참여자가 아닌경우 접근을 제한한다. -->
+<!-- 인원만 마감된 경우이나, 참여자가 아니면 맛남종료와 메세지 출력을 다르게 할 것이다. -->
+  "alert('인원모집이 종료된 밥상입니다!');"
+</c:if>
+<c:if test="${babsangListVO.biClosed == true && sessionScope.user.biNum != babsangListVO.biNum && babsangListVO.biUserCnt != 0}">
+<!-- 해당 조건은 밥상이 마감된 상태, 맛남종료 상태, 밥상참여자가 아닌경우 접근을 제한한다. -->
+<!-- 맛남종료의 경우 관리자가 아니라면 누구도 접근할 수 없으며(맛남완료시 유저객체의 biNum 업데이트된다.) 아래 메세지 출력하도록 수정하였다. -->
+  "alert('맛남 종료된 밥상입니다!');"
+</c:if>
+```
