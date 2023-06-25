@@ -1,6 +1,6 @@
 # **🍴Manna Matna😋**
 
-<img width="80%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/4d2bc797-6a48-40ed-b4af-16ec9e282403"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/4d2bc797-6a48-40ed-b4af-16ec9e282403"/><br>
 팀장 : 김지희<br>
 팀원 : 오성철, 최재환<br>
 개발 기간 : 2023.05.20 ~ 2023.06.30 (총 43일)<br>
@@ -52,7 +52,7 @@
 <br>
 
 # **Entity Relationship Diagram**
-
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/7a0f9c52-f676-4653-a009-369dc4a55a59"/><br>
 
 
 -최종 사진으로 넣을것
