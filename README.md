@@ -1,6 +1,6 @@
 # **🍴Manna Matna😋**
 
-<img width="80%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/4d2bc797-6a48-40ed-b4af-16ec9e282403"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/4d2bc797-6a48-40ed-b4af-16ec9e282403"/><br>
 팀장 : 김지희<br>
 팀원 : 오성철, 최재환<br>
 개발 기간 : 2023.05.20 ~ 2023.06.30 (총 43일)<br>
@@ -9,7 +9,7 @@
 
 # **개요**
 
-🎬PPT 시연 영상 (업로드 예정)<br>
+[🎬PPT 시연 영상 ](https://www.youtube.com/watch?v=w5JAgxHHhw8)<br>
 🎬홈페이지 시연 영상 (업로드 예정)<br>
 <br>
 
@@ -17,7 +17,6 @@
 
 ## **기획 목적**
 
-<!-- 이거 밑에 줄어떻게 넣습미까..? -->
 
 1. API 사용방법 학습 (카카오&네이버 SNS 연동 및 GOOGLE 차트)
 2. 가장 기본적인 CRUD에서 시작하여 각자가 고도화 할 수 있는 정도까지 도전해볼것
@@ -25,7 +24,6 @@
 
 ## **주제 선정**
 
-<!-- 이거 밑에 줄어떻게 넣습미까..? -->
 
 점점 늘어나는 1인 가구의 비중, 오늘도 많은 사람들이 혼자서 밥을먹는다.<br>
 혼자서 밥을 먹었을때 건강에도 좋지 않은 영향을 준다는 연구결과도있는데, <br>
@@ -35,10 +33,10 @@
 # **💻개발 환경/시스템 구성**
 
 | 항목                | 내용                                                     |
-| ------------------- | -------------------------------------------------------- | 
+| ------------------- | -------------------------------------------------------- |
 | 언어                | Java11,HTML/CSS, JavaScript                              |
 | 서버                | Springboot Embedded Web Server                           |
-| 프레임워크          | SpirngBoot(2.7.12), Mybatis(2.3.1)                       | 
+| 프레임워크          | SpirngBoot(2.7.12), Mybatis(2.3.1)                       |
 | DB                  | MySQL Workbench(8.0.32)                                  |
 | IDE                 | Eclipse IDE 2023-03 (4.27.0)                             |
 | 협업 도구           | Git-hub, Zoom, KakaoTalk, GoogleSheet, GoogleSlide       |
@@ -47,60 +45,81 @@
 <br>
 
 # **↗Flowchart**
-
-<!-- 이거 밑에 줄어떻게 넣습미까..? -->
-
--최종 사진으로 넣을것
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/9da410e7-488d-44d0-a4d4-dc3dda6b1219"/><br>
+<br>
 <br>
 
 # **Entity Relationship Diagram**
-
-<!-- 이거 밑에 줄어떻게 넣습미까..? -->
-
--최종 사진으로 넣을것
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/7a0f9c52-f676-4653-a009-369dc4a55a59"/><br>
+<br>
 <br>
 
 # **💡Software Requirement Specification**
 
-<!-- 이거 밑에 줄어떻게 넣습미까..? -->
-
--최종 사진으로 넣을것
 <br>
 
 # **📆Work Breakdown Structure**
 
-<!-- 이거 밑에 줄어떻게 넣습미까..? -->
-
--최종 사진으로 넣을것
 <br>
 
 # **👀웹 구성요소**
+
 ## **🌟Intro(index) Page🌟**
+
 -녹화가능
+
 ## **🌟Info Page🌟**
+
 -녹화가능
+
 ## **🌟Main(babsang-list) Page🌟**
+
 -메인
+
 ## **🌟Babsang-Insert Page🌟**
+
 -메인이동
+
 ## **🌟Babsang-Detail Page🌟**
+
 -메인이동
+
 ## **🌟Babsang-Comment Page🌟**
+
 -메인이동
+
 ## **🌟Join Page🌟**
+
 -메인이동
+
 ## **🌟Login Page🌟**
+
 -메인이동
+
 ## **🌟Profile Page🌟**
+
 -녹화가능
+
 ## **🌟Update Page🌟**
+
 -프로필 -> 녹화가능
+
 ## **🌟Withdraw Page🌟**
+
 -프로필 -> 녹화가능
+
 ## **🌟Eerror page🌟**
+
 -녹화가능
+
 ## **🌟Admin Chart page🌟**
+
 -녹화가능
+
+## **🌟Admin UserList page🌟**
+
+-녹화가능
+
 <!-- 모든 페이지 추가 -->
 <br>
 
@@ -232,6 +251,8 @@
     }
   ```
 
+---
+
 ### 2023.06.15 (2)
 
 - 네이버 API 사용시, 카카오 API와는 달리 state라는 요소가 추가되어있어서 6월 11일에 발생한 것과 똑같이 400 에러 발생
@@ -321,6 +342,8 @@
   </select>
   ```
 
+---
+
 ### 2023. 06. 20 (2)
 
 - 자바스크립트의 동작에따른 CSS 변경을 원해서 찾아보다가 태그.style 형태로 js가 css를 제어할수있음을 알게 되어 만들고있는 버튼에 적용해봤다.
@@ -365,6 +388,8 @@
     $('#idChk').removeClass('selected');
   ```
 
+---
+
 ### 2023. 06. 21
 
 - 가입날짜별 유저 수를 구한 후 관리자 페이지의 LineChart에 적용을 원하여 `UserInfoMapper.xml`에 아래에 해당하는 쿼리문을 추가하였고, `UserInfoVO.java`에 담을 변수 `int uiUserCnt`를 선언하였다.
@@ -392,3 +417,197 @@
     ORDER BY UI_CREDAT ASC;
     </select>
   ```
+
+---
+
+### 2023. 06. 24(1)
+
+- 관리자 페이지 작성시 상위 메뉴탭을 클릭할때마다 해당페이지에서는 해당버튼이 애니메이션이 적용토록 원했지만, 회원목록이 없을 경우에는 애니메이션 적용이 제대로 작동하지 않았다.
+- 해당 `userList-block.jsp`를 살펴보니 jstl <c:if>목록이 없을 때 조건</c:if>사이에 스크립트가 끼워져있어 회원목록이 없을 경우 스크립트가 제대로 작동하지 않았다.
+
+- `userList-block.jsp` 수정 전
+
+  ```jsp
+  <c:if test="${!(empty pageUiActive2.list)}">
+  <script>
+    <!-- 해당 위치에 스크립트가 끼워져있어 정상작동하지 않았다. -->
+    <script>
+      let blockTitle1 = document.getElementById('blockTitle');
+      let withdrawTitle1 = document.getElementById('withdrawTitle');
+      withdrawTitle1.classList.add('cancle');
+    </script>
+  </script>
+  </c:if>
+  ```
+
+- `userList-block.jsp` 수정 후 정상 애니메이션 적용 확인
+
+  ```jsp
+  <c:if test="${!(empty pageUiActive2.list)}">
+    <script>
+    <!-- 유저목록이 없는경우 실행하는 script -->
+    </script>
+  </c:if>
+  <script>
+      let blockTitle1 = document.getElementById('blockTitle');
+      let withdrawTitle1 = document.getElementById('withdrawTitle');
+      withdrawTitle1.classList.add('cancle');
+  </script>
+  ```
+
+---
+
+### 2023. 06. 24(2)
+
+- 밥상 상세페이지에서 다른 유저의 프로필을 확인해보면 해당 로그인한 유저가 밥상을 만들지 않았음에도 사이드바의 버튼이 `밥상생성` -> `내 밥상보러가기`로 변경되는 현상을 파악하였으며, 이후 해당 현상과 관련있던 `sideBar.jsp` 와 해당 요청주소에 해당하는 `UserInfoController.java`를 확인해보았다.
+
+- `UserInfoController.java` 수정 전
+
+  ```java
+    @GetMapping("/profile/{uiNum}")
+    public String profileByUiNum(@PathVariable("uiNum") int uiNum, HttpSession session, Model m) {
+      UserInfoVO userInfoVO = uiService.getUserInfoFromBabsang(uiNum);
+      m.addAttribute("user", userInfoVO);
+      // 다른 유저의 uiNum을 파라미터로 하는 프로필요청을 받을 경우 모델에 "user"라는 이름으로 attribute해주었다.
+      return "user/user-profile";
+    }
+  ```
+
+- `sideBar.jsp` 수정 전
+
+  ```jsp
+  <c:if test="${user.biNum == 0 && sessionScope.user.uiId != 'administer'}">
+  <!-- 각 조건에서는 세션이 아닌 모델에 넣어준 객체 user의 정보로 조건을 체크하고있다는 것을 확인하였다. -->
+    <a class="addBabsang" href="/addBabsang">밥상 생성</a>
+  </c:if>
+  <c:if test="${user.biNum != 0 && sessionScope.user.uiId != 'administer'}">
+  <!-- 각 조건에서는 세션이 아닌 모델에 넣어준 객체 user의 정보로 조건을 체크하고있다는 것을 확인하였다. -->
+    <a class="addBabsang" href="/detail/${user.biNum}">내 밥상<br>보러가기</a>
+  </c:if>
+  ```
+
+- `sideBar.jsp` 수정 후 정상작동 확인
+
+  ```jsp
+  <c:if test="${sessionScope.user.biNum == 0 && sessionScope.user.uiId != 'administer'}">
+  <!-- 로그인 후 세션에 담기는 객체를 이용하여 조건을 검사하도록 수정하였다. -->
+    <a class="addBabsang" href="/addBabsang">밥상 생성</a>
+  </c:if>
+  <c:if test="${sessionScope.user.biNum != 0 && sessionScope.user.uiId != 'administer'}">
+  <!-- 로그인 후 세션에 담기는 객체를 이용하여 조건을 검사하도록 수정하였다. -->
+    <a class="addBabsang" href="/detail/${user.biNum}">내 밥상<br>보러가기</a>
+  </c:if>
+  ```
+
+---
+
+### 2023. 06. 24(3)
+
+- 관리자의 차트페이지(겟매핑) 직접 접근 시 어느 누구라도 로그인이 되어있다면 바로 접근이 가능하다는 것을 확인하였고 이에 해당하는 `common.jsp`를 확인하였으며, 해당 페이지는 유저의 로그인이 되어있지 않다는 조건으로만 세션객체를 검사하고 있었다. 이후 관리자인 유저만 관리자페이지에서 세션검사가 실행되도록 `admin.jsp`를 추가하여 관리자가 접근가능한 모든 jsp에 `include` 처리하였다.
+- `admin.jsp`
+
+  ```jsp
+  <%@page import="com.ezen.mannamatna.vo.UserInfoVO"%>
+  <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+  <%
+  UserInfoVO adminChk = (UserInfoVO) session.getAttribute("user");
+  if(!adminChk.getUiId().equals("administer")){
+  %>
+  <script>
+  alert('관리자 권한이 필요한 서비스입니다. 🍔');
+  location.href = '/main';
+  </script>
+  <%
+  return;
+  }
+  %>
+  ```
+
+- 관리자 jsp에 `<%@ include file="/WEB-INF/views/common/common.jsp"%>` 와 함께 `<%@ include file="/WEB-INF/views/common/admin.jsp"%>`를 모두 추가해주었다.
+
+---
+
+### 2023. 06. 24(4)
+
+- 밥상이 마감되거나, 더 이상 참여가 불가능한 경우에는 보여지는 이미지 배경을 달리하고싶은데 태그립 조건문을 다음과 같이 쓰면 작동하지 않음을 발견했다.
+  
+  ```jsp
+  <c:if test="조건1">
+     <c:if test="조건2">
+     </c:if> // 조건2
+     <c:if test="조건3">
+     </c:if> // 조건3
+  </c:if> // 조건1
+   ```
+  
+- 이렇게 조건문을쓰는 실수가 잦다고한다. 다음과 같이 수정해서 사용해야한다.
+  
+  ```jsp
+  <c:choose>
+  <c:when test="조건1">
+  </c:when> // 조건1
+     <c:otherwise>
+        <c:if test="조건2">
+        </c:if> // 조건2
+        <c:if test="조건3">
+        </c:if> // 조건3
+     </c:otherwise>
+  </c:choose>
+   ```
+
+---
+
+### 2023. 06. 24(5)
+
+-zoomin & zoomout 시에 babsangListVO.biClosed 의 값이 true, false 인지에 따라서 배경색이 바뀌는 효과를 주고싶었는데 스트립트에서 babsangListVO.biClosed 의 값을 읽지 못했다. 다음은 수정전 코드이다.
+
+   ```jsp
+   <c:forEach items="${page.list}" var="babsangListVO">
+		<div class="babsang" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" // 뒤에 생략
+   ```
+   ```script
+   function zoomIn(event) {
+ 			if(${babsangListVO.biClosed}){
+ 				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedR.png')";
+ 			}
+			event.target.style.transform = "scale(1.05)";
+			event.target.style.zIndex = 1;
+			event.target.style.transition = "all 0.3s";
+			
+		}
+		function zoomOut(event) {
+			if(${babsangListVO.biClosed}){
+				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedG.png')";
+ 			}
+			event.target.style.transform = "scale(1)";
+			event.target.style.zIndex = 0;
+			event.target.style.transition = "all 0.3s";
+		}
+   ```
+
+-스크립트 영역에서 자꾸 ${babsangListVO.biClosed}값을 찾지 못하고있어서, 원인을 찾아보니 forEach가 실행되면서 각각의 div가 생성될때 마우스효과가 들어가는 것임을 확인하고 그때 스트립트 영역으로 넘길 함수에 ${babsangListVO.biClosed}값을 넣어주어서 해결했다.
+
+   ```jsp
+   <c:forEach items="${page.list}" var="babsangListVO">
+		<div class="babsang" onmouseenter="zoomIn(event,${babsangListVO.biClosed})" onmouseleave="zoomOut(event,${babsangListVO.biClosed})" // 뒤에 생략
+   ```
+   ```script
+   function zoomIn(event,closed) {
+    			if(closed){
+    				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedR.png')";
+    			}
+   			event.target.style.transform = "scale(1.05)";
+   			event.target.style.zIndex = 1;
+   			event.target.style.transition = "all 0.3s";
+   			
+   		}
+   		function zoomOut(event,closed) {
+   			if(closed){
+   				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedG.png')";
+    			}
+   			event.target.style.transform = "scale(1)";
+   			event.target.style.zIndex = 0;
+   			event.target.style.transition = "all 0.3s";
+   		}
+   ```
