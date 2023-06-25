@@ -107,8 +107,8 @@
 				"../../../resources/upload/babsang/tag/amefoodtag.jpg"
 				</c:if>
 				<c:if test="${babsangListVO.biFdCategory == '분식'}">
-				"../../../resources/upload/babsang/tag/snackfoodtag.jpg"
 				</c:if>
+				"../../../resources/upload/babsang/tag/snackfoodtag.jpg"
 				<c:if test="${babsangListVO.biFdCategory == '패스트푸드'}">
 				"../../../resources/upload/babsang/tag/fastfoodtag.jpg"
 				</c:if>

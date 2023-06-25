@@ -15,15 +15,16 @@
 <script>
 // 마감된 밥상의 경우 방장의 입장에서만 마감취소 혹은 맛남완료 버튼만 활성화
 window.onload = function(){
+	let btnList = document.querySelectorAll('.Btn');
+	console.log(btnList);
+	console.log('콘솔로찍은 biClosed = ' + ${detail.biClosed});
 	
 	if(${userList.size()==0 && sessionScope.user.uiId != 'administer'}){
 		alert('이미 맛남이 완료된 밥상입니다!');
 		location.href='/main';
 	}
-	let btnList = document.querySelectorAll('.Btn');
-	console.log(btnList);
-	console.log('콘솔로찍은 biClosed = ' + ${detail.biClosed});
-	if(${detail.biClosed==true && sessionScope.user.uiNum!=160}){
+	
+	if(${detail.biClosed==true && sessionScope.user.uiId!='administer'}){
 		// 해당밥상의 biClosed = true 일때, 마감한 밥상인 경우 버튼
 		for(let i = 0;i<btnList.length;i++){
 			if(btnList[i].innerText == '마감취소' || btnList[i].innerText == '맛남완료'){
@@ -77,12 +78,20 @@ window.onload = function(){
 			<button class="Btn" type="submit"
 				onclick="location.href='/babsangCloseCancle/${detail.biNum}'">마감취소</button>
 		</c:if>
-		<c:if test="${sessionScope.user.uiNum == detail.uiNum || sessionScope.user.uiId == 'administer'}">
+		<c:if
+			test="${sessionScope.user.uiNum == detail.uiNum || sessionScope.user.uiId == 'administer'}">
 			<%-- 세션정보가 작성자일 경우, 로그인유저가 작성자 및 관리자 인 경우 밥상삭제 버튼 추가 --%>
-			<button class="Btn"
-				onclick="location.href='/deleteBabsang?biNum=${detail.biNum}'">밥상삭제</button>
+			<button class="Btn" id = "deleteBtn" onclick=
+			<c:if test="${sessionScope.user.uiNum == detail.uiNum}">
+			"if(confirm('정말 삭제하시겠습니까?'))location.href='/deleteBabsang?biNum=${detail.biNum}'"
+			</c:if>
+			<c:if test="${sessionScope.user.uiId =='administer'}">
+			"if(confirm('통계 데이터가 변할 수 있습니다. 정말 삭제하시겠습니까?'))location.href='/deleteBabsang?biNum=${detail.biNum}'"
+			</c:if>
+			>밥상삭제</button>
 		</c:if>
-				<c:if test="${sessionScope.user.uiNum == detail.uiNum && ssessionScope.user.uiId != 'administer' && babsangUserList.size()!=0}">
+		<c:if
+			test="${sessionScope.user.uiNum == detail.uiNum && ssessionScope.user.uiId != 'administer' && babsangUserList.size()!=0}">
 			<%-- 로그인유저가 작성자인 경우, 맛남완료 버튼 추가 --%>
 			<button class="Btn"
 				onclick="location.href='/successBabsang/${detail.biNum}'">맛남완료</button>
@@ -93,36 +102,38 @@ window.onload = function(){
 			<div class="participents">참여자정보</div>
 			<br>
 			<div class="userCount">
-			<c:if test="${detail.biClosed==false}">
+				<c:if test="${detail.biClosed==false}">
 			${fn:length(babsangUserList)}(현재인원)
 			</c:if>
-			<c:if test="${sessionScope.user.uiId == 'administer' && detail.biClosed==true}">
+				<c:if
+					test="${sessionScope.user.uiId == 'administer' && detail.biClosed==true}">
 			${detail.biUserCnt}(마감인원)
 			</c:if>
-			&nbsp;/&nbsp;${detail.biHeadCnt}(최대인원)</div>
-			<div class="outterBox">
-			<div class="box" id="makerBox">
-				
-				<img class="profileImg" src="${babsangMaker.uiFilepath}"
-					onclick="location.href='/profile/${babsangMaker.uiNum}'">
-				<div class="nickName" id="makerNickName">
-					<img class="crown" src="../../../resources/upload/왕관.png">
-					${babsangMaker.uiNickname}
-				</div>
-				
+				&nbsp;/&nbsp;${detail.biHeadCnt}(최대인원)
 			</div>
+			<div class="outterBox">
+				<div class="box" id="makerBox">
+
+					<img class="profileImg" src="${babsangMaker.uiFilepath}"
+						onclick="location.href='/profile/${babsangMaker.uiNum}'">
+					<div class="nickName" id="makerNickName">
+						<img class="crown" src="../../../resources/upload/왕관.png">
+						${babsangMaker.uiNickname}
+					</div>
+
+				</div>
 			</div>
 			<c:forEach items="${babsangUserList}" var="userList">
 				<c:if test="${userList.uiNum!=detail.uiNum}">
 					<%-- 유저리스트의 uiNum과 해당밥상의 uiNum 이 같지 않을 경우만 실행 --%>
 					<%-- 즉, 참가자만 출력 (작성자는 기본 고정) --%>
-						<div class="outterBox">
-					<div class="box">
-				
-						<img class="profileImg" src="${userList.uiFilepath}"
-							onclick="location.href='/profile/${userList.uiNum}'">
-						<div class="nickName" id="partyNickName">${userList.uiNickname}</div>
-					</div>
+					<div class="outterBox">
+						<div class="box">
+
+							<img class="profileImg" src="${userList.uiFilepath}"
+								onclick="location.href='/profile/${userList.uiNum}'">
+							<div class="nickName" id="partyNickName">${userList.uiNickname}</div>
+						</div>
 					</div>
 				</c:if>
 			</c:forEach>
@@ -143,7 +154,8 @@ window.onload = function(){
 					<input type="hidden" name="biNum" value="${detail.biNum}" /> <input
 						type="text" class="form-control" id="ciContent" name="ciContent"
 						placeholder="댓글을 입력하세요."> <span class="input-group-btn">
-						<button class="commentBtn" type="button" name="commentInsertBtn" onclick="clickEvent()">작성하기</button>
+						<button class="commentBtn" type="button" name="commentInsertBtn"
+							onclick="clickEvent()">작성하기</button>
 					</span>
 				</div>
 			</form>
