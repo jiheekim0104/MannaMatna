@@ -45,31 +45,21 @@
 <br>
 
 # **↗Flowchart**
-
-
-
--최종 사진으로 넣을것
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/9da410e7-488d-44d0-a4d4-dc3dda6b1219"/><br>
+<br>
 <br>
 
 # **Entity Relationship Diagram**
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/7a0f9c52-f676-4653-a009-369dc4a55a59"/><br>
-
-
--최종 사진으로 넣을것
+<br>
 <br>
 
 # **💡Software Requirement Specification**
 
-
-
--최종 사진으로 넣을것
 <br>
 
 # **📆Work Breakdown Structure**
 
-
-
--최종 사진으로 넣을것
 <br>
 
 # **👀웹 구성요소**
