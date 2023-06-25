@@ -263,6 +263,8 @@
     }
   ```
 
+---
+
 ### 2023.06.15 (2)
 
 - 네이버 API 사용시, 카카오 API와는 달리 state라는 요소가 추가되어있어서 6월 11일에 발생한 것과 똑같이 400 에러 발생
@@ -352,6 +354,8 @@
   </select>
   ```
 
+---
+
 ### 2023. 06. 20 (2)
 
 - 자바스크립트의 동작에따른 CSS 변경을 원해서 찾아보다가 태그.style 형태로 js가 css를 제어할수있음을 알게 되어 만들고있는 버튼에 적용해봤다.
@@ -396,6 +400,8 @@
     $('#idChk').removeClass('selected');
   ```
 
+---
+
 ### 2023. 06. 21
 
 - 가입날짜별 유저 수를 구한 후 관리자 페이지의 LineChart에 적용을 원하여 `UserInfoMapper.xml`에 아래에 해당하는 쿼리문을 추가하였고, `UserInfoVO.java`에 담을 변수 `int uiUserCnt`를 선언하였다.
@@ -423,6 +429,8 @@
     ORDER BY UI_CREDAT ASC;
     </select>
   ```
+
+---
 
 ### 2023. 06. 24(1)
 
@@ -458,6 +466,8 @@
       withdrawTitle1.classList.add('cancle');
   </script>
   ```
+
+---
 
 ### 2023. 06. 24(2)
 
@@ -500,6 +510,8 @@
     <a class="addBabsang" href="/detail/${user.biNum}">내 밥상<br>보러가기</a>
   </c:if>
   ```
+
+---
 
 ### 2023. 06. 24(3)
 
