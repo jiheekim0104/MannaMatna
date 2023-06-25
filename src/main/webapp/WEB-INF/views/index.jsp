@@ -36,13 +36,10 @@ setInterval(function(){             //setInterval(); 함수 반복 실행 메소
   $(".image3").animate({marginTop:  "-929px" },"12000");  
   $(".image4").delay("14000");                          
   $(".image4").animate({marginTop:  "-929px" },"16000");    
-/*  $(".image5").delay("11500");     
-  $(".image5").animate({marginTop:  "0px" },"12500");
-  });
-  //animate( {애니메이션 속성}, "효과 속도" [, 콜백함수] ); 콜백함수는 동작이 완료되면 실행되는 함수입니다. [선택요소] */
 });
 
 setTimeout(function(){    
 	document.querySelector('.buttons').style.display="block";},1000);
+	
 </script>
 </html>

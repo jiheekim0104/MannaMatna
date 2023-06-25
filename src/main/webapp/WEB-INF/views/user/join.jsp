@@ -39,7 +39,7 @@
 		<input type="password" class="uiPwd" name="uiPwd" id="uiPwd" placeholder="비밀번호"><br> 
 		<input type="password" class="uiPwdCheck" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
 		<div class="filebox">
-    		<input class="upload-name" placeholder="프로필 사진" >
+    		<input class="upload-name" placeholder="프로필 사진" readonly="readonly">
     		<label for="file">업로드</label> 
    		 	<input type="file" id="file" name="uiFile" accept="image/gif,image/jpeg,image/png" onchange="loadImg(this)">
 		</div>
