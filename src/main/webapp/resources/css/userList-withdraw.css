@@ -14,7 +14,7 @@ cursor: pointer;
 	 transform-origin: 50% 0%;
      animation-name: shake;
      animation-duration: 1s;
-     animation-iteration-count: infinite; /* 반복회수 무한 */
+     animation-iteration-count: 1; /* 반복회수 무한 */
      animation-delay: 0.1s;
 }
 #blockTitle:not(.cancle){
@@ -23,7 +23,7 @@ cursor: pointer;
 	 transform-origin: 50% 0%;
      animation-name: shake;
      animation-duration: 1s;
-     animation-iteration-count: infinite; /* 반복회수 무한 */
+     animation-iteration-count: 1; /* 반복회수 무한 */
      animation-delay: 0.1s;
 }
 .content .inputUiNickname{

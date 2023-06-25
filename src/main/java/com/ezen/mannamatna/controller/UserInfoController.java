@@ -83,12 +83,13 @@ public class UserInfoController {
 	loginCnt++; // 아이디가 없거나, 비번이 틀린경우에 로그인 시행횟수가 추가됨
 	m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다. (로그인 시도 횟수:"+loginCnt+")");
 	
-	if(loginCnt==5) { //시행횟수가 5번이 되면
+	if(loginCnt%5==0) { //시행횟수가 5번이 되면(5번 마다)
 		if(uiService.findUser(userInfoVO)) { //아이디가 있는지 확인하여 해당유저가있다면
 			userInfoVO.setUiActive(2); //액티브 2로 변경
 			uiService.updateActive(userInfoVO, session);
 			m.addAttribute("msg", "비정상적인 로그인시도로 해당 계정이 일시정지 되었습니다. 관리자에게 문의하세요.");
 			m.addAttribute("url", "/main");
+			loginCnt=0; // 회수 초기화
 			return "common/msg";
 		}
 		// 일치하는 아이디가 없는경우

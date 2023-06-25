@@ -143,7 +143,7 @@ window.onload = function(){
 					<input type="hidden" name="biNum" value="${detail.biNum}" /> <input
 						type="text" class="form-control" id="ciContent" name="ciContent"
 						placeholder="댓글을 입력하세요."> <span class="input-group-btn">
-						<button class="commentBtn" type="button" name="commentInsertBtn">작성하기</button>
+						<button class="commentBtn" type="button" name="commentInsertBtn" onclick="clickEvent()">작성하기</button>
 					</span>
 				</div>
 			</form>
