@@ -125,12 +125,45 @@
 
 # **⚒️Trouble Shooting⚒️**
 
-### 2023.06.05
+### 2023.06.05(1)
 
-- [Uncaught ReferenceError: jQuery is not defined](https://joonpyo-hong.tistory.com/entry/JS-jQuery-is-not-defined-is-not-defined-%EC%98%A4%EB%A5%98)
+- 댓글기능 AJAX를 이용하여 구현시 `Uncaught ReferenceError: jQuery is not defined` 에러가 발생하였고 구글링 하여 보니 jQuery가 제대로 로드되지 않아서 발생한 것이라고 확인하였고, 해당 document에 아래 `<script></script>`를 추가하여 해결하였다.
+- `babsang-comment.jsp` 수정
 
-- [@PathVariable](https://byul91oh.tistory.com/435)
-  - 컨트롤러에 `@PathVariable int biNum`를 매개변수로 하니 request URI에 /comment/list?biNum=1 로 자동으로 매핑되며 컨트롤러에 해당 URI를 응답받아 처리하는 메소드가 없어 404 에러가 발생했다.
+  ```jsp
+    <!-- jQuery에서 제공하는 최신 버전의 jQuery CDN 호스트 -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+  ```
+
+- 찾아보니 jQuery는 `</body>` 바로 위에 넣기를 권장하며 `<head></head>` 사이에 넣으면 웹브라우저가 HTML문서를 해석(Parsing)할 때 `<script>` 태그를 만나면 그 안에 있는 javaScript의 처리가 끝날 때까지 다른 HTML의 해석을 멈추기 때문에 HTML 페이지가 화면에 완성되기까지 더 오래 걸린다고 한다.
+
+---
+
+### 2023. 06. 05(2)
+
+- `CommentInfoController.java`에 `@PathVariable int biNum`를 매개변수로 하는 메소드에서 요청받을 때 `biNum`을 함께 받도록 설정하였으나, 요청에대한 응답시 404에러가 계속 발생했다.
+- 원인을 살펴보니 request URI에 /comment/list?biNum=1 로 자동으로 매핑되었으며 컨트롤러에 해당 URI를 응답받아 처리하는 메소드가 없어 404 에러가 발생했다.
+- `CommentInfoController.java` 수정 전
+
+  ```java
+    @GetMapping("/list") // @PathVariable로 설정한 파라미터가 매핑에 연결되도록 해놓지 않아서 에러가 발생했다.
+    @ResponseBody // 리스트를 화면에 바로 뿌린다.
+    public List<CommentInfoVO> commentInfoList(@PathVariable int biNum){
+      // @PathVariable 어노테이션의 기능을 정확히 모른 채 사용했던 것 같다.
+      return commentInfoService.getCommentInfosService(biNum);
+    }
+  ```
+
+- `CommentInfoController.java` 수정 후
+
+  ```java
+    @GetMapping("/list")
+    @ResponseBody // 리스트를 화면에 바로 뿌린다.
+    public List<CommentInfoVO> commentInfoList(@RequestParam int biNum){
+      // 해당 어노테이션 변경하거나 아예 제거한 채로 정상작동 확인하였다.
+      return commentInfoService.getCommentInfosService(biNum);
+    }
+  ```
 
 ---
 
