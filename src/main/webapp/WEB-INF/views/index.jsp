@@ -35,7 +35,7 @@ setInterval(function(){             //setInterval(); 함수 반복 실행 메소
   $(".image3").delay("10000");                          
   $(".image3").animate({marginTop:  "-929px" },"12000");  
   $(".image4").delay("14000");                          
-  $(".image4").animate({marginTop:  "-929px" },"16000");    
+  $(".image4").animate({marginTop:  "-929px" },"16000");  
 });
 
 setTimeout(function(){    

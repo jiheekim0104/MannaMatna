@@ -7,7 +7,7 @@ html{
 	font-size: 20px;
 	padding:0;
 }
-span{
+.content>div>span{
 	color: #FC522F;
 	font-weight: bolder;
 	font-size: 30px;	
