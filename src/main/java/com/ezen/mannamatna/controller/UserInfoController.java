@@ -61,15 +61,18 @@ public class UserInfoController {
 	public String gologin(@ModelAttribute UserInfoVO userInfoVO, BabsangInfoVO babsang, HttpSession session, Model m) {
 		if(uiService.login(userInfoVO, session)) { // 입력한 id pwd가 일치하는 유저가 있다면
 			userInfoVO = (UserInfoVO) session.getAttribute("user"); // 그 유저를 담아옴
+			log.info("현재유저={}",userInfoVO);
 			if(userInfoVO.getUiActive()==1) { // 액티브가 1이면 탈퇴요청된 계정
 				m.addAttribute("msg","탈퇴처리된 계정입니다.");
 				session.invalidate();
 				return "user/login";
 			}
 			if(userInfoVO.getUiActive()==2) { // 액티브가 2이면 사용이 일시정지된 계정
+				log.info("여기옴={}",userInfoVO);
+				m.addAttribute("url", "/main");
 				m.addAttribute("msg","이용이 일시정지된 계정입니다. 관리자에게 문의하세요.");
 				session.invalidate();
-				return "user/main";
+				return "common/msg";
 			}
 			m.addAttribute("url", "/main");
 			m.addAttribute("msg", "오늘도 즐거운 맛남하세요! 🥰");
@@ -83,13 +86,14 @@ public class UserInfoController {
 	loginCnt++; // 아이디가 없거나, 비번이 틀린경우에 로그인 시행횟수가 추가됨
 	m.addAttribute("msg","아이디나 비밀번호가 잘못되었습니다. (로그인 시도 횟수:"+loginCnt+")");
 	
-	if(loginCnt%5==0) { //시행횟수가 5번이 되면(5번 마다)
+	if(loginCnt>=5) { //시행횟수가 5번이 되면
 		if(uiService.findUser(userInfoVO)) { //아이디가 있는지 확인하여 해당유저가있다면
 			userInfoVO.setUiActive(2); //액티브 2로 변경
 			uiService.updateActive(userInfoVO, session);
 			m.addAttribute("msg", "비정상적인 로그인시도로 해당 계정이 일시정지 되었습니다. 관리자에게 문의하세요.");
+			session.invalidate();
 			m.addAttribute("url", "/main");
-			loginCnt=0; // 회수 초기화
+			log.info("남은유저={}",userInfoVO);
 			return "common/msg";
 		}
 		// 일치하는 아이디가 없는경우

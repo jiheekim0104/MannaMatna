@@ -19,7 +19,7 @@
 		<div class="title" id="blockTitle"
 			onclick="location.href='/blockUser'">정지회원관리</div><br>
 	<form action="/blockUser" method="get" id="searchUiNickname">
-		<input type="text" class="inputUiNickname" name="uiNickname" placeholder="유저 닉네임 입력해주세요." value="${param.uiNickname}">
+		<input type="text" class="inputUiNickname" name="uiNickname" placeholder="찾을 유저의 닉네임을 입력해주세요." value="${param.uiNickname}">
 		<button class="Btn">검색</button>
 	</form>
 		<table class="userTable">
