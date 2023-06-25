@@ -525,3 +525,89 @@
   ```
 
 - 관리자 jsp에 `<%@ include file="/WEB-INF/views/common/common.jsp"%>` 와 함께 `<%@ include file="/WEB-INF/views/common/admin.jsp"%>`를 모두 추가해주었다.
+
+---
+
+### 2023. 06. 24(4)
+
+- 밥상이 마감되거나, 더 이상 참여가 불가능한 경우에는 보여지는 이미지 배경을 달리하고싶은데 태그립 조건문을 다음과 같이 쓰면 작동하지 않음을 발견했다.
+  
+  ```jsp
+  <c:if test="조건1">
+     <c:if test="조건2">
+     </c:if> // 조건2
+     <c:if test="조건3">
+     </c:if> // 조건3
+  </c:if> // 조건1
+   ```
+  
+- 이렇게 조건문을쓰는 실수가 잦다고한다. 다음과 같이 수정해서 사용해야한다.
+  
+  ```jsp
+  <c:choose>
+  <c:when test="조건1">
+  </c:when> // 조건1
+     <c:otherwise>
+        <c:if test="조건2">
+        </c:if> // 조건2
+        <c:if test="조건3">
+        </c:if> // 조건3
+     </c:otherwise>
+  </c:choose>
+   ```
+
+---
+
+### 2023. 06. 24(5)
+
+-zoomin & zoomout 시에 babsangListVO.biClosed 의 값이 true, false 인지에 따라서 배경색이 바뀌는 효과를 주고싶었는데 스트립트에서 babsangListVO.biClosed 의 값을 읽지 못했다. 다음은 수정전 코드이다.
+
+   ```jsp
+   <c:forEach items="${page.list}" var="babsangListVO">
+		<div class="babsang" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" // 뒤에 생략
+   ```
+   ```script
+   function zoomIn(event) {
+ 			if(${babsangListVO.biClosed}){
+ 				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedR.png')";
+ 			}
+			event.target.style.transform = "scale(1.05)";
+			event.target.style.zIndex = 1;
+			event.target.style.transition = "all 0.3s";
+			
+		}
+		function zoomOut(event) {
+			if(${babsangListVO.biClosed}){
+				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedG.png')";
+ 			}
+			event.target.style.transform = "scale(1)";
+			event.target.style.zIndex = 0;
+			event.target.style.transition = "all 0.3s";
+		}
+   ```
+
+-스크립트 영역에서 자꾸 ${babsangListVO.biClosed}값을 찾지 못하고있어서, 원인을 찾아보니 forEach가 실행되면서 각각의 div가 생성될때 마우스효과가 들어가는 것임을 확인하고 그때 스트립트 영역으로 넘길 함수에 ${babsangListVO.biClosed}값을 넣어주어서 해결했다.
+
+   ```jsp
+   <c:forEach items="${page.list}" var="babsangListVO">
+		<div class="babsang" onmouseenter="zoomIn(event,${babsangListVO.biClosed})" onmouseleave="zoomOut(event,${babsangListVO.biClosed})" // 뒤에 생략
+   ```
+   ```script
+   function zoomIn(event,closed) {
+    			if(closed){
+    				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedR.png')";
+    			}
+   			event.target.style.transform = "scale(1.05)";
+   			event.target.style.zIndex = 1;
+   			event.target.style.transition = "all 0.3s";
+   			
+   		}
+   		function zoomOut(event,closed) {
+   			if(closed){
+   				event.target.style.backgroundImage="url('../../../resources/upload/babsang/closedG.png')";
+    			}
+   			event.target.style.transform = "scale(1)";
+   			event.target.style.zIndex = 0;
+   			event.target.style.transition = "all 0.3s";
+   		}
+   ```
