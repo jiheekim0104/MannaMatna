@@ -107,7 +107,6 @@
 				let withdrawTitle = document.getElementById('withdrawTitle');
 				let blockTitle = document.getElementById('blockTitle');
 				blockTitle.classList.add('cancle');
-	
 			</script>
 </body>
 </html>
