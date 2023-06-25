@@ -82,6 +82,10 @@ if(${user.uiId!=null} && (${user.kuiId!=0}||${user.nuiId!=null})){
 	document.querySelector('.naverBnt').style.display = "none";
 	document.querySelector('.kakaoBnt').style.display = "none";
 }
+if(${user.uiId=='administer'}){
+	document.querySelector('.naverBnt').style.display = "none";
+	document.querySelector('.kakaoBnt').style.display = "none";
+}
 if(${user.uiId==null}){
 	document.querySelector('.uiId').innerHTML = '(SNS가입 연동)';
 	document.querySelector('.hint').innerHTML = '* SNS가입 연동고객의 초기 비밀번호는 0000 입니다.';
