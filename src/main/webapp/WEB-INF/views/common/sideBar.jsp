@@ -57,8 +57,12 @@
 				<br>
 				<a href="/profile">Profile</a>
 				<a href="/logout">Logout</a>
+				<c:if test="${sessionScope.user.uiId == 'administer'}">
+				<a class="information" href="https://dashboard.tawk.to" target="_blank">고객 문의</a>
+				</c:if>
+				<c:if test="${sessionScope.user.uiId != 'administer'}">
 				<a class="information" href="/info">만나맛나란?</a>
-				
+				</c:if>
 				<!-- 테스트 완료
 				<a>세션.biNum = ${sessionScope.user.biNum}</a>
 				<a>유저.biNum = ${user.biNum}</a>
