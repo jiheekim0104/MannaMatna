@@ -22,10 +22,13 @@
 		<input type="text" class="inputBiTitle" name="biTitle" placeholder="검색하실 밥상의 제목을 입력해주세요" value="${param.biTitle}">
 		<button class="btnBiTitle">검색</button>
 	</form>
-	
 	<!-- 카테고리 검색 기능 -->
 	<form action="/main" method="get" id="searchCategory">
 		<button class="btnCategory" name="biFdCategory" value="">전체</button>
+		<c:if test="${sessionScope.user.uiId == 'administer'}">
+		<button class="btnCategory" name="biClosed" value="1">마감밥상</button>
+		<button class="btnCategory" name="biUserCnt" value="1">맛남밥상</button>
+		</c:if>
 		<button class="btnCategory" name="biFdCategory" value="한식">한식</button>
 		<button class="btnCategory" name="biFdCategory" value="중식">중식</button>
 		<button class="btnCategory" name="biFdCategory" value="일식">일식</button>
@@ -35,7 +38,6 @@
 		<button class="btnCategory" name="biFdCategory" value="해산물">해산물</button>
 		<button class="btnCategory" name="biFdCategory" value="족발">족발</button>
 	</form>
-	
 	<!-- 밥상 목록 -->
 				
 	<c:if test="${empty page.list}">

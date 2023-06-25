@@ -26,6 +26,12 @@
 		<if test='biFdCategory != null and biFdCategory != ""'>
 			AND BI.BI_FDCATEGORY LIKE CONCAT(#{biFdCategory})
 		</if>
+		<if test='biClosed != null and biClosed !=""'>
+			AND BI.BI_CLOSED = #{biClosed} AND BI.BI_USERCNT IS NULL
+		</if>
+		<if test='biUserCnt != null and biUserCnt !=""'>
+			AND BI.BI_USERCNT > #{biUserCnt}
+		</if>
 		ORDER BY BI.BI_NUM DESC
 	</select>
 	
