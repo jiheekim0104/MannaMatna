@@ -208,10 +208,10 @@ public class BabsangInfoController {
 		if (session.getAttribute("user") != null) {
 			// 세션 로그인상태 유지중 마감하기 누른 후
 			// 밥상인포 biClosed 1로 업데이트
+			url = "/detail/" + biNum; // 해당 페이지 redirect
 			if(userInfoService.getUserInfosByBiNum(biNum).size()==1) {
 				// 참여인원이 방장 혼자밖에없는 경우 삭제만 가능!
-				msg = "참여인원이 아무도 없습니다! 밥상 삭제를 이용해주세요. 😭";
-				url = "/detail/" + biNum; // 해당 페이지 redirect
+				msg = "참여인원이 아무도 없습니다! 밥상 삭제를 이용해주세요. 😭";	
 			}
 			else if (babsangInfoService.blockJoin(biNum)) {
 				// 밥상서비스의 마감메소드 정상 실행 시

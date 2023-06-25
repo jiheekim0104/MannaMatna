@@ -50,8 +50,14 @@
 			<c:if test="${sessionScope.user.uiNum == null && babsangListVO.biClosed == false}">
 			"location.href='/cannotSeeBabsang'"
 			</c:if>
-			<c:if test="${babsangListVO.biClosed == true}">
-			"alert('이미 마감된 밥상입니다!');" 
+			<c:if test="${babsangListVO.biClosed == true && sessionScope.user.biNum == babsangListVO.biNum && babsangListVO.biUserCnt == 0}">
+			"location.href='/detail/${babsangListVO.biNum}'"
+			</c:if>
+			<c:if test="${babsangListVO.biClosed == true && sessionScope.user.biNum != babsangListVO.biNum && babsangListVO.biUserCnt == 0}">
+			"alert('인원모집이 종료된 밥상입니다!');" 
+			</c:if>
+			<c:if test="${babsangListVO.biClosed == true && sessionScope.user.biNum != babsangListVO.biNum && babsangListVO.biUserCnt != 0}">
+			"alert('맛남 종료된 밥상입니다!');" 
 			</c:if>
 			style=
 			<c:choose>
@@ -107,8 +113,8 @@
 				"../../../resources/upload/babsang/tag/amefoodtag.jpg"
 				</c:if>
 				<c:if test="${babsangListVO.biFdCategory == '분식'}">
-				</c:if>
 				"../../../resources/upload/babsang/tag/snackfoodtag.jpg"
+				</c:if>
 				<c:if test="${babsangListVO.biFdCategory == '패스트푸드'}">
 				"../../../resources/upload/babsang/tag/fastfoodtag.jpg"
 				</c:if>
@@ -125,8 +131,11 @@
 		<c:if test="${babsangListVO.biClosed == false}">
 		최대 인원 수 : ${babsangListVO.biHeadCnt}
 		</c:if>
-		<c:if test="${babsangListVO.biClosed == true}">
+		<c:if test="${babsangListVO.biClosed == true && babsangListVO.biUserCnt != 0}">
 		마감 인원 수 : ${babsangListVO.biUserCnt}
+		</c:if>
+		<c:if test="${babsangListVO.biClosed == true && babsangListVO.biUserCnt == 0}">
+		인원모집이 종료되었습니다.
 		</c:if>
 		</div>
 		

@@ -102,11 +102,11 @@ window.onload = function(){
 			<div class="participents">참여자정보</div>
 			<br>
 			<div class="userCount">
-				<c:if test="${detail.biClosed==false}">
+				<c:if test="${sessionScope.user.uiId != 'administer' || detail.biUserCnt==0}">
 			${fn:length(babsangUserList)}(현재인원)
 			</c:if>
 				<c:if
-					test="${sessionScope.user.uiId == 'administer' && detail.biClosed==true}">
+					test="${sessionScope.user.uiId == 'administer' && detail.biClosed==true && detail.biUserCnt!=0}">
 			${detail.biUserCnt}(마감인원)
 			</c:if>
 				&nbsp;/&nbsp;${detail.biHeadCnt}(최대인원)
