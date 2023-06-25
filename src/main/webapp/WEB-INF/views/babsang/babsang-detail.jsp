@@ -86,7 +86,7 @@ window.onload = function(){
 			"if(confirm('정말 삭제하시겠습니까?'))location.href='/deleteBabsang?biNum=${detail.biNum}'"
 			</c:if>
 			<c:if test="${sessionScope.user.uiId =='administer'}">
-			"if(confirm('통계 데이터가 변할 수 있습니다. 정말 삭제하시겠습니까?'))location.href='/deleteBabsang?biNum=${detail.biNum}'"
+			"if(confirm('통계 데이터에 변동이 있을 수 있습니다. 정말 삭제하시겠습니까?'))location.href='/deleteBabsang?biNum=${detail.biNum}'"
 			</c:if>
 			>밥상삭제</button>
 		</c:if>
