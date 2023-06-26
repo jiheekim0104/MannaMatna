@@ -22,12 +22,16 @@
 		<input type="text" class="inputBiTitle" name="biTitle" placeholder="검색하실 밥상의 제목을 입력해주세요" value="${param.biTitle}">
 		<button class="btnBiTitle">검색</button>
 	</form>
+		
 	<!-- 카테고리 검색 기능 -->
 	<form action="/main" method="get" id="searchCategory">
 		<button class="btnCategory" name="biFdCategory" value="">전체</button>
 		<c:if test="${sessionScope.user.uiId == 'administer'}">
 		<button class="btnCategory" name="biClosed" value="1">마감밥상</button>
 		<button class="btnCategory" name="biUserCnt" value="1">맛남밥상</button>
+		</c:if>
+		<c:if test="${sessionScope.user.uiId != 'administer'}">
+		<button class="btnCategory" name="biClosed" value="">참여가능</button>
 		</c:if>
 		<button class="btnCategory" name="biFdCategory" value="한식">한식</button>
 		<button class="btnCategory" name="biFdCategory" value="중식">중식</button>
@@ -38,10 +42,10 @@
 		<button class="btnCategory" name="biFdCategory" value="해산물">해산물</button>
 		<button class="btnCategory" name="biFdCategory" value="족발">족발</button>
 	</form>
-	<!-- 밥상 목록 -->
-				
+	
+	<!-- 밥상 목록 -->			
 	<c:if test="${empty page.list}">
-		<div class="empty">밥상이 존재하지 않습니다. 😇<div>
+		<div class="empty">밥상이 존재하지 않습니다. 😇 </div>
 	</c:if>
 	<c:forEach items="${page.list}" var="babsangListVO">
 		<div class="babsang" onmouseenter="zoomIn(event,${babsangListVO.biClosed})" onmouseleave="zoomOut(event,${babsangListVO.biClosed})"
@@ -96,8 +100,12 @@
 			</c:choose>
 		>
 			
-		<h3 id="biTitle">
-			제목 : ${babsangListVO.biTitle}
+		<h3 id="biTitle" style=
+			<c:if test="${babsangListVO.biClosed != '0'}">
+				"color: black;"
+			</c:if>
+		>
+			${babsangListVO.biTitle}
 		</h3>
 		
 		<div id="biFdCatecory">

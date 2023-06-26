@@ -125,6 +125,22 @@
 
 # **⚒️Trouble Shooting⚒️**
 
+### 2023.06.01 (1)
+
+- 학원에서 작업하는 것을 집에서도 가능하게 하기 위해 환경을 맞춰주는 도중
+  mySQL 설치하는데 3306포트는 이미 사용중이라는 문구를 띄움 <br>
+  해결방안 : 3306 포트의 PID를 찾아 taskkill 후 설치 진행
+
+---
+
+### 2023.06.01 (2)
+
+- 톰캣 서버 작동 시 80포트는 이미 사용중이어서 실행 불가능 <br>
+  해결방안 : 역시 80포트의 PID를 찾아 taskkill
+  (해당 문제는 컴퓨터 전원을 재부팅하면 동일하게 나타나는 것으로 확인 >> 미해결)
+
+---
+
 ### 2023.06.05(1)
 
 - 댓글기능 AJAX를 이용하여 구현시 `Uncaught ReferenceError: jQuery is not defined` 에러가 발생하였고 구글링 하여 보니 jQuery가 제대로 로드되지 않아서 발생한 것이라고 확인하였고, 해당 document에 아래 `<script></script>`를 추가하여 해결하였다.
@@ -164,6 +180,15 @@
       return commentInfoService.getCommentInfosService(biNum);
     }
   ```
+
+---
+
+### 2023.06.07
+
+- 프로젝트 임포트 후 bootstrap.xxx.js파일들에 컴파일 에러가 발생하였다 <br>
+  검색하여보니 semi-colon expected 에러 라고 한다 <br>
+  해결방안 : 해당 워크스페이스 경로\.metedata\.plugin\org.core.resources\.project\{프로젝트명}\.markers 파일을 삭제 <br>
+  참고 자료 - https://mebadong.tistory.com/52
 
 ---
 
