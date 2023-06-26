@@ -29,11 +29,11 @@
 
 
 	<form method="POST" action="/addBabsang" class="content">
-		<input type="text" id="biTitle" name="biTitle" placeholder="제목을 입력해주세요 (최대 길이 50자)" maxlength="50" required >
+		<input type="text" id="biTitle" name="biTitle" placeholder="제목을 입력해주세요 (최대 길이 50자)" maxlength="50" required oninvalid="this.setCustomValidity('제목을 입력해주세요')" onchange="this.setCustomValidity('')" >
 		<div class="options">
 			<input type="text" id="biMeetingDat" name="biMeetingDat" required>
 			<input type="text" id="biMeetingTim" name="biMeetingTim" class="timePicker" required>
-			<select id="biFdCategory"name="biFdCategory" required>
+			<select id="biFdCategory"name="biFdCategory" required oninvalid="this.setCustomValidity('카테고리를 선택해주세요')" onchange="this.setCustomValidity('')">
 				<option value="" selected>카테고리 선택</option>
 				<option value="한식">한식</option>
 				<option value="중식">중식</option>
@@ -44,7 +44,7 @@
 				<option value="해산물">해산물</option>
 				<option value="족발">족발</option>
 			</select>
-			<select id="biHeadCnt" name="biHeadCnt" required>
+			<select id="biHeadCnt" name="biHeadCnt" required oninvalid="this.setCustomValidity('최대 인원수를 설정해주세요')" onchange="this.setCustomValidity('')">
 				<option value="" selected>최대 인원 선택</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
