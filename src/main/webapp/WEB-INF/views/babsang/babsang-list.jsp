@@ -22,6 +22,7 @@
 		<input type="text" class="inputBiTitle" name="biTitle" placeholder="검색하실 밥상의 제목을 입력해주세요" value="${param.biTitle}">
 		<button class="btnBiTitle">검색</button>
 	</form>
+		
 	<!-- 카테고리 검색 기능 -->
 	<form action="/main" method="get" id="searchCategory">
 		<button class="btnCategory" name="biFdCategory" value="">전체</button>
@@ -38,10 +39,10 @@
 		<button class="btnCategory" name="biFdCategory" value="해산물">해산물</button>
 		<button class="btnCategory" name="biFdCategory" value="족발">족발</button>
 	</form>
-	<!-- 밥상 목록 -->
-				
+	
+	<!-- 밥상 목록 -->			
 	<c:if test="${empty page.list}">
-		<div class="empty" >밥상이 존재하지 않습니다. 😇 <div>
+		<div class="empty">밥상이 존재하지 않습니다. 😇 </div>
 	</c:if>
 	<c:forEach items="${page.list}" var="babsangListVO">
 		<div class="babsang" onmouseenter="zoomIn(event,${babsangListVO.biClosed})" onmouseleave="zoomOut(event,${babsangListVO.biClosed})"
