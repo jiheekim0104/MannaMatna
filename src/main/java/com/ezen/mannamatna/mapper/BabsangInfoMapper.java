@@ -8,6 +8,9 @@ public interface BabsangInfoMapper {
 	
 	List<BabsangInfoVO> selectBabsangList(BabsangInfoVO babsang); // 게시물 목록 불러오기
 	
+	//
+	List<BabsangInfoVO> selectBabsangInfoOpened(BabsangInfoVO babsangInfoVO);
+	
 	BabsangInfoVO selectBabsangInfo(int biNum); // 게시글 상세
 
 	int insertBabsangInfo(BabsangInfoVO babsang); // 게시물 작성
@@ -21,4 +24,5 @@ public interface BabsangInfoMapper {
 	int updateBiUserCnt(BabsangInfoVO babsangInfoVO); // 맛남완료 후 해당밥상의 현재인원 업데이트
 
 	BabsangInfoVO selectBiCnt(); // 맛남완료된 밥상 개수 select
+	
 }
