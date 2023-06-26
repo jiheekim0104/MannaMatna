@@ -21,4 +21,7 @@ public class BabsangInfoVO {
 	//페이징 
 	private int page = 1;
 	private int rows = 4;
+	//위치
+	private double lat;
+	private double lng;
 }

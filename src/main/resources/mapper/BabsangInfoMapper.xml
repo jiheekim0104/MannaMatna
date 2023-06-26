@@ -37,7 +37,7 @@
 	<!-- 밥상 상세 정보 -->
 	<select id="selectBabsangInfo" parameterType="int" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
 		SELECT BI_NUM, BI_TITLE, BI_CONTENT, BI_MEETINGDAT, BI_MEETINGTIM, 
-		BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY, BI_CLOSED, UI_NUM, BI_USERCNT 
+		BI_HEADCNT, BI_CREATEDAT, BI_FDCATEGORY, BI_CLOSED, UI_NUM, BI_USERCNT , LAT, LNG
 		FROM BABSANG_INFO 
 		WHERE BI_NUM = #{biNum}
 	</select>
@@ -48,10 +48,10 @@
 	<insert id="insertBabsangInfo">
 		INSERT INTO BABSANG_INFO(
 		BI_TITLE, BI_CONTENT, BI_MEETINGDAT, BI_MEETINGTIM, 
-		BI_HEADCNT, BI_FDCATEGORY, BI_CLOSED, UI_NUM)
+		BI_HEADCNT, BI_FDCATEGORY, BI_CLOSED, UI_NUM , LAT, LNG)
 		VALUES(
 		#{biTitle}, #{biContent}, #{biMeetingDat}, #{biMeetingTim}, 
-		#{biHeadCnt}, #{biFdCategory}, #{biClosed}, #{uiNum}
+		#{biHeadCnt}, #{biFdCategory}, #{biClosed}, #{uiNum}, #{lat}, #{lng}
 		<!-- 마지막에 auto increase 된 넘버 불러오는 mysql 메소드 -->
 		<selectKey resultType="int" keyProperty="uiBiNum" order="AFTER">
 			SELECT LAST_INSERT_ID();

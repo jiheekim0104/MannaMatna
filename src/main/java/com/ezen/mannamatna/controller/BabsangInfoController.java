@@ -62,7 +62,7 @@ public class BabsangInfoController {
 	@PostMapping("/addBabsang")
 	public String insertBabsang(BabsangInfoVO babsang, UserInfoVO userInfoVO, Model m, HttpSession session) {
 		UserInfoVO userSession = (UserInfoVO) session.getAttribute("user");
-
+		log.info("babsang={}",babsang);
 		babsang.setUiNum(userSession.getUiNum()); // 세션의 uiNum >> 받아서 밥상의 uiNum으로 set
 		log.info("userInfo_biNum ===> {}", babsang.getUiBiNum()); // 밥상이 생성되지않아 받아올게 없어서 0이 나옴
 		String msg = "밥상 등록 실패";
