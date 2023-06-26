@@ -30,6 +30,9 @@
 		<button class="btnCategory" name="biClosed" value="1">마감밥상</button>
 		<button class="btnCategory" name="biUserCnt" value="1">맛남밥상</button>
 		</c:if>
+		<c:if test="${sessionScope.user.uiId != 'administer'}">
+		<button class="btnCategory" name="biClosed" value="">참여가능</button>
+		</c:if>
 		<button class="btnCategory" name="biFdCategory" value="한식">한식</button>
 		<button class="btnCategory" name="biFdCategory" value="중식">중식</button>
 		<button class="btnCategory" name="biFdCategory" value="일식">일식</button>

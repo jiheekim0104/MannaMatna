@@ -42,7 +42,9 @@
 		FROM BABSANG_INFO 
 		WHERE BI_NUM = #{biNum}
 	</select>
-	
+	<select id="selectBabsangInfoOpened" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
+		SELECT * FROM BABSANG_INFO WHERE BI_CLOSED = #{biClosed}
+	</select>
 	<!-- 밥상 생성 -->
 	<insert id="insertBabsangInfo">
 		INSERT INTO BABSANG_INFO(
