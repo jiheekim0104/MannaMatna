@@ -13,11 +13,11 @@
 	<img src="../../../resources/upload/logo.png">
 </div>
 <div class="right">
-	<div class="image1"><img src="../../../resources/upload/slide1.jfif"></div>
-	<div class="image2"><img src="../../../resources/upload/slide2.jpg"></div>
-	<div class="image3"><img src="../../../resources/upload/slide3.jpg"></div>
-	<div class="image4"><img src="../../../resources/upload/slide4.jpg"></div>
-	<div class="image5"><img src="../../../resources/upload/slide5.jpeg"></div>
+	<div class="image1"><img src="../../../resources/upload/index/slide1.jfif"></div>
+	<div class="image2"><img src="../../../resources/upload/index/slide2.jpg"></div>
+	<div class="image3"><img src="../../../resources/upload/index/slide3.jpg"></div>
+	<div class="image4"><img src="../../../resources/upload/index/slide4.jpg"></div>
+	<div class="image5"><img src="../../../resources/upload/index/slide5.jpeg"></div>
 </div>
 <div class="buttons">
 	<button class="mainBnt" onclick="location.href='/main'">메인페이지로 이동하기</button><br>

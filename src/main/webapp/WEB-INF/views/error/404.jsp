@@ -62,7 +62,7 @@ div{
 }
 </style>
 <body>
-    <img src="/resources/upload/404.jpg">
+    <img src="/resources/upload/error/404.jpg">
     <div>
     	<button class="mainBnt" onclick="location.href='/main'">메인페이지로 이동</button>
     	<button class="backBnt" onclick="javascript:history.back();">이전페이지로 이동</button>
