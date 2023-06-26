@@ -96,3 +96,7 @@ html{
 	text-align: left;
 }
 
+.panel > p> img {
+	width: 80%;
+	margin: 0 10%;
+}

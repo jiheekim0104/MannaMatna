@@ -7,7 +7,5 @@
     <title>Kakao Login</title>
 </head>
 <body>
-여기서 정보를 받을것이야!
-${user}
 </body>
 </html>

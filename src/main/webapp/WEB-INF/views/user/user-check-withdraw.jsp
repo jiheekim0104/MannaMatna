@@ -22,7 +22,7 @@ alert('${msg}');
 				<span class="uiNickname">${user.uiNickname}</span>님이 맞는지 한번더 확인할게요.<br>
 			</div>	
 			<input type="password" name="uiPwd" id="uiPwd" placeholder="비밀번호를 입력해주세요.">
-			<button class="bnt">확인</button>			
+			<button class="withdrawBnt">확인</button>			
 		</form>
 	</div>
 </body>

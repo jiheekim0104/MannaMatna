@@ -7,8 +7,6 @@
     <title>Naver Login</title>
 </head>
 <body>
-여기서 정보를 받을것이야! (네이버)
-${user}
 
 </body>
 </html>

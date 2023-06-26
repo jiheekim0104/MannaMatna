@@ -17,17 +17,17 @@
 <div class="content">
 	<div class="infoBox1">
 		<br><br><br>
-		<img src="../../../resources/upload/info1.png" class="info1"><br>
+		<img src="../../../resources/upload/info/info1.png" class="info1"><br>
 		<br><br><br><br>
-		전체 인구의 <span>33.4%</span>에 달하는 <span>1인 가구</span>수,<br>
-		맛있는 건 먹고 싶은데, <span>혼자 다 먹긴 부담</span>스럽지 않으신가요?<br>
+		전체 인구의 <span>33.4%</span>에 달하는 <span>1인 가구 </span>수,<br>
+		맛있는 건 먹고 싶은데, <span>혼자 다 먹긴 부담</span>스럽지 않으신가요? <br>
 		<br><br><br><br><br>
 	</div>
 	<div class="infoBox2">
-		<img src="../../../resources/upload/info2.png" class="info2">
+		<img src="../../../resources/upload/info/info2.png" class="info2">
 		<br><br>
 		<span>혹은 혼자 먹으려니까 괜히 입맛이 떨어지지</span> 않나요?<br>
-		<sapn>맨날 혼자서 같은거 먹기 질려!</sapn> 누가 맛집좀 알려주면 좋겠다구요?<br>
+		<sapn>맨날 혼자서 같은 거 먹기 질려!</sapn> 누가 맛집 좀 알려주면 좋겠다고요?<br>
 		그런 당신을 위한 신개념 밥상 매칭 사이트!<br><br><br><br><br><br><br><br><br>
 	</div>
 	<div class="image">
@@ -45,27 +45,54 @@
 		<button class="accordion">밥상에는 어떻게 참여할수있나요? (방장편)</button>
 			<div class="panel">
 	  			<p>
-	  		  (1) '밥상 생성' 버튼을 클릭합니다.<br>
-			  (2) 제목, 만나는 날짜, 만나는 시간, 음식 카테고리, 만나는 최대 인원수를 설정하고 내용을 입력해 주세요.<br>
-			  (3) 인원이 어느 정도 모였으면, '마감하기' 버튼을 눌러주세요. 더 이상 다른 유저가 참여할 수 없어요. 혹시나 추가 참여인원을 모집하고 싶다면 '마감취소'버튼을 눌러주세요.<br>
-			  (4) 만남이 이루어지고 나면 '맛남완료' 버튼을 꼭 눌러주세요.</p>
+	  			(1) '밥상 생성' 버튼을 클릭합니다.<br>
+	  		  <img src="../../../resources/upload/info/1-1.png">
+	  		  <br><br>
+				(2) 제목, 만나는 날짜, 만나는 시간, 음식 카테고리, 만나는 최대 인원수를 설정하고 내용을 입력해 주세요.<br>
+			   <img src="../../../resources/upload/info/1-2.png">
+			   <br><br>
+				(3) 작성된 글은 메인에서 바로 보실수있습니다. 유저들간의 신뢰높은 약속을위해 수정기능은 구현하지 않았으니 작성된 글을 한번더 확인해주세요.<br>
+			   <img src="../../../resources/upload/info/1-3.png">
+			   <br><br>
+				(4) 인원이 어느 정도 모였으면, '마감하기' 버튼을 눌러주세요. 더 이상 다른 유저가 참여할 수 없어요. <br>혹시나 추가 참여인원을 모집하고 싶다면 '마감취소'버튼을 눌러주세요. <br>
+				만남이 이루어지고 나면 '맛남완료' 버튼을 꼭 눌러주세요.<br>
+			   <img src="../../../resources/upload/info/1-4.png">
+			   <br><br>
+				(5) 메인에서 방이 닫혔음을 확인할수있고, 이제 또 다른 밥상 생성과 참여가 가능합니다.
+			   <img src="../../../resources/upload/info/1-5.png">
+			   <br><br>
+				</p>
 			</div>
 	
 		<button class="accordion">밥상에는 어떻게 참여할수있나요? (참여자편)</button>
 			<div class="panel">
 	  			<p>
 	  		  (1) 원하는 밥상을 클릭합니다. 이때 closed가 적혀있는 밥상은 인원이 마감되었거나 맛남이 종료된 밥상이어서 더 이상 참여할 수 없습니다.<br>
+	  		  <img src="../../../resources/upload/info/2-1.png">
+			  <br><br>
 			  (2) 참여하기를 원하시면 '참여하기' 버튼을 눌러주세요.<br>
+			  <img src="../../../resources/upload/info/2-2.png">
+			  <br><br>
 			  (3) 참석이 불가능해진 경우에는 '참여취소' 버튼을 눌러주세요. 단,방장이 인원 마감을 한 경우에는 '참여취소' 버튼을 누를 수 없어요.<br>
-			  (4) 만남 이후에 방장이 '맛남완료'버튼을 누르면 다른 밥상에 참여할 수 있어요.</p>
+			  <img src="../../../resources/upload/info/2-3.png">
+			  <br><br>
+			  (4) 만남 이후에 방장이 '맛남완료'버튼을 누르면 다른 밥상 생성과 참여가 가능합니다.
+			  <img src="../../../resources/upload/info/2-4.png">
+			  <br><br>
+			  </p>
 			</div>
 	
 		<button class="accordion">탈퇴는 어떻게하나요?</button>
 			<div class="panel">
 		 		<p>
 		 		(1) 프로필에서 '탈퇴하기'버튼을 눌러주세요.<br>
+		 		<img src="../../../resources/upload/info/3-1.png">
+			  	<br><br>
 		 		(2) 탈퇴 사유를 입력하고 비밀번호가 일치하면 탈퇴 처리됩니다.<br>
+		 		<img src="../../../resources/upload/info/3-2.png">
+			  	<br><br>
 		 		(3) 이후에 다시 만나맛나로 돌아오고 싶으시다면 관리자와 소통해 주세요.<br>
+			  	<br><br>
 		 		<br>
 		 		* 참고로 참여 중인 밥상이 있는 경우에는 탈퇴요청을 할 수 없습니다. 아래에 있는 절차를 확인해 주세요.<br>
 		 	- 본인이 방장인데 참여 인원이 없는 경우 : 삭제하기 -> 탈퇴<br>
