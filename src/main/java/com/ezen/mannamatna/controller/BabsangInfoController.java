@@ -110,14 +110,15 @@ public class BabsangInfoController {
 		String url = "/login";
 		BabsangInfoVO babsangInfoVO = babsangInfoService.getBabsangInfoVO(biNum); // 상세페이지의 biNum으로 밥상객체 불러옴
 		List<UserInfoVO> userList = userInfoService.getUserInfosByBiNum(biNum); // 해당 밥상에 참여중인 userList
-		if (userSession != null) {
-			// 로그인 유저가 확인됐을 경우에만 삭제 가능
+		if (!userSession.getUiId().equals("administer")) {
+			// 로그인 유저가 확인됐을 경우에만 삭제 가능, 관리자가 아닐 경우
 			msg = "이미 마감된 밥상입니다!!";
 			url = "/detail/" + biNum; // 해당페이지 redirect
 			if (userList.size() > 1) {
-				// 해당밥상에 유저리스트에 다른 유저가 존재할 경우 삭제기능x
+				// 해당밥상에 유저리스트에 다른 유저가 존재할 경우, 관리자가 아닌경우 삭제기능x
+				// 관리자면 삭제가 가능하도록 수정
 				msg = "해당 밥상에 이미 참여중인 유저가 존재합니다!";
-			} else if (!babsangInfoVO.isBiClosed() || userSession.getUiId().equals("administer")) {
+			}else if (!babsangInfoVO.isBiClosed()) {
 				// biClosed = false 인 경우만 삭제기능 가능
 				// 밥상이 마감된 상태면 삭제할 수 없어여!!
 				for (UserInfoVO user : userList) {
@@ -132,6 +133,20 @@ public class BabsangInfoController {
 				msg = "밥상 삭제 성공!!";
 				url = "/main";
 			}
+		}
+		else {
+			// 관리자일 경우 = 무조건 기능실행
+			for (UserInfoVO user : userList) {
+				// 삭제기능 실행 시
+				// 해당 밥상에 참여중인 유저리스트에 모든 biNum을 0으로 초기화
+				user.setBiNum(0);
+				userSession.setBiNum(0); // session에도 넣어주어 버튼들이 다르게 보이도록 설정
+				userInfoService.updateBiNum(user); // delete 성공 시 유저서비스의 update 실행
+			}
+			// 유저리스트의 biNum 전부 0으로 업데이트 후 삭제!!
+			babsangInfoService.deleteBabsangInfo(biNum);
+			msg = "관리자 권한으로 삭제하였습니다.";
+			url = "/main";
 		}
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);

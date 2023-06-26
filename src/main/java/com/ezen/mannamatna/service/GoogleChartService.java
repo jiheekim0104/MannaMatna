@@ -1,5 +1,9 @@
 package com.ezen.mannamatna.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -56,7 +60,7 @@ public class GoogleChartService {
 		columns.add(cols2); // 전체 컬럼 JSONArray에 컬럼2 추가
 
 		jsonData.put("cols", columns); // 리턴해줄 전체 JSONObject에 "cols"라는 이름으로 전체 컬럼을 추가
-		
+
 		JSONArray dataRows = new JSONArray(); // 컬럼에 맞춰 넣을 데이터객체 생성
 
 		JSONObject dataRow1 = new JSONObject(); // 데이터는 [남자, 인원수] 형식으로 만들어주어야한다.
@@ -135,7 +139,7 @@ public class GoogleChartService {
 		jsonData.put("cols", columns);
 
 		JSONArray dataRows = new JSONArray();
-		
+
 		JSONObject dataRow1 = new JSONObject();
 		JSONArray dataRow1Values = new JSONArray();
 		JSONObject dataRow1Value1 = new JSONObject();
@@ -203,35 +207,62 @@ public class GoogleChartService {
 
 	public JSONObject getCredatChart(HttpSession session) {
 		// 날자별 가입인원수 동향 선차트
+		// Get the current date
+		// Get the current date
 		List<UserInfoVO> items = userInfoService.getUserInfosByCredat(session);
 		// 이 리스트는 [가입날짜, 인원수] 의 형식으로 조회된다.
 		JSONObject jsonData = new JSONObject(); // 해당 서비스에서 jsonObject를 컨트롤러에 리턴한다.
 		JSONArray columns = new JSONArray(); // 컬럼 생성
 
+		// Generate the data for the last month
+
 		JSONObject cols1 = new JSONObject(); // 첫번째 컬럼
 		cols1.put("label", "가입날짜");
 		cols1.put("type", "string");
 		columns.add(cols1);
-	
+
 		JSONObject cols2 = new JSONObject(); // 두번째 컬럼
 		cols2.put("label", "가입날짜별회원수");
 		cols2.put("type", "number");
 		columns.add(cols2);
-		
+
 		jsonData.put("cols", columns);
-		
+
 		JSONArray dataRows = new JSONArray();
-		for (UserInfoVO user : items) {
-			// 날짜별 회원수 반복하며 데이터에 추가
+
+		// Format the date as needed, e.g., "YYYY-MM-dd"
+
+		LocalDate currentDate = LocalDate.now();
+		LocalDate thirtyDaysAgo = currentDate.minusDays(30);
+
+		List<LocalDate> allDates = new ArrayList<>();
+		while (currentDate.isAfter(thirtyDaysAgo) || currentDate.isEqual(thirtyDaysAgo)) {
+			allDates.add(currentDate);
+			currentDate = currentDate.minusDays(1);
+		}
+		Collections.reverse(allDates);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		for (LocalDate date : allDates) {
+			// 최근 30일 날짜 컬럼으로 데이터 반복하며 데이터에 추가
+			String formattedDate = date.format(formatter);
 			JSONObject dataRow = new JSONObject();
 			JSONArray dataRowValues = new JSONArray();
 			JSONObject dataRowValue1 = new JSONObject();
-
-			dataRowValue1.put("v", user.getUiCredat());
-			dataRowValues.add(dataRowValue1);
 			JSONObject dataRowValue2 = new JSONObject();
-			dataRowValue2.put("v", user.getUiUserCnt());
-			dataRowValues.add(dataRowValue2);
+			dataRowValue1.put("v", formattedDate);
+			dataRowValues.add(dataRowValue1);
+			for (UserInfoVO user : items) {
+				dataRowValue2.put("v", 0);
+				dataRowValues.add(dataRowValue2);
+				if (formattedDate.equals(user.getUiCredat().toString())) {
+					// 현재날짜별 유저 회원가입날짜가 일치하는 경우
+					dataRowValue2.put("v", user.getUiUserCnt());
+					dataRowValues.add(dataRowValue2);
+					break;
+				}
+			}
+
 			dataRow.put("c", dataRowValues);
 			dataRows.add(dataRow);
 		}

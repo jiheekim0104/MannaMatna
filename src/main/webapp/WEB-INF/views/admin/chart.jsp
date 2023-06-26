@@ -96,7 +96,7 @@
 			}
 		};
 		var lineChartOptions = {
-			title : '만나맛나 날짜별 가입회원 수 동향',
+			title : '만나맛나 날짜별 가입회원 수 동향(최근 30일)',
 			height : 300,
 			fontName : 'omyu_pretty',
 			fontSize: 15,
