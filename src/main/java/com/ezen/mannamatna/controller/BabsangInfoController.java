@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import com.ezen.mannamatna.service.BabsangInfoService;
 import com.ezen.mannamatna.service.UserInfoService;
 import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
+import com.github.pagehelper.PageInfo;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -42,6 +44,11 @@ public class BabsangInfoController {
 	@GetMapping("/main")
 	public String pagingBabsangList(@ModelAttribute BabsangInfoVO babsang, Model m) {
 		m.addAttribute("page", babsangInfoService.getPagingBansang(babsang));
+		return "babsang/babsang-list";
+	}
+	@GetMapping("/main/openedBabsang")
+	public String pagingOpenedBabsangList(BabsangInfoVO babsangInfoVO, Model m) {
+		m.addAttribute("page", babsangInfoService.getPagingOpenedBansangList(babsangInfoVO));
 		return "babsang/babsang-list";
 	}
 	

@@ -34,7 +34,6 @@
 		</if>
 		ORDER BY BI.BI_NUM DESC
 	</select>
-	
 	<!-- 밥상 상세 정보 -->
 	<select id="selectBabsangInfo" parameterType="int" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
 		SELECT BI_NUM, BI_TITLE, BI_CONTENT, BI_MEETINGDAT, BI_MEETINGTIM, 
@@ -43,7 +42,7 @@
 		WHERE BI_NUM = #{biNum}
 	</select>
 	<select id="selectBabsangInfoOpened" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
-		SELECT * FROM BABSANG_INFO WHERE BI_CLOSED = #{biClosed}
+		SELECT * FROM BABSANG_INFO WHERE BI_CLOSED = 0 ORDER BY BI_NUM DESC
 	</select>
 	<!-- 밥상 생성 -->
 	<insert id="insertBabsangInfo">
