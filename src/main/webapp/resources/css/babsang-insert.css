@@ -7,11 +7,12 @@
     font-style: normal;
 }
 
-.content{
+.form{
 	display: grid;
 	grid-template-areas:
 		't t'
 		'o o'
+		'x x'
 		'c c'
 		'b1 b2';
 	grid-template-columns: repeat(2, 1fr);
@@ -27,6 +28,9 @@
 }
 .options{
 	grid-area: o;
+}
+.map_wrap{
+	grid-area:x;
 }
 #biContent{
 	grid-area:c;

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 	// ajax를 이용한 댓글 목록 출력
 	let biNum = '${detail.biNum}'; // 게시글 번호
