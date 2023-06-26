@@ -51,7 +51,7 @@ body{
     
 }
 input::placeholder{
-	font-size: 16px;
+	font-size: 18px;
 	color: #b7b7b7;
 }
 
@@ -66,7 +66,7 @@ input::placeholder{
   	text-align: center;
   	text-decoration: none;
   	display: inline-block;
-  	font-size: 16px;
+  	font-size: 18px;
 }
 
 
@@ -96,6 +96,9 @@ input::placeholder{
       animation-iteration-count: infinite;
       animation-delay: 0.1s;
   	
+}
+.empty{
+	font-size: 18px;
 }
 
 .babsang{
@@ -128,36 +131,8 @@ h3{
 #biFdCatecory>img{
 	height: 24px;
 }
-@keyframes shakeForBabsang{
-	 /* 흔들리는 애니메이션 추가 밥상은 수치를 좀 다르게 주겠다.*/
-     0%{
-        transform: rotate(0deg);
-      }
-      10%{
-        transform: rotate(1deg);
-      }
-      20%{
-        transform: rotate(-1deg);
-      }
-      30%{
-        transform: rotate(0.5deg);
-      }
-      40%{
-        transform: rotate(-0.5deg);
-      }
-      50%{
-        transform: rotate(0deg);
-      }
-} 
 .babsang:hover{
   	border: 2px solid #FC522F;
-  	/* 메인 버튼 및 페이징Div shake 애니메이션*/
-  	  /* transform-origin: 50% 0%;
-      animation-name: shakeForBabsang;
-      animation-duration: 1s;
-      animation-iteration-count: infinite;
-      animation-delay: 0.1s; */
-      
 }
 
 #pageDiv{

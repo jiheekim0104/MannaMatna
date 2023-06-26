@@ -41,7 +41,7 @@
 	<!-- 밥상 목록 -->
 				
 	<c:if test="${empty page.list}">
-		<div>밥상이 존재하지 않습니다</div>
+		<div class="empty">밥상이 존재하지 않습니다. 😇<div>
 	</c:if>
 	<c:forEach items="${page.list}" var="babsangListVO">
 		<div class="babsang" onmouseenter="zoomIn(event,${babsangListVO.biClosed})" onmouseleave="zoomOut(event,${babsangListVO.biClosed})"
