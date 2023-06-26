@@ -41,7 +41,7 @@
 	<!-- 밥상 목록 -->
 				
 	<c:if test="${empty page.list}">
-		<div class="empty">밥상이 존재하지 않습니다. 😇<div>
+		<div class="empty" >밥상이 존재하지 않습니다. 😇 <div>
 	</c:if>
 	<c:forEach items="${page.list}" var="babsangListVO">
 		<div class="babsang" onmouseenter="zoomIn(event,${babsangListVO.biClosed})" onmouseleave="zoomOut(event,${babsangListVO.biClosed})"
@@ -96,8 +96,12 @@
 			</c:choose>
 		>
 			
-		<h3 id="biTitle">
-			제목 : ${babsangListVO.biTitle}
+		<h3 id="biTitle" style=
+			<c:if test="${babsangListVO.biClosed != '0'}">
+				"color: black;"
+			</c:if>
+		>
+			${babsangListVO.biTitle}
 		</h3>
 		
 		<div id="biFdCatecory">
