@@ -706,3 +706,104 @@ function zoomIn(event,closed) {
   "alert('맛남 종료된 밥상입니다!');"
 </c:if>
 ```
+
+---
+
+### 2023. 06. 26(1)
+
+- 밥상 분류 기준 중 참여가능한 밥상만 조회가 가능하면 좋겠다는 의견에 따라 수정작업중, boolean 타입의 biClosed의 false(0)이라는 조건으로는 구현해놨던 검색쿼리문에 적용이 안된다는 것을 확인했다. boolean 타입이므로 애초에 false로는 검색자체가 구현이 안되는 것이었다. 따라서 파라미터 상관없이 `biClosed = 0` 이라는 조건으로 데이터를 조회하는 쿼리문을 `BabsangInfoMapper.xml`에 추가한 후 참여가능 버튼을 누른 후 매핑되도록 구현하였다.
+- 데이터 자원소모가 매우 큰 방식임을 알았으나, 다른 방법을 찾지 못하여 버튼 클릭 시 새로 조회하고 새로 페이징하도록 설정하였다.
+- `BabsangInfoMapper.xml` 수정
+
+  ```xml
+  <select id="selectBabsangInfoOpened" resultType="com.ezen.mannamatna.vo.BabsangInfoVO">
+      SELECT * FROM BABSANG_INFO WHERE BI_CLOSED = 0 ORDER BY BI_NUM DESC
+  </select>
+  ```
+
+- `BabsangInfoMapper.java` 인터페이스에 해당 메소드 추가
+
+  ```java
+  List<BabsangInfoVO> selectBabsangInfoOpened();
+  ```
+
+- `BabsangInfoService.java` 수정 추가
+
+  ```java
+    public PageInfo<BabsangInfoVO> getPagingOpenedBansangList(BabsangInfoVO babsangInfoVO) {
+      // 참여가능 밥상 페이징 리턴
+      PageHelper.startPage(babsangInfoVO.getPage(), babsangInfoVO.getRows());
+      return new PageInfo<>(babsangInfoMapper.selectBabsangInfoOpened());
+    }
+  ```
+
+- `BabsangInfoController.java` 수정 및 매핑 추가
+
+  ```java
+    @GetMapping("/main/openedBabsang")
+    public String pagingOpenedBabsangList(BabsangInfoVO babsangInfoVO, Model m) {
+      m.addAttribute("page", babsangInfoService.getPagingOpenedBansangList(babsangInfoVO));
+      return "babsang/babsang-list";
+    }
+  ```
+
+### 2023. 06. 26(2)
+
+- 관리자 밥상 삭제 테스트 중 일반밥상, 맛남밥상 모두 삭제가 가능하였으나, 마감밥상은 삭제가 구현되지 않음을 확인하였다. 관련된 `BabsangInfoController.java` 에 삭제메소드 내부에 참가자가 존재할 경우 유저가 관리자일 조건을 검사하지 않고 넘어가고 있었다. (`if-else`)
+- `BabsangInfoController.java` 수정 전
+
+```java
+		if (userSession!=null) {
+			msg = "이미 마감된 밥상입니다!!";
+			url = "/detail/" + biNum;
+			if (userList.size() > 1) {
+				// 해당 조건에서 참이 되었을 때 else if()조건을 거치지 않고 삭제 기능을 수행하지 않았다.
+				msg = "해당 밥상에 이미 참여중인 유저가 존재합니다!";
+			}else if (!babsangInfoVO.isBiClosed() || userSession.getUiId().equals("administer")) {
+				for (UserInfoVO user : userList) {
+					user.setBiNum(0);
+					userSession.setBiNum(0);
+					userInfoService.updateBiNum(user);
+        }
+				babsangInfoService.deleteBabsangInfo(biNum);
+				msg = "밥상 삭제 성공!!";
+				url = "/main";
+			}
+		}
+```
+
+- `BabsangInfoController.java` 수정 후
+
+```java
+		if (!userSession.getUiId().equals("administer")) {
+			// 최초 관리자가 아닐 경우로 일반유저와 관리자를 크게 if-else로 보기쉽게 구분하였다.
+			msg = "이미 마감된 밥상입니다!!";
+			url = "/detail/" + biNum;
+			if (userList.size() > 1) {
+				msg = "해당 밥상에 이미 참여중인 유저가 존재합니다!";
+			}else if (!babsangInfoVO.isBiClosed()) {
+				for (UserInfoVO user : userList) {
+					user.setBiNum(0);
+					userSession.setBiNum(0);
+					userInfoService.updateBiNum(user);
+				}
+				babsangInfoService.deleteBabsangInfo(biNum);
+				msg = "밥상 삭제 성공!!";
+				url = "/main";
+			}
+		}
+		else {
+			// 관리자일 경우 = 무조건 기능실행
+			for (UserInfoVO user : userList) {
+				user.setBiNum(0);
+				userSession.setBiNum(0);
+				userInfoService.updateBiNum(user);
+			}
+			babsangInfoService.deleteBabsangInfo(biNum);
+      // 유저가 관리자일 경우만 실행하므로 메세지처리를 다소 변경하였다.
+			msg = "관리자 권한으로 삭제하였습니다.";
+			url = "/main";
+		}
+```
+
+- 수정에 수정을 거칠수록 내가 짠 코드마저도 잘 알아보지 못하여 작업 시간이 매우 길어지게됨을 느꼈다. 추후에는 클린코드에 좀 더 신경써서 작업해야겠음을 절실하게 느끼는 중이다.
