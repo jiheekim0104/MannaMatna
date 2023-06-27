@@ -42,6 +42,7 @@ dependencies {
 	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1' // 구글차트 api를 위한 json-simple 의존성 추가
 	implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
     implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13' // 문자인증 테스트용...
 }
 
 tasks.named('test') {
