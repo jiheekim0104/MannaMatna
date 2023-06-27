@@ -38,7 +38,7 @@
 | DB                  | MySQL Workbench(8.0.32)                                  |
 | IDE                 | Eclipse IDE 2023-03 (4.27.0)                             |
 | 협업 도구           | Git-hub, Zoom, KakaoTalk, GoogleSheet, GoogleSlide       |
-| API 또는 라이브러리 | Google : Chart<br>Kakao : Login<br>Naver : Login<br>tawk |
+| API 또는 라이브러리 | Google : Chart<br>Kakao : Login, Map<br>Naver : Login<br>tawk |
 
 <br>
 
