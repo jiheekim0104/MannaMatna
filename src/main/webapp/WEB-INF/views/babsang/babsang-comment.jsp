@@ -7,36 +7,58 @@
 	let inputBtn = document.querySelector('.commentBtn');
 	console.log(document.getElementById('#ciContent'));
 	
-	function clickEvent() { //댓글 등록 버튼 클릭시 
-		
-		console.log('댓글등록눌렀따!!!');
-		let content = commentInsertForm.ciContent;
-		let inputBox = document.querySelector('.commentInput');
-		console.log('댓글내용 : ' + content.value);
-		if(content.value.trim() == ''){
-			// 내용이 없는 없는경우에는 commentInsert 실행하지 않는다.!!
-			content.placeholder='내용은 필수입니다.'; // 인풋박스의 placeholder 변경
-			inputBox.classList.add('vibration'); // 애니메이션 클래스 추가
-			console.log(inputBox);
-			console.log(inputBox.classList);
-			setTimeout(function(){
-				// 0.4초 후 애니메이션 클래스 제거
-				inputBox.classList.remove('vibration');
-			}, 400);
-			setTimeout(function(){
-				// 0.8초 후 placeholder 원상복귀 처리
-				content.placeholder='댓글을 입력하세요.';
-			}, 1000);
-			content.focus(); // 인풋박스 포커스되도록 설정
-		}else{
-			// 내용이 있는 경우에만 인서트 실행
-		let insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
-		commentInsert(insertData); //Insert 함수호출(아래)
-		}
-	};
+	document.addEventListener('keydown', function(event) {
+	    if (event.key === 'Enter' && event.target.id === 'ciContent') {
+	      event.preventDefault();
+	      
+	      let content = event.target.value.trim();
+	      console.log(event.target.parentNode.classList);
+	      if (content === '') {
+	        event.target.placeholder = '내용은 필수입니다.';
+	        // 부모요소에 애니메이션적용
+	        event.target.parentNode.classList.add('vibration');
+	        setTimeout(function() {
+	        	event.target.parentNode.classList.remove('vibration');
+	        }, 400);
+	        setTimeout(function() {
+	          event.target.placeholder = '내용을 입력하세요.';
+	        }, 1000);
+	        event.target.focus();
+	      } else {
+	        let insertData = $('[name=commentInsertForm]').serialize();
+	        commentInsert(insertData);
+	      }
+	    }
+	  });
 	
+	   function clickEvent() { //댓글 등록 버튼 클릭시 
+		      
+		      console.log('댓글등록눌렀따!!!');
+		      let content = commentInsertForm.ciContent;
+		      let inputBox = document.querySelector('.commentInput');
+		      console.log('댓글내용 : ' + content.value);
+		      if(content.value.trim() == ''){
+		         // 내용이 없는 없는경우에는 commentInsert 실행하지 않는다.!!
+		         content.placeholder='내용은 필수입니다.'; // 인풋박스의 placeholder 변경
+		         inputBox.classList.add('vibration'); // 애니메이션 클래스 추가
+		         console.log(inputBox);
+		         console.log(inputBox.classList);
+		         setTimeout(function(){
+		            // 0.4초 후 애니메이션 클래스 제거
+		            inputBox.classList.remove('vibration');
+		         }, 400);
+		         setTimeout(function(){
+		            // 0.8초 후 placeholder 원상복귀 처리
+		            content.placeholder='댓글을 입력하세요.';
+		         }, 1000);
+		         content.focus(); // 인풋박스 포커스되도록 설정
+		      }else{
+		         // 내용이 있는 경우에만 인서트 실행
+		      let insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
+		      commentInsert(insertData); //Insert 함수호출(아래)
+		      }
+		   };
 
-	
 	//댓글 목록 
 	function commentList() {
 		$.ajax({
@@ -81,23 +103,18 @@
 						}
 						
 						$(".commentList").html(a);
-						let commentBoxes = document.querySelectorAll('.commentBox');
-						let commentBoxesEnd = document.querySelectorAll('.end'); // end 붙은 코멘트들확인
-						console.log('end 코멘트확인 + ' + commentBoxesEnd);
-						// 댓글 작성 후 생기는 commentBox 배열중에서 가장 마지막인덱스의 댓글에만 애니메이션 1초 적용 후 제거
-								if(commentBoxes[commentBoxes.length-1].classList.contains('end')==false){
-									commentBoxes[commentBoxes.length-1].classList.add('fadeInUp');
-							setTimeout(function(){
-								// 1초 후 placeholder 원상복귀 처리
-								commentBoxes[commentBoxes.length-1].classList.remove('fadeInUp');
-								console.log('진행중 클래스 확인 : ' + commentBoxes[commentBoxes.length-1].classList);
-							}, 1000);
-							for(let i = 0;i<commentBoxes.length;i++){
-								// 리스트 전체에 end 클래스를 추가하여 더이상 애니메이션이 작동하지않도록!
-								commentBoxes[i].classList.add('end');
-							}
-							console.log('클래스 추가 후 확인 : ' + commentBoxes[commentBoxes.length-1].classList);
-							}
+					      // Apply animation only to the last comment box
+					      let lastCommentBox = $(".commentBox").last();
+					      
+
+					      // Check if the last comment box has the "end" class
+					      if (!lastCommentBox.hasClass("end")) {
+					    	  lastCommentBox.addClass("fadeInUp");
+					        setTimeout(function () {
+					          // Remove the animation class after 1 second
+					          lastCommentBox.removeClass("fadeInUp");
+					        }, 1000);
+					      }
 					}
 				});
 	}
@@ -111,6 +128,7 @@
 				if (data == 1) {
 					commentList(); //댓글 작성 후 댓글 목록 reload
 					$('[name=ciContent]').val('');
+					$(".commentBox").last().addClass("end");
 				}
 			}
 		});
@@ -152,16 +170,11 @@
 	        type : 'post',
 	        success : function(data){
 	            if(data == 1) commentList(biNum); //댓글 삭제후 목록 출력 
+	            $(".commentBox .commentInfo" + ciNum).addClass("end");
 	        }
 	    });
 	}
 	$(document).ready(function() {
 		commentList(); // 페이지 로딩 시 댓글 목록 출력
-		
-		 $("#ciContent").keydown(function(key){
-		        if(key.keyCode==13) {
-		        	$('[name=commentInsertBtn]').click(clickEvent());
-		        }
-		    });
 	});
 </script>
