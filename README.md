@@ -76,62 +76,73 @@
 ## **🌟Intro(index) Page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/55019b43-5e73-45d1-a7ef-b5245f9c283e"/><br>
-
+<br>
 ## **🌟Info Page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/54933ba8-05b2-4be4-9260-2a899ab10ecc"/><br>
-
+<br>
 ## **🌟Main(babsang-list) Page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/e11b8553-d511-40f8-adce-70ed5c4dc46c"/>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/e11b8553-d511-40f8-adce-70ed5c4dc46c"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/cf941a42-bbd8-4349-9b75-6a3b3dfe9e3e"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/f37975cc-1147-455a-b3a9-47b324b9eadf"/><br>
 <br>
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/cf941a42-bbd8-4349-9b75-6a3b3dfe9e3e"/>
-<br>
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/f37975cc-1147-455a-b3a9-47b324b9eadf"/>
 
 ## **🌟Babsang-Insert Page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/8dd9b3b3-3319-4870-bcc7-822c61a2139c"/> 3-12<br>
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/059f1a28-d7e4-4e43-8ae1-4252ea4fddaf"/> 3-13<br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/8dd9b3b3-3319-4870-bcc7-822c61a2139c"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/059f1a28-d7e4-4e43-8ae1-4252ea4fddaf"/><br>
+<br>
 
 ## **🌟Babsang-Detail Page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/ad7587d0-7533-4dc0-8729-a36e4ad685cc"/> 3-14<br>
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/fb22729b-281f-4c63-b32b-f488dc5cb607"/> 3-15<br>
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/2287415d-07cc-4d76-911a-038884497ff9"/> 3-16<br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/ad7587d0-7533-4dc0-8729-a36e4ad685cc"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/fb22729b-281f-4c63-b32b-f488dc5cb607"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/2287415d-07cc-4d76-911a-038884497ff9"/><br>
+<br>
 
 ## **🌟Babsang-Comment Page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/c8fc971a-8dcc-496f-acc8-7282cc745a1e"/> 3-17<br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/c8fc971a-8dcc-496f-acc8-7282cc745a1e"/><br>
 
 ## **🌟Join Page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/de0011c9-27d7-4560-a17e-5ba79823dbb7"/> 2-11<br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/de0011c9-27d7-4560-a17e-5ba79823dbb7"/><br>
+<br>
 
 ## **🌟Login Page🌟**
+
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/7088e98b-cebf-4111-948a-413c8fde1773"/><br>
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/5f9917fe-3846-49bf-ae2c-a9949a7c5086"/><br>
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/76f2777a-c98c-450c-b4c9-7bc70b76386d"/><br>
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/ea6a3f47-468e-4d52-8acd-0ad54576ffd1"/><br>
+<br>
 
 ## **🌟User Chat🌟**
+
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/e71c71e1-b180-4150-93f4-bf8e4b69b5e9"/><br>
+<br>
+
 ## **🌟Profile Page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/c150db60-985d-40cd-8c05-b371de97a6a6"/><br>
-
+<br>
 
 ## **🌟Update Page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/b60ca57d-08ab-4649-b217-3ba58deed8c6"/> <br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/b60ca57d-08ab-4649-b217-3ba58deed8c6"/><br>
+<br>
 
 ## **🌟Withdraw Page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/698a7347-433b-4a9e-8c8a-e019542c6ca5"/><br>
+<br>
 
 ## **🌟Join-SNS page🌟**
+
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/a9eee7a8-31ab-4171-85c6-c1f2ebd82e57"/><br>
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/cc5bb800-25d5-4ba7-b03f-01181004bf0d"/><br>
+<br>
 
 ## **🌟Eerror page🌟**
 
@@ -140,31 +151,37 @@
 ## **🌟Admin Login page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/3406f3db-5947-4bba-b2dc-a6a1a66cc59c"/><br>
+<br>
 
 ## **🌟Admin Chart page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/942ad911-1f40-46dd-9281-1f2074a6e021"/><br>
+<br>
 
 ## **🌟Admin UserList-withdraw page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/9b510700-dcfb-476c-aba2-8c9541ecb1f2"/><br>
+<br>
 
 ## **🌟Admin UserList-block page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/fc7eafbf-e814-4406-89b9-551c471dcdde"/><br>
+<br>
 
 ## **🌟Admin Babsang List page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/74dddc0b-4463-4555-b7b1-8ac961c43023"/><br>
+<br>
 
 ## **🌟Admin Babsang Delete page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/69695a9d-1e85-4042-812d-ba8758c4562a"/><br>
+<br>
 
 ## **🌟Admin Customer Service page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/f72e90c3-6671-4b5f-9f2a-288b810b6eae"/><br>
-
+<br>
 <br>
 
 # **⚒️Trouble Shooting⚒️**
