@@ -102,8 +102,8 @@
 			<textarea id="biContent" name="biContent"
 				placeholder="내용을 입력해주세요 (최대 길이 500자)" maxlength="500" ></textarea><br>
 			<div class="buttons">
-				<button id="submit">등록</button>
 				<button id="cancle" onclick="location.href='/main'">취소</button>
+				<button id="submit">등록</button>
 			</div>
 			
 

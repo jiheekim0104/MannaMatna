@@ -69,8 +69,8 @@
 	height: 78%;
 }
 
-.buttons{
-	text-align: right;
+.buttons>button{
+	float: right;
 }
 
 #biMeetingDat, #biMeetingTim, #biFdCategory, #biHeadCnt{
