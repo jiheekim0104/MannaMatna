@@ -76,34 +76,37 @@
 				placeholder="제목을 입력해주세요 (최대 길이 50자)" maxlength="50" required>
 			<div class="options">
 				<input type="text" id="biMeetingDat" name="biMeetingDat" required>
-				<input type="text" id="biMeetingTim" name="biMeetingTim"
-					class="timePicker" required> <select id="biFdCategory"
-					name="biFdCategory" required>
-					<option value="" selected>카테고리 선택</option>
-					<option value="한식">한식</option>
-					<option value="중식">중식</option>
-					<option value="중식">일식</option>
-					<option value="양식">양식</option>
-					<option value="분식">분식</option>
-					<option value="패스트푸드">패스트푸드</option>
-					<option value="해산물">해산물</option>
-					<option value="족발">족발</option>
-				</select> <select id="biHeadCnt" name="biHeadCnt" required>
-					<option value="" selected>최대 인원 선택</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-				</select>
+				<input type="text" id="biMeetingTim" name="biMeetingTim" class="timePicker" required> 
+					<select id="biFdCategory" name="biFdCategory" required>
+						<option value="" selected>카테고리 선택</option>
+						<option value="한식">한식</option>
+						<option value="중식">중식</option>
+						<option value="중식">일식</option>
+						<option value="양식">양식</option>
+						<option value="분식">분식</option>
+						<option value="패스트푸드">패스트푸드</option>
+						<option value="해산물">해산물</option>
+						<option value="족발">족발</option>
+					</select> 
+					<select id="biHeadCnt" name="biHeadCnt" required>
+						<option value="" selected>최대 인원 선택</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+					</select>
 			</div>
 			<textarea id="biContent" name="biContent"
-				placeholder="내용을 입력해주세요 (최대 길이 500자)" maxlength="500"></textarea><br>
-			<button id="submit">등록</button>
-			<button id="cancle" onclick="location.href='/main'">취소</button>
+				placeholder="내용을 입력해주세요 (최대 길이 500자)" maxlength="500" ></textarea><br>
+			<div class="buttons">
+				<button id="cancle" onclick="location.href='/main'">취소</button>
+				<button id="submit">등록</button>
+			</div>
 			
+
 			<br>
 			<input type="hidden" name="lat" class="lat" value="0.0">
 			<input type="hidden" name="lng" class="lng" value="0.0">
@@ -127,7 +130,6 @@
 				<ul id="placesList"></ul>
 				<div id="pagination"></div>
 			</div>
-			
 
 		</div>
 	</div>

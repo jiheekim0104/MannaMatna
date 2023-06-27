@@ -122,6 +122,7 @@ window.onload = function(){
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=741c6c8657768cf31100b909d46f72c8"></script>
 
+<<<<<<< HEAD
 
 <script>
 var markerPosition  = new kakao.maps.LatLng(${detail.lat}, ${detail.lng});
@@ -138,6 +139,13 @@ mapOption = {
     center: new kakao.maps.LatLng(${detail.lat}, ${detail.lng}), // 지도의 중심좌표
     marker: marker, // 이미지 지도에 표시할 마커 
     level: 3 // 지도의 확대 레벨
+=======
+		
+// 이미지 지도에 표시할 마커입니다
+var marker = {
+    position: new kakao.maps.LatLng(${detail.lat}, ${detail.lng}), 
+    text: '여기에서 맛남!' // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다
+>>>>>>> branch 'master' of https://github.com/jiheekim0104/MannaMatna.git
 };
 //지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 

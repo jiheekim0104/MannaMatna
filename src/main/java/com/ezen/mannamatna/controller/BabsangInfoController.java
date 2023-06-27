@@ -110,7 +110,7 @@ public class BabsangInfoController {
 		String url = "/login";
 		BabsangInfoVO babsangInfoVO = babsangInfoService.getBabsangInfoVO(biNum); // 상세페이지의 biNum으로 밥상객체 불러옴
 		List<UserInfoVO> userList = userInfoService.getUserInfosByBiNum(biNum); // 해당 밥상에 참여중인 userList
-		if (!userSession.getUiId().equals("administer")) {
+		if (!"administer".equals(userSession.getUiId())) {
 			// 로그인 유저가 확인됐을 경우에만 삭제 가능, 관리자가 아닐 경우
 			msg = "이미 마감된 밥상입니다!!";
 			url = "/detail/" + biNum; // 해당페이지 redirect

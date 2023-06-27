@@ -1,4 +1,5 @@
 # **🍴Manna Matna😋**
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/3da0dd7a-e875-461d-8b25-89fb37c53746"/>
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/4d2bc797-6a48-40ed-b4af-16ec9e282403"/><br>
 팀장 : 김지희<br>
@@ -38,7 +39,7 @@
 | DB                  | MySQL Workbench(8.0.32)                                  |
 | IDE                 | Eclipse IDE 2023-03 (4.27.0)                             |
 | 협업 도구           | Git-hub, Zoom, KakaoTalk, GoogleSheet, GoogleSlide       |
-| API 또는 라이브러리 | Google : Chart<br>Kakao : Login<br>Naver : Login<br>tawk |
+| API 또는 라이브러리 | Google : Chart<br>Kakao : Login, Map<br>Naver : Login<br>tawk |
 
 <br>
 
@@ -77,31 +78,35 @@
 -메인
 
 ## **🌟Babsang-Insert Page🌟**
-
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/8dd9b3b3-3319-4870-bcc7-822c61a2139c"/> 3-12<br> 
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/059f1a28-d7e4-4e43-8ae1-4252ea4fddaf"/> 3-13<br>
 -메인이동
 
 ## **🌟Babsang-Detail Page🌟**
-
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/ad7587d0-7533-4dc0-8729-a36e4ad685cc"/> 3-14<br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/fb22729b-281f-4c63-b32b-f488dc5cb607"/> 3-15<br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/2287415d-07cc-4d76-911a-038884497ff9"/> 3-16<br>
 -메인이동
 
 ## **🌟Babsang-Comment Page🌟**
-
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/c8fc971a-8dcc-496f-acc8-7282cc745a1e"/> 3-17<br>
 -메인이동
 
 ## **🌟Join Page🌟**
-
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/de0011c9-27d7-4560-a17e-5ba79823dbb7"/> 2-11<br>
 -메인이동
 
 ## **🌟Login Page🌟**
-
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/ea6a3f47-468e-4d52-8acd-0ad54576ffd1"/> 4-18<br>
 -메인이동
 
 ## **🌟Profile Page🌟**
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/c150db60-985d-40cd-8c05-b371de97a6a6"/> 4-19<br>
 
 -녹화가능
 
 ## **🌟Update Page🌟**
-
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/b60ca57d-08ab-4649-b217-3ba58deed8c6"/> 4-20<br>
 -프로필 -> 녹화가능
 
 ## **🌟Withdraw Page🌟**
