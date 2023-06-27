@@ -47,14 +47,17 @@ nav{
 /* 사이드바 메뉴 */
 .sidenav {
 	height:100%;
-  z-index: 1; 
-  top: 0; 
-  left: 0;
-  border-right: 5px solid #FC522F;
-  overflow-x: hidden; /* x축 스크롤 숨김 */
+  	z-index: 1; 
+  	top: 0; 
+  	left: 0;
+  	border-right: 5px solid #FC522F;
+  	overflow-x: hidden; /* x축 스크롤 숨김 */
 }
-
-.logo{
+.sidenav>img{
+	margin-top:50px;
+}
+.logo{	
+	
 	width: 100%;
 	padding: 0;
 	margin: 0 auto;
