@@ -1,5 +1,7 @@
 package com.ezen.mannamatna.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,11 @@ public class BabsangInfoService {
 	public PageInfo<BabsangInfoVO> getPagingBansang(BabsangInfoVO babsang) {
 		PageHelper.startPage(babsang.getPage(), babsang.getRows());
 		return new PageInfo<>(babsangInfoMapper.selectBabsangList(babsang));
+	}
+	public PageInfo<BabsangInfoVO> getPagingOpenedBansangList(BabsangInfoVO babsangInfoVO) {
+		// 참여가능 밥상 페이징 리턴
+		PageHelper.startPage(babsangInfoVO.getPage(), babsangInfoVO.getRows());
+		return new PageInfo<>(babsangInfoMapper.selectBabsangInfoOpened());
 	}
 
 	public BabsangInfoVO getBabsangInfoVO(int biNum) {

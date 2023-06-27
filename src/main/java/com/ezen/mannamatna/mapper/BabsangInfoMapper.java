@@ -8,8 +8,7 @@ public interface BabsangInfoMapper {
 	
 	List<BabsangInfoVO> selectBabsangList(BabsangInfoVO babsang); // 게시물 목록 불러오기
 	
-	//
-	List<BabsangInfoVO> selectBabsangInfoOpened(BabsangInfoVO babsangInfoVO);
+	List<BabsangInfoVO> selectBabsangInfoOpened(); // 참여가능 밥상리스트
 	
 	BabsangInfoVO selectBabsangInfo(int biNum); // 게시글 상세
 

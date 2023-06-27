@@ -11,7 +11,11 @@
 <meta charset="UTF-8">
 <title>밥상상세페이지</title>
 <link rel="stylesheet" href="${path}/resources/css/babsang-detail.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+</style>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=741c6c8657768cf31100b909d46f72c8&libraries=services"></script>
 <script>
 // 마감된 밥상의 경우 방장의 입장에서만 마감취소 혹은 맛남완료 버튼만 활성화
 window.onload = function(){
@@ -44,6 +48,7 @@ window.onload = function(){
 </head>
 <body>
 	<div class="content">
+	
 		<div class="title">${detail.biTitle}</div>
 		<div class="category">${detail.biFdCategory}</div>
 		<hr class="line">
@@ -81,14 +86,13 @@ window.onload = function(){
 		<c:if
 			test="${sessionScope.user.uiNum == detail.uiNum || sessionScope.user.uiId == 'administer'}">
 			<%-- 세션정보가 작성자일 경우, 로그인유저가 작성자 및 관리자 인 경우 밥상삭제 버튼 추가 --%>
-			<button class="Btn" id = "deleteBtn" onclick=
-			<c:if test="${sessionScope.user.uiNum == detail.uiNum}">
+			<button class="Btn" id="deleteBtn"
+				onclick=<c:if test="${sessionScope.user.uiNum == detail.uiNum}">
 			"if(confirm('정말 삭제하시겠습니까?'))location.href='/deleteBabsang?biNum=${detail.biNum}'"
 			</c:if>
-			<c:if test="${sessionScope.user.uiId =='administer'}">
+				<c:if test="${sessionScope.user.uiId =='administer'}">
 			"if(confirm('통계 데이터에 변동이 있을 수 있습니다. 정말 삭제하시겠습니까?'))location.href='/deleteBabsang?biNum=${detail.biNum}'"
-			</c:if>
-			>밥상삭제</button>
+			</c:if>>밥상삭제</button>
 		</c:if>
 		<c:if
 			test="${sessionScope.user.uiNum == detail.uiNum && ssessionScope.user.uiId != 'administer' && babsangUserList.size()!=0}">
@@ -96,13 +100,44 @@ window.onload = function(){
 			<button class="Btn"
 				onclick="location.href='/successBabsang/${detail.biNum}'">맛남완료</button>
 		</c:if>
+		
+		<c:if test="${detail.lat!=0.0 && detail.lng!=0.0}">
 		<hr>
+		<!-- 카카오 지도 삽입 -->
+		<!-- 이미지 지도를 표시할 div 입니다 -->
+		
+		
+		<div id="staticMap" style="width:100%; height: 400px;"></div>
+
+		<script type="text/javascript"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=741c6c8657768cf31100b909d46f72c8"></script>
+		<script>
+
+// 이미지 지도에 표시할 마커입니다
+var marker = {
+    position: new kakao.maps.LatLng(${detail.lat}, ${detail.lng}), 
+    text: '여기에서 맛남!' // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다
+};
+
+var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div
+    staticMapOption = { 
+        center: new kakao.maps.LatLng(${detail.lat}, ${detail.lng}), // 이미지 지도의 중심좌표
+        level: 2, // 이미지 지도의 확대 레벨
+        marker: marker // 이미지 지도에 표시할 마커
+    };
+
+// 이미지 지도를 생성합니다
+var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+</script>
+</c:if>
 		<!-- 참가자정보 영역 -->
 		<div class="userImages">
+			<hr>
 			<div class="participents">참여자정보</div>
 			<br>
 			<div class="userCount">
-				<c:if test="${sessionScope.user.uiId != 'administer' || detail.biUserCnt==0}">
+				<c:if
+					test="${sessionScope.user.uiId != 'administer' || detail.biUserCnt==0}">
 			${fn:length(babsangUserList)}(현재인원)
 			</c:if>
 				<c:if
@@ -145,7 +180,7 @@ window.onload = function(){
 			<div class="commentList"></div>
 		</div>
 		<!-- 제이쿼리가 제대로 로드 되지 않는 현상 해결 -->
-		<script src="http://code.jquery.com/jquery-latest.js"></script>
+
 		<!-- 댓글입력 Form -->
 		<div class="container">
 			<label for="ciContent"></label>

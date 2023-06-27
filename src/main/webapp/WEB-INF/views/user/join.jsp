@@ -41,7 +41,7 @@
 		<div class="filebox">
     		<input class="upload-name" placeholder="프로필 사진" readonly="readonly">
     		<label for="file">업로드</label> 
-   		 	<input type="file" id="file" name="uiFile" accept="image/gif,image/jpeg,image/png" onchange="loadImg(this)">
+   		 	<input type="file" id="file" name="uiFile" accept="image/*" onchange="loadImg(this)">
 		</div>
 		<div id="imgDiv" style="display:none">
 			<img src = "" width="300">
