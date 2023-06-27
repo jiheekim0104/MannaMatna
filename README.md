@@ -1,4 +1,5 @@
 # **🍴Manna Matna😋**
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/3da0dd7a-e875-461d-8b25-89fb37c53746"/>
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/4d2bc797-6a48-40ed-b4af-16ec9e282403"/><br>
 팀장 : 김지희<br>
