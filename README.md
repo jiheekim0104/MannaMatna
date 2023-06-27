@@ -1,4 +1,5 @@
 # **🍴Manna Matna😋**
+
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/3da0dd7a-e875-461d-8b25-89fb37c53746"/>
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/4d2bc797-6a48-40ed-b4af-16ec9e282403"/><br>
@@ -31,14 +32,14 @@
 
 # **💻개발 환경/시스템 구성**
 
-| 항목                | 내용                                                     |
-| ------------------- | -------------------------------------------------------- |
-| 언어                | Java11,HTML/CSS, JavaScript                              |
-| 서버                | Springboot Embedded Web Server                           |
-| 프레임워크          | SpirngBoot(2.7.12), Mybatis(2.3.1)                       |
-| DB                  | MySQL Workbench(8.0.32)                                  |
-| IDE                 | Eclipse IDE 2023-03 (4.27.0)                             |
-| 협업 도구           | Git-hub, Zoom, KakaoTalk, GoogleSheet, GoogleSlide       |
+| 항목                | 내용                                                          |
+| ------------------- | ------------------------------------------------------------- |
+| 언어                | Java11,HTML/CSS, JavaScript                                   |
+| 서버                | Springboot Embedded Web Server                                |
+| 프레임워크          | SpirngBoot(2.7.12), Mybatis(2.3.1)                            |
+| DB                  | MySQL Workbench(8.0.32)                                       |
+| IDE                 | Eclipse IDE 2023-03 (4.27.0)                                  |
+| 협업 도구           | Git-hub, Zoom, KakaoTalk, GoogleSheet, GoogleSlide            |
 | API 또는 라이브러리 | Google : Chart<br>Kakao : Login, Map<br>Naver : Login<br>tawk |
 
 <br>
@@ -78,54 +79,78 @@
 -메인
 
 ## **🌟Babsang-Insert Page🌟**
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/8dd9b3b3-3319-4870-bcc7-822c61a2139c"/> 3-12<br> 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/059f1a28-d7e4-4e43-8ae1-4252ea4fddaf"/> 3-13<br>
--메인이동
+
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/8dd9b3b3-3319-4870-bcc7-822c61a2139c"/> 3-12<br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/059f1a28-d7e4-4e43-8ae1-4252ea4fddaf"/> 3-13<br> -메인이동
 
 ## **🌟Babsang-Detail Page🌟**
+
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/ad7587d0-7533-4dc0-8729-a36e4ad685cc"/> 3-14<br>
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/fb22729b-281f-4c63-b32b-f488dc5cb607"/> 3-15<br>
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/2287415d-07cc-4d76-911a-038884497ff9"/> 3-16<br>
--메인이동
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/2287415d-07cc-4d76-911a-038884497ff9"/> 3-16<br> -메인이동
 
 ## **🌟Babsang-Comment Page🌟**
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/c8fc971a-8dcc-496f-acc8-7282cc745a1e"/> 3-17<br>
--메인이동
+
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/c8fc971a-8dcc-496f-acc8-7282cc745a1e"/> 3-17<br> -메인이동
 
 ## **🌟Join Page🌟**
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/de0011c9-27d7-4560-a17e-5ba79823dbb7"/> 2-11<br>
--메인이동
+
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/de0011c9-27d7-4560-a17e-5ba79823dbb7"/> 2-11<br> -메인이동
 
 ## **🌟Login Page🌟**
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/ea6a3f47-468e-4d52-8acd-0ad54576ffd1"/> 4-18<br>
--메인이동
+
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/ea6a3f47-468e-4d52-8acd-0ad54576ffd1"/> 4-18<br> -메인이동
 
 ## **🌟Profile Page🌟**
+
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/c150db60-985d-40cd-8c05-b371de97a6a6"/> 4-19<br>
 
 -녹화가능
 
 ## **🌟Update Page🌟**
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/b60ca57d-08ab-4649-b217-3ba58deed8c6"/> 4-20<br>
--프로필 -> 녹화가능
+
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/b60ca57d-08ab-4649-b217-3ba58deed8c6"/> 4-20<br> -프로필 -> 녹화가능
 
 ## **🌟Withdraw Page🌟**
 
--프로필 -> 녹화가능
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/698a7347-433b-4a9e-8c8a-e019542c6ca5"/><br>
+
+## **🌟Join-SNS page🌟**
+
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/cc5bb800-25d5-4ba7-b03f-01181004bf0d"/><br>
 
 ## **🌟Eerror page🌟**
 
--녹화가능
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/c4db6e80-082a-4a41-8fcc-2430e0f7636f"/><br>
+
+## **🌟Admin Login page🌟**
+
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/3406f3db-5947-4bba-b2dc-a6a1a66cc59c"/><br>
 
 ## **🌟Admin Chart page🌟**
 
--녹화가능
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/942ad911-1f40-46dd-9281-1f2074a6e021"/><br>
 
-## **🌟Admin UserList page🌟**
+## **🌟Admin UserList-withdraw page🌟**
 
--녹화가능
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/9b510700-dcfb-476c-aba2-8c9541ecb1f2"/><br>
 
-<!-- 모든 페이지 추가 -->
+## **🌟Admin UserList-block page🌟**
+
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/fc7eafbf-e814-4406-89b9-551c471dcdde"/><br>
+
+## **🌟Admin Babsang List page🌟**
+
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/74dddc0b-4463-4555-b7b1-8ac961c43023"/><br>
+
+## **🌟Admin Babsang Delete page🌟**
+
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/69695a9d-1e85-4042-812d-ba8758c4562a"/><br>
+
+## **🌟Admin Customer Service page🌟**
+
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/f72e90c3-6671-4b5f-9f2a-288b810b6eae"/><br>
+
 <br>
 
 # **⚒️Trouble Shooting⚒️**
