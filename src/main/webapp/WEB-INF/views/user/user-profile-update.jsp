@@ -32,7 +32,7 @@
 			<div class="filebox">
 	    		<input class="upload-name" name="uiFilepath" placeholder="프로필 사진" readonly="readonly">
 	    		<label for="file" class="labelBnt" onclick="newUpload()">업로드</label> 
-	   		 	<input type="file" id="file" name="uiFile" accept="image/gif,image/jpeg,image/png" onchange="loadImg(this)" value="N">
+	   		 	<input type="file" id="file" name="uiFile" accept="image/*" onchange="loadImg(this)" value="N">
 	   		 	<button id="uploadChk" value="N"></button>
 			</div>
 			<input type="text" name="uiNickname" id="uiNickname" value="${user.uiNickname}" onkeyup="nicknameBntChange()">

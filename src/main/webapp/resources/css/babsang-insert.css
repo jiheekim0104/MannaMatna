@@ -6,15 +6,10 @@
     font-weight: normal;
     font-style: normal;
 }
-
-.form{
+.content{
 	display: grid;
 	grid-template-areas:
-		't t'
-		'o o'
-		'x x'
-		'c c'
-		'b1 b2';
+		't o';
 	grid-template-columns: repeat(2, 1fr);
 	column-gap: 0px;
 	row-gap: 10px;
@@ -22,52 +17,70 @@
 	align-items: stretch;
 }
 
-#biTitle{
-	grid-area:t;
-	
-}
-.options{
-	grid-area: o;
-}
 .map_wrap{
-	grid-area:x;
+	grid-area:t;
 }
-#biContent{
-	grid-area:c;
+
+.form{
+	grid-area:o;
+	margin-left: 5px;
 }
-#submit{
-	grid-area:b1;
-}
-#cancle{
-	grid-area:b2;
-}
+
+
 
 #biTitle, #biContent, #submit, #cancle{
 	font-family: 'omyu_pretty';
-	width: 60%;
+	width: 98%;
 	margin: auto;
   	background-color: white;
   	border: 2px solid #999999;
   	border-radius:0.5em;
   	color: black;
   	font-size: 25px;
+  	margin-bottom: 5px; 
 }
 #biTitle{
   	font-size: 25px;
 }
+
+
+
+.map_wrap{
+	width: 25%;
+	float: left;
+}
 .options{
-	width: 60%;
+	width: 100%;
 	margin: auto;
 	justify-content: center;
 }
+
+.options>input{
+	padding: 1px 2px;
+	width:48%;
+}
+
+.options>select{
+	padding: 1px 2px;
+	width:49%;
+}
+
+#biContent{
+	height: 78%;
+}
+
+.buttons{
+	text-align: right;
+}
+
 #biMeetingDat, #biMeetingTim, #biFdCategory, #biHeadCnt{
 	font-family: 'omyu_pretty';
-	width: 24%;
 	background-color: white;
   	border: 2px solid #999999;
   	border-radius:0.5em;
   	color: black;
   	font-size: 20px;
+  	margin-bottom: 5px; 	
 }
 textarea{
 	height: 300px;

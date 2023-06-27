@@ -113,6 +113,7 @@ window.onload = function(){
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=741c6c8657768cf31100b909d46f72c8"></script>
 		<script>
 
+		
 // 이미지 지도에 표시할 마커입니다
 var marker = {
     position: new kakao.maps.LatLng(${detail.lat}, ${detail.lng}), 
