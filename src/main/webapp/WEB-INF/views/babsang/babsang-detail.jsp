@@ -100,9 +100,13 @@ window.onload = function(){
 			<button class="Btn"
 				onclick="location.href='/successBabsang/${detail.biNum}'">맛남완료</button>
 		</c:if>
+		
+		<c:if test="${detail.lat!=0.0 && detail.lng!=0.0}">
 		<hr>
 		<!-- 카카오 지도 삽입 -->
 		<!-- 이미지 지도를 표시할 div 입니다 -->
+		
+		
 		<div id="staticMap" style="width:100%; height: 400px;"></div>
 
 		<script type="text/javascript"
@@ -125,7 +129,7 @@ var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지
 // 이미지 지도를 생성합니다
 var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
 </script>
-
+</c:if>
 		<!-- 참가자정보 영역 -->
 		<div class="userImages">
 			<hr>

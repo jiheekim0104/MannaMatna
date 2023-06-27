@@ -105,8 +105,8 @@
 			<button id="cancle" onclick="location.href='/main'">취소</button>
 			
 			<br>
-			<input type="hidden" name="lat" class="lat">
-			<input type="hidden" name="lng" class="lng">
+			<input type="hidden" name="lat" class="lat" value="0.0">
+			<input type="hidden" name="lng" class="lng" value="0.0">
 		</form>
 		
 		<div class="map_wrap">
@@ -315,12 +315,10 @@
       });
       
       
-      
+     
           return marker;
       }
-      
-      
-      
+
       // 지도 위에 표시되고 있는 마커를 모두 제거합니다
        function removeMarker() {
           for ( var i = 0; i < markers.length; i++ ) {
