@@ -107,7 +107,7 @@ window.onload = function(){
 		<!-- 이미지 지도를 표시할 div 입니다 -->
 		
 		
-		<div id="staticMap" style="width:100%; height: 400px;"></div>
+		<div id="staticMap"></div>
 
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=741c6c8657768cf31100b909d46f72c8"></script>

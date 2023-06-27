@@ -210,7 +210,7 @@
 	transform: translateZ(0);
 	}
 }
-.content .container .commentList .commentBox.fadeInUp {
+.content .container .commentList .commentBox.fadeInUp:not(.end) {
 	animation: fadeInUp 1s;
 }
 
@@ -345,4 +345,13 @@
 #commentUpdate:focus {
 	/* 댓글 수정 시 포커스 속성*/
 	outline: none;
+}
+#staticMap{
+	border-radius: 20px;
+	width:75%;
+	height: 400px;
+	display: inline-block;
+}
+#staticMap:hover{
+	opacity: 0.8;
 }
