@@ -23,6 +23,7 @@ public class UserInfoVO {
 	private int uiUserCnt; // 날짜별 유저수 조회용
 	private long kuiId;
 	private String kakaoImgPath;
+	private String uiPhone;
 	
 	private String nuiId;
 	private String naverImgPath;

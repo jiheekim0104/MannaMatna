@@ -95,6 +95,7 @@ input:focus{
 	display: inline-block;
 	font-size: 12px;
 	line-height: 26px;
+	margin-top: 10px;
 }
 
 .filebox label:hover{
@@ -114,7 +115,7 @@ input:focus{
 select{
 	width: 358px;
 	height: 22px;
-	margin: 5px 0px;
+	margin: 10px 0px;
 }
 
 .gender{

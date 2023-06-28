@@ -56,9 +56,9 @@
 
 	<insert id="insertUserInfo">
 		insert into user_info
-		(ui_nickname,ui_pwd,ui_filepath,ui_gender,ui_age,ui_id)
+		(ui_nickname,ui_pwd,ui_filepath,ui_gender,ui_age,ui_id,ui_phone)
 		values
-		(#{uiNickname},#{uiPwd},#{uiFilepath},#{uiGender},#{uiAge},#{uiId})
+		(#{uiNickname},#{uiPwd},#{uiFilepath},#{uiGender},#{uiAge},#{uiId},#{uiPhone})
 	</insert>
 
 	<insert id="insertKakaoUserInfo">
@@ -75,7 +75,7 @@
 
 	<update id="updateUserInfo">
 		update user_info set ui_nickname = #{uiNickname},
-		ui_pwd = #{uiPwd}, ui_filepath = #{uiFilepath}, ui_gender = #{uiGender} , ui_age = #{uiAge}
+		ui_pwd = #{uiPwd}, ui_filepath = #{uiFilepath}, ui_gender = #{uiGender} , ui_age = #{uiAge}, ui_phone = #{uiPhone}
 		where ui_num = #{uiNum}
 	</update>
 	

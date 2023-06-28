@@ -8,7 +8,7 @@ h1{
 }
 input{
 	width: 244px;
-	height: 22px;
+	height: 25px;
 	margin: 5px 0px;
 	border-radius:0.3em;
 	border: 1px solid gray;
@@ -22,13 +22,13 @@ input:focus{ /* 상자선택시 색변경 어근데 왜 라디오가 네모냐�
 
 .uiPwd{
 	width: 350px;
-	height: 22px;
+	height: 25px;
 	margin: 5px 0px;
 }
 
 .uiPwdCheck{
 	width: 350px;
-	height: 22px;
+	height: 25px;
 	margin: 5px 0px;
 }
 
@@ -109,7 +109,7 @@ button>img {
 
 .filebox .upload-name {
 	width: 244px;
-	height: 22px;
+	height: 25px;
 	margin: 5px 0px;
     display: inline-block; 
 }
@@ -129,6 +129,7 @@ button>img {
 	font-size: 12px;
 	line-height: 26px;
 	font-family: none;
+	margin-top: 10px;
 }
 
 .filebox label:hover{
@@ -147,8 +148,8 @@ button>img {
 
 select{
 	width: 358px;
-	height: 22px;
-	margin: 5px 0px;
+	height: 28px;
+	margin: 10px 0px;
 }
 
 select:focus{ /* 상자선택시 색변경 */

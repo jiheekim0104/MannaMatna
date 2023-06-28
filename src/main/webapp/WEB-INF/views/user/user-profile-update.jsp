@@ -39,8 +39,13 @@
 			<button class="bnt" type="button" id="nicknameChk" onclick="fn_nicknameChk();" value="N">중복확인</button><br> 	
 			<input type="password" class="uiPwd" name="uiPwd" id="uiPwd" placeholder="비밀번호"><br> 
 			<input type="password" class="uiPwdCheck" name="uiPwdCheck" id="uiPwdCheck" placeholder="비밀번호 확인"><br>
+			<c:if test="${user.uiPhone==null}">
+				<input type="text" class="uiPhone" name="uiPhone" id="uiPhone" placeholder="휴대전화(-를 제외하고 입력)">
+				<button type="button" id="phoneChk" class="bnt" onclick="fn_phoneChk()" value="N" >본인인증</button><br> 
+				<input type="text" class="phonePass" name="phonePass" id="phonePass" placeholder="인증번호 입력"> 
+				<button type="button" id="phonePassChk" class="bnt" onclick="fn_phonePassChk()" value="N" >인증확인</button><br> 
+			</c:if>
 			<select name="uiAge" id="uiAge">
-
 			<option value="0">${user.uiAge}대</option>
 				<c:if test="${user.uiAge==10}">
 					<option value="10" selected="selected">10대</option>
@@ -90,7 +95,7 @@
 			</c:if>	
 			
 		</div>
-		<br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		<button class="bnt">수정완료</button>
 		<button class="bnt" type="button">취소하기</button>
 	</form>
@@ -153,6 +158,15 @@
 				return false;
 			}
 			
+			if(${user.uiPhone==null}){
+				let phoneChk = document.getElementById('phoneChk').value; // 휴대폰 본인인증 시행 유무
+				if(phoneChk=="N"){
+					alert("휴대폰 본인인증을 해주세요.");
+					return false;
+				}
+			}
+			
+			
 			let inputAge = document.getElementById('uiAge').value; // 입력받은 연령대
 			if(inputAge == 0){  
 				alert("연령대를 선택해주세요.");
@@ -192,6 +206,17 @@
 				})
 			}
 
+		}
+		function fn_phoneChk(){
+			//문자발송 연결되는 부분 
+			alert(0);
+			$('#phoneChk').val('Y');
+		}
+		
+		function fn_phonePassChk(){
+			//발송해준 번호랑 일치하는지 체크하는부분
+			alert(1);
+			$('#phonePassChk').val('Y');
 		}
 	</script>
 </div>	
