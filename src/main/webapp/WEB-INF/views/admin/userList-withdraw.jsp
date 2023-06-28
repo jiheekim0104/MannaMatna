@@ -67,8 +67,8 @@
 					</td>
 					<td>
 					<form name = "sms" class="sms">
-					<input type="hidden" id = "uiPhone" name = "to" value = "${userInfoVO.uiPhone}">
-					<button class="smsBtn" id = "confirmNum" type = "button" onclick="send(${userInfoVO.uiNum})">인증요청</button>
+					<input type="hidden" id= "uiPhone${userInfoVO.uiNum}" name = "to" value ="${userInfoVO.uiPhone}">
+					<button class="smsBtn" id="confirmNum" type="button" onclick="send(${userInfoVO.uiNum})">인증요청</button>
 					</form>
 						<button class="Btn"
 							onclick="location.href='/withdrawCancle/${userInfoVO.uiNum}'">탈퇴취소</button>
@@ -136,10 +136,11 @@
 						}
 					}
 				}
-				
-				function send(index){
+				function send(uiNum){
 					//문자발송 연결되는 부분 
-					let number = index;
+					let number = uiNum;
+					let num = $('#uiPhone'+uiNum).val();
+					console.log(num);
 					let textId = 'confirmText'+number;
 					console.log('uiNum' + number);
 					console.log('textId' + textId);
@@ -147,19 +148,19 @@
 						url : "/sms/send", // 요청서버 url
 						type : "post", // 타입
 						contentType : "application/json", // 보내는 데이터의 타입
-						data : JSON.stringify({"uiPhone" : $("#uiPhone").val()}),// 보낼데이터의 타입
+						data : JSON.stringify({"uiPhone" : $('#uiPhone'+uiNum).val()}),// 보낼데이터의 타입
 						success : function(data) { // 결과 성공 콜백함수
 							console.log(data);
 							console.log(data.result);
 							console.log(data.smsConfirmNum);
-							if((data.result)=="true"){
+							if((data.result)=='true'){
 								console.log('실행했어????!!!!');
 								console.log(textId);
 								$("."+textId).text(data.smsConfirmNum);
 								alert("인증번호가 전송되었습니다.");
 							}	
 						}
-					})
+					});
 				}
 		</script>
 </body>

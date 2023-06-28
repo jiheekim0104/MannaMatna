@@ -11,7 +11,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="${path}/resources/css/userList-withdraw.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 	<div class="content">
@@ -20,13 +21,12 @@
 		<div class="title" id="blockTitle"
 			onclick="location.href='/blockUser'">정지회원관리</div>
 		<br>
-		<!--  
 		<form action="/blockUser" method="get" id="searchUiNickname" name = "searchUiNickname">
 			<input type="text" class="inputUiNickname" name="uiNickname"
 				placeholder="찾을 유저의 닉네임을 입력해주세요." value="${param.uiNickname}">
 			<button class="Btn">검색</button>
 		</form>
-		-->
+
 		<table class="userTable">
 			<tr>
 				<th>회원번호</th>
@@ -61,14 +61,15 @@
 					<c:if test="${userInfoVO.uiAge<50}">
 						<td>${userInfoVO.uiAge}대</td>
 					</c:if>
-					<td id ="smsConfirmNum">
-					<span>인증번호</span><br>
-					<span id="confirmText" class= "confirmText${userInfoVO.uiNum}" style="font-size: 20px;">${userInfoVO.uiPhone}</span>
-					</td>
+					<td id="smsConfirmNum"><span>인증번호</span><br> <span
+						id="confirmText" class="confirmText${userInfoVO.uiNum}"
+						style="font-size: 20px;"></span></td>
 					<td>
-						<form name="sms" class = "sms">
-							<input type="hidden" id = "uiPhone" class="uiPhone" name="to" value="${userInfoVO.uiPhone}">
-							<button class="smsBtn" id="confirmNum" type="button" onclick="send(${userInfoVO.uiNum})">인증요청</button>
+						<form name="sms" class="sms">
+							<input type="hidden" id="uiPhone${userInfoVO.uiNum}" class="uiPhone" name="to"
+								value="${userInfoVO.uiPhone}">
+							<button class="smsBtn" id="confirmNum" type="button"
+								onclick="send(${userInfoVO.uiNum})">인증요청</button>
 						</form>
 						<button class="Btn"
 							onclick="location.href='/blockCancle/${userInfoVO.uiNum}'">정지해제</button>
@@ -112,14 +113,12 @@
 				document.querySelector('#pageDiv').innerHTML = html;
 			</script>
 		</c:if>
-		</div>
-		
-		<script>
-				let blockTitle1 = document.getElementById('blockTitle');
-				let withdrawTitle1 = document.getElementById('withdrawTitle');
-				withdrawTitle1.classList.add('cancle');
-				</script>
-		<script>
+	</div>
+	<script>
+				let withdrawTitle = document.getElementById('withdrawTitle');
+				let blockTitle = document.getElementById('blockTitle');
+				withdrawTitle.classList.add('cancle');
+	
 				// 핸드폰번호 연동 없는 유저는 인증요청버튼 비활성화
 				window.onload = function(){
 					let smsBtns = document.querySelectorAll('.smsBtn');
@@ -132,41 +131,37 @@
 							// 유저정보의 핸드폰번호가 등록되어있지 않으면
 							smsBtns[i].style.backgroundColor = 'gray';
 							smsBtns[i].style.border = 'gray';
-							smsBtns[i].type = "button";
 							smsBtns[i].onclick = null;
 							smsBtns[i].classList.add('ended');
 						}
 					}
 				}
-		</script>
-		<script>
-		function send(index){
-			let number = index;
-			let textId = 'confirmText'+number;
-			console.log('uiNum' + number);
-			console.log('textId' + textId);
-			//문자발송 연결되는 부분 
-		
-			$.ajax({
-				url : "/sms/send", // 요청서버 url
-				type : "post", // 타입
-				contentType : "application/json", // 보내는 데이터의 타입
-				data : JSON.stringify({"uiPhone" : $("#uiPhone").val()}),// 보낼데이터의 타입
-				success : function(data) { // 결과 성공 콜백함수
-					console.log(data);
-					console.log(data.result);
-					console.log(data.smsConfirmNum);
-					if((data.result)=='true'){
-						let textId = 'confirmText'+number;
-						console.log('실행했어????!!!!');
-						console.log(textId);
-						$("."+textId).text(data.smsConfirmNum);
-						alert("인증번호가 전송되었습니다.");
-					}	
+				function send(uiNum){
+					//문자발송 연결되는 부분 
+					let number = uiNum;
+					let num = $('#uiPhone'+uiNum).val();
+					console.log(num);
+					let textId = 'confirmText'+number;
+					console.log('uiNum' + number);
+					console.log('textId' + textId);
+					$.ajax({
+						url : "/sms/send", // 요청서버 url
+						type : "post", // 타입
+						contentType : "application/json", // 보내는 데이터의 타입
+						data : JSON.stringify({"uiPhone" : $('#uiPhone'+uiNum).val()}),// 보낼데이터의 타입
+						success : function(data) { // 결과 성공 콜백함수
+							console.log(data);
+							console.log(data.result);
+							console.log(data.smsConfirmNum);
+							if((data.result)=='true'){
+								console.log('실행했어????!!!!');
+								console.log(textId);
+								$("."+textId).text(data.smsConfirmNum);
+								alert("인증번호가 전송되었습니다.");
+							}	
+						}
+					});
 				}
-			});
-		}
 		</script>
-	
 </body>
 </html>

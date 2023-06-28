@@ -2,12 +2,8 @@ package com.ezen.mannamatna.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,12 +23,13 @@ public class SmsController {
 
 	@PostMapping("/sms/send")
 	@ResponseBody
-	public Map<String, String> sendSms(@ModelAttribute MessageVO messageVO , @RequestBody Map<String, String> checkMap, Model m, HttpSession session) throws Exception {
+	public Map<String, String> sendSms(@ModelAttribute MessageVO messageVO , @RequestBody Map<String, String> checkMap) throws Exception {
 		log.info("포스트 /sms/send 처음 온곳");
 		String smsConfirmNum = null;
 		String result = "false";
 		messageVO.setTo(checkMap.get("uiPhone"));
 		log.info("담긴 번호를 messageVO에 넣어줬어{}",messageVO);
+
 		if(messageVO.getTo()!=null) {
 			log.info("문자서비스 실행했어?{}",messageVO);
 			smsConfirmNum = smsService.sendSms(messageVO).getSmsConfirmNum();
