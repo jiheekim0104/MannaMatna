@@ -11,6 +11,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="${path}/resources/css/userList-withdraw.css">
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 	<div class="content">
@@ -61,12 +63,12 @@
 					<td title="${userInfoVO.uiDel}">${userInfoVO.uiDel}</td>
 					<td id ="smsConfirmNum">
 					<span>인증번호</span><br>
-					<span style="font-size: 20px;">${confirmNum}</span>
+					<span class="confirmText" id= "confirmText${userInfoVO.uiNum}" style="font-size: 20px;"></span>
 					</td>
 					<td>
-					<form name = "sms" method="POST" action="/sms/send">
+					<form name = "sms">
 					<input type="hidden" id = "uiPhone" name = "to" value = "${userInfoVO.uiPhone}">
-					<button class="smsBtn" id = "confirmNum">인증요청</button>
+					<button class="smsBtn" id = "confirmNum" type = "button" onclick="send(${userInfoVO.uiNum})">인증요청</button>
 					</form>
 						<button class="Btn"
 							onclick="location.href='/withdrawCancle/${userInfoVO.uiNum}'">탈퇴취소</button>
@@ -141,6 +143,30 @@
 						}
 					}
 				}
+		</script>
+		<script>
+		function send(index){
+			//문자발송 연결되는 부분 
+			let number = index;
+			$.ajax({
+				url : "/sms/send", // 요청서버 url
+				type : "post", // 타입
+				contentType : "application/json", // 보내는 데이터의 타입
+				data : JSON.stringify({"uiPhone" : $("#uiPhone").val()}),// 보낼데이터의 타입
+				success : function(data) { // 결과 성공 콜백함수
+					console.log(data);
+					console.log(data.result);
+					console.log(data.smsConfirmNum);
+					if((data.result)=='true'){
+						let textId = 'confirmText'+number;
+						console.log('실행했어????!!!!');
+						console.log(textId);
+						$('#'+textId).text(data.smsConfirmNum);
+						alert("인증번호가 전송되었습니다.");
+					}	
+				}
+			})
+		}
 		</script>
 </body>
 </html>

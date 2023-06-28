@@ -88,8 +88,8 @@ cursor: pointer;
 	overflow:hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	max-width: 110px;
-	width: 120px;
+	max-width: 140px;
+	width: 150px;
 }
 .content .userTable th:nth-child(6), td:nth-child(6){
 	overflow:hidden;
@@ -211,4 +211,11 @@ cursor: pointer;
       animation-duration: 1s;
       animation-iteration-count: infinite; /* 반복회수 무한 */
       animation-delay: 0.1s;
+}
+#smsConfirmNum{
+	width: 120px;
+	font-size: 16px;
+	color: red;
+	font-family: 'omyu_pretty';
+	text-align: right;
 }
