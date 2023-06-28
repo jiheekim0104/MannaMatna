@@ -209,7 +209,6 @@
 	}
 	function fn_phoneChk(){
 		//문자발송 연결되는 부분 
-		alert($('#uiPhone').val());
 		$.ajax({
 			url : "/sms/joinsend", // 요청서버 url
 			type : "post", // 타입
@@ -227,7 +226,6 @@
 	
 	function fn_phonePassChk(){
 		//발송해준 번호랑 일치하는지 체크하는부분
-		alert($('#phonePass').val());
 		$.ajax({
 			url : "/sms/joinsendNumCheck", // 요청서버 url
 			type : "post", // 타입
