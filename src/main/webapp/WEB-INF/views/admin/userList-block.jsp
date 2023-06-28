@@ -33,6 +33,7 @@
 				<th>성별</th>
 				<th>연령대</th>
 				<th></th>
+				<th></th>
 			</tr>
 			<c:if test="${empty pageUiActive2.list}">
 				<tr>
@@ -57,11 +58,12 @@
 					<c:if test="${userInfoVO.uiAge<50}">
 						<td>${userInfoVO.uiAge}대</td>
 					</c:if>
+					<td id ="smsConfirmNum">123456${response.smsConfirmNum}</td>
 					<td style="text-align: right;">
 						<form name="sms" method="POST" action="/sms/send">
 							<input type="hidden" class="uiPhone" name="to"
 								value="${userInfoVO.uiPhone}">
-							<button class="Btn" id="confirmNum">인증요청</button>
+							<button class="smsBtn" id="confirmNum">인증요청</button>
 						</form>
 						<button class="Btn"
 							onclick="location.href='/blockCancle/${userInfoVO.uiNum}'">정지해제</button>
@@ -111,19 +113,29 @@
 				withdrawTitle1.classList.add('cancle');
 				</script>
 		<script>
-				// 마감된 밥상의 경우 방장의 입장에서만 마감취소 혹은 맛남완료 버튼만 활성화
-				//window.onload = function(){
-					//let uiPhones = document.querySelectorAll('.uiPhone');
-					
-					//console.log(uiPhones);
-					//console.log(uiPhones.size());
-					//for(let i = 0;i<uiPhones.size(); i++){
-						//console.log(uiPhones[i].value);
-						//if(uiPhones[i].value.trim() == ''){
-							// 해당 버튼에 해당하는 인풋폰번호가 없다면
-						//}
-					//}
-				//}
+				//마감된 밥상의 경우 방장의 입장에서만 마감취소 혹은 맛남완료 버튼만 활성화
+				window.onload = function(){
+					let uiPhones = document.querySelectorAll('.uiPhone');
+					let smsBtns = document.querySelectorAll('.smsBtn');
+					let totalForms = document.forms;
+					totalForms[0].remove();
+					let smsForms = totalForms;
+					console.log('폼들의 개수' + smsForms.length);
+					console.log(smsForms);
+					console.log(uiPhones);
+					console.log(uiPhones.length);
+					for(let i = 0;i<smsForms.length;i++){
+						// 첫번째 검색폼은 위에서 지워주었다.
+						if(smsForms[i].to.value.trim() == ''){
+							// 유저정보의 핸드폰번호가 등록되어있지 않으면
+							smsBtns[i].style.backgroundColor = 'gray';
+							smsBtns[i].style.border = 'gray';
+							smsBtns[i].type = "button";
+							smsBtns[i].onclick = null;
+							smsBtns[i].classList.add('ended');
+						}
+					}
+				}
 		</script>
 	</div>
 </body>

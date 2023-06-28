@@ -33,6 +33,7 @@
 				<th>연령대</th>
 				<th>탈퇴사유</th>
 				<th></th>
+				<th></th>
 			</tr>
 			<c:if test="${empty pageUiActive1.list}">
 				<tr>
@@ -58,10 +59,14 @@
 						<td>${userInfoVO.uiAge}대</td>
 					</c:if>
 					<td title="${userInfoVO.uiDel}">${userInfoVO.uiDel}</td>
+					<td id ="smsConfirmNum">
+					<span>인증번호</span><br>
+					<span style="font-size: 20px;">${confirmNum}</span>
+					</td>
 					<td>
 					<form name = "sms" method="POST" action="/sms/send">
 					<input type="hidden" id = "uiPhone" name = "to" value = "${userInfoVO.uiPhone}">
-					<button class="Btn" id = "confirmNum">인증요청</button>
+					<button class="smsBtn" id = "confirmNum">인증요청</button>
 					</form>
 						<button class="Btn"
 							onclick="location.href='/withdrawCancle/${userInfoVO.uiNum}'">탈퇴취소</button>
@@ -112,5 +117,30 @@
 				let blockTitle = document.getElementById('blockTitle');
 				blockTitle.classList.add('cancle');
 			</script>
+			<script>
+				//마감된 밥상의 경우 방장의 입장에서만 마감취소 혹은 맛남완료 버튼만 활성화
+				window.onload = function(){
+					let uiPhones = document.querySelectorAll('.uiPhone');
+					let smsBtns = document.querySelectorAll('.smsBtn');
+					let totalForms = document.forms;
+					totalForms[0].remove();
+					let smsForms = totalForms;
+					console.log('폼들의 개수' + smsForms.length);
+					console.log(smsForms);
+					console.log(uiPhones);
+					console.log(uiPhones.length);
+					for(let i = 0;i<smsForms.length;i++){
+						// 첫번째 검색폼은 위에서 지워주었다.
+						if(smsForms[i].to.value.trim() == ''){
+							// 유저정보의 핸드폰번호가 등록되어있지 않으면
+							smsBtns[i].style.backgroundColor = 'gray';
+							smsBtns[i].style.border = 'gray';
+							smsBtns[i].type = "button";
+							smsBtns[i].onclick = null;
+							smsBtns[i].classList.add('ended');
+						}
+					}
+				}
+		</script>
 </body>
 </html>

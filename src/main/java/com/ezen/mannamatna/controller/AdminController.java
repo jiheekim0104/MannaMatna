@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.mannamatna.service.BabsangInfoService;
 import com.ezen.mannamatna.service.GoogleChartService;
+import com.ezen.mannamatna.service.SmsService;
 import com.ezen.mannamatna.service.UserInfoService;
 import com.ezen.mannamatna.vo.BabsangInfoVO;
+import com.ezen.mannamatna.vo.SmsResponseVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
 
 import lombok.extern.log4j.Log4j2;
@@ -32,6 +34,9 @@ public class AdminController {
 
 	@Autowired
 	UserInfoService userInfoService; // 회원리스트 의존성 추가
+	
+	@Autowired
+	SmsService smsService;
 
 	@PostMapping("/getPieChart")
 	@ResponseBody
@@ -63,18 +68,25 @@ public class AdminController {
 
 	// 페이징 기능 추가
 	@GetMapping("/manageUser")
-	public String goManageUser(UserInfoVO userInfoVO, Model m) {
+	public String goManageUser(@ModelAttribute SmsResponseVO smsResponseVO, @ModelAttribute UserInfoVO userInfoVO, HttpSession session,Model m) {
 		// 페이징 객체 모델에 넣어준다.
 		// 탈퇴유저 모델에 넣어주고
+		smsResponseVO = (SmsResponseVO)session.getAttribute("responseSession");
+		if(smsResponseVO!=null) {
+			String confirmNum = smsResponseVO.getSmsConfirmNum();
+			log.info("다시 리로드 했을때 sms넘버 있어?{}", smsResponseVO);
+			m.addAttribute("confirmNum", confirmNum);
+		}
 		m.addAttribute("pageUiActive1", userInfoService.getPagingUiActive1(userInfoVO));
 		return "admin/userList-withdraw";
 	}
-
 	// 페이징 기능 추가
 	@GetMapping("/blockUser")
-	public String goBlockUser(UserInfoVO userInfoVO, Model m) {
+	public String goBlockUser(SmsResponseVO smsResponseVO,UserInfoVO userInfoVO, Model m) {
 		// 페이징 객체 모델에 넣어준다.
 		// 정지유저 모델에 넣어준다.
+		String confirmNum = smsResponseVO.getSmsConfirmNum();
+		m.getAttribute("response");
 		m.addAttribute("pageUiActive2", userInfoService.getPagingUiActive2(userInfoVO));
 		return "admin/userList-block";
 	}
