@@ -18,12 +18,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ezen.mannamatna.service.SmsService;
 import com.ezen.mannamatna.service.UserInfoService;
 import com.ezen.mannamatna.vo.BabsangInfoVO;
 import com.ezen.mannamatna.vo.KakaoToken;
 import com.ezen.mannamatna.vo.KakaoUserInfoVO;
+import com.ezen.mannamatna.vo.MessageVO;
 import com.ezen.mannamatna.vo.NaverToken;
 import com.ezen.mannamatna.vo.NaverUserInfoVO;
+import com.ezen.mannamatna.vo.SmsResponseVO;
 import com.ezen.mannamatna.vo.UserInfoVO;
 
 import lombok.extern.log4j.Log4j2;
@@ -31,11 +34,48 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Controller
 public class UserInfoController {
-	
+	String smsConfirmNum=null;
 	int loginCnt =0; // 로그인 횟수 세기
 	
 	@Autowired
 	UserInfoService uiService;
+	
+	@Autowired
+	SmsService smsService;
+	
+	@PostMapping("/sms/joinsend")
+	@ResponseBody
+	public Map<String, Boolean> joinsendChk(@ModelAttribute MessageVO messageVO, @RequestBody Map<String, String> checkMap) throws Exception {
+		log.info("조인샌드={}",messageVO);
+		boolean result = false; 
+		messageVO.setTo(checkMap.get("uiPhone")); 
+		log.info("조인샌드={}",messageVO);
+		if(messageVO.getTo()!=null) {
+			smsConfirmNum = smsService.sendSms(messageVO).getSmsConfirmNum(); 
+			result =true;
+		}
+		Map<String, Boolean> map = new HashMap<>(); 
+		map.put("result", result); //맵으로 리턴
+		log.info("조인샌드={}",smsConfirmNum);
+		return map; 
+	}
+	
+	@PostMapping("/sms/joinsendNumCheck")
+	@ResponseBody
+	public Map<String, Boolean> joinsendNumChk(@RequestBody Map<String, String> checkMap) throws Exception {
+		log.info("조인샌드인증중={}",checkMap.get("phonePass"));
+		log.info("조인샌드인증중={}",smsConfirmNum);
+		boolean result = false; 	
+		log.info("조인샌드인증중={}",checkMap.get("phonePass").equals(smsConfirmNum));
+		if(checkMap.get("phonePass").equals(smsConfirmNum)) {
+			result =true;
+		} else {
+			result = false;
+		}
+		Map<String, Boolean> map = new HashMap<>(); 
+		map.put("result", result); //맵으로 리턴
+		return map; 
+	}
 	
 	@GetMapping("/") 
 	public String home(@ModelAttribute UserInfoVO userInfoVO, Model m) {

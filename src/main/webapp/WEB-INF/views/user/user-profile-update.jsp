@@ -158,13 +158,20 @@
 				return false;
 			}
 			
-			if(${user.uiPhone==null}){
+			if(${user.uiPhone}==null){
 				let phoneChk = document.getElementById('phoneChk').value; // 휴대폰 본인인증 시행 유무
 				if(phoneChk=="N"){
 					alert("휴대폰 본인인증을 해주세요.");
 					return false;
 				}
+				
+				let phonePassChk = document.getElementById('phonePassChk').value; // 휴대폰 인증번호 일치 확인 결과
+				if(phonePassChk=="N"){
+					alert("인증번호가 일치하지 않습니다.");
+					return false;
+				}
 			}
+			
 			
 			
 			let inputAge = document.getElementById('uiAge').value; // 입력받은 연령대
@@ -207,16 +214,42 @@
 			}
 
 		}
+		
 		function fn_phoneChk(){
 			//문자발송 연결되는 부분 
-			alert(0);
-			$('#phoneChk').val('Y');
+			alert($('#uiPhone').val());
+			$.ajax({
+				url : "/sms/joinsend", // 요청서버 url
+				type : "post", // 타입
+				contentType : "application/json", // 보내는 데이터의 타입
+				data : JSON.stringify({"uiPhone" : $("#uiPhone").val()}),// 보낼데이터의 타입
+				success : function(data) { // 결과 성공 콜백함수
+					if(data.result==true){
+						$('#phoneChk').val('Y');
+						alert("인증번호가 전송되었습니다.");
+						$('#phoneChk').addClass('selected');
+					}	
+				}
+			})
 		}
 		
 		function fn_phonePassChk(){
 			//발송해준 번호랑 일치하는지 체크하는부분
-			alert(1);
-			$('#phonePassChk').val('Y');
+			alert($('#phonePass').val());
+			$.ajax({
+				url : "/sms/joinsendNumCheck", // 요청서버 url
+				type : "post", // 타입
+				contentType : "application/json", // 보내는 데이터의 타입
+				data : JSON.stringify({"phonePass" : $("#phonePass").val()}),// 보낼데이터의 타입
+				success : function(data) { // 결과 성공 콜백함수
+					if(data.result==true){
+						$('#phonePassChk').val('Y');
+						alert("확인되었습니다.");
+						$('#phonePassChk').addClass('selected');
+					} else {alert("인증번호가 일치하지 않습니다.")}	
+				}
+			})
+			
 		}
 	</script>
 </div>	

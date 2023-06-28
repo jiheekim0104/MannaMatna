@@ -81,7 +81,7 @@
 						<option value="" selected>카테고리 선택</option>
 						<option value="한식">한식</option>
 						<option value="중식">중식</option>
-						<option value="중식">일식</option>
+						<option value="일식">일식</option>
 						<option value="양식">양식</option>
 						<option value="분식">분식</option>
 						<option value="패스트푸드">패스트푸드</option>
