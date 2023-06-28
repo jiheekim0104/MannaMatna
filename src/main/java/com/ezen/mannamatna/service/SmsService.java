@@ -37,6 +37,7 @@ public class SmsService {
  
 	private String phone = "01041160586";
 	
+	private String code = "";
 	public String makeSignature(Long time) throws Exception {
 		String space = " ";
         String newLine = "\n";
@@ -45,7 +46,6 @@ public class SmsService {
         String timestamp = time.toString();
         String accessKey = this.accessKey;
         String secretKey = this.secretKey;
- 
         String message = new StringBuilder()
                 .append(method)
                 .append(space)
@@ -83,7 +83,7 @@ public class SmsService {
 				.contentType("COMM")
 				.countryCode("82")
 				.from(phone)
-				.content(messageVO.getContent())
+				.content("[만나맛나] 인증번호 ["+createSmsKey(this.code)+"]를 입력해주세요.")
 				.messages(messages)
 				.build();
 		
@@ -94,16 +94,17 @@ public class SmsService {
 		RestTemplate restTemplate = new RestTemplate();
 	    restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
 	    SmsResponseVO response = restTemplate.postForObject(new URI("https://sens.apigw.ntruss.com/sms/v2/services/"+ serviceId +"/messages"), httpBody, SmsResponseVO.class);
- 
-	    return response;	
+	    response.setSmsConfirmNum(code);
+	    return response;
 	}
-	 public static String createSmsKey() {
+	 public String createSmsKey(String code) {
 	        StringBuffer key = new StringBuffer();
 	        Random rnd = new Random();
 
-	        for (int i = 0; i < 5; i++) { // 인증코드 5자리
+	        for (int i = 0; i < 6; i++) { // 인증코드 6자리
 	            key.append((rnd.nextInt(10)));
 	        }
-	        return key.toString();
+	        this.code = key.toString();
+	        return this.code;
 	    }
 }

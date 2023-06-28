@@ -17,12 +17,6 @@
                     <input type="text" class="form-control" name="to" placeholder="전화번호를 입력하세요.">
                 </td>
             </tr>
-            <tr class="form-group">        
-                <td>내용</td>
-                <td>
-                    <textarea class="form-control" name="content" placeholder="보낼 내용을 입력하세요"> </textarea>
-                </td>
-            </tr>
         </table>
         <button class="btn btn-default">발송</button>
     </form>

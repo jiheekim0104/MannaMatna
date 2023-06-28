@@ -17,11 +17,13 @@
 		<div class="title" id="withdrawTitle"
 			onclick="location.href='/manageUser'">탈퇴회원관리</div>
 		<div class="title" id="blockTitle"
-			onclick="location.href='/blockUser'">정지회원관리</div><br>
-	<form action="/blockUser" method="get" id="searchUiNickname">
-		<input type="text" class="inputUiNickname" name="uiNickname" placeholder="찾을 유저의 닉네임을 입력해주세요." value="${param.uiNickname}">
-		<button class="Btn">검색</button>
-	</form>
+			onclick="location.href='/blockUser'">정지회원관리</div>
+		<br>
+		<form action="/blockUser" method="get" id="searchUiNickname">
+			<input type="text" class="inputUiNickname" name="uiNickname"
+				placeholder="찾을 유저의 닉네임을 입력해주세요." value="${param.uiNickname}">
+			<button class="Btn">검색</button>
+		</form>
 		<table class="userTable">
 			<tr>
 				<th>회원번호</th>
@@ -55,8 +57,15 @@
 					<c:if test="${userInfoVO.uiAge<50}">
 						<td>${userInfoVO.uiAge}대</td>
 					</c:if>
-					<td style="text-align: right;"><button class="Btn"
-							onclick="location.href='/blockCancle/${userInfoVO.uiNum}'">정지해제</button></td>
+					<td style="text-align: right;">
+						<form name="sms" method="POST" action="/sms/send">
+							<input type="hidden" class="uiPhone" name="to"
+								value="${userInfoVO.uiPhone}">
+							<button class="Btn" id="confirmNum">인증요청</button>
+						</form>
+						<button class="Btn"
+							onclick="location.href='/blockCancle/${userInfoVO.uiNum}'">정지해제</button>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -96,11 +105,26 @@
 				document.querySelector('#pageDiv').innerHTML = html;
 			</script>
 		</c:if>
-				<script>
+		<script>
 				let blockTitle1 = document.getElementById('blockTitle');
 				let withdrawTitle1 = document.getElementById('withdrawTitle');
 				withdrawTitle1.classList.add('cancle');
 				</script>
+		<script>
+				// 마감된 밥상의 경우 방장의 입장에서만 마감취소 혹은 맛남완료 버튼만 활성화
+				//window.onload = function(){
+					//let uiPhones = document.querySelectorAll('.uiPhone');
+					
+					//console.log(uiPhones);
+					//console.log(uiPhones.size());
+					//for(let i = 0;i<uiPhones.size(); i++){
+						//console.log(uiPhones[i].value);
+						//if(uiPhones[i].value.trim() == ''){
+							// 해당 버튼에 해당하는 인풋폰번호가 없다면
+						//}
+					//}
+				//}
+		</script>
 	</div>
 </body>
 </html>

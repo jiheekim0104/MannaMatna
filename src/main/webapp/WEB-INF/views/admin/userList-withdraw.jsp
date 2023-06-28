@@ -59,6 +59,10 @@
 					</c:if>
 					<td title="${userInfoVO.uiDel}">${userInfoVO.uiDel}</td>
 					<td>
+					<form name = "sms" method="POST" action="/sms/send">
+					<input type="hidden" id = "uiPhone" name = "to" value = "${userInfoVO.uiPhone}">
+					<button class="Btn" id = "confirmNum">인증요청</button>
+					</form>
 						<button class="Btn"
 							onclick="location.href='/withdrawCancle/${userInfoVO.uiNum}'">탈퇴취소</button>
 					</td>

@@ -16,14 +16,16 @@
         <th>요청 시간</th>
         <th>Status Code</th>
         <th>Status Name</th>
+        <th>확인 숫자</th>
       </tr>
     </thead>
     <tbody>
-      <tr >
+      <tr>
         <td>${response.requestId}</td>
         <td>${response.requestTime}</td>
         <td>${response.statusCode}</td>
         <td>${response.statusName}</td>
+        <td>${response.smsConfirmNum}</td>
       </tr>
     </tbody>
   </table>
