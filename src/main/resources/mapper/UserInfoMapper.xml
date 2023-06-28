@@ -135,7 +135,7 @@
 		SELECT UI_NUM, UI_NICKNAME, UI_PWD, UI_FILEPATH,
 		UI_GENDER,
 		UI_AGE, BI_NUM, UI_CREDAT,
-		UI_ID, UI_ACTIVE, UI_DEL
+		UI_ID, UI_ACTIVE, UI_DEL, UI_PHONE
 		FROM USER_INFO WHERE UI_ACTIVE = 2 
 		<if test='uiNickname != null and uiNickname != ""'>
 		<!-- 유저 닉네임으로 검색기능 추가(닉네임 유니크속성) -->
