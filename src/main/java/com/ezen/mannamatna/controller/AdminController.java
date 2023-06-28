@@ -34,9 +34,6 @@ public class AdminController {
 
 	@Autowired
 	UserInfoService userInfoService; // 회원리스트 의존성 추가
-	
-	@Autowired
-	SmsService smsService;
 
 	@PostMapping("/getPieChart")
 	@ResponseBody
@@ -68,25 +65,18 @@ public class AdminController {
 
 	// 페이징 기능 추가
 	@GetMapping("/manageUser")
-	public String goManageUser(@ModelAttribute SmsResponseVO smsResponseVO, @ModelAttribute UserInfoVO userInfoVO, HttpSession session,Model m) {
+	public String goManageUser(@ModelAttribute UserInfoVO userInfoVO, HttpSession session, Model m) {
 		// 페이징 객체 모델에 넣어준다.
 		// 탈퇴유저 모델에 넣어주고
-		smsResponseVO = (SmsResponseVO)session.getAttribute("responseSession");
-		if(smsResponseVO!=null) {
-			String confirmNum = smsResponseVO.getSmsConfirmNum();
-			log.info("다시 리로드 했을때 sms넘버 있어?{}", smsResponseVO);
-			m.addAttribute("confirmNum", confirmNum);
-		}
 		m.addAttribute("pageUiActive1", userInfoService.getPagingUiActive1(userInfoVO));
 		return "admin/userList-withdraw";
 	}
+
 	// 페이징 기능 추가
 	@GetMapping("/blockUser")
-	public String goBlockUser(SmsResponseVO smsResponseVO,UserInfoVO userInfoVO, Model m) {
+	public String goBlockUser(UserInfoVO userInfoVO, Model m) {
 		// 페이징 객체 모델에 넣어준다.
 		// 정지유저 모델에 넣어준다.
-		String confirmNum = smsResponseVO.getSmsConfirmNum();
-		m.getAttribute("response");
 		m.addAttribute("pageUiActive2", userInfoService.getPagingUiActive2(userInfoVO));
 		return "admin/userList-block";
 	}
@@ -100,7 +90,7 @@ public class AdminController {
 			// 관리자 아이디일 경우만 실행
 			UserInfoVO userInfoVO = userInfoService.getUserInfoFromBabsang(uiNum);
 			// 유저객체를 찾는 방식이 같아 재사용 (WHERE UI_NUM = #{uiNum or biNum})
-			if(userInfoVO.getUiActive()==1 && userInfoVO.getUiDel()!=null) {
+			if (userInfoVO.getUiActive() == 1 && userInfoVO.getUiDel() != null) {
 				// 탈퇴신청 유저만!
 				userInfoVO.setUiDel(null); // 사유 초기화
 				userInfoVO.setUiActive(0); // 다시 0으로 초기화

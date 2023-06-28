@@ -63,10 +63,10 @@
 					<td title="${userInfoVO.uiDel}">${userInfoVO.uiDel}</td>
 					<td id ="smsConfirmNum">
 					<span>인증번호</span><br>
-					<span class="confirmText" id= "confirmText${userInfoVO.uiNum}" style="font-size: 20px;"></span>
+					<span class="confirmText${userInfoVO.uiNum}" id= "confirmText" style="font-size: 20px;"></span>
 					</td>
 					<td>
-					<form name = "sms">
+					<form name = "sms" class="sms">
 					<input type="hidden" id = "uiPhone" name = "to" value = "${userInfoVO.uiPhone}">
 					<button class="smsBtn" id = "confirmNum" type = "button" onclick="send(${userInfoVO.uiNum})">인증요청</button>
 					</form>
@@ -118,55 +118,49 @@
 				let withdrawTitle = document.getElementById('withdrawTitle');
 				let blockTitle = document.getElementById('blockTitle');
 				blockTitle.classList.add('cancle');
-			</script>
-			<script>
-				//마감된 밥상의 경우 방장의 입장에서만 마감취소 혹은 맛남완료 버튼만 활성화
+	
+				// 핸드폰번호 연동 없는 유저는 인증요청버튼 비활성화
 				window.onload = function(){
-					let uiPhones = document.querySelectorAll('.uiPhone');
 					let smsBtns = document.querySelectorAll('.smsBtn');
-					let totalForms = document.forms;
-					totalForms[0].remove();
-					let smsForms = totalForms;
+					let smsForms = document.querySelectorAll('.sms');
 					console.log('폼들의 개수' + smsForms.length);
 					console.log(smsForms);
-					console.log(uiPhones);
-					console.log(uiPhones.length);
 					for(let i = 0;i<smsForms.length;i++){
 						// 첫번째 검색폼은 위에서 지워주었다.
 						if(smsForms[i].to.value.trim() == ''){
 							// 유저정보의 핸드폰번호가 등록되어있지 않으면
 							smsBtns[i].style.backgroundColor = 'gray';
 							smsBtns[i].style.border = 'gray';
-							smsBtns[i].type = "button";
 							smsBtns[i].onclick = null;
 							smsBtns[i].classList.add('ended');
 						}
 					}
 				}
-		</script>
-		<script>
-		function send(index){
-			//문자발송 연결되는 부분 
-			let number = index;
-			$.ajax({
-				url : "/sms/send", // 요청서버 url
-				type : "post", // 타입
-				contentType : "application/json", // 보내는 데이터의 타입
-				data : JSON.stringify({"uiPhone" : $("#uiPhone").val()}),// 보낼데이터의 타입
-				success : function(data) { // 결과 성공 콜백함수
-					console.log(data);
-					console.log(data.result);
-					console.log(data.smsConfirmNum);
-					if((data.result)=='true'){
-						let textId = 'confirmText'+number;
-						console.log('실행했어????!!!!');
-						console.log(textId);
-						$('#'+textId).text(data.smsConfirmNum);
-						alert("인증번호가 전송되었습니다.");
-					}	
+				
+				function send(index){
+					//문자발송 연결되는 부분 
+					let number = index;
+					let textId = 'confirmText'+number;
+					console.log('uiNum' + number);
+					console.log('textId' + textId);
+					$.ajax({
+						url : "/sms/send", // 요청서버 url
+						type : "post", // 타입
+						contentType : "application/json", // 보내는 데이터의 타입
+						data : JSON.stringify({"uiPhone" : $("#uiPhone").val()}),// 보낼데이터의 타입
+						success : function(data) { // 결과 성공 콜백함수
+							console.log(data);
+							console.log(data.result);
+							console.log(data.smsConfirmNum);
+							if((data.result)=="true"){
+								console.log('실행했어????!!!!');
+								console.log(textId);
+								$("."+textId).text(data.smsConfirmNum);
+								alert("인증번호가 전송되었습니다.");
+							}	
+						}
+					})
 				}
-			})
-		}
 		</script>
 </body>
 </html>

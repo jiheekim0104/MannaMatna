@@ -34,7 +34,7 @@ public class SmsController {
 		messageVO.setTo(checkMap.get("uiPhone"));
 		log.info("담긴 번호를 messageVO에 넣어줬어{}",messageVO);
 		if(messageVO.getTo()!=null) {
-			log.info("문자서비스 실행했어?",messageVO);
+			log.info("문자서비스 실행했어?{}",messageVO);
 			smsConfirmNum = smsService.sendSms(messageVO).getSmsConfirmNum();
 			log.info("문자 확인 번호{}",smsConfirmNum);
 			result = "true";

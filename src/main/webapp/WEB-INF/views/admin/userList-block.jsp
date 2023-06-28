@@ -11,8 +11,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="${path}/resources/css/userList-withdraw.css">
-	<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 	<div class="content">
@@ -21,11 +20,13 @@
 		<div class="title" id="blockTitle"
 			onclick="location.href='/blockUser'">정지회원관리</div>
 		<br>
-		<form action="/blockUser" method="get" id="searchUiNickname">
+		<!--  
+		<form action="/blockUser" method="get" id="searchUiNickname" name = "searchUiNickname">
 			<input type="text" class="inputUiNickname" name="uiNickname"
 				placeholder="찾을 유저의 닉네임을 입력해주세요." value="${param.uiNickname}">
 			<button class="Btn">검색</button>
 		</form>
+		-->
 		<table class="userTable">
 			<tr>
 				<th>회원번호</th>
@@ -62,12 +63,11 @@
 					</c:if>
 					<td id ="smsConfirmNum">
 					<span>인증번호</span><br>
-					<span id="confirmText" class= "confirmText${userInfoVO.uiNum}" style="font-size: 20px;"></span>
+					<span id="confirmText" class= "confirmText${userInfoVO.uiNum}" style="font-size: 20px;">${userInfoVO.uiPhone}</span>
 					</td>
 					<td>
-						<form name="sms">
-							<input type="hidden" id = "uiPhone" class="uiPhone" name="to"
-								value="${userInfoVO.uiPhone}">
+						<form name="sms" class = "sms">
+							<input type="hidden" id = "uiPhone" class="uiPhone" name="to" value="${userInfoVO.uiPhone}">
 							<button class="smsBtn" id="confirmNum" type="button" onclick="send(${userInfoVO.uiNum})">인증요청</button>
 						</form>
 						<button class="Btn"
@@ -112,6 +112,8 @@
 				document.querySelector('#pageDiv').innerHTML = html;
 			</script>
 		</c:if>
+		</div>
+		
 		<script>
 				let blockTitle1 = document.getElementById('blockTitle');
 				let withdrawTitle1 = document.getElementById('withdrawTitle');
@@ -120,15 +122,10 @@
 		<script>
 				// 핸드폰번호 연동 없는 유저는 인증요청버튼 비활성화
 				window.onload = function(){
-					let uiPhones = document.querySelectorAll('.uiPhone');
 					let smsBtns = document.querySelectorAll('.smsBtn');
-					let totalForms = document.forms;
-					totalForms[0].remove();
-					let smsForms = totalForms;
+					let smsForms = document.querySelectorAll('.sms');
 					console.log('폼들의 개수' + smsForms.length);
 					console.log(smsForms);
-					console.log(uiPhones);
-					console.log(uiPhones.length);
 					for(let i = 0;i<smsForms.length;i++){
 						// 첫번째 검색폼은 위에서 지워주었다.
 						if(smsForms[i].to.value.trim() == ''){
@@ -144,8 +141,12 @@
 		</script>
 		<script>
 		function send(index){
-			//문자발송 연결되는 부분 
 			let number = index;
+			let textId = 'confirmText'+number;
+			console.log('uiNum' + number);
+			console.log('textId' + textId);
+			//문자발송 연결되는 부분 
+		
 			$.ajax({
 				url : "/sms/send", // 요청서버 url
 				type : "post", // 타입
@@ -159,13 +160,13 @@
 						let textId = 'confirmText'+number;
 						console.log('실행했어????!!!!');
 						console.log(textId);
-						$('.'+textId).text(data.smsConfirmNum);
+						$("."+textId).text(data.smsConfirmNum);
 						alert("인증번호가 전송되었습니다.");
 					}	
 				}
-			})
+			});
 		}
 		</script>
-	</div>
+	
 </body>
 </html>
