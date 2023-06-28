@@ -28,4 +28,7 @@ public class SmsController {
 		m.addAttribute("url",url);
 		return "common/msg";
 	}
+	
+	
+	
 }

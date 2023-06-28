@@ -20,7 +20,6 @@ alert('${msg}');
 </script>
 <body>
 <div class="content">
-${user }
 	<div class="img">
 		<c:if test="${user.uiFilepath != null}">	
 			<img src="${user.uiFilepath}" width="300">
@@ -41,11 +40,11 @@ ${user }
 			성별 : 
 			<a id="uiGender" name="uiGender"></a><br>
 			연령대 : ${user.uiAge}대<br>
-			<c:if test="${uesr.uiPhone != null}">
-				<span class="uiPhone">휴대폰 본인인증 완료</span>
+			<c:if test="${user.uiPhone != null}">
+				<span class="uiPhone">* 휴대폰 본인인증 완료</span>
 			</c:if>
-			<c:if test="${uesr.uiPhone == null}">
-				<span class="uiPhone">휴대폰 본인인증 미완료</span>
+			<c:if test="${user.uiPhone == null}">
+				<span class="uiPhone">* 휴대폰 본인인증 미완료</span>
 			</c:if>	
 		</div>
 		<br><br><br><br>
