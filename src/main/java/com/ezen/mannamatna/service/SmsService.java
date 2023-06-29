@@ -37,7 +37,7 @@ public class SmsService {
  
 	private String phone = "01041160586";
 	
-	private String code = "";
+	private String code = ""; // 인증코드
 	public String makeSignature(Long time) throws Exception {
 		String space = " ";
         String newLine = "\n";
@@ -94,10 +94,12 @@ public class SmsService {
 		RestTemplate restTemplate = new RestTemplate();
 	    restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
 	    SmsResponseVO response = restTemplate.postForObject(new URI("https://sens.apigw.ntruss.com/sms/v2/services/"+ serviceId +"/messages"), httpBody, SmsResponseVO.class);
+	    // 이 서비스에서는 SmsResponseVO 객체에 인증코드난수를 저장하는 이 부분이 포인트이다.
 	    response.setSmsConfirmNum(code);
 	    return response;
 	}
 	 public String createSmsKey(String code) {
+		 // 난수 생성
 	        StringBuffer key = new StringBuffer();
 	        Random rnd = new Random();
 
@@ -105,6 +107,6 @@ public class SmsService {
 	            key.append((rnd.nextInt(10)));
 	        }
 	        this.code = key.toString();
-	        return this.code;
+	        return this.code; // 서비스의 필드로 리턴.
 	    }
 }
