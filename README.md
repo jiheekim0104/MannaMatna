@@ -870,3 +870,26 @@ function zoomIn(event,closed) {
 ```
 
 - 수정에 수정을 거칠수록 내가 짠 코드마저도 잘 알아보지 못하여 작업 시간이 매우 길어지게됨을 느꼈다. 추후에는 클린코드에 좀 더 신경써서 작업해야겠음을 절실하게 느끼는 중이다.
+
+---
+
+## **소감 한마디😋**
+
+<details>
+<summary style="font-size: 15px; font-weight:bolder;">김지희</summary>
+안녕하세요!!!!!!!!!!!!!!!
+아아아러아러
+ㄴ이라ㅓㄴㅁ이ㅏ러
+</details>
+
+---
+
+<details>
+<summary style="font-size: 15px; font-weight:bolder;">오성철</summary>
+</details>
+
+---
+
+<details>
+<summary style="font-size: 15px; font-weight:bolder;">최재환</summary>
+</details>
