@@ -9,8 +9,8 @@
 
 # **개요**
 
-[🎬PPT 시연 영상 ](https://www.youtube.com/watch?v=w5JAgxHHhw8)<br>
-🎬홈페이지 시연 영상 (업로드 예정)<br>
+[🎬PPT 시연 영상 ](https://youtu.be/KpE5Y49B_Eo)<br>
+[🎬홈페이지 시연 영상 ](https://youtu.be/wp8UchmF1LQ)<br>
 <br>
 
 # **📋개발목적**
