@@ -50,13 +50,13 @@
 
 # **Entity Relationship Diagram**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/7a0f9c52-f676-4653-a009-369dc4a55a59"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/8c91bb42-014b-4908-93ae-e9c9819a8ef7"/><br>
 <br>
 <br>
 
 # **💡Software Requirement Specification**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/3da0dd7a-e875-461d-8b25-89fb37c53746"/>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/9700241b-3d68-4c8e-a26f-051179107b04"/>
 
 [ 요구사항 및 기능정의서 크게보기🔎 ](https://docs.google.com/spreadsheets/d/e/2PACX-1vRd7yn39Ijn_snqgYvRUrslN67E5XAEhw1w7TSOkCE0yYIJU4zvl_Z_yRIUOOiHqDHOJjt470lfT0M8/pubhtml?gid=1520309848&single=true)
 <br>
@@ -64,7 +64,7 @@
 
 # **📆Work Breakdown Structure**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/bc1351f8-4c3d-4cd3-9eab-82c13f4bfcd5"/>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/001697cd-f898-4acf-89c6-ae9d2b4a54a6"/>
 
 [ WBS 크게보기🔎 ](https://docs.google.com/spreadsheets/d/e/2PACX-1vRd7yn39Ijn_snqgYvRUrslN67E5XAEhw1w7TSOkCE0yYIJU4zvl_Z_yRIUOOiHqDHOJjt470lfT0M8/pubhtml?gid=1566000035&single=true)
 <br>
