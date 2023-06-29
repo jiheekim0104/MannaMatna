@@ -83,7 +83,7 @@
 <br>
 ## **🌟Main(babsang-list) Page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/e11b8553-d511-40f8-adce-70ed5c4dc46c"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/d1b65f91-6f48-4f22-8481-cc0e0a301143"/><br>
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/cf941a42-bbd8-4349-9b75-6a3b3dfe9e3e"/><br>
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/f37975cc-1147-455a-b3a9-47b324b9eadf"/><br>
 <br>
