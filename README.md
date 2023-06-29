@@ -127,7 +127,7 @@
 
 ## **🌟Profile Page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/c150db60-985d-40cd-8c05-b371de97a6a6"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/be55a123-807d-45ed-9aba-497f23802d11"/><br>
 <br>
 
 ## **🌟Update Page🌟**
