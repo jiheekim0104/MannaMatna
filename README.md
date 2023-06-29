@@ -108,7 +108,8 @@
 
 ## **🌟Join Page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/de0011c9-27d7-4560-a17e-5ba79823dbb7"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/20dd7331-4d50-41f5-9d6a-94f630dba253"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/bdd1c63b-058a-47c5-ab00-25e1a9f3deb4"/><br>
 <br>
 
 ## **🌟Login Page🌟**
