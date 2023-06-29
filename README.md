@@ -874,7 +874,8 @@ function zoomIn(event,closed) {
 ---
 
 ## **소감 한마디😋**
-<span style='background-color:#fff5b1'></span>
+<span style="background-color:#fff5b1">여기요!</span>
+
 <details>
 <summary style="font-size: 15px; font-weight:bolder;">김지희</summary>
 저희는 다른 조에 비해서 더 빨리 프로젝트 설계를 시작했지만, 저희가 구현할 수 있는 능력치를 간과한 나머지.. <span style='background-color:#fff5b1'>설계를 뒤엎고 다시 만드는 것을 반복하는 데에만 2달</span>이 걸렸어요.😭 (마치 클라이언트의 무리한 부탁을 잘라내지 못해 방황하는 그 상황과 같음..) <br>
