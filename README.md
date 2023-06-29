@@ -64,7 +64,6 @@
 
 # **📆Work Breakdown Structure**
 
-
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/bc1351f8-4c3d-4cd3-9eab-82c13f4bfcd5"/>
 
 [ WBS 크게보기🔎 ](https://docs.google.com/spreadsheets/d/e/2PACX-1vRd7yn39Ijn_snqgYvRUrslN67E5XAEhw1w7TSOkCE0yYIJU4zvl_Z_yRIUOOiHqDHOJjt470lfT0M8/pubhtml?gid=1566000035&single=true)
@@ -77,10 +76,12 @@
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/55019b43-5e73-45d1-a7ef-b5245f9c283e"/><br>
 <br>
+
 ## **🌟Info Page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/120540854/54933ba8-05b2-4be4-9260-2a899ab10ecc"/><br>
 <br>
+
 ## **🌟Main(babsang-list) Page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/d1b65f91-6f48-4f22-8481-cc0e0a301143"/><br>
@@ -90,13 +91,13 @@
 
 ## **🌟Babsang-Insert Page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/8dd9b3b3-3319-4870-bcc7-822c61a2139c"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/c3310312-25fc-4f9a-9260-ad3400b1b3d0"/><br>
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/059f1a28-d7e4-4e43-8ae1-4252ea4fddaf"/><br>
 <br>
 
 ## **🌟Babsang-Detail Page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/ad7587d0-7533-4dc0-8729-a36e4ad685cc"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/d1952d14-b9fe-45c3-bc3f-4545e5119207"/><br>
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/fb22729b-281f-4c63-b32b-f488dc5cb607"/><br>
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775214/2287415d-07cc-4d76-911a-038884497ff9"/><br>
 <br>
@@ -144,7 +145,7 @@
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/cc5bb800-25d5-4ba7-b03f-01181004bf0d"/><br>
 <br>
 
-## **🌟Eerror page🌟**
+## **🌟Error page🌟**
 
 <img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/c4db6e80-082a-4a41-8fcc-2430e0f7636f"/><br>
 
@@ -160,12 +161,12 @@
 
 ## **🌟Admin UserList-withdraw page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/9b510700-dcfb-476c-aba2-8c9541ecb1f2"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/a2840033-6589-4538-89bc-8d71ddbc179d"/><br>
 <br>
 
 ## **🌟Admin UserList-block page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/fc7eafbf-e814-4406-89b9-551c471dcdde"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/8f5cf84f-e5eb-4fa1-99dc-5c7245500678"/><br>
 <br>
 
 ## **🌟Admin Babsang List page🌟**
@@ -180,7 +181,7 @@
 
 ## **🌟Admin Customer Service page🌟**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/f72e90c3-6671-4b5f-9f2a-288b810b6eae"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/0b352cf7-54d3-40d5-977d-3479c13b0635"/><br>
 <br>
 <br>
 
