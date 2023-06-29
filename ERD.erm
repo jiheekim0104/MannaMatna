@@ -11,7 +11,7 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
-	<x>201</x>
+	<x>0</x>
 	<y>0</y>
 	<default_color>
 		<r>128</r>
@@ -89,7 +89,7 @@
 				<is_open_after_saved>true</is_open_after_saved>
 			</export_html_setting>
 			<export_image_setting>
-				<output_file_path>C:\Users\USER\Desktop\ERD.png</output_file_path>
+				<output_file_path>C:\Users\USER\Desktop\ERD(edit1).png</output_file_path>
 				<category_dir_path></category_dir_path>
 				<with_category_image>true</with_category_image>
 				<is_open_after_saved>true</is_open_after_saved>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2023-06-24 16:19:37</creation_date>
-			<updated_date>2023-06-29 10:14:33</updated_date>
+			<updated_date>2023-06-29 16:13:03</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -661,7 +661,7 @@
 						<source_xp>0</source_xp>
 						<source_yp>52</source_yp>
 						<target_xp>100</target_xp>
-						<target_yp>27</target_yp>
+						<target_yp>39</target_yp>
 						<color>
 							<r>0</r>
 							<g>0</g>
@@ -784,8 +784,8 @@
 					<target>1</target>
 						<source_xp>0</source_xp>
 						<source_yp>15</source_yp>
-						<target_xp>-1</target_xp>
-						<target_yp>-1</target_yp>
+						<target_xp>100</target_xp>
+						<target_yp>52</target_yp>
 						<color>
 							<r>0</r>
 							<g>0</g>
@@ -1398,7 +1398,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>6</word_id>
+					<word_id>7</word_id>
 					<id>17</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1594,7 +1594,7 @@
 					<source>3</source>
 					<target>4</target>
 						<source_xp>100</source_xp>
-						<source_yp>16</source_yp>
+						<source_yp>17</source_yp>
 						<target_xp>0</target_xp>
 						<target_yp>17</target_yp>
 						<color>
@@ -1620,7 +1620,7 @@
 			<option></option>
 			<columns>
 				<normal_column>
-					<word_id>7</word_id>
+					<word_id>6</word_id>
 					<id>22</id>
 					<description></description>
 					<unique_key_name></unique_key_name>

@@ -50,7 +50,7 @@
 
 # **Entity Relationship Diagram**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/8c91bb42-014b-4908-93ae-e9c9819a8ef7"/><br>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/7c9ca03c-b909-44a6-8891-84eadce5cba7"/><br>
 <br>
 <br>
 
@@ -64,7 +64,7 @@
 
 # **📆Work Breakdown Structure**
 
-<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/001697cd-f898-4acf-89c6-ae9d2b4a54a6"/>
+<img width="100%" src="https://github.com/jiheekim0104/MannaMatna/assets/121775439/01001eac-ddb3-4fff-8693-8516bae2f9ac"/>
 
 [ WBS 크게보기🔎 ](https://docs.google.com/spreadsheets/d/e/2PACX-1vRd7yn39Ijn_snqgYvRUrslN67E5XAEhw1w7TSOkCE0yYIJU4zvl_Z_yRIUOOiHqDHOJjt470lfT0M8/pubhtml?gid=1566000035&single=true)
 <br>
@@ -875,7 +875,6 @@ function zoomIn(event,closed) {
 
 ## **소감 한마디😋**
 
-
 <details>
 <summary style="font-size: 15px; font-weight:bolder;">김지희</summary>
 저희는 다른 조에 비해서 더 빨리 프로젝트 설계를 시작했지만, 저희가 구현할 수 있는 능력치를 간과한 나머지.. 설계를 뒤엎고 다시 만드는 것을 반복하는 데에만 2달이 걸렸어요.😭 (마치 클라이언트의 무리한 부탁을 잘라내지 못해 방황하는 그 상황과 같음..) <br>
@@ -890,6 +889,7 @@ function zoomIn(event,closed) {
 그래도 저희의 프로젝트가 잘 마무리되었으니 두 구성원분들께도 이 기간이 뜻깊은 순간으로 남길 바라며, 저도 이 순간을 기억하며 더 성장하는 개발자가 될게요!😜 <br><br>
 
 너무 수고 많으셨습니다.🥰<br>
+
 </details>
 
 ---
@@ -902,4 +902,5 @@ function zoomIn(event,closed) {
 
 <details>
 <summary style="font-size: 15px; font-weight:bolder;">최재환</summary>
+조장님이 말씀하셨던 것 처럼, 넘치는 열정과 에너지로 다른 조에 비해서 프로젝트 설계를 시작 했습니다만..😭설계를 잘 차려놓는 것이 정말 어려운 일이라는 것을 알았습니다..!의견을 합치며 엎치락 뒤치락 했었던 탓에, 설계과정에서 이미 다들 지치고 힘들었던 것 같습니다..그럼에도 불구하고 각자 맡은 바 끝까지 포기하지 않고 해낸 저희 1조 혼밥탈출 넘버원 팀원 모두 감사드리고 또 감사드립니다!!!!!!🤗설계시 쏟아지는 아이디어를 하나의 둥근 형태로 가공하는 과정에서 저는 소통, 정리능력을 배웠고, 역할분배 후 코드작업을 하는 과정에서는 책임감 및 CS, 다른 팀원들의 어려움을 듣고 서로 해결해주면서 소통과, 협업을 배울 수 있었습니다. 이 경험을 항상 새겨두고 팀원들을 위하는 발전하는 개발자로 성장해 나가겠습니다!!! 이 때까지 모두 정말 수고 많으셨습니다!!!😊앞으로는 혼밥하지 말자구요!!!!!(종종 같이 밥먹어요ㅎㅎ)😁😁
 </details>
