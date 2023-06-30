@@ -35,7 +35,7 @@ public class SmsService {
 	
 	private String serviceId = "인증키";
  
-	private String phone = "01041160586"; // 30대 남성입니다.
+	private String phone = ""; // 30대 남성입니다.
 	
 	
 	private String code = ""; // 인증코드
