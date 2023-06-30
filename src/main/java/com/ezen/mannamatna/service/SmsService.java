@@ -29,13 +29,14 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class SmsService {
 
-	private String accessKey = "9FrSHzIqbI07EE3jA5Ae";
+	private String accessKey = "인증키";
 	
-	private String secretKey = "7pDv29fk1cWh542nDLxgMqgwcLPRcWbP7KH69DDq";
+	private String secretKey = "인증키";
 	
-	private String serviceId = "ncp:sms:kr:308361350075:mannamatna";
+	private String serviceId = "인증키";
  
-	private String phone = "01041160586";
+	private String phone = "01041160586"; // 30대 남성입니다.
+	
 	
 	private String code = ""; // 인증코드
 	public String makeSignature(Long time) throws Exception {

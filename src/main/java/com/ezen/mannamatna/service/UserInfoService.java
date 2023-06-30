@@ -309,7 +309,7 @@ public class UserInfoService {
 			StringBuilder sb = new StringBuilder();
 			String redirectURI = "&redirect_uri=http://localhost" + addURI; 
 			sb.append("grant_type=authorization_code"); // grant_type를 authorization_code로 고정등록해야함
-			sb.append("&client_id=b288a9632f49edf850cff8d6eb985755"); // 카카오 개발자에서 발급받은 클라이언트 아이디
+			sb.append("&client_id=인증키"); // 카카오 개발자에서 발급받은 클라이언트 아이디
 			sb.append(redirectURI);
 			sb.append("&code=" + code); // 인자로 받아온 인증코드
 			bw.write(sb.toString());
@@ -517,8 +517,8 @@ public class UserInfoService {
 		// addURI : Redirect URI에서 http://localhost 뒤에 붙는 부분을 달리해주기 위해 추가함
 		// state :  세션 유지 및 위조 방지용 상태 토큰, 정상적인 요청인지 비정상적인 요청인지 확인가능
 		NaverToken naverToken = new NaverToken();
-		String clientId = "BSeMnF9B1CusMX9DeEg8";// 애플리케이션 클라이언트 아이디값
-		String clientSecret = "fpEWA5y2fc";// 애플리케이션 클라이언트 시크릿값
+		String clientId = "";// 애플리케이션 클라이언트 아이디값
+		String clientSecret = "";// 애플리케이션 클라이언트 시크릿값
 //	    code = request.getParameter("code");
 //	    state = request.getParameter("state");
 		String redirectURI = URLEncoder.encode("http://localhost" + addURI, "UTF-8");
